@@ -11,9 +11,9 @@ for (let i = 0; i < spots.length; i += 100) {
   const q = new URLSearchParams({ latitude: chunk.map((s) => s.lat).join(','), longitude: chunk.map((s) => s.lon).join(',') });
   let res;
   for (let attempt = 0; ; attempt++) {
-    res = await fetch(`https://api.open-meteo.com/v1/elevation?${q}`);
-    if (res.status !== 429 || attempt >= 6) break;
-    console.error(`rate limited, waiting 65 s (attempt ${attempt + 1})`);
+    res = await fetch(`https://api.open-meteo.com/v1/elevation?${q}`).catch((e) => ({ ok: false, status: `network (${e.cause?.code ?? e.message})` }));
+    if (res.ok || attempt >= 6) break; // retry rate limits, server errors and network failures
+    console.error(`${res.status}, waiting 65 s (attempt ${attempt + 1})`);
     await new Promise((ok) => setTimeout(ok, 65_000));
   }
   if (!res.ok) throw new Error(`elevation ${res.status}`);
