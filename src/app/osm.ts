@@ -1,6 +1,6 @@
 import { inferShore } from '../lib/coastline';
 import { distanceKm, type LatLon } from '../lib/geo';
-import { cacheGet, cacheSet, fetchKiteSpots, fetchShoreFeatures, MAX_SHORE_POINTS, tileFor, type OsmKiteSpot, type OverpassDeps } from '../lib/overpass';
+import { cacheGet, cacheSet, fetchKiteSpots, fetchShoreFeatures, planShoreQuery, tileFor, type OsmKiteSpot, type OverpassDeps } from '../lib/overpass';
 import { compass, type Sector } from '../lib/sectors';
 import { mergeSpots } from '../lib/spots';
 import type { Spot } from '../lib/types';
@@ -16,14 +16,17 @@ async function shoreFor(tileKey: string, spots: OsmKiteSpot[], deps?: OverpassDe
   const key = `shore:${tileKey}`;
   const hit = cacheGet<ShoreMap>(key, deps);
   if (hit) return hit.ok ? hit.value : {};
-  const batch = spots.slice(0, MAX_SHORE_POINTS);
-  const features = await fetchShoreFeatures(batch, deps);
+  // One bbox query around the tile's new spots (nearest first; capped, see planShoreQuery).
+  const plan = planShoreQuery(spots);
+  if (!plan) return {};
+  const features = await fetchShoreFeatures(plan.bbox, deps);
   if (!features) {
     cacheSet<ShoreMap>(key, {}, false, deps);
     return {};
   }
   const map: ShoreMap = {};
-  for (const s of batch) {
+  // Spots outside the queried box stay unknown: their nearest shore may be missing from it.
+  for (const s of plan.covered) {
     const inf = inferShore(s, features);
     map[s.key] = inf ? { normal: Math.round(inf.normalDeg), sectors: inf.sectors.map(([a, b]) => [Math.round(a), Math.round(b)] as Sector) } : null;
   }
@@ -47,7 +50,7 @@ function toSpot(s: OsmKiteSpot, shore: ShoreMap[string] | undefined): Spot {
 async function run(center: LatLon, radiusKm: number, curated: Spot[], deps?: OverpassDeps): Promise<Spot[]> {
   const { tile, spots } = await fetchKiteSpots(center, radiusKm, deps);
   if (spots.length === 0) return [];
-  // Nearest first so the capped coastline batch covers the spots the user sees first.
+  // Nearest first so a capped shore bbox covers the spots the user sees first.
   const sorted = [...spots].sort((a, b) => distanceKm(center, a) - distanceKm(center, b));
   // Drop OSM spots already covered by the curated list (and OSM duplicates such as node + area).
   const asSpots = sorted.map((s) => toSpot(s, undefined));

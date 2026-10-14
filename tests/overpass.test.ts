@@ -9,7 +9,11 @@ import {
   FAILURE_TTL_MS,
   fetchKiteSpots,
   MAX_CALLS_PER_DAY,
+  MAX_SHORE_BBOX_KM,
+  MAX_SHORE_POINTS,
+  paddedBBox,
   parseKiteSpots,
+  planShoreQuery,
   parseShoreFeatures,
   tileFor,
   type KV,
@@ -34,15 +38,49 @@ describe('queries', () => {
     expect(q).toContain('nwr["sport"~"kitesurfing"](around:90000,36.01235,-5.6)');
     expect(q).toContain('out tags center;');
   });
-  it('builds one batched shore query', () => {
-    const q = buildShoreQuery([
-      { lat: 1, lon: 2 },
-      { lat: 3, lon: 4 },
-    ]);
-    expect(q.match(/natural"="coastline"/g)).toHaveLength(2);
-    expect(q).toContain('way["natural"="coastline"](around:1500,3,4);');
-    expect(q).toContain('way["natural"="water"](around:1500,1,2);');
+  it('builds one bbox shore query for coastline, lakes and multipolygons', () => {
+    const q = buildShoreQuery({ south: 1, west: 2, north: 3.123456, east: 4 });
+    expect(q).not.toContain('around');
+    expect(q.match(/\(1,2,3\.12346,4\)/g)).toHaveLength(5);
+    expect(q).toContain('way["natural"="coastline"](1,2,3.12346,4);');
+    expect(q).toContain('way["natural"="water"][!"water"](1,2,3.12346,4);');
+    expect(q).toContain('relation["natural"="water"]["type"="multipolygon"]["water"~"^(lake|reservoir|lagoon|river)$"](1,2,3.12346,4);');
     expect(q.endsWith(');out geom;')).toBe(true);
+  });
+});
+
+describe('planShoreQuery', () => {
+  const kmLat = (km: number) => km / 111.32;
+  it('pads every spot by ~2 km when the box fits', () => {
+    const pts = [
+      { lat: 36, lon: -5.6 },
+      { lat: 36 + kmLat(10), lon: -5.6 },
+    ];
+    const plan = planShoreQuery(pts)!;
+    expect(plan.covered).toEqual(pts);
+    expect(plan.bbox.south).toBeCloseTo(36 - kmLat(2), 6);
+    expect(plan.bbox.north).toBeCloseTo(36 + kmLat(12), 6);
+    expect(planShoreQuery([])).toBeNull();
+  });
+
+  it('falls back to the nearest spots when the tile box is too large', () => {
+    // Nearest first: a tight cluster, then one spot 100 km north.
+    const near = Array.from({ length: 3 }, (_, i) => ({ lat: 36 + kmLat(i), lon: -5.6 }));
+    const far = { lat: 36 + kmLat(100), lon: -5.6 };
+    const plan = planShoreQuery([...near, far])!;
+    expect(plan.covered).toEqual(near);
+    expect(plan.bbox.north).toBeLessThan(far.lat);
+    expect((plan.bbox.north - plan.bbox.south) * 111.32).toBeLessThanOrEqual(MAX_SHORE_BBOX_KM);
+  });
+
+  it('caps the fallback at MAX_SHORE_POINTS and shrinks until it fits', () => {
+    const many = Array.from({ length: 30 }, (_, i) => ({ lat: 36 + kmLat(i * 0.5), lon: -5.6 }));
+    const plan = planShoreQuery([...many, { lat: 40, lon: -5.6 }])!;
+    expect(plan.covered).toHaveLength(MAX_SHORE_POINTS);
+    const spread = Array.from({ length: 5 }, (_, i) => ({ lat: 36 + kmLat(i * 20), lon: -5.6 }));
+    const p2 = planShoreQuery(spread)!;
+    expect(p2.covered).toEqual(spread.slice(0, 2));
+    expect(p2.bbox).toEqual(paddedBBox(spread.slice(0, 2)));
   });
 });
 
@@ -94,12 +132,36 @@ describe('parseShoreFeatures', () => {
         { type: 'way', id: 3, tags: { natural: 'wood' }, geometry: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }] },
         { type: 'way', id: 4, tags: { natural: 'coastline' }, geometry: [{ lat: 0, lon: 0 }] },
         { type: 'node', id: 5, lat: 0, lon: 0 },
+        { type: 'way', id: 6, tags: { natural: 'water', water: 'river' }, geometry: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }] },
       ],
     });
     expect(f).toEqual([
       { kind: 'coastline', points: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }] },
       { kind: 'water', points: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }] },
+      { kind: 'river', points: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }] },
     ]);
+  });
+
+  it('assembles multipolygon outer rings and ignores inner rings', () => {
+    const p = (lat: number, lon: number) => ({ lat, lon });
+    const f = parseShoreFeatures({
+      elements: [
+        {
+          type: 'relation',
+          id: 7,
+          tags: { natural: 'water', water: 'lake', type: 'multipolygon' },
+          members: [
+            { type: 'way', ref: 1, role: 'outer', geometry: [p(0, 0), p(0, 1), p(1, 1)] },
+            // Reversed fragment closing the ring.
+            { type: 'way', ref: 2, role: 'outer', geometry: [p(0, 0), p(1, 0), p(1, 1)] },
+            { type: 'way', ref: 3, role: 'inner', geometry: [p(0.4, 0.4), p(0.4, 0.6), p(0.6, 0.6), p(0.4, 0.4)] },
+            // Never closes: dropped.
+            { type: 'way', ref: 4, role: 'outer', geometry: [p(5, 5), p(5, 6)] },
+          ],
+        },
+      ],
+    });
+    expect(f).toEqual([{ kind: 'water', points: [p(0, 0), p(0, 1), p(1, 1), p(1, 0), p(0, 0)] }]);
   });
 });
 
@@ -193,8 +255,57 @@ describe('augmentWithOsm', () => {
     expect(spots[1]).toMatchObject({ name: 'Kite spot (OSM)', source: 'osm', sectorSource: 'unknown' });
     expect(spots[1].sectors).toBeUndefined();
     expect(fetch).toHaveBeenCalledTimes(2);
+    // One bbox query around the nearest spot only: way-12 is ~45 km away (box too large).
+    const shoreQuery = decodeURIComponent(String((fetch.mock.calls[1] as unknown as [string, RequestInit])[1].body));
+    expect(shoreQuery).not.toContain('around');
+    const m = /way\["natural"="coastline"\]\(([-\d.]+),([-\d.]+),([-\d.]+),([-\d.]+)\)/.exec(shoreQuery)!;
+    const [south, west, north, east] = m.slice(1).map(Number);
+    expect(south < 36.2 && north > 36.2 && west < -5.8 && east > -5.8).toBe(true);
+    expect(north).toBeLessThan(36.4);
     const again = await augmentWithOsm(TARIFA, 50, curated, deps);
     expect(again).toEqual(spots);
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it('infers a lake spot from a multipolygon and leaves a river spot unknown', async () => {
+    const at = (lat: number, lon: number, northM: number, eastM: number) => ({
+      lat: lat + northM / 111_320,
+      lon: lon + eastM / (111_320 * Math.cos((lat * Math.PI) / 180)),
+    });
+    const lake = { lat: 36.1, lon: -5.7 };
+    const riv = { lat: 36.1, lon: -5.65 };
+    const kiteBody = {
+      elements: [
+        { type: 'node', id: 21, ...lake, tags: { sport: 'kitesurfing' } },
+        { type: 'node', id: 22, ...riv, tags: { sport: 'kitesurfing' } },
+      ],
+    };
+    // 2 km x 2 km lake whose west shore is 300 m east of the lake spot, split into two outer ways.
+    const a = at(lake.lat, lake.lon, -1000, 300);
+    const b = at(lake.lat, lake.lon, -1000, 2300);
+    const c = at(lake.lat, lake.lon, 1000, 2300);
+    const d = at(lake.lat, lake.lon, 1000, 300);
+    const shoreBody = {
+      elements: [
+        {
+          type: 'relation',
+          id: 1,
+          tags: { natural: 'water', type: 'multipolygon' },
+          members: [
+            { type: 'way', role: 'outer', geometry: [a, b, c] },
+            { type: 'way', role: 'outer', geometry: [a, d, c] },
+          ],
+        },
+        // A river polygon 100 m north of the river spot (with a coastline farther away).
+        { type: 'way', id: 2, tags: { natural: 'water', water: 'river' }, geometry: [at(riv.lat, riv.lon, 100, -3000), at(riv.lat, riv.lon, 100, 3000)] },
+        { type: 'way', id: 3, tags: { natural: 'coastline' }, geometry: [at(riv.lat, riv.lon, -800, -3000), at(riv.lat, riv.lon, -800, 3000)] },
+      ],
+    };
+    const fetch = vi.fn(async (_url: string, init?: RequestInit) => json(String(init?.body).includes('coastline') ? shoreBody : kiteBody));
+    const spots = await augmentWithOsm(TARIFA, 50, [], { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 });
+    const byId = Object.fromEntries(spots.map((s) => [s.id, s]));
+    expect(byId['osm-node-21']).toMatchObject({ sectorSource: 'coastline', sectors: [[350, 190]] });
+    expect(byId['osm-node-22']).toMatchObject({ sectorSource: 'unknown' });
     expect(fetch).toHaveBeenCalledTimes(2);
   });
 
