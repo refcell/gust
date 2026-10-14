@@ -13,9 +13,11 @@ interface Props {
   onToggle: () => void;
   muted?: boolean;
   onMute?: (muted: boolean) => void;
+  favorite?: boolean;
+  onFavorite?: (favorite: boolean) => void;
 }
 
-export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, muted, onMute }: Props) {
+export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, muted, onMute, favorite, onFavorite }: Props) {
   const sc = wind ? scoreWind(wind.current, spot.sectors, settings) : null;
   const nowHour = wind ? wind.current.time.slice(0, 13) + ':00' : '';
   const next = wind ? goodWindows(wind.hourly, spot.sectors, settings, nowHour)[0] : undefined;
@@ -25,7 +27,14 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, mut
     <li class={`spot r-${sc?.rating ?? 'none'}`}>
       <button class="spot-head" aria-expanded={open} aria-controls={detailId} onClick={onToggle}>
         <span class="spot-main">
-          <span class="spot-name">{spot.name}</span>
+          <span class="spot-name">
+            {favorite && (
+              <span class="fav-star" aria-label="Favourite" role="img">
+                ★
+              </span>
+            )}
+            {spot.name}
+          </span>
           <span class="spot-sub muted small">
             {formatDistance(distanceKm)}
             {sc && ` · ${sc.reason}`}
@@ -92,6 +101,11 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, mut
             <a href={`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lon}`} target="_blank" rel="noopener">
               Open in Maps
             </a>
+            {onFavorite && (
+              <button class="btn ghost small fav-btn" aria-pressed={!!favorite} onClick={() => onFavorite(!favorite)}>
+                <span aria-hidden="true">{favorite ? '★' : '☆'}</span> Favourite
+              </button>
+            )}
             {onMute && (
               <button class="btn ghost small" aria-pressed={!!muted} onClick={() => onMute(!muted)}>
                 {muted ? 'Unmute alerts' : 'Mute alerts'}

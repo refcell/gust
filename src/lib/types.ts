@@ -34,6 +34,8 @@ export interface Settings {
   minWindowHours: number;
   /** Spot ids that never send notifications. */
   muted?: string[];
+  /** Favourite spot ids: listed first, always shown and watched (even outside the radius). */
+  favorites?: string[];
 }
 
 export const DEFAULT_SETTINGS: Settings = {

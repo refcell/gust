@@ -51,6 +51,32 @@ test.describe('app', () => {
     await expect(page.getByText('Crissy Field')).toBeVisible();
   });
 
+  test('favourite a spot: listed first with a star, persisted', async ({ page }) => {
+    await page.goto('/gust/app/');
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    const head = page.getByRole('button', { name: /Crissy Field/ });
+    await head.click();
+    const star = page.getByRole('button', { name: 'Favourite', exact: true });
+    await expect(star).toHaveAttribute('aria-pressed', 'false');
+    await star.click();
+    await expect(star).toHaveAttribute('aria-pressed', 'true');
+    const first = page.locator('section[aria-label="Near you"] li.spot').first();
+    await expect(first).toContainText('Crissy Field');
+    await expect(first.getByRole('img', { name: 'Favourite' })).toBeVisible();
+    await page.reload();
+    await expect(page.locator('section[aria-label="Near you"] li.spot').first().getByRole('img', { name: 'Favourite' })).toBeVisible();
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('gust.settings') ?? '{}').favorites)).toEqual(['crissy-field']);
+  });
+
+  test('favourites outside the radius get their own section', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('gust.settings', JSON.stringify({ favorites: ['kanaha'] })));
+    await page.goto('/gust/app/');
+    const fav = page.getByRole('region', { name: 'Favourites' });
+    await expect(fav.getByRole('heading', { name: 'Favourites' })).toBeVisible();
+    await expect(fav.locator('li.spot')).toHaveCount(1);
+    await expect(fav.locator('li.spot .spot-wind strong')).toBeVisible();
+  });
+
   test('alerts panel explains platform support', async ({ page }) => {
     await page.goto('/gust/app/');
     await page.getByRole('tab', { name: 'Alerts' }).click();

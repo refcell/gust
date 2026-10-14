@@ -38,8 +38,15 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await audit(page, 'spots (expanded)');
 
       await page.getByRole('button', { name: 'Map', exact: true }).click();
-      for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Zoom in' }).click();
-      await page.getByRole('button', { name: /^Crissy Field[^,]*, / }).click();
+      const crissy = page.getByRole('button', { name: /^Crissy Field[^,]*, / });
+      const cluster = page.locator('button.map-cluster[data-spots~="crissy-field"]');
+      await expect(crissy.or(cluster)).toBeVisible();
+      await audit(page, 'spots map (clusters)');
+      for (let i = 0; i < 6 && (await crissy.count()) === 0; i++) {
+        await cluster.click();
+        await expect(crissy.or(cluster)).toBeVisible();
+      }
+      await crissy.click();
       await expect(page.getByRole('button', { name: 'Open details' })).toBeVisible();
       await audit(page, 'spots map (selected)');
       await page.getByRole('button', { name: 'List', exact: true }).click();

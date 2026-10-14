@@ -27,11 +27,18 @@ test.describe('map view', () => {
     expect(tiles.length).toBeGreaterThan(0);
     expect(tiles.every((u) => /\/\d+\/\d+\/\d+\.png$/.test(u))).toBe(true);
 
-    // Rating is conveyed as text, not colour alone.
     const crissy = map.getByRole('button', { name: /^Crissy Field[^,]*, (Good|OK|Light|Strong|Offshore|No wind), / });
+    // Markers around the city are clustered at the initial (radius-wide) zoom: tap the cluster
+    // containing Crissy Field until its own marker shows.
+    const cluster = map.locator('button.map-cluster[data-spots~="crissy-field"]');
+    await expect(cluster).toHaveAttribute('aria-label', /^\d+ spots, best (Good|OK|Light|Strong|No wind|Offshore)\b.*\. Zoom in$/);
+    await expect(cluster.locator('.map-pin')).toHaveText(/^\d+$/);
+    for (let i = 0; i < 6 && (await crissy.count()) === 0; i++) {
+      await cluster.click();
+      await expect(async () => expect((await crissy.count()) + (await cluster.count())).toBeGreaterThan(0)).toPass();
+    }
+    // Rating is conveyed as text, not colour alone.
     await expect(crissy.locator('.map-pin')).toHaveText(/\S/);
-    // Markers around the city overlap at the initial (radius-wide) zoom; zoom in on the user first.
-    for (let i = 0; i < 4; i++) await map.getByRole('button', { name: 'Zoom in' }).click();
     await crissy.click();
     await expect(crissy).toHaveAttribute('aria-pressed', 'true');
     const card = page.getByRole('region', { name: /^Selected: Crissy Field/ });
@@ -67,6 +74,11 @@ test.describe('map view', () => {
       await page.keyboard.press('Tab');
       await expect(page.locator('button.map-marker').nth(1)).toBeFocused();
       await page.keyboard.press('Shift+Tab');
+    }
+    // Enter on a cluster zooms in and keeps focus on a marker of that cluster.
+    for (let i = 0; i < 8 && (await page.evaluate(() => document.activeElement?.classList.contains('map-cluster'))); i++) {
+      await page.keyboard.press('Enter');
+      await expect(page.locator('button.map-marker:focus')).toHaveCount(1);
     }
     await page.keyboard.press('Enter');
     await expect(page.getByRole('button', { name: 'Open details' })).toBeVisible();

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { Badge } from './SpotCard';
 import { RATING_LABEL, scoreWind, type Rating } from '../lib/score';
 import { compass } from '../lib/sectors';
+import { bestRating, clusterPoints, CLUSTER_PX } from '../lib/cluster';
 import { clampZoom, fitBounds, metersPerPixel, normalize, project, visibleTiles, worldSize, zoomAround, MAX_ZOOM, MIN_ZOOM, type Pt } from '../lib/tiles';
 import type { LatLon } from '../lib/geo';
 import type { NearbySpot } from '../lib/spots';
@@ -36,6 +37,8 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [view, setView] = useState<View | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+  /** Spots of a cluster tapped at max zoom, listed in the card. */
+  const [listIds, setListIds] = useState<string[] | null>(null);
   const viewRef = useRef(view);
   viewRef.current = view;
   const sizeRef = useRef(size);
@@ -174,6 +177,41 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
     [items, wind, settings],
   );
 
+  // Group markers closer than CLUSTER_PX on screen. World-pixel positions only change with zoom,
+  // so panning reuses the result.
+  const zoom = view?.z ?? 0;
+  const clusters = useMemo(() => {
+    const Wz = worldSize(zoom);
+    return clusterPoints(
+      scored.map((s) => ({ x: s.p.x * Wz, y: s.p.y * Wz, item: s })),
+      CLUSTER_PX,
+    );
+  }, [scored, zoom]);
+  const favs = new Set(settings.favorites ?? []);
+  const atMax = !!view && view.z >= MAX_ZOOM - 1e-6;
+
+  const openCluster = (members: typeof scored, keyboard: boolean) => {
+    const v = viewRef.current;
+    if (!v) return;
+    if (v.z >= MAX_ZOOM - 1e-6) {
+      setSelected(null);
+      setListIds(members.map((m) => m.n.spot.id));
+      return;
+    }
+    const f = fitBounds(
+      members.map((m) => m.n.spot),
+      sizeRef.current.w,
+      sizeRef.current.h,
+      60,
+    );
+    setView({ c: normalize(f.center), z: clampZoom(Math.max(v.z + 1, f.zoom)) });
+    // The cluster button unmounts; keep keyboard focus on the first member's new marker.
+    if (keyboard) {
+      const id = CSS.escape(members[0].n.spot.id);
+      requestAnimationFrame(() => surfaceRef.current?.querySelector<HTMLElement>(`[data-spot="${id}"], [data-spots~="${id}"]`)?.focus({ preventScroll: true }));
+    }
+  };
+
   const { w, h } = size;
   const W = view ? worldSize(view.z) : 0;
   /** Viewport position of a normalized point, choosing the nearest world copy horizontally. */
@@ -187,6 +225,7 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
   const inView = (s: { x: number; y: number }) => s.x >= -8 && s.x <= w + 8 && s.y >= -8 && s.y <= h + 8;
 
   const sel = scored.find((s) => s.n.spot.id === selected);
+  const list = sel || !listIds || !atMax ? [] : scored.filter((s) => listIds.includes(s.n.spot.id));
   const originPx = screen(project(origin));
   const radiusPx = view ? (radiusKm * 1000) / metersPerPixel(origin.lat, view.z) : 0;
   const userPx = user ? screen(project(user)) : null;
@@ -218,23 +257,50 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
               style={{ left: `${originPx.x - radiusPx}px`, top: `${originPx.y - radiusPx}px`, width: `${radiusPx * 2}px`, height: `${radiusPx * 2}px` }}
             />
             {userPx && inView(userPx) && <div class="map-user" role="img" aria-label="Your location" style={{ left: `${userPx.x}px`, top: `${userPx.y}px` }} />}
-            {scored.map(({ n, w: sw, sc, p }) => {
-              const s = screen(p);
+            {clusters.map((c) => {
+              const s = screen({ x: c.x / W, y: c.y / W });
               if (!inView(s)) return null;
-              const label = sc
-                ? `${n.spot.name}, ${RATING_LABEL[sc.rating]}, ${formatSpeed(sw!.current.speedKn, settings.unit)}`
-                : `${n.spot.name}, no wind data yet`;
+              const fav = c.items.some((m) => favs.has(m.n.spot.id));
+              if (c.items.length > 1) {
+                const best = bestRating(c.items.map((m) => m.sc?.rating));
+                const ids = c.items.map((m) => m.n.spot.id);
+                const label = `${c.items.length} spots, ${best ? `best ${RATING_LABEL[best]}` : 'no wind data yet'}${fav ? ', includes a favourite' : ''}. ${atMax ? 'Show list' : 'Zoom in'}`;
+                return (
+                  <button
+                    key={`c:${ids[0]}`}
+                    type="button"
+                    class={`map-marker map-cluster b-${best ?? 'none'}${fav ? ' fav' : ''}${selected && ids.includes(selected) ? ' sel' : ''}`}
+                    style={{ left: `${s.x}px`, top: `${s.y}px` }}
+                    aria-label={label}
+                    data-spots={ids.join(' ')}
+                    onClick={(e) => {
+                      if (draggedRef.current && e.detail !== 0) return;
+                      openCluster(c.items, e.detail === 0);
+                    }}
+                  >
+                    <span class="map-pin" aria-hidden="true">
+                      {c.items.length}
+                    </span>
+                  </button>
+                );
+              }
+              const { n, w: sw, sc } = c.items[0];
+              const label =
+                (sc ? `${n.spot.name}, ${RATING_LABEL[sc.rating]}, ${formatSpeed(sw!.current.speedKn, settings.unit)}` : `${n.spot.name}, no wind data yet`) +
+                (fav ? ', favourite' : '');
               return (
                 <button
                   key={n.spot.id}
                   type="button"
-                  class={`map-marker b-${sc?.rating ?? 'none'}${selected === n.spot.id ? ' sel' : ''}`}
+                  class={`map-marker b-${sc?.rating ?? 'none'}${fav ? ' fav' : ''}${selected === n.spot.id ? ' sel' : ''}`}
                   style={{ left: `${s.x}px`, top: `${s.y}px` }}
                   aria-label={label}
                   aria-pressed={selected === n.spot.id}
+                  data-spot={n.spot.id}
                   onClick={(e) => {
                     // Ignore the click that ends a drag; keyboard activation (detail 0) always counts.
                     if (draggedRef.current && e.detail !== 0) return;
+                    setListIds(null);
                     setSelected(selected === n.spot.id ? null : n.spot.id);
                   }}
                 >
@@ -265,7 +331,14 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
           <div class={`map-card spot r-${sel.sc?.rating ?? 'none'}`} role="region" aria-label={`Selected: ${sel.n.spot.name}`}>
             <div class="map-card-head">
               <span class="spot-main">
-                <span class="spot-name">{sel.n.spot.name}</span>
+                <span class="spot-name">
+                  {favs.has(sel.n.spot.id) && (
+                    <span class="fav-star" aria-label="Favourite" role="img">
+                      ★
+                    </span>
+                  )}
+                  {sel.n.spot.name}
+                </span>
                 <span class="spot-sub muted small">
                   {formatDistance(sel.n.distanceKm)}
                   {sel.w &&
@@ -279,8 +352,36 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
               Open details
             </button>
           </div>
+        ) : list.length ? (
+          <div class="map-card spot" role="region" aria-label={`${list.length} spots here`}>
+            <p class="small muted map-list-title">{list.length} spots at this point</p>
+            <ul class="map-list">
+              {list.map((m) => (
+                <li key={m.n.spot.id}>
+                  <button
+                    type="button"
+                    class="map-list-item"
+                    onClick={() => {
+                      setListIds(null);
+                      setSelected(m.n.spot.id);
+                    }}
+                  >
+                    <span class="spot-name">
+                      {favs.has(m.n.spot.id) && (
+                        <span class="fav-star" aria-label="Favourite" role="img">
+                          ★
+                        </span>
+                      )}
+                      {m.n.spot.name}
+                    </span>
+                    {m.sc ? <Badge rating={m.sc.rating} /> : <span class="muted small">No data</span>}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : (
-          <p class="muted small map-hint">Tap a marker to see the spot.</p>
+          <p class="muted small map-hint">Tap a marker to see the spot, or a number to zoom in.</p>
         )}
       </div>
     </div>
