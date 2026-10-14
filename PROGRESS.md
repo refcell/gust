@@ -25,6 +25,20 @@ client gated on `VITE_PUSH_API`). 418 curated spots (185 US). Unit tests + Playw
 - Overpass usage limit (~100 req/day across all users): OSM augmentation must cache per tile for
   days and only fetch on significant location change.
 
+- Git push uses SSH (`git remote set-url --push origin git@github.com:refcell/gust.git`) because the
+  gh OAuth token lacks the `workflow` scope needed to push `.github/workflows/*`.
+- Android: Bubblewrap TWA (`android/twa-manifest.json`, `android/build-apk.sh`), built in Actions,
+  published to the `apk-latest` prerelease. Signing keystore: PKCS12 generated locally with openssl
+  (no JDK on this machine), stored as repo secrets `ANDROID_KEYSTORE_B64`/`ANDROID_KEYSTORE_PASSWORD`;
+  backup at `~/.config/gust-android/` on the owner's machine. Alias `android`.
+- TWA verification: `refcell/refcell.github.io` does not exist (the name redirects elsewhere), so
+  `https://refcell.github.io/.well-known/assetlinks.json` cannot be served from this repo. The APK
+  shows a thin URL bar. Upgrade path: create the user-site repo with `.well-known/assetlinks.json`
+  (+ `.nojekyll`), or move to a custom domain. Not done automatically: it would publish content at
+  the owner's root domain.
+- First-run alerts banner on the Spots tab (not on iOS until installed). Enabling alerts shows an
+  immediate confirmation notification listing spots that are on now.
+
 ## Next
 
 1. Verify Pages deploy live; fetch URLs.
