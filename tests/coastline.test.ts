@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { inferShore, sectorsFromNormal, type ShoreFeature } from '../src/lib/coastline';
+import { assembleRings, inferShore, sectorsFromNormal, type ShoreFeature } from '../src/lib/coastline';
 import { inSector } from '../src/lib/sectors';
 
 const spot = { lat: 30, lon: -80 };
@@ -76,5 +76,25 @@ describe('inferShore', () => {
     const pond = [at(-100, 300), at(-100, 500), at(100, 500), at(100, 300), at(-100, 300)];
     expect(inferShore(spot, [{ kind: 'water', points: pond }])).toBeNull();
     expect(inferShore(spot, [{ kind: 'water', points: [at(-1000, 300), at(1000, 300)] }])).toBeNull();
+  });
+
+  it('multipolygon outer rings assembled from fragments face the lake interior', () => {
+    const [a, b, c, d] = [at(-1000, 300), at(-1000, 2300), at(1000, 2300), at(1000, 300)];
+    const rings = assembleRings([
+      [a, b],
+      [c, b],
+      [c, d, a],
+    ]);
+    expect(rings).toHaveLength(1);
+    expect(inferShore(spot, rings.map((points) => ({ kind: 'water' as const, points })))!.normalDeg).toBeCloseTo(90, 3);
+    expect(assembleRings([[a, b], [c, d]])).toEqual([]);
+  });
+
+  it('treats a nearest river polygon as unknown, but not a farther one', () => {
+    const river: ShoreFeature = { kind: 'river', points: [at(200, -3000), at(200, 3000)] };
+    const sea = coast(at(-500, -3000), at(-500, 3000)); // travelling east: water south
+    expect(inferShore(spot, [river, sea])).toBeNull();
+    const farRiver: ShoreFeature = { kind: 'river', points: [at(1000, -3000), at(1000, 3000)] };
+    expect(inferShore(spot, [farRiver, sea])!.normalDeg).toBeCloseTo(180, 3);
   });
 });
