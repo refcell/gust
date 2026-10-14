@@ -19,6 +19,7 @@ import { enableBackground, pushConfigured, requestAlerts, showLocalNotification,
 import { syncKey } from '../lib/pushsync';
 import { isStale } from '../lib/time';
 import { formatSpeed } from '../lib/units';
+import { favoriteItems, favoritesFirst, watchSets } from '../lib/watch';
 
 type LocStatus = 'idle' | 'locating' | 'ok' | 'denied' | 'error' | 'unsupported';
 type View = 'spots' | 'places' | 'alerts' | 'settings';
@@ -163,17 +164,15 @@ export function App() {
           : { key: p.id, title: `Nearest to ${p.name}`, items: nearestSpots(allSpots, p, 3), fallback: true },
       );
     }
+    // Favourites no other section shows (outside the radius) keep their own section.
+    const favs = favoriteItems(allSpots, settings.favorites, out, loc ?? places[0] ?? null);
+    if (favs.length) out.push({ key: 'fav', title: 'Favourites', items: favs, fallback: false });
     return out;
-  }, [allSpots, loc, places, settings.radiusKm]);
+  }, [allSpots, loc, places, settings.radiusKm, settings.favorites]);
 
-  // Spots inside the radius are watched for alerts; fallback (nearest, outside radius) are only shown.
-  const [watched, shownOnly] = useMemo(() => {
-    const w = new Map<string, Spot>();
-    const f = new Map<string, Spot>();
-    for (const g of groups) for (const n of g.items) (g.fallback ? f : w).set(n.spot.id, n.spot);
-    for (const id of w.keys()) f.delete(id);
-    return [[...w.values()], [...f.values()]];
-  }, [groups]);
+  // Spots inside the radius and all favourites are watched for alerts; other fallback spots
+  // (nearest, outside the radius) are only shown.
+  const { watched, shownOnly } = useMemo(() => watchSets(groups, settings.favorites), [groups, settings.favorites]);
   const watchKey = [...watched, ...shownOnly].map((s) => s.id).join('|');
 
   const refresh = useCallback(async () => {
@@ -372,7 +371,7 @@ export function App() {
   };
 
   const sortItems = (items: NearbySpot[]) =>
-    [...items].sort((a, b) => {
+    favoritesFirst(items, settings.favorites, (a, b) => {
       const wa = wind[a.spot.id];
       const wb = wind[b.spot.id];
       const sa = wa ? scoreWind(wa.current, a.spot.sectors, settings).score : -1;
@@ -500,6 +499,11 @@ export function App() {
                       onMute={(m) => {
                         const rest = (settings.muted ?? []).filter((id) => id !== n.spot.id);
                         updateSettings({ ...settings, muted: m ? [...rest, n.spot.id] : rest });
+                      }}
+                      favorite={settings.favorites?.includes(n.spot.id)}
+                      onFavorite={(f) => {
+                        const rest = (settings.favorites ?? []).filter((id) => id !== n.spot.id);
+                        updateSettings({ ...settings, favorites: f ? [...rest, n.spot.id] : rest });
                       }}
                     />
                   ))}
