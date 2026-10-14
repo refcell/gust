@@ -481,3 +481,10 @@ input[type='search'] {
 .skeleton .spot {
   opacity: 0.55;
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}

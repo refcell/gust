@@ -196,6 +196,17 @@ export function App() {
     refresh();
   }, [refresh]);
 
+  // Deep links (?spot=id, used by notifications): scroll the spot into view once it renders.
+  const scrolledRef = useRef(false);
+  useEffect(() => {
+    if (scrolledRef.current || !openId || !fetchedAt) return;
+    const el = document.getElementById(`spot-${openId}`)?.closest('li');
+    if (el) {
+      scrolledRef.current = true;
+      el.scrollIntoView({ block: 'center' });
+    }
+  }, [openId, fetchedAt]);
+
   // Re-check on resume (the main alert path on iOS).
   const refreshRef = useRef(refresh);
   refreshRef.current = refresh;
@@ -348,6 +359,11 @@ export function App() {
                       settings={settings}
                       open={openId === n.spot.id}
                       onToggle={() => setOpenId(openId === n.spot.id ? null : n.spot.id)}
+                      muted={settings.muted?.includes(n.spot.id)}
+                      onMute={(m) => {
+                        const rest = (settings.muted ?? []).filter((id) => id !== n.spot.id);
+                        updateSettings({ ...settings, muted: m ? [...rest, n.spot.id] : rest });
+                      }}
                     />
                   ))}
                 </ul>

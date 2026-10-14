@@ -41,7 +41,9 @@ export function computeAlerts(
   // Forget windows older than two days.
   for (const [k, t] of Object.entries(prev.notifiedWindows)) if (now - t < 48 * 3600_000) notified[k] = t;
 
+  const muted = new Set(settings.muted ?? []);
   for (const { spot, wind } of entries) {
+    if (muted.has(spot.id)) continue;
     // Never alert from stale (e.g. offline-cached) data, and do not let it overwrite state.
     if (isStale(wind, now)) continue;
     const sc = scoreWind(wind.current, spot.sectors, settings);

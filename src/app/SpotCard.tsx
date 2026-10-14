@@ -11,9 +11,11 @@ interface Props {
   settings: Settings;
   open: boolean;
   onToggle: () => void;
+  muted?: boolean;
+  onMute?: (muted: boolean) => void;
 }
 
-export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle }: Props) {
+export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, muted, onMute }: Props) {
   const sc = wind ? scoreWind(wind.current, spot.sectors, settings) : null;
   const nowHour = wind ? wind.current.time.slice(0, 13) + ':00' : '';
   const next = wind ? goodWindows(wind.hourly, spot.sectors, settings, nowHour)[0] : undefined;
@@ -28,6 +30,7 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle }: P
             {formatDistance(distanceKm)}
             {sc && ` · ${sc.reason}`}
             {sc?.direction === 'unknown' && ' · direction unknown'}
+            {muted && ' · muted'}
           </span>
           {next && (
             <span class="spot-next small">
@@ -85,10 +88,15 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle }: P
             <dd>{spot.source === 'osm' ? 'OpenStreetMap' : 'gust curated list'}</dd>
           </dl>
           {spot.notes && <p class="small">{spot.notes}</p>}
-          <p class="small">
+          <p class="small actions">
             <a href={`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lon}`} target="_blank" rel="noopener">
               Open in Maps
             </a>
+            {onMute && (
+              <button class="btn ghost small" aria-pressed={!!muted} onClick={() => onMute(!muted)}>
+                {muted ? 'Unmute alerts' : 'Mute alerts'}
+              </button>
+            )}
           </p>
         </div>
       )}

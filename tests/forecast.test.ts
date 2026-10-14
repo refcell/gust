@@ -65,6 +65,11 @@ describe('computeAlerts', () => {
     // Still good: no repeat.
     expect(computeAlerts([{ spot, wind: wind(21) }], on.next, DEFAULT_SETTINGS, { now }).alerts).toHaveLength(0);
   });
+  it('never alerts for muted spots', () => {
+    const light = computeAlerts([{ spot, wind: wind(8) }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now });
+    const muted = { ...DEFAULT_SETTINGS, muted: ['x'] };
+    expect(computeAlerts([{ spot, wind: wind(20) }], light.next, muted, { now }).alerts).toHaveLength(0);
+  });
   it('can alert on first sight', () => {
     expect(computeAlerts([{ spot, wind: wind(20) }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now, alertOnFirst: true }).alerts).toHaveLength(1);
   });
