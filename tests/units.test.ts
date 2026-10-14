@@ -24,3 +24,9 @@ describe('units', () => {
     expect(formatDistance(42.4)).toBe('42 km');
   });
 });
+
+describe('formatDistance', () => {
+  it('unknown distance', () => {
+    expect(formatDistance(NaN)).toBe('distance unknown');
+  });
+});
