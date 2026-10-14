@@ -84,7 +84,7 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  if (url.hostname === 'api.open-meteo.com' || url.hostname.includes('overpass')) {
+  if (url.hostname === 'api.open-meteo.com' || url.hostname === 'marine-api.open-meteo.com' || url.hostname.includes('overpass')) {
     event.respondWith(networkFirst(req, DATA_CACHE));
     return;
   }
