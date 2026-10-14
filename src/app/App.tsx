@@ -4,6 +4,7 @@ import { SpotCard } from './SpotCard';
 import { SettingsPanel } from './SettingsPanel';
 import { AlertsPanel } from './AlertsPanel';
 import { PlacesPanel } from './PlacesPanel';
+import { Welcome } from './Welcome';
 import { runCheck, K, notificationOptions } from '../lib/check';
 import { kvGet, kvSet } from '../lib/kv';
 import { fetchWind } from '../lib/openmeteo';
@@ -29,6 +30,13 @@ interface Loc extends LatLon {
 /** Re-check wind on resume when the last fetch is older than this. */
 const STALE_MS = 10 * 60_000;
 const DEMO: Loc = { lat: 37.8043, lon: -122.4659, at: 0, label: 'San Francisco (demo)', source: 'demo' };
+
+const TABS: [View, string][] = [
+  ['spots', 'Spots'],
+  ['places', 'Places'],
+  ['alerts', 'Alerts'],
+  ['settings', 'Settings'],
+];
 
 interface Group {
   key: string;
@@ -244,7 +252,9 @@ export function App() {
           .slice(0, 3)
           .map(({ spot, w }) => `${spot.name} ${formatSpeed(w!.current.speedKn, settings.unit)}`)
           .join(' · ')
-      : `Watching ${watched.length} spots. You will get a notification when one turns good.`;
+      : watched.length
+        ? `Watching ${watched.length} spots. You will get a notification when one turns good.`
+        : 'Share your location or add a place, and gust will tell you when a spot turns good.';
     await showLocalNotification(on.length ? `${on.length} spot${on.length > 1 ? 's are' : ' is'} on now` : 'Alerts are on', {
       body,
       tag: 'gust-enabled',
@@ -256,7 +266,9 @@ export function App() {
     localStorage.setItem('gust.alertBanner', 'dismissed');
     setBannerDismissed(true);
   };
-  const showBanner = !demo && !bannerDismissed && notifPerm === 'default' && watched.length > 0 && !(platform.ios && !platform.standalone);
+  const iosNeedsInstall = platform.ios && !platform.standalone;
+  const showWelcome = !demo && !loc && places.length === 0;
+  const showBanner = !showWelcome && !demo && !bannerDismissed && notifPerm === 'default' && watched.length > 0 && !iosNeedsInstall;
 
   const updateSettings = (s: Settings) => {
     setSettings(s);
@@ -274,6 +286,23 @@ export function App() {
     return stale.length ? Math.min(...stale.map((w) => w.observedAt || w.fetchedAt)) : 0;
   })();
 
+  /** Switch section; `focusSel` moves keyboard focus into the new panel once it renders. */
+  const selectView = (v: View, focusSel?: string) => {
+    setView(v);
+    if (focusSel) requestAnimationFrame(() => document.querySelector<HTMLElement>(focusSel)?.focus());
+  };
+  // Tabs pattern: arrows / Home / End move between tabs and activate them.
+  const onTabKey = (e: KeyboardEvent) => {
+    const i = TABS.findIndex(([v]) => v === view);
+    const n = TABS.length;
+    const next = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    const v = TABS[next][0];
+    setView(v);
+    document.getElementById(`tab-${v}`)?.focus();
+  };
+
   const sortItems = (items: NearbySpot[]) =>
     [...items].sort((a, b) => {
       const wa = wind[a.spot.id];
@@ -286,9 +315,11 @@ export function App() {
   return (
     <div class="shell">
       <header class="top">
-        <a class="brand" href={__BASE__} aria-label="gust home">
-          gust
-        </a>
+        <h1 class="brand-h">
+          <a class="brand" href={__BASE__}>
+            gust
+          </a>
+        </h1>
         <span class="status" aria-live="polite">
           {loading ? 'Updating…' : fetchedAt ? `Updated ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
           {!online && ' · offline'}
@@ -301,9 +332,21 @@ export function App() {
       </header>
 
       <main id="main">
+        <div role="tabpanel" id="panel" aria-labelledby={`tab-${view}`}>
         {view === 'spots' && (
           <>
-            <LocationBar loc={loc} status={locStatus} onLocate={locate} demo={demo} />
+            {showWelcome ? (
+              <Welcome
+                locStatus={locStatus}
+                onLocate={locate}
+                notifPerm={notifPerm}
+                onEnableAlerts={enableAlerts}
+                iosNeedsInstall={iosNeedsInstall}
+                onAddPlace={() => selectView('places', '#place-q')}
+              />
+            ) : (
+              <LocationBar loc={loc} status={locStatus} onLocate={locate} demo={demo} />
+            )}
             {showBanner && (
               <div class="banner" role="region" aria-label="Alerts">
                 <p class="small">Get a notification when a spot near you turns good.</p>
@@ -327,15 +370,7 @@ export function App() {
                 Showing cached wind from {new Date(staleAt).toLocaleString([], { weekday: 'short', hour: '2-digit', minute: '2-digit' })}. Scores may be out of date.
               </p>
             )}
-            {!allSpots && !error && <p class="muted">Loading spots…</p>}
-            {allSpots && groups.length === 0 && (
-              <div class="empty">
-                <p>Share your location to see kite spots near you, or add a place you ride.</p>
-                <button class="btn" onClick={() => setView('places')}>
-                  Add a place
-                </button>
-              </div>
-            )}
+            {!allSpots && !error && !showWelcome && <p class="muted">Loading spots…</p>}
             {groups.length > 0 && !fetchedAt && !error && (
               <ul class="spots skeleton" aria-label={`Checking wind at ${watched.length + shownOnly.length} spots`}>
                 {[...watched, ...shownOnly].slice(0, 6).map((sp) => (
@@ -381,21 +416,26 @@ export function App() {
         {view === 'places' && <PlacesPanel places={places} onChange={updatePlaces} loc={loc} />}
         {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} />}
         {view === 'settings' && <SettingsPanel settings={settings} onChange={updateSettings} />}
+        </div>
       </main>
 
       <nav class="tabs" aria-label="Sections">
-        {(
-          [
-            ['spots', 'Spots'],
-            ['places', 'Places'],
-            ['alerts', 'Alerts'],
-            ['settings', 'Settings'],
-          ] as [View, string][]
-        ).map(([v, label]) => (
-          <button key={v} class={view === v ? 'tab active' : 'tab'} aria-current={view === v ? 'page' : undefined} onClick={() => setView(v)}>
-            {label}
-          </button>
-        ))}
+        <div class="tablist" role="tablist" aria-label="Sections" onKeyDown={onTabKey}>
+          {TABS.map(([v, label]) => (
+            <button
+              key={v}
+              id={`tab-${v}`}
+              role="tab"
+              class={view === v ? 'tab active' : 'tab'}
+              aria-selected={view === v}
+              aria-controls="panel"
+              tabIndex={view === v ? 0 : -1}
+              onClick={() => selectView(v)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </nav>
     </div>
   );
