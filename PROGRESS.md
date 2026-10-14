@@ -109,7 +109,11 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   8 BC spots corrected to country CA.
 - Advisor (gpt-6.1-sol) review of loops 4-5: blocker (lake-island shore inference), should-fix
   (per-alert cron rollback, mute sync independent of weather fetch, axe gate failing open). Axe
-  gate now a static import (fails closed); the other three are in a fix lane.
+  gate now a static import (fails closed). Fixed: lake inner rings kept as 'island' shores (water
+  outside), unclosed/unjoined water pieces are 'ambiguous' (distance only -> unknown when nearest);
+  cron rolls back only undelivered alerts (payloads carry their alerts); push settings sync runs
+  on settings/watch changes independent of weather (debounced 1.5 s, newest-wins sender, skipped
+  until spots load so an empty list never wipes the server).
 - Session reloads stop async workflows (not resumable): relaunch the same workflow; bulk scripts
   that rewrite data/spots.json must not run concurrently with merges.
 
@@ -136,4 +140,5 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   (elevation re-check queued after the Open-Meteo hourly limit resets), WebKit iPhone e2e in CI.
 - Loop 5: Chrome installability e2e, OSM bbox shore inference with lakes/rivers, Welcome card,
   ARIA tabs, axe audit (57 e2e passing, 124 unit).
-- Loop 6: map view, +59 spots, BC country fix, axe fail-closed, advisor review (fixes in progress).
+- Loop 6: map view, +59 spots, BC country fix, axe fail-closed, advisor review fixed (144 unit,
+  44 server, 66 e2e).
