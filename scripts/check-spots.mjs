@@ -9,7 +9,13 @@ const flagged = [];
 for (let i = 0; i < spots.length; i += 100) {
   const chunk = spots.slice(i, i + 100);
   const q = new URLSearchParams({ latitude: chunk.map((s) => s.lat).join(','), longitude: chunk.map((s) => s.lon).join(',') });
-  const res = await fetch(`https://api.open-meteo.com/v1/elevation?${q}`);
+  let res;
+  for (let attempt = 0; ; attempt++) {
+    res = await fetch(`https://api.open-meteo.com/v1/elevation?${q}`);
+    if (res.status !== 429 || attempt >= 6) break;
+    console.error(`rate limited, waiting 65 s (attempt ${attempt + 1})`);
+    await new Promise((ok) => setTimeout(ok, 65_000));
+  }
   if (!res.ok) throw new Error(`elevation ${res.status}`);
   const { elevation } = await res.json();
   chunk.forEach((s, j) => {
