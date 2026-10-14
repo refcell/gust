@@ -1,5 +1,5 @@
-import type { LatLon } from './geo';
-import type { ShoreFeature } from './coastline';
+import { bbox as bboxAround, type LatLon } from './geo';
+import { assembleRings, type ShoreFeature } from './coastline';
 
 /**
  * OpenStreetMap Overpass client with strict caching.
@@ -23,8 +23,11 @@ export const TILE_DEG = 0.5;
 export const RADIUS_BUCKETS = [25, 50, 100];
 /** Half-diagonal of a 0.5° tile (worst case, at the equator) so one query covers the whole tile. */
 const TILE_PAD_KM = 40;
-export const SHORE_RADIUS_M = 1500;
-/** Maximum spots per coastline query (keeps the union small). */
+/** Padding around each spot in the shore bbox query (covers the 1.5 km inference radius). */
+export const SHORE_PAD_KM = 2;
+/** Largest shore bbox side, km. Bigger boxes fall back to the nearest MAX_SHORE_POINTS spots. */
+export const MAX_SHORE_BBOX_KM = 40;
+/** Spots in the fallback shore bbox when the whole tile does not fit. */
 export const MAX_SHORE_POINTS = 15;
 const KEY_PREFIX = 'gust:osm:';
 const FETCH_TIMEOUT_MS = 25_000;
@@ -66,6 +69,7 @@ export interface OsmElement {
   lon?: number;
   center?: LatLon;
   geometry?: (LatLon | null)[];
+  members?: { type?: string; ref?: number; role?: string; geometry?: (LatLon | null)[] }[];
   tags?: Record<string, string>;
 }
 
@@ -87,15 +91,67 @@ export function buildKiteQuery(center: LatLon, radiusM: number): string {
   return `[out:json][timeout:20];nwr["sport"~"kitesurfing"](around:${r},${coord(center.lat)},${coord(center.lon)});out tags center;`;
 }
 
-/** Overpass QL for coastline and water-polygon ways near any of `points` (one batched union). */
-export function buildShoreQuery(points: readonly LatLon[], radiusM = SHORE_RADIUS_M): string {
-  const r = Math.round(radiusM);
-  const parts: string[] = [];
+export interface BBox {
+  south: number;
+  west: number;
+  north: number;
+  east: number;
+}
+
+/** Bounding box of `points`, each padded by `padKm`, clamped to valid coordinates. */
+export function paddedBBox(points: readonly LatLon[], padKm = SHORE_PAD_KM): BBox {
+  const b: BBox = { south: 90, west: 180, north: -90, east: -180 };
   for (const p of points) {
-    const at = `(around:${r},${coord(p.lat)},${coord(p.lon)})`;
-    parts.push(`way["natural"="coastline"]${at};`, `way["natural"="water"]${at};`);
+    const q = bboxAround(p, padKm);
+    b.south = Math.min(b.south, q.south);
+    b.west = Math.min(b.west, q.west);
+    b.north = Math.max(b.north, q.north);
+    b.east = Math.max(b.east, q.east);
   }
-  return `[out:json][timeout:20];(${parts.join('')});out geom;`;
+  return { south: Math.max(-90, b.south), west: Math.max(-180, b.west), north: Math.min(90, b.north), east: Math.min(180, b.east) };
+}
+
+function fits(b: BBox, maxKm: number): boolean {
+  const midLat = ((b.south + b.north) / 2) * (Math.PI / 180);
+  return (b.north - b.south) * 111.32 <= maxKm && (b.east - b.west) * 111.32 * Math.cos(midLat) <= maxKm;
+}
+
+const contains = (outer: BBox, inner: BBox) =>
+  inner.south >= outer.south && inner.north <= outer.north && inner.west >= outer.west && inner.east <= outer.east;
+
+export interface ShorePlan<T extends LatLon> {
+  bbox: BBox;
+  /** Spots whose whole padded neighbourhood lies inside `bbox`; only these can be inferred. */
+  covered: T[];
+}
+
+/**
+ * Pick ONE shore bbox for `points` (sorted nearest first): every spot when the padded box fits
+ * within `maxKm` per side, else the nearest MAX_SHORE_POINTS, else the longest nearest-first prefix
+ * that fits. Returns null for no points.
+ */
+export function planShoreQuery<T extends LatLon>(points: readonly T[], maxKm = MAX_SHORE_BBOX_KM, padKm = SHORE_PAD_KM): ShorePlan<T> | null {
+  if (points.length === 0) return null;
+  let box = paddedBBox(points, padKm);
+  if (!fits(box, maxKm)) {
+    let n = Math.min(points.length, MAX_SHORE_POINTS);
+    box = paddedBBox(points.slice(0, n), padKm);
+    while (n > 1 && !fits(box, maxKm)) box = paddedBBox(points.slice(0, --n), padKm);
+  }
+  const covered = points.filter((p) => contains(box, paddedBBox([p], padKm)));
+  return { bbox: box, covered };
+}
+
+/**
+ * Overpass QL for shore geometry inside `b`: coastline ways plus lake / reservoir / lagoon / river
+ * water polygons (ways and multipolygon relations; untagged `natural=water` counts as a lake).
+ */
+export function buildShoreQuery(b: BBox): string {
+  const box = `(${coord(b.south)},${coord(b.west)},${coord(b.north)},${coord(b.east)})`;
+  const water = ['[!"water"]', '["water"~"^(lake|reservoir|lagoon|river)$"]'];
+  const parts = [`way["natural"="coastline"]${box};`];
+  for (const w of water) parts.push(`way["natural"="water"]${w}${box};`, `relation["natural"="water"]["type"="multipolygon"]${w}${box};`);
+  return `[out:json][timeout:25];(${parts.join('')});out geom;`;
 }
 
 function elements(json: unknown): OsmElement[] {
@@ -131,16 +187,29 @@ export function parseKiteSpots(json: unknown): OsmKiteSpot[] {
   return out;
 }
 
-/** Parse an Overpass `out geom` response into shore features. */
+const cleanPoints = (g: (LatLon | null)[] | undefined): LatLon[] =>
+  Array.isArray(g) ? g.filter((p): p is LatLon => !!p && isNum(p.lat) && isNum(p.lon)).map((p) => ({ lat: p.lat, lon: p.lon })) : [];
+
+/**
+ * Parse an Overpass `out geom` response into shore features. Multipolygon water relations become
+ * their assembled outer rings; river polygons (`water=river`) become `river` features.
+ */
 export function parseShoreFeatures(json: unknown): ShoreFeature[] {
   const out: ShoreFeature[] = [];
   for (const el of elements(json)) {
-    if (!el || el.type !== 'way' || !Array.isArray(el.geometry)) continue;
+    if (!el) continue;
     const natural = el.tags?.natural;
-    const kind = natural === 'coastline' ? 'coastline' : natural === 'water' ? 'water' : null;
+    const kind = natural === 'coastline' ? 'coastline' : natural === 'water' ? (el.tags?.water === 'river' ? 'river' : 'water') : null;
     if (!kind) continue;
-    const points = el.geometry.filter((p): p is LatLon => !!p && isNum(p.lat) && isNum(p.lon)).map((p) => ({ lat: p.lat, lon: p.lon }));
-    if (points.length >= 2) out.push({ kind, points });
+    if (el.type === 'way') {
+      const points = cleanPoints(el.geometry);
+      if (points.length >= 2) out.push({ kind, points });
+    } else if (el.type === 'relation' && kind !== 'coastline' && Array.isArray(el.members)) {
+      const outers = el.members.filter((m) => m && m.type === 'way' && (m.role === 'outer' || m.role === '')).map((m) => cleanPoints(m.geometry));
+      // Rivers only matter for distance, so unclosed fragments are fine.
+      const rings = kind === 'river' ? outers.filter((p) => p.length >= 2) : assembleRings(outers);
+      for (const points of rings) out.push({ kind, points });
+    }
   }
   return out;
 }
@@ -294,14 +363,13 @@ export async function fetchKiteSpots(center: LatLon, radiusKm: number, deps?: Ov
 }
 
 /**
- * Coastline / water ways near `points` (one batched query, uncached: callers cache the derived
+ * Coastline / water geometry inside `b` (one bbox query, uncached: callers cache the derived
  * sectors, which are far smaller than the geometry). Returns null on failure.
  */
-export async function fetchShoreFeatures(points: readonly LatLon[], deps?: OverpassDeps): Promise<ShoreFeature[] | null> {
-  if (points.length === 0) return [];
+export async function fetchShoreFeatures(b: BBox, deps?: OverpassDeps): Promise<ShoreFeature[] | null> {
   try {
     if (!canCall(deps)) return null;
-    const json = await overpassPost(buildShoreQuery(points.slice(0, MAX_SHORE_POINTS)), deps);
+    const json = await overpassPost(buildShoreQuery(b), deps);
     return json === null ? null : parseShoreFeatures(json);
   } catch {
     return null;
