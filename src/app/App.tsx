@@ -15,7 +15,8 @@ import type { Place, Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { detectPlatform } from '../lib/platform';
 import { augmentWithOsm } from './osm';
-import { enableBackground, requestAlerts, showLocalNotification } from './background';
+import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, syncPush } from './background';
+import { syncKey } from '../lib/pushsync';
 import { isStale } from '../lib/time';
 import { formatSpeed } from '../lib/units';
 
@@ -216,6 +217,21 @@ export function App() {
     const t = setTimeout(() => refresh(), 65_000);
     return () => clearTimeout(t);
   }, [error, online, loading, refresh]);
+
+  // Keep the push backend's copy of the settings and watched spots (muted spots excluded) in sync
+  // on its own, so muting takes effect even while the wind fetch is failing. Debounced; requests are
+  // serialized latest-wins in background.ts. No-op without VITE_PUSH_API or a push subscription, and
+  // skipped until the spot list has loaded (an empty watch list would wipe the backend's spots).
+  const locRef = useRef(loc);
+  locRef.current = loc;
+  const pushKey = pushConfigured && curated ? syncKey(settings, watched) : '';
+  useEffect(() => {
+    if (!pushKey) return;
+    const t = setTimeout(() => {
+      syncPush({ settings, watched, loc: locRef.current }).catch(() => undefined);
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [pushKey]);
 
   // Deep links (?spot=id, used by notifications): scroll the spot into view once it renders.
   const scrolledRef = useRef(false);

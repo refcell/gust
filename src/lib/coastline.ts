@@ -7,14 +7,16 @@ import { normDeg, type Sector } from './sectors';
  * OSM `natural=coastline` ways are drawn with land on the LEFT and water on the RIGHT of the
  * direction of travel, so the seaward normal of a segment is its bearing + 90°.
  * Closed `natural=water` ways (lakes, reservoirs) have water INSIDE; the normal points toward the
- * polygon interior, which depends on the ring's winding order. Multipolygon lakes are reduced to
- * their closed outer rings (water inside) before they get here; see `assembleRings`.
- * `river` features (river polygons) only count for distance: when the nearest shore is a river,
- * the orientation is ambiguous and no inference is made.
+ * polygon interior, which depends on the ring's winding order. Multipolygon lakes are split into
+ * their closed outer rings (`water`, water inside) and closed inner rings (`island`, water OUTSIDE,
+ * so the normal points away from the island interior); see `assembleRings`.
+ * `river` features (river polygons) and `ambiguous` features (unclosed water ways, multipolygon
+ * fragments that never close) only count for distance: when the nearest shore is one of them, the
+ * orientation is unknown and no inference is made. A farther boundary is never used instead.
  */
 
 export interface ShoreFeature {
-  kind: 'coastline' | 'water' | 'river';
+  kind: 'coastline' | 'water' | 'island' | 'river' | 'ambiguous';
   /** Nodes in way order (closed rings repeat the first node at the end). */
   points: LatLon[];
 }
@@ -89,8 +91,14 @@ const samePoint = (a: LatLon, b: LatLon) => a.lat === b.lat && a.lon === b.lon;
  * reversing fragments as needed. Fragments that never close are dropped.
  */
 export function assembleRings(ways: readonly LatLon[][]): LatLon[][] {
+  return assembleRingsWithRest(ways).rings;
+}
+
+/** Like `assembleRings`, but also returns the (joined) fragments that never closed. */
+export function assembleRingsWithRest(ways: readonly LatLon[][]): { rings: LatLon[][]; rest: LatLon[][] } {
   const open = ways.filter((w) => w.length >= 2).map((w) => [...w]);
   const rings: LatLon[][] = [];
+  const rest: LatLon[][] = [];
   while (open.length > 0) {
     let ring = open.shift()!;
     let grown = true;
@@ -111,8 +119,9 @@ export function assembleRings(ways: readonly LatLon[][]): LatLon[][] {
       }
     }
     if (isClosed(ring)) rings.push(ring);
+    else rest.push(ring);
   }
-  return rings;
+  return { rings, rest };
 }
 
 /** Rideable sector for a given seaward normal: [normal - 100, normal + 100], normalised. */
@@ -125,28 +134,38 @@ export function sectorsFromNormal(normalDeg: number, halfWidth = SECTOR_HALF_WID
  * Returns null when nothing usable is within `maxKm`.
  */
 export function inferShore(spot: LatLon, features: readonly ShoreFeature[], maxKm = MAX_SHORE_KM): ShoreInference | null {
-  let best: { d: number; normal: number; river: boolean } | null = null;
+  let best: { d: number; normal: number; ambiguous: boolean } | null = null;
   for (const f of features) {
     if (f.points.length < 2) continue;
     const pts = f.points.map((p) => project(spot, p));
-    // Water polygons: water is on the left for CCW rings, on the right for CW rings.
     let side = 90;
-    const river = f.kind === 'river';
-    if (f.kind === 'water') {
-      if (!isClosed(f.points)) continue;
-      const area = signedArea(pts);
-      if (Math.abs(area) / 1e6 < MIN_WATER_AREA_KM2) continue;
-      side = area > 0 ? -90 : 90;
+    let ambiguous = f.kind === 'river' || f.kind === 'ambiguous';
+    if (f.kind === 'water' || f.kind === 'island') {
+      if (!isClosed(f.points)) {
+        // An open water way has no inside: it still blocks farther boundaries.
+        ambiguous = true;
+      } else {
+        const area = signedArea(pts);
+        if (f.kind === 'water') {
+          // Lakes: water is on the left for CCW rings, on the right for CW rings.
+          if (Math.abs(area) / 1e6 < MIN_WATER_AREA_KM2) continue;
+          side = area > 0 ? -90 : 90;
+        } else {
+          // Islands (lake inner rings): land inside, water outside -> the opposite side.
+          if (area === 0) ambiguous = true;
+          side = area > 0 ? 90 : -90;
+        }
+      }
     }
     for (let i = 0; i + 1 < pts.length; i++) {
       const a = pts[i];
       const b = pts[i + 1];
       if (a.x === b.x && a.y === b.y) continue;
       const d = distToSegment(a, b);
-      if (!best || d < best.d) best = { d, normal: normDeg(planarBearing(a, b) + side), river };
+      if (!best || d < best.d) best = { d, normal: normDeg(planarBearing(a, b) + side), ambiguous };
     }
   }
-  // Nearest shore is a river: which bank faces which way is ambiguous, so leave it unknown.
-  if (!best || best.river || best.d / 1000 > maxKm) return null;
+  // Nearest shore is a river or has no known water side: leave it unknown.
+  if (!best || best.ambiguous || best.d / 1000 > maxKm) return null;
   return { normalDeg: best.normal, distanceKm: best.d / 1000, sectors: sectorsFromNormal(best.normal) };
 }

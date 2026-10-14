@@ -142,7 +142,7 @@ describe('parseShoreFeatures', () => {
     ]);
   });
 
-  it('assembles multipolygon outer rings and ignores inner rings', () => {
+  it('assembles multipolygon outer rings, keeps inner rings as islands and unclosed fragments as ambiguous', () => {
     const p = (lat: number, lon: number) => ({ lat, lon });
     const f = parseShoreFeatures({
       elements: [
@@ -155,13 +155,17 @@ describe('parseShoreFeatures', () => {
             // Reversed fragment closing the ring.
             { type: 'way', ref: 2, role: 'outer', geometry: [p(0, 0), p(1, 0), p(1, 1)] },
             { type: 'way', ref: 3, role: 'inner', geometry: [p(0.4, 0.4), p(0.4, 0.6), p(0.6, 0.6), p(0.4, 0.4)] },
-            // Never closes: dropped.
+            // Never closes: distance-only.
             { type: 'way', ref: 4, role: 'outer', geometry: [p(5, 5), p(5, 6)] },
           ],
         },
       ],
     });
-    expect(f).toEqual([{ kind: 'water', points: [p(0, 0), p(0, 1), p(1, 1), p(1, 0), p(0, 0)] }]);
+    expect(f).toEqual([
+      { kind: 'water', points: [p(0, 0), p(0, 1), p(1, 1), p(1, 0), p(0, 0)] },
+      { kind: 'island', points: [p(0.4, 0.4), p(0.4, 0.6), p(0.6, 0.6), p(0.4, 0.4)] },
+      { kind: 'ambiguous', points: [p(5, 5), p(5, 6)] },
+    ]);
   });
 });
 
@@ -307,6 +311,35 @@ describe('augmentWithOsm', () => {
     expect(byId['osm-node-21']).toMatchObject({ sectorSource: 'coastline', sectors: [[350, 190]] });
     expect(byId['osm-node-22']).toMatchObject({ sectorSource: 'unknown' });
     expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it('infers the water-facing side for a spot on a lake island (inner ring), not the far mainland bank', async () => {
+    const at = (lat: number, lon: number, northM: number, eastM: number) => ({
+      lat: lat + northM / 111_320,
+      lon: lon + eastM / (111_320 * Math.cos((lat * Math.PI) / 180)),
+    });
+    const isl = { lat: 36.1, lon: -5.7 };
+    const kiteBody = { elements: [{ type: 'node', id: 31, ...isl, tags: { sport: 'kitesurfing' } }] };
+    // Lake with its west bank 1.4 km west of the spot; the spot is on an island, 50 m from its west shore.
+    const q = (n: number, e: number) => at(isl.lat, isl.lon, n, e);
+    const shoreBody = {
+      elements: [
+        {
+          type: 'relation',
+          id: 1,
+          tags: { natural: 'water', water: 'lake', type: 'multipolygon' },
+          members: [
+            { type: 'way', role: 'outer', geometry: [q(-3000, -1400), q(-3000, 4000), q(3000, 4000), q(3000, -1400), q(-3000, -1400)] },
+            { type: 'way', role: 'inner', geometry: [q(-500, -50), q(-500, 950), q(500, 950)] },
+            { type: 'way', role: 'inner', geometry: [q(500, 950), q(500, -50), q(-500, -50)] },
+          ],
+        },
+      ],
+    };
+    const fetch = vi.fn(async (_url: string, init?: RequestInit) => json(String(init?.body).includes('coastline') ? shoreBody : kiteBody));
+    const spots = await augmentWithOsm(TARIFA, 50, [], { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 });
+    // Seaward normal 270° -> rideable [170, 10]; an east (offshore) wind is excluded.
+    expect(spots.find((s) => s.id === 'osm-node-31')).toMatchObject({ sectorSource: 'coastline', sectors: [[170, 10]] });
   });
 
   it('handles empty responses (e2e mocks) and failures without throwing', async () => {
