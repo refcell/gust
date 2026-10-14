@@ -94,11 +94,11 @@ export function Badge({ rating }: { rating: Rating }) {
   return <span class={`badge b-${rating}`}>{RATING_LABEL[rating]}</span>;
 }
 
-/** Arrow pointing where the wind blows to. */
+/** Arrow pointing where the wind blows to (the path points down = south at 0°, i.e. wind from north). */
 function Arrow({ deg }: { deg: number }) {
   return (
     <svg class="arrow" viewBox="0 0 24 24" width="22" height="22" role="img" aria-label={`from ${compass(deg)}`}>
-      <g transform={`rotate(${deg + 180} 12 12)`}>
+      <g transform={`rotate(${deg} 12 12)`}>
         <path d="M12 3v16M6 13l6 7 6-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
       </g>
     </svg>
@@ -122,13 +122,22 @@ function Hourly({ wind, spot, settings }: { wind: SpotWind; spot: Spot; settings
             <div class="bar-col" key={h.time} title={`${h.time.slice(5, 16).replace('T', ' ')} · ${formatSpeed(h.speedKn, settings.unit)} g${formatSpeed(h.gustKn, settings.unit, false)} ${compass(h.dirDeg)}`}>
               <div class="gust" style={{ height: `${(h.gustKn / max) * 100}%` }} />
               <div class={`bar b-${r}`} style={{ height: `${(h.speedKn / max) * 100}%` }} />
+              {(h.time.endsWith('T00:00') || h.time.endsWith('T12:00')) && (
+                <span class="tick" aria-hidden="true">
+                  {h.time.endsWith('T00:00') ? weekday(h.time) : '12'}
+                </span>
+              )}
             </div>
           );
         })}
       </div>
       <figcaption class="small muted">
-        Next 48 h · bars = wind, ticks = gusts · {hours[0] && relativeDay(hours[0].time, wind.current.time)} →
+        Next 48 h from {hours[0] && relativeDay(hours[0].time, wind.current.time)}. Bars show wind, lines show gusts.
       </figcaption>
     </figure>
   );
+}
+
+function weekday(iso: string): string {
+  return new Date(iso.slice(0, 10) + 'T00:00:00Z').toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' });
 }

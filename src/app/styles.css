@@ -262,6 +262,21 @@ main {
 .hourly {
   margin: 12px 0 0;
 }
+.hourly figcaption {
+  margin-top: 20px;
+}
+.tick {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 3px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding-left: 2px;
+  line-height: 1;
+  white-space: nowrap;
+}
 .bars {
   display: flex;
   align-items: flex-end;
