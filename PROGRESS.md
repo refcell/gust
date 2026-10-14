@@ -168,13 +168,21 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   60-min VALARM: the no-account background alert path on iOS. Stable UID per spot+start; shifted
   windows leave old events (no delete without a feed; upgrade path: subscribable feed from the
   push server).
-- DST fix: forecast local times convert with the Open-Meteo `timezone` via Intl (a single
-  `utc_offset_seconds` is wrong after a clock change); cached data without it falls back.
+- DST (corrected in loop 11): Open-Meteo writes every timestamp in a response at its single
+  `utc_offset_seconds`, even across a clock change (verified: Adelaide 3-5 Oct 2026, 72/72 hours
+  match the fixed offset vs `timeformat=unixtime`). The loop-10 Intl zone conversion was wrong and
+  is removed; API timestamps always use the fixed offset.
+
+- gpt-6.1-sol review of loops 9-10: blocker (DST conversion, above) fixed; marine forecasts past
+  their last hour show nothing (expired offline caches never look current); marine fetches time out
+  after 10 s; calendar SEQUENCE is a persisted strictly increasing counter (`gust.icsSeq`, clamped to
+  signed 32-bit). Open: installed-iPhone Blob -> Calendar handoff needs device acceptance.
+- Docs audit: README/data/server READMEs re-verified against code; scripts + workflows tables.
 
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
-   notification; Android Chrome install + APK sideload. Everything else is verified in CI/live.
+   notification -> calendar export opens in Calendar with reminders; Android Chrome install + APK sideload. Everything else is verified in CI/live.
 2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
 4. Verify approximate positions (data/README.md) against imagery/elevation.
 5. Verify lower-confidence spot coordinates against OSM coastline data (scripted check).
@@ -202,3 +210,5 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 10: marine conditions, calendar export (iOS background fallback), DST-correct window times
   (213 unit, 90 e2e).
 - Docs audit: README, data/README, server/README checked against code (features, limits, scripts, workflows, spot ids).
+- Loop 11: docs audit, demo re-record (marine), review fixes (DST revert, marine expiry/timeout,
+  monotonic SEQUENCE).

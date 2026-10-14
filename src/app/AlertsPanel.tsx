@@ -3,7 +3,7 @@ import type { Platform } from '../lib/platform';
 import type { Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { pushSpots } from '../lib/pushsync';
-import { buildIcs, calendarWindows } from '../lib/ics';
+import { buildIcs, calendarWindows, nextSequence } from '../lib/ics';
 import { saveFile } from './download';
 import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, type BackgroundStatus } from './background';
 
@@ -66,7 +66,9 @@ export function AlertsPanel({ platform, settings, watched, loc, origins, wind }:
     // Recompute at click time so windows that ended since render are dropped.
     const wins = calendarWindows(watched.map((spot) => ({ spot, wind: wind[spot.id] })), settings, now);
     if (!wins.length) return;
-    saveFile(buildIcs(wins, { now, unit: settings.unit }), 'gust-windows.ics', 'text/calendar;charset=utf-8', { iosStandalone: platform.ios && platform.standalone });
+    const sequence = nextSequence(Number(localStorage.getItem('gust.icsSeq')), now);
+    localStorage.setItem('gust.icsSeq', String(sequence));
+    saveFile(buildIcs(wins, { now, unit: settings.unit, sequence }), 'gust-windows.ics', 'text/calendar;charset=utf-8', { iosStandalone: platform.ios && platform.standalone });
   };
 
   const iosNeedsInstall = platform.ios && !platform.standalone;

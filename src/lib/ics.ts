@@ -1,6 +1,6 @@
 import { goodWindows } from './forecast';
 import { compass, normDeg } from './sectors';
-import { isStale, localIsoToEpochInZone } from './time';
+import { isStale, localIsoToEpoch } from './time';
 import type { Settings, Spot, SpotWind } from './types';
 import { formatSpeed, type SpeedUnit } from './units';
 
@@ -32,7 +32,7 @@ export function calendarWindows(entries: readonly { spot: Spot; wind: SpotWind |
   const out: CalendarWindow[] = [];
   for (const { spot, wind } of entries) {
     if (!wind || muted.has(spot.id) || isStale(wind, now)) continue;
-    const toMs = (iso: string) => localIsoToEpochInZone(iso, wind.timezone, wind.utcOffsetSeconds);
+    const toMs = (iso: string) => localIsoToEpoch(iso, wind.utcOffsetSeconds);
     for (const w of goodWindows(wind.hourly, spot.sectors, settings)) {
       const startMs = toMs(w.start);
       const endMs = toMs(w.end) + HOUR;
@@ -105,11 +105,20 @@ export function spotUrl(spotId: string): string {
 }
 
 /** Build an iCalendar (RFC 5545) file with one VEVENT (+ 60 min display alarm) per window. */
-export function buildIcs(wins: readonly CalendarWindow[], opts: { now: number; unit?: SpeedUnit }): string {
+/** Largest SEQUENCE we emit (RFC 5545 INTEGER is signed 32-bit). */
+export const MAX_SEQUENCE = 2 ** 31 - 1;
+
+/** Next export SEQUENCE: strictly above the previous export's, and at least minutes-since-epoch. */
+export function nextSequence(prev: number | null | undefined, now: number): number {
+  const p = Number.isInteger(prev) && (prev as number) >= 0 ? (prev as number) : -1;
+  return Math.min(MAX_SEQUENCE, Math.max(p + 1, Math.floor(Math.max(0, now) / 60_000)));
+}
+
+export function buildIcs(wins: readonly CalendarWindow[], opts: { now: number; unit?: SpeedUnit; sequence?: number }): string {
   const unit = opts.unit ?? 'kn';
   const stamp = icsDate(opts.now);
   // Re-exports carry a higher SEQUENCE so calendars that honour it replace the earlier copy.
-  const seq = Math.max(0, Math.floor(opts.now / 60_000));
+  const seq = opts.sequence ?? nextSequence(null, opts.now);
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//refcell//gust//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:gust wind windows'];
   for (const w of wins) {
     const url = spotUrl(w.spotId);
