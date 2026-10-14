@@ -183,7 +183,7 @@ export function App() {
       // Keep background paths (periodic sync, push subscription) in sync with the watched spots.
       if (granted) enableBackground({ settings, watched, loc, prompt: false }).catch(() => undefined);
     } catch {
-      setError(online ? 'Could not fetch wind data. Pull to retry.' : 'Offline — showing the last wind data.');
+      setError(online ? 'Could not reach the wind service. Retrying in a minute.' : 'Offline — showing the last wind data.');
       const last = await kvGet<Record<string, SpotWind>>(K.lastWind).catch(() => undefined);
       if (last) setWind((prev) => ({ ...last, ...prev }));
     } finally {
@@ -195,6 +195,13 @@ export function App() {
   useEffect(() => {
     refresh();
   }, [refresh]);
+
+  // After a failed fetch (rate limit, flaky network), retry once a minute while online.
+  useEffect(() => {
+    if (!error || !online || loading) return;
+    const t = setTimeout(() => refresh(), 65_000);
+    return () => clearTimeout(t);
+  }, [error, online, loading, refresh]);
 
   // Deep links (?spot=id, used by notifications): scroll the spot into view once it renders.
   const scrolledRef = useRef(false);
