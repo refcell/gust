@@ -2,6 +2,7 @@ import type { LatLon } from '../lib/geo';
 import { K } from '../lib/check';
 import { kvSet } from '../lib/kv';
 import type { Settings, Spot } from '../lib/types';
+import { createLatestSender, subscribeBody, type SubscribeBody, type SyncResult } from '../lib/pushsync';
 
 export const PUSH_API = import.meta.env.VITE_PUSH_API?.replace(/\/$/, '') ?? '';
 export const VAPID_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY ?? '';
@@ -22,6 +23,31 @@ function b64ToBytes(b64: string): Uint8Array<ArrayBuffer> {
   const out = new Uint8Array(new ArrayBuffer(raw.length));
   for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
   return out;
+}
+
+/** Every `/subscribe` POST goes through this, so an older body never overwrites newer settings. */
+const postSubscribe = createLatestSender(async (body: SubscribeBody) => {
+  const res = await fetch(`${PUSH_API}/subscribe`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  return res.ok;
+});
+
+const tz = () => Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+/**
+ * Push the current settings / watched spots (muted ones excluded) to the push backend for an
+ * existing subscription. Independent of the wind fetch. No-op (null) when push is not configured,
+ * unsupported, or there is no subscription yet.
+ */
+export async function syncPush(o: { settings: Settings; watched: Spot[]; loc: LatLon | null }): Promise<SyncResult | null> {
+  if (!pushConfigured || !('PushManager' in window)) return null;
+  try {
+    const reg = await navigator.serviceWorker?.ready.catch(() => undefined);
+    const sub = await reg?.pushManager.getSubscription();
+    if (!sub) return null;
+    return await postSubscribe(subscribeBody({ subscription: sub.toJSON(), settings: o.settings, watched: o.watched, loc: o.loc, tz: tz() }));
+  } catch {
+    return { ok: false, stale: false };
+  }
 }
 
 /**
@@ -54,18 +80,8 @@ export async function enableBackground(o: { settings: Settings; watched: Spot[];
       let sub = await reg.pushManager.getSubscription();
       if (!sub && o.prompt) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(VAPID_KEY) });
       if (sub) {
-        const res = await fetch(`${PUSH_API}/subscribe`, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            subscription: sub.toJSON(),
-            settings: o.settings,
-            location: o.loc,
-            spots: o.watched.filter((s) => !(o.settings.muted ?? []).includes(s.id)).map((s) => ({ id: s.id, name: s.name, lat: s.lat, lon: s.lon, sectors: s.sectors ?? [] })),
-            tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          }),
-        });
-        status.push = res.ok ? 'subscribed' : 'failed';
+        const r = await postSubscribe(subscribeBody({ subscription: sub.toJSON(), settings: o.settings, watched: o.watched, loc: o.loc, tz: tz() }));
+        status.push = r.ok || r.stale ? 'subscribed' : 'failed';
       }
     } catch {
       status.push = 'failed';

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { AlertState } from '../../src/lib/alerts';
 import { DEFAULT_SETTINGS } from '../../src/lib/types';
 import type { Alert } from '../../src/lib/alerts';
-import { buildPayloads, inQuietHours, localHour, MAX_PER_SUBSCRIBER, runCron } from '../src/cron';
+import { buildPayloads, inQuietHours, localHour, MAX_PER_SUBSCRIBER, rollback, runCron } from '../src/cron';
 import worker from '../src/index';
 import { endpointId, putState, putSubscriber } from '../src/store';
 import type { Subscriber, SubSpot } from '../src/validate';
@@ -92,7 +92,7 @@ describe('buildPayloads', () => {
   it('sends each alert when within the per-subscriber limit', () => {
     const out = buildPayloads([fc('a'), now('b')], app);
     expect(out.map((o) => o.payload.tag)).toEqual(['now-b', 'fc-a']);
-    expect(out[0]).toEqual({ payload: { title: 'B is on', body: 'b', tag: 'now-b', url: 'https://x.test/app/?spot=b' }, urgent: true });
+    expect(out[0]).toEqual({ payload: { title: 'B is on', body: 'b', tag: 'now-b', url: 'https://x.test/app/?spot=b' }, urgent: true, alerts: [now('b')] });
     expect(out[1].urgent).toBe(false);
   });
 
@@ -102,6 +102,21 @@ describe('buildPayloads', () => {
     expect(out.map((o) => o.payload.tag)).toEqual(['now-d', 'fc-a', 'gust-summary']);
     expect(out[2].payload).toEqual({ title: 'Wind at 3 more spots', body: 'B, C, E', tag: 'gust-summary', url: app });
     expect(out[2].urgent).toBe(false);
+    // Each push records which alerts it represents (the summary stands for the overflow).
+    expect(out.map((o) => o.alerts.map((a) => a.tag))).toEqual([['now-d'], ['fc-a'], ['fc-b', 'fc-c', 'fc-e']]);
+  });
+});
+
+describe('rollback', () => {
+  it('undoes only the undelivered alerts', () => {
+    const prev: AlertState = { ratings: { a: 'light', b: 'ok' }, notifiedWindows: {} };
+    const next: AlertState = { ratings: { a: 'good', b: 'good', c: 'good' }, notifiedWindows: { 'x@1': NOW, 'y@2': NOW } };
+    const alerts: Alert[] = [
+      { tag: 'now-a', kind: 'now', spotId: 'a', title: '', body: '' },
+      { tag: 'now-c', kind: 'now', spotId: 'c', title: '', body: '' },
+      { tag: 'fc-y@2', kind: 'forecast', spotId: 'y', title: '', body: '' },
+    ];
+    expect(rollback(prev, next, alerts)).toEqual({ ratings: { a: 'light', b: 'good' }, notifiedWindows: { 'x@1': NOW } });
   });
 });
 
@@ -186,10 +201,25 @@ describe('runCron', () => {
     const m = mockFetch([r]);
     const report = await runCron(env, NOW, m.fetch);
     expect(m.pushes).toHaveLength(1);
+    expect(JSON.parse(m.pushes[0].payload).tag).toBe('now-a');
     expect(report).toMatchObject({ alerts: 2, sent: 1 });
-    // The cap cut delivery short: the forecast window is not consumed.
+    // The cap cut delivery short: the delivered "now" transition is kept, the forecast window is not consumed.
     const st = JSON.parse(env.SUBS.map.get('state:' + id)!) as AlertState;
+    expect(st.ratings.a).toBe('good');
     expect(st.notifiedWindows).toEqual({});
+
+    // Run 2: "now" does not repeat; the pending forecast alert goes out instead.
+    const m2 = mockFetch([r]);
+    const report2 = await runCron(env, NOW + 30 * 60_000, m2.fetch);
+    expect(m2.pushes.map((p) => JSON.parse(p.payload).tag)).toEqual(['fc-b@2025-06-01T15:00']);
+    expect(report2).toMatchObject({ alerts: 1, sent: 1 });
+    const st2 = JSON.parse(env.SUBS.map.get('state:' + id)!) as AlertState;
+    expect(Object.keys(st2.notifiedWindows)).toEqual(['b@2025-06-01T15:00']);
+
+    // Run 3: nothing left to send.
+    const m3 = mockFetch([r]);
+    await runCron(env, NOW + 60 * 60_000, m3.fetch);
+    expect(m3.pushes).toHaveLength(0);
   });
 
   it('does not consume alerts when a push fails, and resends next run', async () => {
