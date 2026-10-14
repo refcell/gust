@@ -10,17 +10,51 @@ export interface SpotGroup {
 
 /**
  * Favourite spots that no other section shows (e.g. outside the radius), with distances from
- * `origin`, nearest first. Needs an origin for the distance; returns [] without one.
+ * `origin`, nearest first. Without an origin the distance is unknown (NaN), sorted by name.
  */
 export function favoriteItems(allSpots: readonly Spot[], favorites: readonly string[] | undefined, groups: readonly SpotGroup[], origin: LatLon | null): NearbySpot[] {
-  if (!origin || !favorites?.length) return [];
+  if (!favorites?.length) return [];
   const fav = new Set(favorites);
   const shown = new Set<string>();
   for (const g of groups) for (const n of g.items) shown.add(n.spot.id);
-  return allSpots
-    .filter((s) => fav.has(s.id) && !shown.has(s.id))
-    .map((spot) => ({ spot, distanceKm: distanceKm(origin, spot) }))
-    .sort((a, b) => a.distanceKm - b.distanceKm);
+  const items = allSpots.filter((s) => fav.has(s.id) && !shown.has(s.id));
+  if (!origin) return items.map((spot) => ({ spot, distanceKm: NaN })).sort((a, b) => a.spot.name.localeCompare(b.spot.name));
+  return items.map((spot) => ({ spot, distanceKm: distanceKm(origin, spot) })).sort((a, b) => a.distanceKm - b.distanceKm);
+}
+
+/**
+ * The spot universe: current spots plus saved snapshots of favourites that are no longer in it
+ * (e.g. OSM spots from another area, after travelling). Snapshots of non-favourites are ignored.
+ */
+export function withFavoriteSnapshots(spots: readonly Spot[], favorites: readonly string[] | undefined, snapshots: readonly Spot[]): Spot[] {
+  const fav = new Set(favorites ?? []);
+  if (!fav.size || !snapshots.length) return [...spots];
+  const have = new Set(spots.map((s) => s.id));
+  const extra = snapshots.filter((s) => fav.has(s.id) && !have.has(s.id));
+  return extra.length ? [...spots, ...extra.filter((s, i) => extra.findIndex((x) => x.id === s.id) === i)] : [...spots];
+}
+
+/** Snapshot list after (un)favouriting `spot`: added (or refreshed) when favourited, removed otherwise. */
+export function toggleFavoriteSnapshot(snapshots: readonly Spot[], spot: Spot, favorite: boolean): Spot[] {
+  const rest = snapshots.filter((s) => s.id !== spot.id);
+  return favorite ? [...rest, spot] : rest;
+}
+
+/**
+ * Snapshots to add for favourites that are in `spots` but not yet saved (favourites made before
+ * snapshots existed). Returns null when nothing is missing.
+ */
+export function backfillFavoriteSnapshots(snapshots: readonly Spot[], spots: readonly Spot[], favorites: readonly string[] | undefined): Spot[] | null {
+  const have = new Set(snapshots.map((s) => s.id));
+  const missing = new Set((favorites ?? []).filter((id) => !have.has(id)));
+  if (!missing.size) return null;
+  const add: Spot[] = [];
+  for (const s of spots) {
+    if (!missing.has(s.id)) continue;
+    add.push(s);
+    missing.delete(s.id);
+  }
+  return add.length ? [...snapshots, ...add] : null;
 }
 
 /**

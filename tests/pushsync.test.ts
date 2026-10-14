@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createLatestSender, subscribeBody, syncKey } from '../src/lib/pushsync';
+import { createLatestSender, createRevisionedSender, nextRevision, pushSpots, subscribeBody, syncKey } from '../src/lib/pushsync';
+import { MAX_PUSH_SPOTS } from '../src/lib/limits';
 import { DEFAULT_SETTINGS, type Spot } from '../src/lib/types';
 
 const spot = (id: string): Spot => ({ id, name: id.toUpperCase(), lat: 1, lon: 2, country: 'US', sectors: [[200, 300]] }) as Spot;
@@ -79,5 +80,68 @@ describe('createLatestSender', () => {
     });
     expect(await send('a')).toEqual({ ok: false, stale: false });
     expect(await send('b')).toEqual({ ok: true, stale: false });
+  });
+});
+
+describe('createRevisionedSender', () => {
+  it('two refreshes resolving in reverse order: the newer (muted) settings win', async () => {
+    // A fake "persist + POST" target; the last write is what the backend/IDB keeps.
+    let stored: { muted?: string[] } | null = null;
+    const writes: number[] = [];
+    const send = createRevisionedSender(async (v: { rev: number; settings: { muted?: string[] } }) => {
+      writes.push(v.rev);
+      stored = v.settings;
+      return true;
+    });
+    // Refresh A starts with unmuted settings, then the user mutes and refresh B starts.
+    const revA = nextRevision();
+    const a = { rev: revA, settings: { ...DEFAULT_SETTINGS, muted: [] } };
+    const revB = nextRevision();
+    const b = { rev: revB, settings: { ...DEFAULT_SETTINGS, muted: ['x'] } };
+    // B finishes first, A (older) last.
+    expect(await send(b.rev, b)).toEqual({ ok: true, stale: false });
+    expect(await send(a.rev, a)).toEqual({ ok: false, stale: true });
+    expect(writes).toEqual([revB]); // the older intent was dropped before persisting / posting
+    expect(stored).toEqual({ ...DEFAULT_SETTINGS, muted: ['x'] });
+  });
+
+  it('drops a queued older revision that is overtaken while another request is in flight', async () => {
+    const sent: number[] = [];
+    const gate = deferred();
+    const send = createRevisionedSender(async (v: number) => {
+      sent.push(v);
+      return v === 1 ? gate.promise : true;
+    });
+    const p1 = send(1, 1);
+    await flush();
+    const p2 = send(2, 2);
+    const p3 = send(3, 3);
+    const late = send(2, 2); // an older intent arriving late
+    gate.resolve(true);
+    expect((await Promise.all([p1, p2, p3, late])).map((r) => r.stale)).toEqual([true, true, false, true]);
+    expect(sent).toEqual([1, 3]);
+  });
+});
+
+describe('pushSpots', () => {
+  const at = (id: string, lat: number): Spot => ({ id, name: id, lat, lon: 0 }) as Spot;
+
+  it('caps at the server limit: favourites first (nearest first), then nearest others; muted left out', () => {
+    const watched = [at('o3', 3), at('f2', 20), at('o1', 1), at('m', 0), at('f1', 10), at('o2', 2)];
+    const s = { ...DEFAULT_SETTINGS, favorites: ['f2', 'f1', 'gone'], muted: ['m'] };
+    const r = pushSpots(watched, s, [{ lat: 0, lon: 0 }], 4);
+    expect(r.spots.map((x) => x.id)).toEqual(['f1', 'f2', 'o1', 'o2']);
+    expect(r.total).toBe(5);
+  });
+
+  it('uses the nearest origin, keeps input order without origins, and never exceeds MAX_PUSH_SPOTS', () => {
+    const watched = [at('a', 10), at('b', 0)];
+    expect(pushSpots(watched, DEFAULT_SETTINGS, [{ lat: 50, lon: 0 }, { lat: 9, lon: 0 }]).spots.map((x) => x.id)).toEqual(['a', 'b']);
+    expect(pushSpots(watched, DEFAULT_SETTINGS, []).spots.map((x) => x.id)).toEqual(['a', 'b']);
+    const many = Array.from({ length: 100 }, (_, i) => at(`s${i}`, i / 10));
+    const body = subscribeBody({ subscription: {}, settings: { ...DEFAULT_SETTINGS, favorites: ['s99'] }, watched: many, loc: { lat: 0, lon: 0 }, tz: 'UTC' });
+    expect(body.spots).toHaveLength(MAX_PUSH_SPOTS);
+    expect(body.spots[0].id).toBe('s99');
+    expect(body.spots[1].id).toBe('s0');
   });
 });
