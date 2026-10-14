@@ -474,3 +474,10 @@ input[type='search'] {
   display: flex;
   gap: 8px;
 }
+
+.skeleton {
+  margin-top: 48px;
+}
+.skeleton .spot {
+  opacity: 0.55;
+}
