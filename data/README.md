@@ -31,7 +31,7 @@ The file is a JSON array. Each entry looks like this:
 | `lon`     | number                | WGS84 decimal degrees, at most 5 decimals. West is negative, so all of the Americas are negative. |
 | `country` | string                | ISO 3166-1 alpha-2 code (`US`, `ES`, `BR`, ...). |
 | `region`  | string, optional      | State or province code (`CA`, `HI`, `BC`, `QLD`, ...). Leave it out when not useful. |
-| `sectors` | `[from, to][]`        | Wind directions that are safe to ride. See below. |
+| `sectors` | `[from, to][]`        | Wind directions that are safe to ride. See below. `[]` means unknown: the spot is scored on speed only and shown as "direction unknown". |
 | `water`   | enum                  | `flat`, `chop`, `waves` or `mixed`. |
 | `level`   | enum                  | `beginner`, `intermediate`, `advanced` or `all`. |
 | `notes`   | string, ≤ 140 chars   | Best season and wind, hazards, launch or access info. Facts only. |
@@ -94,7 +94,13 @@ copied from a proprietary spot database.
 - Never rename or reuse an `id`.
 - Before opening a PR, check that the JSON parses, ids are unique, coordinates are
   in range, sector values are within 0–360, and `water` and `level` use the
-  allowed values.
+  allowed values. `pnpm test` runs the dataset safety checks.
+- For batches, write the new entries to `data/new-<name>.json` and run
+  `node scripts/merge-spots.mjs`. It validates the schema, sector width (at most 220°
+  unless a documented any-direction spot) and the longitude sign in the Americas,
+  drops duplicates (same id or within 1.5 km), appends one object per line, and deletes
+  the input files (`--keep` keeps them).
+- If the orientation is uncertain, use `"sectors": []` rather than a guess.
 
 ## Known lower-confidence entries
 
@@ -122,7 +128,11 @@ are welcome:
 ## Approximate positions
 
 Some positions come from a town or kite-school location rather than the waterline and may be a
-few hundred metres off: `chicxulub`, `hurghada-north`, `wadi-lahami`, `sint-joris`, `kawama`,
-`umm-al-quwain`, `theologos`, `vietnam-hon-rom`, `grapevine-lake`, `galveston-8-mile-road`, and entries whose notes
-say "Approximate position". `node scripts/check-spots.mjs` flags coastal spots that sit well above
-sea level (Open-Meteo elevation, per-IP rate limits apply).
+few hundred metres off: `chicxulub`, `hurghada-north`, `wadi-lahami`, `curacao-sint-joris`,
+`cuba-varadero-kawama`, `uae-umm-al-quwain-kite-beach`, `rhodes-theologos`, `vietnam-hon-rom`,
+`grapevine-lake-murrell-park`, `galveston-8-mile-road`, and entries whose notes say "Approximate
+position". `node scripts/check-spots.mjs [maxMeters]` flags coastal spots that sit more than 25 m
+(by default) above sea level using Open-Meteo elevation; known lakes and rivers at altitude are
+skipped. The Spot coordinate check workflow runs it weekly with a 15 m threshold.
+`node scripts/snap-spots.mjs <id> ...` moves listed spots onto the nearest low-lying cell next to
+the sea. Both use the per-IP Open-Meteo budget; snap one to three spots at a time.
