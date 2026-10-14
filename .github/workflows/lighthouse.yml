@@ -1,0 +1,34 @@
+name: Lighthouse
+
+# Report-only Lighthouse run against the live site after each deploy (and on demand).
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run Lighthouse (mobile)
+        run: |
+          sleep 60 # let the Pages CDN pick up the new deploy
+          for page in "" "app/?demo=1"; do
+            name=$(echo "${page:-landing}" | tr -c 'a-z0-9' '-')
+            npx -y lighthouse@12 "https://refcell.github.io/gust/${page}" --quiet \
+              --chrome-flags="--headless=new --no-sandbox" --form-factor=mobile \
+              --output=json --output-path="lh-${name}.json"
+          done
+      - name: Summary
+        run: node scripts/lh-summary.mjs lh-*.json | tee -a "$GITHUB_STEP_SUMMARY"
