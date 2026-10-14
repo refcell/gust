@@ -466,18 +466,29 @@ export function App() {
               )
             )}
             {spotsMode === 'list' && groups.length > 0 && !fetchedAt && !error && (
-              <ul class="spots skeleton" aria-label={`Checking wind at ${watched.length + shownOnly.length} spots`}>
-                {[...watched, ...shownOnly].slice(0, 6).map((sp) => (
-                  <li key={sp.id} class="spot">
-                    <div class="spot-head">
-                      <span class="spot-main">
-                        <span class="spot-name">{sp.name}</span>
-                        <span class="spot-sub muted small">Checking wind…</span>
-                      </span>
-                    </div>
-                  </li>
+              // Same section/heading structure as the loaded list, so the swap does not shift layout.
+              <div aria-label={`Checking wind at ${watched.length + shownOnly.length} spots`} role="status">
+                {groups.slice(0, 2).map((g) => (
+                  <section key={g.key} class="group" aria-label={g.title}>
+                    <h2>
+                      {g.title}
+                      {g.fallback && <span class="muted small"> · none within {settings.radiusKm} km</span>}
+                    </h2>
+                    <ul class="spots skeleton">
+                      {sortItems(g.items).slice(0, 6).map((n) => (
+                        <li key={n.spot.id} class="spot">
+                          <div class="spot-head">
+                            <span class="spot-main">
+                              <span class="spot-name">{n.spot.name}</span>
+                              <span class="spot-sub muted small">Checking wind…</span>
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
                 ))}
-              </ul>
+              </div>
             )}
             {spotsMode === 'list' && (fetchedAt > 0 || error) && groups.map((g) => (
               <section key={g.key} class="group" aria-label={g.title}>
