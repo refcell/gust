@@ -178,13 +178,14 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
   );
 
   // Group markers closer than CLUSTER_PX on screen. World-pixel positions only change with zoom,
-  // so panning reuses the result.
+  // so panning reuses the result. x is periodic (world width) so spots across the antimeridian merge.
   const zoom = view?.z ?? 0;
   const clusters = useMemo(() => {
     const Wz = worldSize(zoom);
     return clusterPoints(
       scored.map((s) => ({ x: s.p.x * Wz, y: s.p.y * Wz, item: s })),
       CLUSTER_PX,
+      Wz,
     );
   }, [scored, zoom]);
   const favs = new Set(settings.favorites ?? []);

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { directionFit, scoreWind } from '../src/lib/score';
 import { DEFAULT_SETTINGS } from '../src/lib/types';
 import type { Sector } from '../src/lib/sectors';
+import { sectorsFromNormal } from '../src/lib/coastline';
 
 const S = DEFAULT_SETTINGS; // 15–30 kn, gusts <= 35
 const WEST: Sector[] = [[225, 315]];
@@ -64,5 +65,26 @@ describe('scoreWind', () => {
     const mid = scoreWind({ speedKn: 22.5, gustKn: 25, dirDeg: 270 }, WEST, S).score;
     const edge = scoreWind({ speedKn: 15, gustKn: 18, dirDeg: 270 }, WEST, S).score;
     expect(mid).toBeGreaterThan(edge);
+  });
+});
+
+describe('inferred coastline sectors (safety)', () => {
+  // East-facing shore: seaward normal 90°, inferred sectors side-shore at most.
+  const EAST_SHORE = sectorsFromNormal(90);
+  const at = (dirDeg: number) => scoreWind({ speedKn: 22, gustKn: 26, dirDeg }, EAST_SHORE, S);
+  it('rates onshore through side-shore (normal ± 89°) good', () => {
+    for (const d of [90, 1, 179]) expect(at(d).rating).toBe('good');
+  });
+  it('caps just past side-shore (normal ± 95°) at ok', () => {
+    for (const d of [355, 185]) {
+      expect(at(d).direction).toBe('marginal');
+      expect(at(d).rating).toBe('ok');
+    }
+  });
+  it('rates cross-offshore (normal ± 110°) offshore with score 0', () => {
+    for (const d of [340, 200, 270]) {
+      expect(at(d).rating).toBe('offshore');
+      expect(at(d).score).toBe(0);
+    }
   });
 });

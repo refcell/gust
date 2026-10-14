@@ -18,7 +18,7 @@ import {
   tileFor,
   type KV,
 } from '../src/lib/overpass';
-import { augmentWithOsm } from '../src/app/osm';
+import { augmentWithOsm, shoreCacheKey, SHORE_CACHE_VERSION } from '../src/app/osm';
 import type { Spot } from '../src/lib/types';
 
 function memStore(): KV & { data: Map<string, string> } {
@@ -255,7 +255,7 @@ describe('augmentWithOsm', () => {
     const spots = await augmentWithOsm(TARIFA, 50, curated, deps);
     expect(spots.map((s) => s.id)).toEqual(['osm-node-11', 'osm-way-12']);
     const coastSpot = spots[0];
-    expect(coastSpot).toMatchObject({ name: 'Coast spot', source: 'osm', sectorSource: 'coastline', sectors: [[350, 190]] });
+    expect(coastSpot).toMatchObject({ name: 'Coast spot', source: 'osm', sectorSource: 'coastline', sectors: [[0, 180]] });
     expect(spots[1]).toMatchObject({ name: 'Kite spot (OSM)', source: 'osm', sectorSource: 'unknown' });
     expect(spots[1].sectors).toBeUndefined();
     expect(fetch).toHaveBeenCalledTimes(2);
@@ -308,7 +308,7 @@ describe('augmentWithOsm', () => {
     const fetch = vi.fn(async (_url: string, init?: RequestInit) => json(String(init?.body).includes('coastline') ? shoreBody : kiteBody));
     const spots = await augmentWithOsm(TARIFA, 50, [], { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 });
     const byId = Object.fromEntries(spots.map((s) => [s.id, s]));
-    expect(byId['osm-node-21']).toMatchObject({ sectorSource: 'coastline', sectors: [[350, 190]] });
+    expect(byId['osm-node-21']).toMatchObject({ sectorSource: 'coastline', sectors: [[0, 180]] });
     expect(byId['osm-node-22']).toMatchObject({ sectorSource: 'unknown' });
     expect(fetch).toHaveBeenCalledTimes(2);
   });
@@ -338,8 +338,24 @@ describe('augmentWithOsm', () => {
     };
     const fetch = vi.fn(async (_url: string, init?: RequestInit) => json(String(init?.body).includes('coastline') ? shoreBody : kiteBody));
     const spots = await augmentWithOsm(TARIFA, 50, [], { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 });
-    // Seaward normal 270° -> rideable [170, 10]; an east (offshore) wind is excluded.
-    expect(spots.find((s) => s.id === 'osm-node-31')).toMatchObject({ sectorSource: 'coastline', sectors: [[170, 10]] });
+    // Seaward normal 270° -> rideable [180, 0]; an east (offshore) wind is excluded.
+    expect(spots.find((s) => s.id === 'osm-node-31')).toMatchObject({ sectorSource: 'coastline', sectors: [[180, 0]] });
+  });
+
+  it('ignores shore entries cached by an older inference version', async () => {
+    const storage = memStore();
+    const tileKey = tileFor(TARIFA, 50).key;
+    // Pre-v2 entry (unversioned key) with the old ±100° sectors and a v1 entry: both must be ignored.
+    const stale = JSON.stringify({ at: T0, ttl: CACHE_TTL_MS, ok: true, value: { 'node-11': { normal: 90, sectors: [[350, 190]] } } });
+    storage.setItem(`gust:osm:shore:${tileKey}`, stale);
+    storage.setItem(`gust:osm:shore:v1:${tileKey}`, stale);
+    expect(SHORE_CACHE_VERSION).toBeGreaterThanOrEqual(2);
+    expect(shoreCacheKey(tileKey)).toBe(`shore:v${SHORE_CACHE_VERSION}:${tileKey}`);
+    const fetch = vi.fn(async (_url: string, init?: RequestInit) => json(String(init?.body).includes('coastline') ? shore : kite));
+    const spots = await augmentWithOsm(TARIFA, 50, curated, { fetch: fetch as unknown as typeof globalThis.fetch, storage, now: () => T0 });
+    expect(fetch).toHaveBeenCalledTimes(2); // shore query re-run
+    expect(spots[0]).toMatchObject({ id: 'osm-node-11', sectors: [[0, 180]] });
+    expect(storage.data.has(`gust:osm:${shoreCacheKey(tileKey)}`)).toBe(true);
   });
 
   it('handles empty responses (e2e mocks) and failures without throwing', async () => {

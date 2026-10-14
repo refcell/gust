@@ -56,3 +56,27 @@ describe('bestRating', () => {
     expect(bestRating([])).toBeNull();
   });
 });
+
+describe('clusterPoints across the antimeridian', () => {
+  it('merges spots at 179.9 and -179.9 when x is periodic, centroid on the seam', async () => {
+    const { project, worldSize } = await import('../src/lib/tiles');
+    const W = worldSize(8);
+    const a = project({ lat: -17, lon: 179.9 });
+    const b = project({ lat: -17, lon: -179.9 });
+    const pts = [
+      { x: a.x * W, y: a.y * W, item: 'east' },
+      { x: b.x * W, y: b.y * W, item: 'west' },
+    ];
+    expect(clusterPoints(pts, 40).map((c) => c.items)).toEqual([['east'], ['west']]); // non-periodic
+    const c = clusterPoints(pts, 40, W);
+    expect(c.map((k) => k.items)).toEqual([['east', 'west']]);
+    const cx = c[0].x / W;
+    expect(Math.min(cx, 1 - cx)).toBeLessThan(1e-6); // centred on 180°, not mid-world
+  });
+
+  it('wraps the grid with few cells and keeps non-periodic results unchanged', () => {
+    const c = clusterPoints([pt(1, 0, 'a'), pt(99, 0, 'b'), pt(50, 0, 'c')], 40, 100);
+    expect(c.map((k) => k.items)).toEqual([['a', 'b'], ['c']]);
+    expect(c[0].x).toBeCloseTo(0);
+  });
+});
