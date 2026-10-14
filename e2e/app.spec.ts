@@ -35,6 +35,13 @@ test.describe('app', () => {
     await expect(page.getByText(/11\.3 m\/s/).first()).toBeVisible();
   });
 
+  test('far from any spot shows the nearest spots with wind', async ({ page, context }) => {
+    await context.setGeolocation({ latitude: 38.5, longitude: -98.5 }); // central Kansas
+    await page.goto('/gust/app/');
+    await expect(page.getByRole('heading', { name: /Nearest spots/ })).toBeVisible();
+    await expect(page.locator('.spot-wind strong').first()).toBeVisible();
+  });
+
   test('demo mode works without geolocation', async ({ page }) => {
     await page.goto('/gust/app/?demo=1');
     await expect(page.getByText('Demo mode')).toBeVisible();
