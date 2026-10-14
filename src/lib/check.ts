@@ -21,7 +21,7 @@ export interface CheckResult {
  * Background-safe check: fetch wind for the watched spots, compute alerts, persist state.
  * Used by the service worker (periodic sync / push) and by the page.
  */
-export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; alertOnFirst?: boolean } = {}): Promise<CheckResult> {
+export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; alertOnFirst?: boolean; deliver?: boolean } = {}): Promise<CheckResult> {
   const settings = opts.settings ?? (await kvGet<Settings>(K.settings)) ?? DEFAULT_SETTINGS;
   const spots = opts.spots ?? (await kvGet<Spot[]>(K.watch)) ?? [];
   if (spots.length === 0) return { alerts: [], wind: {} };
@@ -36,7 +36,12 @@ export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; aler
     }
   });
   const prev = (await kvGet<AlertState>(K.alertState)) ?? EMPTY_ALERT_STATE;
-  const { alerts, next } = computeAlerts(entries, prev, settings, { alertOnFirst: opts.alertOnFirst });
+  const computed = computeAlerts(entries, prev, settings, { alertOnFirst: opts.alertOnFirst });
+  // When notifications cannot be shown, do not mark forecast windows as notified,
+  // so they still alert once the user enables notifications.
+  const deliver = opts.deliver ?? true;
+  const next = deliver ? computed.next : { ...computed.next, notifiedWindows: prev.notifiedWindows };
+  const alerts = deliver ? computed.alerts : [];
   await kvSet(K.alertState, next);
   const lastWind = { ...((await kvGet<Record<string, SpotWind>>(K.lastWind)) ?? {}), ...wind };
   await kvSet(K.lastWind, lastWind);

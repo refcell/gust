@@ -5,7 +5,8 @@ declare const self: ServiceWorkerGlobalScope;
 
 const CACHE = `gust-${__SW_VERSION__}`;
 const DATA_CACHE = 'gust-data';
-const SHELL = [__BASE__, __BASE__ + 'app/', __BASE__ + 'manifest.webmanifest', ...__PRECACHE__.filter((f) => !f.endsWith('.html'))];
+const ICONS = ['icon-192.png', 'icon-512.png', 'badge-96.png', 'apple-touch-icon.png', 'icon.svg'].map((f) => __BASE__ + 'icons/' + f);
+const SHELL = [__BASE__, __BASE__ + 'app/', __BASE__ + 'manifest.webmanifest', ...ICONS, ...__PRECACHE__.filter((f) => !f.endsWith('.html'))];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

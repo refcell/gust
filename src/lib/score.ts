@@ -33,6 +33,11 @@ export function directionFit(dirDeg: number, sectors: readonly Sector[] | undefi
  * - Marginal direction caps the rating at `ok`.
  */
 export function scoreWind(w: Pick<WindSample, 'speedKn' | 'gustKn' | 'dirDeg'>, sectors: readonly Sector[] | undefined, s: Settings): Score {
+  // Fail closed on missing or invalid data: never "good".
+  if (!Number.isFinite(w.speedKn) || !Number.isFinite(w.dirDeg) || w.speedKn < 0) {
+    return { score: 0, rating: 'poor', direction: 'unknown', reason: 'No data' };
+  }
+  if (!Number.isFinite(w.gustKn)) w = { ...w, gustKn: Infinity };
   const direction = directionFit(w.dirDeg, sectors);
   if (direction === 'offshore') return { score: 0, rating: 'offshore', direction, reason: 'Offshore — unsafe' };
 

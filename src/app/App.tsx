@@ -13,7 +13,8 @@ import type { Place, Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { detectPlatform } from '../lib/platform';
 import { augmentWithOsm } from './osm';
-import { requestAlerts, showLocalNotification } from './background';
+import { enableBackground, requestAlerts, showLocalNotification } from './background';
+import { isStale } from '../lib/time';
 import { formatSpeed } from '../lib/units';
 
 type LocStatus = 'idle' | 'locating' | 'ok' | 'denied' | 'error' | 'unsupported';
@@ -163,17 +164,14 @@ export function App() {
     try {
       await kvSet(K.settings, settings);
       await kvSet(K.watch, watched);
-      const { alerts, wind: w } = await runCheck({ spots: watched, settings });
+      const granted = 'Notification' in window && Notification.permission === 'granted';
+      const { alerts, wind: w } = await runCheck({ spots: watched, settings, deliver: granted });
       if (Object.keys(w).length === 0) throw new Error('no data');
       setWind((prev) => ({ ...prev, ...w }));
       setFetchedAt(Date.now());
-      if (alerts.length && 'Notification' in window && Notification.permission === 'granted') {
-        const reg = await navigator.serviceWorker?.getRegistration(__BASE__);
-        for (const a of alerts) {
-          if (reg) await reg.showNotification(a.title, notificationOptions(a));
-          else new Notification(a.title, notificationOptions(a));
-        }
-      }
+      for (const a of alerts) await showLocalNotification(a.title, notificationOptions(a));
+      // Keep background paths (periodic sync, push subscription) in sync with the watched spots.
+      if (granted) enableBackground({ settings, watched, loc, prompt: false }).catch(() => undefined);
     } catch {
       setError(online ? 'Could not fetch wind data. Pull to retry.' : 'Offline — showing the last wind data.');
       const last = await kvGet<Record<string, SpotWind>>(K.lastWind).catch(() => undefined);
@@ -241,6 +239,13 @@ export function App() {
     savePlaces(p);
   };
 
+  // Oldest sample among watched spots, if any is stale (e.g. served from the offline cache).
+  const staleAt = (() => {
+    const ws = watched.map((s) => wind[s.id]).filter(Boolean) as SpotWind[];
+    const stale = ws.filter((w) => isStale(w));
+    return stale.length ? Math.min(...stale.map((w) => w.observedAt || w.fetchedAt)) : 0;
+  })();
+
   const sortItems = (items: NearbySpot[]) =>
     [...items].sort((a, b) => {
       const wa = wind[a.spot.id];
@@ -287,6 +292,11 @@ export function App() {
             {error && (
               <p class="notice" role="status">
                 {error}
+              </p>
+            )}
+            {staleAt && (
+              <p class="notice" role="status">
+                Showing cached wind from {new Date(staleAt).toLocaleString([], { weekday: 'short', hour: '2-digit', minute: '2-digit' })}. Scores may be out of date.
               </p>
             )}
             {!allSpots && !error && <p class="muted">Loading spots…</p>}

@@ -3,6 +3,7 @@ import { scoreWind, type Rating } from './score';
 import type { Settings, Spot, SpotWind } from './types';
 import { formatSpeed } from './units';
 import { compass } from './sectors';
+import { isStale, localIsoToEpoch } from './time';
 
 export interface AlertState {
   /** Last rating per spot id. */
@@ -41,6 +42,8 @@ export function computeAlerts(
   for (const [k, t] of Object.entries(prev.notifiedWindows)) if (now - t < 48 * 3600_000) notified[k] = t;
 
   for (const { spot, wind } of entries) {
+    // Never alert from stale (e.g. offline-cached) data, and do not let it overwrite state.
+    if (isStale(wind, now)) continue;
     const sc = scoreWind(wind.current, spot.sectors, settings);
     const before = prev.ratings[spot.id];
     if (sc.rating === 'good' && before !== 'good' && (before !== undefined || opts.alertOnFirst)) {
@@ -60,8 +63,8 @@ export function computeAlerts(
       const wins = goodWindows(wind.hourly, spot.sectors, settings, nowLocal);
       for (const w of wins) {
         if (w.start <= nowLocal) continue; // already happening; covered by "now"
-        const startMs = Date.parse(w.start + ':00Z') - wind.utcOffsetSeconds * 1000;
-        if (startMs - now > horizon) continue;
+        const startMs = localIsoToEpoch(w.start, wind.utcOffsetSeconds);
+        if (!(startMs > now && startMs - now <= horizon)) continue;
         const key = `${spot.id}@${w.start}`;
         if (notified[key]) continue;
         notified[key] = now;

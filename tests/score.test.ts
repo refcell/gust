@@ -48,6 +48,13 @@ describe('scoreWind', () => {
     expect(r.direction).toBe('unknown');
     expect(r.score).toBeLessThan(scoreWind({ speedKn: 22, gustKn: 25, dirDeg: 270 }, WEST, S).score);
   });
+  it('fails closed on missing data', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(scoreWind({ speedKn: 22, gustKn: null as any, dirDeg: 270 }, WEST, S).rating).not.toBe('good');
+    expect(scoreWind({ speedKn: 22, gustKn: NaN, dirDeg: 270 }, WEST, S).rating).not.toBe('good');
+    expect(scoreWind({ speedKn: NaN, gustKn: 20, dirDeg: 270 }, WEST, S).rating).toBe('poor');
+    expect(scoreWind({ speedKn: 22, gustKn: 25, dirDeg: NaN }, WEST, S).rating).toBe('poor');
+  });
   it('respects custom windows', () => {
     const light = { ...S, minKn: 10, maxKn: 18, maxGustKn: 22 };
     expect(scoreWind({ speedKn: 12, gustKn: 15, dirDeg: 270 }, WEST, light).rating).toBe('good');
