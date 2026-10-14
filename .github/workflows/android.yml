@@ -1,0 +1,133 @@
+name: Android APK
+
+# Builds the gust Trusted Web Activity APK with Bubblewrap and attaches it to a GitHub Release.
+# - tags v*        -> release for that tag
+# - main / manual  -> rolling prerelease "apk-latest" (stable download URL)
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+    branches: [main]
+    paths:
+      - 'android/**'
+      - '.github/workflows/android.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: android-actions/setup-android@v3
+        with:
+          # build-tools version must match @bubblewrap/core's BUILD_TOOLS_VERSION (see android/build-apk.sh).
+          packages: 'platform-tools build-tools;36.1.0 platforms;android-36'
+
+      - name: Pre-write Bubblewrap config
+        # build-apk.sh also passes an explicit --config; this keeps a bare `bubblewrap` call in this
+        # job from prompting to download a JDK/SDK.
+        run: |
+          mkdir -p ~/.bubblewrap
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$ANDROID_HOME" > ~/.bubblewrap/config.json
+          cat ~/.bubblewrap/config.json
+
+      - name: Version
+        id: version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            name="${GITHUB_REF_NAME#v}"
+            tag="$GITHUB_REF_NAME"
+          else
+            name="1.0.${GITHUB_RUN_NUMBER}"
+            tag="apk-latest"
+          fi
+          {
+            echo "name=$name"
+            echo "tag=$tag"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build signed APK
+        id: build
+        env:
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          APP_VERSION_CODE: ${{ github.run_number }}
+          APP_VERSION_NAME: ${{ steps.version.outputs.name }}
+        run: ./android/build-apk.sh
+
+      - name: Summary
+        env:
+          FINGERPRINT: ${{ steps.build.outputs.fingerprint }}
+          SIGNED_WITH_SECRET: ${{ secrets.ANDROID_KEYSTORE_B64 != '' }}
+        run: |
+          {
+            echo "### gust APK ${{ steps.version.outputs.name }} (versionCode ${{ github.run_number }})"
+            echo
+            echo "SHA-256 signing certificate fingerprint: \`$FINGERPRINT\`"
+            echo
+            if [ "$SIGNED_WITH_SECRET" != "true" ]; then
+              echo "> Signed with a throwaway key generated in this run. It will not install over an APK"
+              echo "> from another run. Add ANDROID_KEYSTORE_B64 / ANDROID_KEYSTORE_PASSWORD secrets (see android/README.md)."
+              echo
+            fi
+            echo '```json'
+            cat android/build/out/assetlinks.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gust-apk
+          path: |
+            android/build/out/app-release-signed.apk
+            android/build/out/app-release-bundle.aab
+            android/build/out/assetlinks.json
+            android/build/out/sha256.txt
+          retention-days: 30
+
+      - name: Move apk-latest tag to this commit
+        if: steps.version.outputs.tag == 'apk-latest'
+        run: |
+          git tag -f apk-latest "$GITHUB_SHA"
+          git push -f origin refs/tags/apk-latest
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag == 'apk-latest' && 'gust Android APK (latest build)' || format('gust {0}', steps.version.outputs.tag) }}
+          prerelease: ${{ steps.version.outputs.tag == 'apk-latest' }}
+          make_latest: ${{ steps.version.outputs.tag == 'apk-latest' && 'false' || 'true' }}
+          body: |
+            Android app for gust (Trusted Web Activity wrapping https://refcell.github.io/gust/app/).
+
+            Install: download `app-release-signed.apk` on your Android phone, open it, and allow installs from your browser when asked.
+
+            - Version: ${{ steps.version.outputs.name }} (versionCode ${{ github.run_number }}), commit ${{ github.sha }}
+            - Signing certificate SHA-256: `${{ steps.build.outputs.fingerprint }}`
+            - `assetlinks.json` is the Digital Asset Links file for this signing key (see android/README.md).
+
+            The installable PWA at https://refcell.github.io/gust/ is the primary app; this APK opens the same site.
+          files: |
+            android/build/out/app-release-signed.apk
+            android/build/out/assetlinks.json
+          fail_on_unmatched_files: true
