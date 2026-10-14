@@ -20,6 +20,10 @@ describe('goodWindows', () => {
     expect(goodWindows(hourly, spot.sectors, { ...DEFAULT_SETTINGS, minWindowHours: 4 })).toHaveLength(0);
     expect(goodWindows(hourly, spot.sectors, { ...DEFAULT_SETTINGS, minWindowHours: 1 }, '2026-06-01T14:00')).toHaveLength(1);
   });
+  it('breaks runs across missing hours', () => {
+    const gappy = [W('2026-06-01T10:00', 20), W('2026-06-01T12:00', 20)];
+    expect(goodWindows(gappy, spot.sectors, DEFAULT_SETTINGS)).toHaveLength(0);
+  });
   it('ignores offshore hours', () => {
     expect(goodWindows(hourly.map((h) => ({ ...h, dirDeg: 90 })), spot.sectors, DEFAULT_SETTINGS)).toHaveLength(0);
   });
@@ -34,8 +38,21 @@ describe('relativeDay', () => {
 });
 
 describe('computeAlerts', () => {
-  const wind = (speed: number, hourly: WindSample[] = []): SpotWind => ({ current: W('2026-06-01T09:00', speed), hourly, utcOffsetSeconds: 0, fetchedAt: 0 });
   const now = Date.parse('2026-06-01T09:00:00Z');
+  const wind = (speed: number, hourly: WindSample[] = []): SpotWind => ({ current: W('2026-06-01T09:00', speed), hourly, utcOffsetSeconds: 0, fetchedAt: now, observedAt: now });
+
+  it('ignores stale data entirely', () => {
+    const light = computeAlerts([{ spot, wind: wind(8) }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now });
+    const later = now + 3 * 86400_000;
+    const r = computeAlerts([{ spot, wind: wind(20, [W('2026-06-01T14:00', 20), W('2026-06-01T15:00', 21)]) }], light.next, DEFAULT_SETTINGS, { now: later });
+    expect(r.alerts).toHaveLength(0);
+    expect(r.next.ratings.x).toBe(light.next.ratings.x);
+  });
+  it('never alerts for windows that already started', () => {
+    const hourly = [W('2026-06-01T08:00', 20), W('2026-06-01T09:00', 20), W('2026-06-01T10:00', 21)];
+    const r = computeAlerts([{ spot, wind: { ...wind(8, hourly), current: W('2026-06-01T07:00', 8) } }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now: now + 30 * 60_000 });
+    expect(r.alerts.filter((a) => a.kind === 'forecast')).toHaveLength(0);
+  });
 
   it('fires when a spot crosses into good, not on first sight', () => {
     const first = computeAlerts([{ spot, wind: wind(20) }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now });
@@ -84,5 +101,15 @@ describe('open-meteo', () => {
     expect(p?.current.speedKn).toBe(12);
     expect(p?.hourly).toHaveLength(1);
     expect(p?.utcOffsetSeconds).toBe(-25200);
+    expect(p?.observedAt).toBe(Date.parse('2026-06-01T16:00:00Z'));
+  });
+  it('rejects invalid current data', () => {
+    const base = { utc_offset_seconds: 0, hourly: { time: [], wind_speed_10m: [], wind_gusts_10m: [], wind_direction_10m: [] } };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const bad = (current: any) => parseLocation({ ...base, current } as any);
+    expect(bad({ time: '2026-06-01T09:00', wind_speed_10m: 12, wind_gusts_10m: null, wind_direction_10m: 280 })).toBeNull();
+    expect(bad({ time: '2026-06-01T09:00', wind_speed_10m: NaN, wind_gusts_10m: 3, wind_direction_10m: 280 })).toBeNull();
+    expect(bad({ time: '2026-06-01T09:00', wind_speed_10m: 5, wind_gusts_10m: 3, wind_direction_10m: 400 })).toBeNull();
+    expect(bad({ time: 'nope', wind_speed_10m: 5, wind_gusts_10m: 3, wind_direction_10m: 40 })).toBeNull();
   });
 });

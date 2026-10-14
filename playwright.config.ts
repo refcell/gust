@@ -8,7 +8,9 @@ export default defineConfig({
   use: { baseURL: 'http://localhost:4173', trace: 'retain-on-failure', serviceWorkers: 'block' },
   webServer: { command: 'pnpm preview --port 4173 --strictPort', url: 'http://localhost:4173/gust/', reuseExistingServer: !process.env.CI },
   projects: [
-    { name: 'mobile', use: { ...devices['Pixel 7'] } },
-    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
+    { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /pwa\.spec/ },
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: /pwa\.spec/ },
+    // Service worker enabled: catches precache/install failures and offline regressions.
+    { name: 'pwa', use: { ...devices['Pixel 7'], serviceWorkers: 'allow' }, testMatch: /pwa\.spec/ },
   ],
 });

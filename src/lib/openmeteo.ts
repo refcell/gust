@@ -1,5 +1,6 @@
 import type { LatLon } from './geo';
 import type { SpotWind, WindSample } from './types';
+import { localIsoToEpoch } from './time';
 
 export const OPEN_METEO = 'https://api.open-meteo.com/v1/forecast';
 const VARS = 'wind_speed_10m,wind_gusts_10m,wind_direction_10m';
@@ -25,23 +26,38 @@ interface OMLocation {
   hourly?: { time: string[]; wind_speed_10m: (number | null)[]; wind_gusts_10m: (number | null)[]; wind_direction_10m: (number | null)[] };
 }
 
+/** A physically valid sample: finite, non-negative speeds, direction in 0..360. */
+export function validSample(s: unknown, g: unknown, d: unknown): boolean {
+  return (
+    typeof s === 'number' && Number.isFinite(s) && s >= 0 && s < 200 &&
+    typeof g === 'number' && Number.isFinite(g) && g >= 0 && g < 250 &&
+    typeof d === 'number' && Number.isFinite(d) && d >= 0 && d <= 360
+  );
+}
+
+const ISO_MINUTE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+
 export function parseLocation(loc: OMLocation, fetchedAt = Date.now()): SpotWind | null {
-  const c = loc.current;
-  const h = loc.hourly;
-  if (!c || !h) return null;
+  const c = loc?.current;
+  const h = loc?.hourly;
+  const offset = loc?.utc_offset_seconds;
+  if (!c || !h || !Array.isArray(h.time) || typeof offset !== 'number' || !Number.isFinite(offset)) return null;
+  if (typeof c.time !== 'string' || !ISO_MINUTE.test(c.time)) return null;
+  if (!validSample(c.wind_speed_10m, c.wind_gusts_10m, c.wind_direction_10m)) return null;
   const hourly: WindSample[] = [];
   for (let i = 0; i < h.time.length; i++) {
-    const s = h.wind_speed_10m[i];
-    const g = h.wind_gusts_10m[i];
-    const d = h.wind_direction_10m[i];
-    if (s == null || g == null || d == null) continue;
-    hourly.push({ time: h.time[i], speedKn: s, gustKn: g, dirDeg: d });
+    const s = h.wind_speed_10m?.[i];
+    const g = h.wind_gusts_10m?.[i];
+    const d = h.wind_direction_10m?.[i];
+    if (typeof h.time[i] !== 'string' || !ISO_MINUTE.test(h.time[i]) || !validSample(s, g, d)) continue;
+    hourly.push({ time: h.time[i], speedKn: s as number, gustKn: g as number, dirDeg: d as number });
   }
   return {
     current: { time: c.time, speedKn: c.wind_speed_10m, gustKn: c.wind_gusts_10m, dirDeg: c.wind_direction_10m },
     hourly,
-    utcOffsetSeconds: loc.utc_offset_seconds,
+    utcOffsetSeconds: offset,
     fetchedAt,
+    observedAt: localIsoToEpoch(c.time, offset),
   };
 }
 

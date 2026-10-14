@@ -2,6 +2,9 @@ import { scoreWind } from './score';
 import type { Sector } from './sectors';
 import type { Settings, WindSample } from './types';
 
+const HOUR = 3600_000;
+const t = (iso: string) => Date.parse(iso + ':00Z');
+
 export interface GoodWindow {
   start: string;
   end: string;
@@ -31,6 +34,8 @@ export function goodWindows(hourly: readonly WindSample[], sectors: readonly Sec
   };
   for (const w of hourly) {
     if (w.time < fromTime) continue;
+    // A missing hour breaks the run.
+    if (run.length && t(w.time) - t(run[run.length - 1].time) !== HOUR) flush();
     if (scoreWind(w, sectors, settings).rating === 'good') run.push(w);
     else flush();
   }

@@ -57,7 +57,10 @@ export interface SpotWind {
   hourly: WindSample[];
   /** UTC offset of the spot in seconds. */
   utcOffsetSeconds: number;
+  /** When this was fetched from the network (ms epoch). */
   fetchedAt: number;
+  /** Epoch ms of the `current` sample, derived from its local time and the UTC offset. */
+  observedAt: number;
 }
 
 export interface Place {

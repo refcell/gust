@@ -121,7 +121,7 @@ function Hourly({ wind, spot, settings }: { wind: SpotWind; spot: Spot; settings
   const max = Math.max(settings.maxGustKn, ...hours.map((h) => h.gustKn));
   return (
     <figure class="hourly">
-      <div class="bars" role="img" aria-label="Wind for the next 48 hours">
+      <div class="bars" role="img" aria-label="Wind for the next 48 hours (table follows)">
         {hours.map((h) => {
           const r = scoreWind(h, spot.sectors, settings).rating;
           return (
@@ -137,6 +137,31 @@ function Hourly({ wind, spot, settings }: { wind: SpotWind; spot: Spot; settings
           );
         })}
       </div>
+      <table class="sr-only">
+        <caption>Hourly wind, every 3 hours</caption>
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Wind</th>
+            <th scope="col">Gust</th>
+            <th scope="col">From</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {hours
+            .filter((_, i) => i % 3 === 0)
+            .map((h) => (
+              <tr key={h.time}>
+                <td>{relativeDay(h.time, wind.current.time)}</td>
+                <td>{formatSpeed(h.speedKn, settings.unit)}</td>
+                <td>{formatSpeed(h.gustKn, settings.unit)}</td>
+                <td>{compass(h.dirDeg)}</td>
+                <td>{RATING_LABEL[scoreWind(h, spot.sectors, settings).rating]}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
       <figcaption class="small muted">
         Next 48 h from {hours[0] && relativeDay(hours[0].time, wind.current.time)}. Bars show wind, lines show gusts.
       </figcaption>
