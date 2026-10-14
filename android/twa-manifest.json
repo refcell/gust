@@ -1,0 +1,58 @@
+{
+  "packageId": "io.github.refcell.gust",
+  "host": "refcell.github.io",
+  "name": "gust",
+  "launcherName": "gust",
+  "display": "standalone",
+  "themeColor": "#0B0C0E",
+  "themeColorDark": "#0B0C0E",
+  "navigationColor": "#0B0C0E",
+  "navigationColorDark": "#0B0C0E",
+  "navigationDividerColor": "#0B0C0E",
+  "navigationDividerColorDark": "#0B0C0E",
+  "backgroundColor": "#0B0C0E",
+  "enableNotifications": true,
+  "startUrl": "/gust/app/?source=pwa",
+  "iconUrl": "https://refcell.github.io/gust/icons/icon-512.png",
+  "maskableIconUrl": "https://refcell.github.io/gust/icons/maskable-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "Nearby spots",
+      "shortName": "Nearby spots",
+      "url": "https://refcell.github.io/gust/app/?source=shortcut",
+      "chosenIconUrl": "https://refcell.github.io/gust/icons/icon-192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://refcell.github.io/gust/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://refcell.github.io/gust/",
+  "minSdkVersion": 21,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "displayOverride": [],
+  "appVersion": "1"
+}
