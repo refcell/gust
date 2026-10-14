@@ -15,6 +15,9 @@ test.describe('app', () => {
     await expect(page.getByText('Crissy Field')).toBeVisible();
     await expect(page.locator('.badge').first()).toBeVisible();
     await expect(page.getByText(/Updated \d/)).toBeVisible();
+    // No stray falsy values rendered as text (e.g. "0").
+    await expect(page.locator('main')).not.toHaveText(/^0|\n0\n/);
+    await expect(page.getByText('cached wind')).toHaveCount(0);
   });
 
   test('expands a spot to show hourly forecast', async ({ page }) => {

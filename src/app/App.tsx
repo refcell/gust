@@ -304,7 +304,7 @@ export function App() {
                 {error}
               </p>
             )}
-            {staleAt && (
+            {staleAt > 0 && (
               <p class="notice" role="status">
                 Showing cached wind from {new Date(staleAt).toLocaleString([], { weekday: 'short', hour: '2-digit', minute: '2-digit' })}. Scores may be out of date.
               </p>
