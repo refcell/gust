@@ -298,7 +298,21 @@ export function App() {
                 </button>
               </div>
             )}
-            {groups.map((g) => (
+            {groups.length > 0 && !fetchedAt && !error && (
+              <ul class="spots skeleton" aria-label={`Checking wind at ${watched.length} spots`}>
+                {watched.slice(0, 6).map((sp) => (
+                  <li key={sp.id} class="spot">
+                    <div class="spot-head">
+                      <span class="spot-main">
+                        <span class="spot-name">{sp.name}</span>
+                        <span class="spot-sub muted small">Checking wind…</span>
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {(fetchedAt > 0 || error) && groups.map((g) => (
               <section key={g.key} class="group" aria-label={g.title}>
                 <h2>
                   {g.title}
