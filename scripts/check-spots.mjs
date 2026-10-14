@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 
 const MAX = Number(process.argv[2] ?? 25);
 const spots = JSON.parse(readFileSync('data/spots.json', 'utf8'));
+// Reviewed: inland water at altitude (lake/reservoir/river level), not misplaced pins.
+const KNOWN_INLAND = new Set(['jordanelle-hailstone', 'wasaga-beach', 'campione-del-garda', 'dougs-beach']);
 const inland = /lake|reservoir|river|dam|lago|lac\b|see\b|forebay|basin|delta|gorge|salton/i;
 const flagged = [];
 for (let i = 0; i < spots.length; i += 100) {
@@ -21,7 +23,7 @@ for (let i = 0; i < spots.length; i += 100) {
   chunk.forEach((s, j) => {
     const e = elevation[j];
     const lakeLike = inland.test(s.name + ' ' + (s.notes ?? ''));
-    if (!lakeLike && e > MAX) flagged.push({ id: s.id, elevation: e, lat: s.lat, lon: s.lon });
+    if (!lakeLike && !KNOWN_INLAND.has(s.id) && e > MAX) flagged.push({ id: s.id, elevation: e, lat: s.lat, lon: s.lon });
   });
 }
 console.log(`${spots.length} spots checked, ${flagged.length} coastal spots above ${MAX} m:`);
