@@ -123,6 +123,6 @@ are welcome:
 
 Some positions come from a town or kite-school location rather than the waterline and may be a
 few hundred metres off: `chicxulub`, `hurghada-north`, `wadi-lahami`, `sint-joris`, `kawama`,
-`umm-al-quwain`, `theologos`, `grapevine-lake`, `galveston-8-mile-road`, and entries whose notes
+`umm-al-quwain`, `theologos`, `vietnam-hon-rom`, `grapevine-lake`, `galveston-8-mile-road`, and entries whose notes
 say "Approximate position". `node scripts/check-spots.mjs` flags coastal spots that sit well above
 sea level (Open-Meteo elevation, per-IP rate limits apply).

@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const ids = process.argv.slice(2);
 const spots = JSON.parse(readFileSync('data/spots.json', 'utf8'));
 const STEP_M = 250;
-const N = 12; // grid half-width in steps (~3 km)
+const N = Number(process.env.SNAP_N ?? 12); // grid half-width in steps (~3 km at 12)
 
 async function elevations(points) {
   const out = [];
