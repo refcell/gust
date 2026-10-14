@@ -226,10 +226,19 @@ dialog::backdrop {
 .steps li span {
   display: inline;
 }
-.steps svg {
+.steps .illo {
   display: block;
-  margin-top: 6px;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin-top: 8px;
+  color: var(--fg);
+}
+.steps .illo .hl {
   color: var(--accent);
+}
+.steps .illo text {
+  font-family: inherit;
 }
 dialog .primary {
   width: 100%;
