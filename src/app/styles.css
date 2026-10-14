@@ -550,3 +550,167 @@ input[type='search'] {
   justify-content: space-between;
   gap: 12px;
 }
+
+.seg.mode {
+  display: flex;
+  margin: 4px 0 8px;
+}
+.seg.mode button {
+  flex: 1;
+  min-height: 44px;
+  padding: 8px 14px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.seg.mode button.on {
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 600;
+}
+.seg.mode button:focus-visible {
+  outline-offset: -3px;
+}
+
+.map {
+  position: relative;
+  height: calc(100dvh - 260px);
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #dfe6e9;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.map-tiles {
+  position: absolute;
+  inset: 0;
+}
+.map-tile {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.map-radius {
+  position: absolute;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  pointer-events: none;
+}
+.map-user {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.map-marker {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.map-marker.b-none {
+  color: var(--muted);
+}
+.map-pin {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--card);
+  border: 2.5px solid currentColor;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+.map-marker.sel {
+  z-index: 1;
+}
+.map-marker.sel .map-pin {
+  min-width: 32px;
+  height: 32px;
+  border-width: 4px;
+  box-shadow: 0 0 0 2px var(--fg), 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+.map-marker:focus-visible {
+  outline-offset: -2px;
+  border-radius: 50%;
+}
+.map-ctrl {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--line);
+  z-index: 2;
+}
+.map-zoom {
+  width: 44px;
+  height: 44px;
+  background: var(--card);
+  border: 0;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.map-zoom:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+.map-zoom:focus-visible {
+  outline-offset: -3px;
+}
+.map-attr {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 2px 6px;
+  background: var(--card);
+  font-size: 0.75rem;
+  border-top-left-radius: 6px;
+  z-index: 2;
+}
+.map-card-slot {
+  margin-top: 8px;
+}
+.map-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+.map-card-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+.map-card .btn {
+  min-height: 44px;
+}
+.map-hint {
+  margin: 4px 0;
+}
