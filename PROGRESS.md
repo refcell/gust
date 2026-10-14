@@ -63,13 +63,27 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - e2e has a `pwa` project with the service worker enabled (install, precache, offline).
 - Light theme accent/good colours darkened to pass WCAG AA for normal text.
 
+- Dataset expansion: three parallel workers wrote `data/new-*.json`; `scripts/merge-spots.mjs`
+  validates (schema, sector width <= 220° unless documented any-direction, Americas longitude sign)
+  and dedupes (id, 1.5 km) before appending. 587 spots, 296 US, 71 countries. Texas City Dike added
+  to the documented any-direction list.
+- Push server cron is delivery-aware like the client: if any push for a subscriber fails or the
+  per-run cap cuts delivery, forecast windows are not consumed and "now" transitions are rolled
+  back, so they resend next run (duplicates preferred over lost alerts).
+- Overpass shore query limited to 15 points (was 40) to reduce 504s on public instances.
+- `/subscribe` is unauthenticated (a browser client cannot hold a secret). Before deploying, add a
+  Cloudflare rate-limiting rule for `/subscribe` (documented upgrade; config-only).
+- Advisor gate (kimi-k3, after gpt-6-astra hit quota and a gpt-6.1-sol run dropped): "Definition of
+  done met apart from physical-device testing", its one must-fix (cron state commit) done.
+
 ## Next
 
-1. Merge dataset side-off audit; confirm Android APK release builds; verify the release asset.
-2. Second advisor review (different family) of the fixes.
-3. Fallback (outside-radius) spots: show but do not watch for alerts.
-4. More spots / better direction inference; onboarding polish; iOS sheet illustration.
-5. Re-record demo after UI changes.
+1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
+   notification; Android Chrome install + APK sideload. Everything else is verified in CI/live.
+2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
+3. Better direction inference for unknown-sector OSM spots (bbox shore query per tile).
+4. Per-spot favourites / mute; share links (?spot=id) scroll into view.
+5. Verify lower-confidence spot coordinates against OSM coastline data (scripted check).
 
 ## Log
 
@@ -79,3 +93,6 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 2: merged OSM lane, push backend lane, APK lane; stable APK keystore secrets; README with
   demo; first-run alerts banner; CLS fix; advisor review + fixes (validation, staleness, gaps,
   delivery-aware dedup, contrast, SW e2e gate).
+- Loop 3: dataset safety audit merged (112 spots narrowed), +169 spots via three parallel lanes,
+  Install row in app Settings, iOS sheet illustration, stray-0 render fix, clock-relative e2e mocks,
+  server cron delivery-aware dedup, second advisor gate passed.

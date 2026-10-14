@@ -30,7 +30,7 @@ function width([from, to]: Sector): number {
 }
 
 /** Spots allowed to use [0, 360]: causeways, sandbars and lagoons with launches on every side. */
-const ANY_DIRECTION = ['skyway-beach', 'sanibel-causeway', 'mar-menor', 'trabucador', 'brouwersdam'];
+const ANY_DIRECTION = ['skyway-beach', 'sanibel-causeway', 'mar-menor', 'trabucador', 'brouwersdam', 'texas-city-dike'];
 
 describe('dataset safety: offshore and side-off wind never scores good', () => {
   it('aruba-hadicurari: NE/E trades are side-off, not good', () => {

@@ -187,6 +187,24 @@ describe('runCron', () => {
     const report = await runCron(env, NOW, m.fetch);
     expect(m.pushes).toHaveLength(1);
     expect(report).toMatchObject({ alerts: 2, sent: 1 });
+    // The cap cut delivery short: the forecast window is not consumed.
+    const st = JSON.parse(env.SUBS.map.get('state:' + id)!) as AlertState;
+    expect(st.notifiedWindows).toEqual({});
+  });
+
+  it('does not consume alerts when a push fails, and resends next run', async () => {
+    const env = await makeEnv();
+    const r = await makeReceiver();
+    const id = await putSubscriber(env.SUBS, subscriber(r, [A]));
+    await putState(env.SUBS, id, { ratings: { a: 'light' }, notifiedWindows: {} });
+    const failing = mockFetch([r], { [r.sub.endpoint]: 500 });
+    const report = await runCron(env, NOW, failing.fetch);
+    expect(report).toMatchObject({ alerts: 1, sent: 0, failed: 1 });
+    expect((JSON.parse(env.SUBS.map.get('state:' + id)!) as AlertState).ratings.a).toBe('light');
+    const ok = mockFetch([r]);
+    const report2 = await runCron(env, NOW + 30 * 60_000, ok.fetch);
+    expect(report2).toMatchObject({ alerts: 1, sent: 1 });
+    expect((JSON.parse(env.SUBS.map.get('state:' + id)!) as AlertState).ratings.a).toBe('good');
   });
 
   it('survives an Open-Meteo outage without changing state', async () => {

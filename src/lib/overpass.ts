@@ -25,7 +25,7 @@ export const RADIUS_BUCKETS = [25, 50, 100];
 const TILE_PAD_KM = 40;
 export const SHORE_RADIUS_M = 1500;
 /** Maximum spots per coastline query (keeps the union small). */
-export const MAX_SHORE_POINTS = 40;
+export const MAX_SHORE_POINTS = 15;
 const KEY_PREFIX = 'gust:osm:';
 const FETCH_TIMEOUT_MS = 25_000;
 

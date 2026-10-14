@@ -1,4 +1,4 @@
-import { computeAlerts, EMPTY_ALERT_STATE, type Alert } from '../../src/lib/alerts';
+import { computeAlerts, EMPTY_ALERT_STATE, type Alert, type AlertState } from '../../src/lib/alerts';
 import { fetchWind } from '../../src/lib/openmeteo';
 import type { Spot, SpotWind } from '../../src/lib/types';
 import type { Env } from './env';
@@ -125,8 +125,12 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
     report.alerts += alerts.length;
 
     let gone = false;
+    let allDelivered = true;
     for (const { payload, urgent } of buildPayloads(alerts, appUrl)) {
-      if (report.sent + report.failed >= maxPushes) break;
+      if (report.sent + report.failed >= maxPushes) {
+        allDelivered = false;
+        break;
+      }
       try {
         const res = await sendPush(sub.subscription, JSON.stringify(payload), vapid, {
           ttl: urgent ? 3 * 3600 : 12 * 3600,
@@ -138,9 +142,13 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
           break;
         }
         if (res.ok) report.sent++;
-        else report.failed++;
+        else {
+          report.failed++;
+          allDelivered = false;
+        }
       } catch {
         report.failed++;
+        allDelivered = false;
       }
     }
     if (gone) {
@@ -148,8 +156,22 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
       report.removed++;
       continue;
     }
+    // Delivery-aware dedup (same rule as the client): if anything failed to send, do not consume
+    // this run's transitions or forecast windows, so they alert again on the next run.
+    const persisted = allDelivered ? next : rollback(prev, next, alerts);
     // KV writes are metered (1000/day on the free plan): only write when something changed.
-    if (!stored || JSON.stringify(next) !== JSON.stringify(stored)) await putState(env.SUBS, id, next);
+    if (!stored || JSON.stringify(persisted) !== JSON.stringify(stored)) await putState(env.SUBS, id, persisted);
   }
   return report;
+}
+
+/** Keep previous notified windows and previous ratings for spots whose "now" alert was not delivered. */
+export function rollback(prev: AlertState, next: AlertState, alerts: Alert[]): AlertState {
+  const ratings = { ...next.ratings };
+  for (const a of alerts) {
+    if (a.kind !== 'now') continue;
+    if (prev.ratings[a.spotId] === undefined) delete ratings[a.spotId];
+    else ratings[a.spotId] = prev.ratings[a.spotId];
+  }
+  return { ratings, notifiedWindows: prev.notifiedWindows };
 }
