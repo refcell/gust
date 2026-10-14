@@ -1,0 +1,80 @@
+import { goodWindows, relativeDay } from './forecast';
+import { scoreWind, type Rating } from './score';
+import type { Settings, Spot, SpotWind } from './types';
+import { formatSpeed } from './units';
+import { compass } from './sectors';
+
+export interface AlertState {
+  /** Last rating per spot id. */
+  ratings: Record<string, Rating>;
+  /** Forecast windows already notified, keyed `${spotId}@${start}`. */
+  notifiedWindows: Record<string, number>;
+}
+
+export const EMPTY_ALERT_STATE: AlertState = { ratings: {}, notifiedWindows: {} };
+
+export interface Alert {
+  tag: string;
+  title: string;
+  body: string;
+  spotId: string;
+  kind: 'now' | 'forecast';
+}
+
+/**
+ * Compare fresh wind to the previous state and return the alerts to show plus the next state.
+ * A "now" alert fires when a spot crosses into `good` (not on the first observation unless `alertOnFirst`).
+ * A "forecast" alert fires once per future good window that starts within `horizonHours`.
+ */
+export function computeAlerts(
+  entries: { spot: Spot; wind: SpotWind }[],
+  prev: AlertState,
+  settings: Settings,
+  opts: { alertOnFirst?: boolean; horizonHours?: number; now?: number } = {},
+): { alerts: Alert[]; next: AlertState } {
+  const now = opts.now ?? Date.now();
+  const horizon = (opts.horizonHours ?? 24) * 3600_000;
+  const alerts: Alert[] = [];
+  const ratings: Record<string, Rating> = { ...prev.ratings };
+  const notified: Record<string, number> = {};
+  // Forget windows older than two days.
+  for (const [k, t] of Object.entries(prev.notifiedWindows)) if (now - t < 48 * 3600_000) notified[k] = t;
+
+  for (const { spot, wind } of entries) {
+    const sc = scoreWind(wind.current, spot.sectors, settings);
+    const before = prev.ratings[spot.id];
+    if (sc.rating === 'good' && before !== 'good' && (before !== undefined || opts.alertOnFirst)) {
+      const c = wind.current;
+      alerts.push({
+        tag: `now-${spot.id}`,
+        kind: 'now',
+        spotId: spot.id,
+        title: `${spot.name} is on`,
+        body: `${formatSpeed(c.speedKn, settings.unit)} gusting ${formatSpeed(c.gustKn, settings.unit, false)} from ${compass(c.dirDeg)}`,
+      });
+    }
+    ratings[spot.id] = sc.rating;
+
+    if (settings.forecastAlerts) {
+      const nowLocal = wind.current.time;
+      const wins = goodWindows(wind.hourly, spot.sectors, settings, nowLocal);
+      for (const w of wins) {
+        if (w.start <= nowLocal) continue; // already happening; covered by "now"
+        const startMs = Date.parse(w.start + ':00Z') - wind.utcOffsetSeconds * 1000;
+        if (startMs - now > horizon) continue;
+        const key = `${spot.id}@${w.start}`;
+        if (notified[key]) continue;
+        notified[key] = now;
+        alerts.push({
+          tag: `fc-${key}`,
+          kind: 'forecast',
+          spotId: spot.id,
+          title: `Good window ahead: ${spot.name}`,
+          body: `${relativeDay(w.start, nowLocal)} for ${w.hours}h, avg ${formatSpeed(w.avgKn, settings.unit)}`,
+        });
+        break; // one forecast alert per spot per check
+      }
+    }
+  }
+  return { alerts, next: { ratings, notifiedWindows: notified } };
+}

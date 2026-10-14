@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>gust — wind alerts for kiteboarding</title>
+    <meta name="description" content="gust pings you when the wind is on at kite spots near you. Installs from the web. No App Store." />
+    <meta name="theme-color" content="#0b0c0e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
+    <link rel="manifest" href="/gust/manifest.webmanifest" />
+    <link rel="icon" href="/gust/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/gust/icons/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="gust" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta property="og:title" content="gust" />
+    <meta property="og:description" content="Wind alerts for kiteboarding spots near you." />
+    <meta property="og:image" content="https://refcell.github.io/gust/icons/icon-512.png" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="mark" href="/gust/">gust</a>
+      <nav aria-label="Primary">
+        <a href="/gust/app/">Open app</a>
+        <a href="https://github.com/refcell/gust">GitHub</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="intro">
+        <h1>gust pings you when the wind is on at kite spots near you.</h1>
+        <p class="lede">Live and forecast wind for every spot within reach, scored against your wind window and the directions each spot can actually be ridden in. Installs from this page. No App Store, no account.</p>
+        <div class="cta">
+          <button id="install" class="primary" type="button">Install gust</button>
+          <a class="secondary" href="/gust/app/">Open in browser</a>
+        </div>
+        <p id="install-note" class="note" role="status"></p>
+        <p id="apk" class="note" hidden><a href="https://github.com/refcell/gust/releases/latest">Download the Android APK</a></p>
+      </section>
+
+      <section class="demo" aria-label="Live demo">
+        <div class="phone">
+          <iframe src="/gust/app/?demo=1" title="gust app, live demo with a fixed location" loading="lazy"></iframe>
+        </div>
+        <p class="caption">The real app, running live with a fixed location in San Francisco.</p>
+      </section>
+
+      <section class="how">
+        <h2>How it works</h2>
+        <p>gust finds kite spots near your phone and near the places you save. It starts from a curated list of well-known spots worldwide, with depth across the US, and fills gaps with spots mapped on OpenStreetMap.</p>
+        <p>For each spot it pulls current and hourly wind from Open-Meteo: speed, gusts, and direction. A spot is good when the wind sits inside your window, gusts stay under your limit, and the direction is onshore, side-onshore, or side for that beach. Offshore wind is never rated good.</p>
+        <p>When a spot turns good, or a good window shows up in the forecast, gust sends a notification. On Android it can check in the background. On iPhone it checks every time you open the app; background alerts there need the optional push server.</p>
+      </section>
+
+      <section class="qr" id="qr-section" hidden>
+        <h2>Open on your phone</h2>
+        <div class="qr-row">
+          <div id="qr" class="qr-code" role="img" aria-label="QR code linking to refcell.github.io/gust"></div>
+          <p>Scan with your phone camera to open gust, then tap Install.<br /><span class="url">refcell.github.io/gust</span></p>
+        </div>
+      </section>
+    </main>
+    <footer class="foot">
+      <span>MIT licensed.</span>
+      <a href="https://github.com/refcell/gust">Source</a>
+      <span>Wind data by <a href="https://open-meteo.com/">Open-Meteo</a>. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</span>
+    </footer>
+
+    <dialog id="ios-sheet" aria-labelledby="ios-title">
+      <form method="dialog">
+        <h2 id="ios-title">Add gust to your Home Screen</h2>
+        <ol class="steps">
+          <li>
+            <span>Tap the <strong>Share</strong> button in Safari’s toolbar.</span>
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M6 11H5v10h14V11h-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </li>
+          <li>
+            <span>Scroll and tap <strong>Add to Home Screen</strong>.</span>
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+          </li>
+          <li>
+            <span>Tap <strong>Add</strong>, then open gust from your Home Screen and allow location and notifications.</span>
+          </li>
+        </ol>
+        <p id="ios-extra" class="note"></p>
+        <button class="primary" value="close">Got it</button>
+      </form>
+    </dialog>
+    <script type="module" src="/src/landing/main.ts"></script>
+  </body>
+</html>
