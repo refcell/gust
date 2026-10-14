@@ -1,7 +1,7 @@
 # Spot dataset
 
 `spots.json` is the curated list of kiteboarding spots bundled with gust. It has
-418 spots worldwide, 185 of them in the US. The app merges these with OpenStreetMap
+687 spots worldwide, 320 of them in the US, across 75 countries. The app merges these with OpenStreetMap
 `sport=kitesurfing` results at runtime.
 
 ## Schema
@@ -118,3 +118,11 @@ are welcome:
   `nantucket-madaket`, `monomoy`): positions are approximate.
 - **Inland lakes and reservoirs** (UT, CO, NV, MN): wind sectors are generalised.
   Water levels and shorelines change with the season.
+
+## Approximate positions
+
+Some positions come from a town or kite-school location rather than the waterline and may be a
+few hundred metres off: `chicxulub`, `hurghada-north`, `wadi-lahami`, `sint-joris`, `kawama`,
+`umm-al-quwain`, `theologos`, `grapevine-lake`, `galveston-8-mile-road`, and entries whose notes
+say "Approximate position". `node scripts/check-spots.mjs` flags coastal spots that sit well above
+sea level (Open-Meteo elevation, per-IP rate limits apply).

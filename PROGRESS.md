@@ -117,12 +117,21 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Session reloads stop async workflows (not resumable): relaunch the same workflow; bulk scripts
   that rewrite data/spots.json must not run concurrently with merges.
 
+- Map clustering: greedy 40 px screen-space clusters (recomputed on zoom only), coloured by best
+  rating (Good > OK > Light > Strong > No wind > Offshore); tap zooms to fit, at max zoom lists.
+- Favourites (`settings.favorites`): sorted first, star in list, ring on map; always watched for
+  alerts even outside the radius (own "Favourites" section when not otherwise listed).
+- +41 spots (687 total); coordinates for new spots partly from Nominatim beach outlines by the
+  worker (~150 throttled lookups, 1.3 s apart, gust User-Agent).
+- Playwright `reuseExistingServer: false`: a worker's leftover `vite preview` on :4173 silently
+  served an old worktree build and failed 15 e2e tests; now a busy port fails loudly.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
    notification; Android Chrome install + APK sideload. Everything else is verified in CI/live.
 2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
-4. Map marker clustering; favourites.
+4. Verify approximate positions (data/README.md) against imagery/elevation.
 5. Verify lower-confidence spot coordinates against OSM coastline data (scripted check).
 
 ## Log
@@ -142,3 +151,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   ARIA tabs, axe audit (57 e2e passing, 124 unit).
 - Loop 6: map view, +59 spots, BC country fix, axe fail-closed, advisor review fixed (144 unit,
   44 server, 66 e2e).
+- Loop 7: map clustering, favourites (watched beyond radius), +41 spots, e2e server isolation.
