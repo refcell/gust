@@ -1,5 +1,5 @@
 import { bbox as bboxAround, type LatLon } from './geo';
-import { assembleRings, type ShoreFeature } from './coastline';
+import { assembleRingsWithRest, type ShoreFeature } from './coastline';
 
 /**
  * OpenStreetMap Overpass client with strict caching.
@@ -192,7 +192,8 @@ const cleanPoints = (g: (LatLon | null)[] | undefined): LatLon[] =>
 
 /**
  * Parse an Overpass `out geom` response into shore features. Multipolygon water relations become
- * their assembled outer rings; river polygons (`water=river`) become `river` features.
+ * their assembled outer rings (`water`) and inner rings (`island`); fragments that never close
+ * become `ambiguous` (distance only). River polygons (`water=river`) become `river` features.
  */
 export function parseShoreFeatures(json: unknown): ShoreFeature[] {
   const out: ShoreFeature[] = [];
@@ -205,10 +206,20 @@ export function parseShoreFeatures(json: unknown): ShoreFeature[] {
       const points = cleanPoints(el.geometry);
       if (points.length >= 2) out.push({ kind, points });
     } else if (el.type === 'relation' && kind !== 'coastline' && Array.isArray(el.members)) {
-      const outers = el.members.filter((m) => m && m.type === 'way' && (m.role === 'outer' || m.role === '')).map((m) => cleanPoints(m.geometry));
-      // Rivers only matter for distance, so unclosed fragments are fine.
-      const rings = kind === 'river' ? outers.filter((p) => p.length >= 2) : assembleRings(outers);
-      for (const points of rings) out.push({ kind, points });
+      const ways = (role: (r: string | undefined) => boolean) =>
+        el.members!.filter((m) => m && m.type === 'way' && role(m.role)).map((m) => cleanPoints(m.geometry));
+      const outers = ways((r) => r === 'outer' || r === '');
+      const inners = ways((r) => r === 'inner');
+      if (kind === 'river') {
+        // Rivers only matter for distance, so unclosed fragments are fine.
+        for (const points of [...outers, ...inners]) if (points.length >= 2) out.push({ kind, points });
+        continue;
+      }
+      const o = assembleRingsWithRest(outers);
+      const i = assembleRingsWithRest(inners);
+      for (const points of o.rings) out.push({ kind, points });
+      for (const points of i.rings) out.push({ kind: 'island', points });
+      for (const points of [...o.rest, ...i.rest]) out.push({ kind: 'ambiguous', points });
     }
   }
   return out;

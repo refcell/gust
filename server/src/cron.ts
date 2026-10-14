@@ -58,18 +58,26 @@ export function alertPayload(a: Alert, appUrl: string): PushPayload {
 /** Individual notifications per subscriber per run; the rest are folded into one summary. */
 export const MAX_PER_SUBSCRIBER = 3;
 
+export interface OutgoingPush {
+  payload: PushPayload;
+  urgent: boolean;
+  /** The alerts this push delivers (a summary push represents several). */
+  alerts: Alert[];
+}
+
 /** Ready-to-display payloads for one subscriber: "now" alerts first, overflow folded into a summary. */
-export function buildPayloads(alerts: Alert[], appUrl: string): { payload: PushPayload; urgent: boolean }[] {
+export function buildPayloads(alerts: Alert[], appUrl: string): OutgoingPush[] {
   const sorted = [...alerts.filter((a) => a.kind === 'now'), ...alerts.filter((a) => a.kind !== 'now')];
   const fits = sorted.length <= MAX_PER_SUBSCRIBER;
   const single = fits ? sorted : sorted.slice(0, MAX_PER_SUBSCRIBER - 1);
-  const out = single.map((a) => ({ payload: alertPayload(a, appUrl), urgent: a.kind === 'now' }));
+  const out: OutgoingPush[] = single.map((a) => ({ payload: alertPayload(a, appUrl), urgent: a.kind === 'now', alerts: [a] }));
   if (!fits) {
     const rest = sorted.slice(MAX_PER_SUBSCRIBER - 1);
     const names = [...new Set(rest.map((a) => a.title.replace(/^Good window ahead: /, '').replace(/ is on$/, '')))];
     out.push({
       payload: { title: `Wind at ${names.length} more spot${names.length === 1 ? '' : 's'}`, body: names.join(', '), tag: 'gust-summary', url: appUrl },
       urgent: rest.some((a) => a.kind === 'now'),
+      alerts: rest,
     });
   }
   return out;
@@ -125,12 +133,9 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
     report.alerts += alerts.length;
 
     let gone = false;
-    let allDelivered = true;
-    for (const { payload, urgent } of buildPayloads(alerts, appUrl)) {
-      if (report.sent + report.failed >= maxPushes) {
-        allDelivered = false;
-        break;
-      }
+    const delivered = new Set<Alert>();
+    for (const { payload, urgent, alerts: represented } of buildPayloads(alerts, appUrl)) {
+      if (report.sent + report.failed >= maxPushes) break;
       try {
         const res = await sendPush(sub.subscription, JSON.stringify(payload), vapid, {
           ttl: urgent ? 3 * 3600 : 12 * 3600,
@@ -141,14 +146,12 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
           gone = true;
           break;
         }
-        if (res.ok) report.sent++;
-        else {
-          report.failed++;
-          allDelivered = false;
-        }
+        if (res.ok) {
+          report.sent++;
+          for (const a of represented) delivered.add(a);
+        } else report.failed++;
       } catch {
         report.failed++;
-        allDelivered = false;
       }
     }
     if (gone) {
@@ -156,22 +159,32 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
       report.removed++;
       continue;
     }
-    // Delivery-aware dedup (same rule as the client): if anything failed to send, do not consume
-    // this run's transitions or forecast windows, so they alert again on the next run.
-    const persisted = allDelivered ? next : rollback(prev, next, alerts);
+    // Delivery-aware dedup: alerts whose push failed or was cut by the MAX_PUSHES cap do not consume
+    // their transition / forecast window, so they alert again next run. Delivered ones are kept, so
+    // they do not repeat and starve the rest.
+    const undelivered = alerts.filter((a) => !delivered.has(a));
+    const persisted = undelivered.length === 0 ? next : rollback(prev, next, undelivered);
     // KV writes are metered (1000/day on the free plan): only write when something changed.
     if (!stored || JSON.stringify(persisted) !== JSON.stringify(stored)) await putState(env.SUBS, id, persisted);
   }
   return report;
 }
 
-/** Keep previous notified windows and previous ratings for spots whose "now" alert was not delivered. */
-export function rollback(prev: AlertState, next: AlertState, alerts: Alert[]): AlertState {
+/**
+ * Undo the state changes of `undelivered` alerts only: their spots keep the previous rating ("now")
+ * and their forecast windows are not marked notified. Everything else in `next` is kept.
+ */
+export function rollback(prev: AlertState, next: AlertState, undelivered: Alert[]): AlertState {
   const ratings = { ...next.ratings };
-  for (const a of alerts) {
-    if (a.kind !== 'now') continue;
-    if (prev.ratings[a.spotId] === undefined) delete ratings[a.spotId];
-    else ratings[a.spotId] = prev.ratings[a.spotId];
+  const notifiedWindows = { ...next.notifiedWindows };
+  for (const a of undelivered) {
+    if (a.kind === 'now') {
+      if (prev.ratings[a.spotId] === undefined) delete ratings[a.spotId];
+      else ratings[a.spotId] = prev.ratings[a.spotId];
+    } else if (a.tag.startsWith('fc-')) {
+      // Forecast alert tags are `fc-${windowKey}` (see computeAlerts).
+      delete notifiedWindows[a.tag.slice(3)];
+    }
   }
-  return { ratings, notifiedWindows: prev.notifiedWindows };
+  return { ratings, notifiedWindows };
 }
