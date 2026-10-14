@@ -1,12 +1,15 @@
 import { defineConfig, devices } from '@playwright/test';
 
+/** Override with PW_PORT to run several e2e suites side by side (e.g. parallel worktrees). */
+const PORT = Number(process.env.PW_PORT ?? 4173);
+
 export default defineConfig({
   testDir: 'e2e',
   timeout: 30_000,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? 'github' : 'list',
-  use: { baseURL: 'http://localhost:4173', trace: 'retain-on-failure', serviceWorkers: 'block' },
-  webServer: { command: 'pnpm preview --port 4173 --strictPort', url: 'http://localhost:4173/gust/', reuseExistingServer: false },
+  use: { baseURL: `http://localhost:${PORT}`, trace: 'retain-on-failure', serviceWorkers: 'block' },
+  webServer: { command: `pnpm preview --port ${PORT} --strictPort`, url: `http://localhost:${PORT}/gust/`, reuseExistingServer: false },
   projects: [
     { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /pwa\.spec/ },
     { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: /pwa\.spec/ },
