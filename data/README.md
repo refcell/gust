@@ -16,7 +16,7 @@ The file is a JSON array. Each entry looks like this:
   "lon": -122.4598,
   "country": "US",
   "region": "CA",
-  "sectors": [[200, 320]],
+  "sectors": [[260, 340]],
   "water": "chop",
   "level": "advanced",
   "notes": "Apr-Sep W thermal; strong ebb currents, shipping lane, cold water. Launch East Beach, experts only."
@@ -61,13 +61,17 @@ How sectors were derived:
    valleys), known seasonal directions, and directions known to be dangerous or
    blocked. Examples:
    - Hood River: W and E along the Columbia Gorge.
-   - Crissy Field: SW to NW.
+   - Crissy Field: W to NNW (SW blows off the Presidio shore).
    - Kanaha: NE trades, side-on.
    - Tarifa: Levante (E) and Poniente (W).
-5. Some famous flat-water spots are ridden side-shore or slightly side-off over
-   waist-deep water, such as Laguna Madre (South Padre, Bird Island Basin), SF Bay
-   peninsula spots and Aruba. For these, the sector covers only the commonly
-   ridden side-shore directions, and the notes flag the risk.
+5. Some famous flat-water spots are usually ridden side-off over waist-deep water
+   with a rescue service, such as Laguna Madre (South Padre, Bird Island Basin), Aruba
+   (Hadicurari), Bonaire (Atlantis) and Cape Verde (Ponta Preta). gust stays
+   conservative here. The sector covers only the side-shore directions, and the notes
+   say that the usual trade-wind direction gets rated offshore.
+6. Hard limit: no rideable direction may be more than about 100° from the seaward
+   normal. `tests/dataset-safety.test.ts` checks the known side-off cases and fails if any spot
+   other than a documented `[0, 360]` entry has more than 220° of rideable sector in total.
 
 ## Sources
 
@@ -100,8 +104,14 @@ are welcome:
 - **SF Bay peninsula** (`third-ave-foster-city`, `coyote-point`, `palo-alto-baylands`):
   exact launch positions and which W/NW directions count as side-shore.
 - **Side-off flat-water spots** (`aruba-hadicurari`, `bonaire-atlantis`,
-  `diamond-head`, `spi-kite-beach`, `bird-island-basin`): sectors cover the commonly
-  ridden directions, which are side-shore to side-off.
+  `diamond-head`, `spi-kite-beach`, `bird-island-basin`, `cabo-de-la-vela`,
+  `cape-verde-ponta-preta`): sectors were cut back to side-shore only, so the
+  directions locals usually ride are rated offshore on purpose.
+- **Orientation estimated from memory, narrowed on safety grounds** (`rio-vista`,
+  `cabrillo-beach`, `candlestick-point`, `tiana-beach`, `napeague-lazy-point`,
+  `third-beach`, `lake-pepin-lake-city`, `peru-paracas`, `buen-hombre`,
+  `lagoa-da-conceicao`, `tarifa-los-lances`, `bolonia`): the launch shore's facing
+  was estimated without imagery. Check these against satellite imagery before you widen them.
 - **Approximate coordinates** (`kona-old-airport`, `turnagain-arm-hope`,
   `exmouth-town-beach`, `abu-dhabi-kite-beach`, `limnos-keros`, `china-pingtan`,
   `buen-hombre`, `salinas-del-rey`, `djerba`, `india-*`, `pagudpud`,
