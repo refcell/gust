@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import type { Platform } from '../lib/platform';
-import type { Settings, Spot } from '../lib/types';
+import type { Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { pushSpots } from '../lib/pushsync';
+import { buildIcs, calendarWindows } from '../lib/ics';
+import { saveFile } from './download';
 import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, type BackgroundStatus } from './background';
 
 interface Props {
@@ -13,11 +15,13 @@ interface Props {
   loc: LatLon | null;
   /** Last location and saved places (which spots the push server watches). */
   origins: LatLon[];
+  /** Latest wind per spot id (for the calendar export). */
+  wind: Readonly<Record<string, SpotWind>>;
 }
 
 type Perm = NotificationPermission | 'unsupported';
 
-export function AlertsPanel({ platform, settings, watched, loc, origins }: Props) {
+export function AlertsPanel({ platform, settings, watched, loc, origins, wind }: Props) {
   const [perm, setPerm] = useState<Perm>(() => ('Notification' in window ? Notification.permission : 'unsupported'));
   const [bg, setBg] = useState<BackgroundStatus | null>(null);
   const [busy, setBusy] = useState(false);
@@ -54,6 +58,16 @@ export function AlertsPanel({ platform, settings, watched, loc, origins }: Props
 
   const test = () =>
     showLocalNotification('gust', { body: 'Notifications work. You will hear from gust when the wind is on.', icon: __BASE__ + 'icons/icon-192.png', tag: 'gust-test' });
+
+  // Upcoming good windows (next 48 h) at watched, non-muted spots for the calendar export.
+  const calWins = useMemo(() => calendarWindows(watched.map((spot) => ({ spot, wind: wind[spot.id] })), settings, Date.now()), [watched, wind, settings]);
+  const exportCalendar = () => {
+    const now = Date.now();
+    // Recompute at click time so windows that ended since render are dropped.
+    const wins = calendarWindows(watched.map((spot) => ({ spot, wind: wind[spot.id] })), settings, now);
+    if (!wins.length) return;
+    saveFile(buildIcs(wins, { now, unit: settings.unit }), 'gust-windows.ics', 'text/calendar;charset=utf-8', { iosStandalone: platform.ios && platform.standalone });
+  };
 
   const iosNeedsInstall = platform.ios && !platform.standalone;
   // The push server watches at most MAX_PUSH_SPOTS spots; say so when some are left out.
@@ -107,6 +121,14 @@ export function AlertsPanel({ platform, settings, watched, loc, origins }: Props
           <strong>Location:</strong> background checks use the last location gust saw and your saved places. Phones do not give web apps location in the background.
         </li>
       </ul>
+      <h3>Calendar</h3>
+      <button class="btn ghost" onClick={exportCalendar} disabled={calWins.length === 0}>
+        {calWins.length ? 'Add good windows to calendar' : 'No good windows in the next 48 h'}
+      </button>
+      <p class="small muted">
+        {calWins.length ? `${calWins.length} ${calWins.length === 1 ? 'window' : 'windows'}. ` : ''}A forecast snapshot with a reminder an hour before each window; re-export to refresh. Calendar reminders fire in the background, even on iPhone.
+      </p>
+
       <p class="small muted">Watching {watched.length} spots.</p>
       {capped && (
         <p class="notice small" role="note">
