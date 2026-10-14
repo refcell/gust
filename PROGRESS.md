@@ -161,6 +161,16 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Spot coordinate check runs on the runner (retries 429/network); vietnam-hon-rom moved off inland
   hills to an approximate beach position; known inland lake spots skipped by name.
 
+- Marine conditions (waves, period, direction, water temp + wetsuit hint, tide trend/next extreme)
+  from the Open-Meteo Marine API, lazily per expanded spot, cached 1 h (memory + SW data cache).
+  4xx/all-null = no marine data (inland); tide is modelled hourly sea level.
+- Calendar export (.ics) of the next 48 h of good windows at watched, non-muted spots with a
+  60-min VALARM: the no-account background alert path on iOS. Stable UID per spot+start; shifted
+  windows leave old events (no delete without a feed; upgrade path: subscribable feed from the
+  push server).
+- DST fix: forecast local times convert with the Open-Meteo `timezone` via Intl (a single
+  `utc_offset_seconds` is wrong after a clock change); cached data without it falls back.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
@@ -189,3 +199,5 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 7: map clustering, favourites (watched beyond radius), +41 spots, e2e server isolation.
 - Loop 8: advisor blockers + should-fix all addressed (186 unit, 44 server, 72 e2e).
 - Loop 9: Kimi review fixes, Lighthouse CI, landing demo poster (TBT), coordinate check in CI.
+- Loop 10: marine conditions, calendar export (iOS background fallback), DST-correct window times
+  (213 unit, 90 e2e).

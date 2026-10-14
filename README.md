@@ -39,14 +39,17 @@ Web apps get fewer background privileges than native apps. gust uses every path 
 | Background checks without a server | no (WebKit has no Periodic Background Sync) | yes, Periodic Background Sync, at the browser's discretion (typically a few times a day) | yes, Periodic Background Sync if installed |
 | Background checks with the push server | yes, Web Push (iOS 16.4+) | yes, Web Push | yes, Web Push |
 | Location in the background | no | no | no |
+| Calendar reminders for forecast windows (.ics export) | yes, Calendar alarms fire in the background | yes | yes |
 
 - Notifications on iOS only work after installing to the Home Screen and are requested from a button tap, as WebKit requires.
 - Phones never give web apps location in the background. Background checks use the last location gust saw while open, plus your saved places. Save the places you ride.
 - The push server is optional and self-hosted (see below). The public build enables Web Push only when it is built with `VITE_PUSH_API` set. Without it, iPhone alerts happen when you open the app.
+- No-account background fallback: Alerts → "Add good windows to calendar" exports the next 48 h of good windows at watched spots as an `.ics` file with a reminder 60 minutes before each window. Calendar reminders fire in the background on every platform. It is a forecast snapshot: re-export to refresh (events with the same spot and start time update in place where the calendar supports it).
 
 ## Data sources
 
 - **Wind:** [Open-Meteo](https://open-meteo.com/) forecast API (CC BY 4.0). No key; the free tier allows fewer than 10,000 calls per day for non-commercial use. gust batches up to 50 spots per request, re-checks only when data is older than 10 minutes, and retries a minute after a failure. Limits are per IP and weighted by the number of locations.
+- **Waves, water temperature, tide:** [Open-Meteo Marine API](https://open-meteo.com/en/docs/marine-weather-api) (`marine-api.open-meteo.com`, no key), fetched only when you open a spot and cached for an hour. Tide is modelled sea level at hourly resolution, not a tide-station prediction; the wetsuit hint is a rough guide. Inland spots show none of this.
 - **Spots:** the curated [`data/spots.json`](data/spots.json) (schema in [`data/README.md`](data/README.md)), plus [OpenStreetMap](https://www.openstreetmap.org/copyright) via Overpass. Overpass is shared infrastructure, so OSM lookups are cached per area for 14 days and capped per device per day. For OSM spots without known sectors, gust infers the shore orientation from nearby `natural=coastline` ways (land on the left, water on the right) and treats ±90° around the seaward normal (side-shore at most) as rideable. Lake shores and islands inside lakes are handled; river banks stay "unknown".
 - **Place search:** Open-Meteo geocoding API.
 
