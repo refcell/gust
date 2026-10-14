@@ -13,6 +13,8 @@ import type { Place, Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { detectPlatform } from '../lib/platform';
 import { augmentWithOsm } from './osm';
+import { requestAlerts, showLocalNotification } from './background';
+import { formatSpeed } from '../lib/units';
 
 type LocStatus = 'idle' | 'locating' | 'ok' | 'denied' | 'error' | 'unsupported';
 type View = 'spots' | 'places' | 'alerts' | 'settings';
@@ -55,6 +57,8 @@ export function App() {
   const [view, setView] = useState<View>('spots');
   const [openId, setOpenId] = useState<string | null>(params.get('spot'));
   const [online, setOnline] = useState(navigator.onLine);
+  const [notifPerm, setNotifPerm] = useState<NotificationPermission | 'unsupported'>(() => ('Notification' in window ? Notification.permission : 'unsupported'));
+  const [bannerDismissed, setBannerDismissed] = useState(() => localStorage.getItem('gust.alertBanner') === 'dismissed');
 
   // Load the curated dataset once.
   useEffect(() => {
@@ -201,6 +205,33 @@ export function App() {
     };
   }, []);
 
+  const enableAlerts = async () => {
+    const r = await requestAlerts({ settings, watched, loc });
+    setNotifPerm(r.perm);
+    if (r.perm !== 'granted') return;
+    // Confirm right away, listing spots that are already on.
+    const on = watched
+      .map((spot) => ({ spot, w: wind[spot.id] }))
+      .filter(({ spot, w }) => w && scoreWind(w.current, spot.sectors, settings).rating === 'good');
+    const body = on.length
+      ? on
+          .slice(0, 3)
+          .map(({ spot, w }) => `${spot.name} ${formatSpeed(w!.current.speedKn, settings.unit)}`)
+          .join(' · ')
+      : `Watching ${watched.length} spots. You will get a notification when one turns good.`;
+    await showLocalNotification(on.length ? `${on.length} spot${on.length > 1 ? 's are' : ' is'} on now` : 'Alerts are on', {
+      body,
+      tag: 'gust-enabled',
+      icon: __BASE__ + 'icons/icon-192.png',
+      data: { url: __BASE__ + 'app/' },
+    });
+  };
+  const dismissBanner = () => {
+    localStorage.setItem('gust.alertBanner', 'dismissed');
+    setBannerDismissed(true);
+  };
+  const showBanner = !demo && !bannerDismissed && notifPerm === 'default' && watched.length > 0 && !(platform.ios && !platform.standalone);
+
   const updateSettings = (s: Settings) => {
     setSettings(s);
     saveSettings(s);
@@ -240,6 +271,19 @@ export function App() {
         {view === 'spots' && (
           <>
             <LocationBar loc={loc} status={locStatus} onLocate={locate} demo={demo} />
+            {showBanner && (
+              <div class="banner" role="region" aria-label="Alerts">
+                <p class="small">Get a notification when a spot near you turns good.</p>
+                <div class="banner-actions">
+                  <button class="btn small" onClick={enableAlerts}>
+                    Enable alerts
+                  </button>
+                  <button class="btn ghost small" onClick={dismissBanner}>
+                    Not now
+                  </button>
+                </div>
+              </div>
+            )}
             {error && (
               <p class="notice" role="status">
                 {error}

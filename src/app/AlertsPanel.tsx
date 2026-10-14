@@ -2,7 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { Platform } from '../lib/platform';
 import type { Settings, Spot } from '../lib/types';
 import type { LatLon } from '../lib/geo';
-import { enableBackground, pushConfigured, type BackgroundStatus } from './background';
+import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, type BackgroundStatus } from './background';
 
 interface Props {
   platform: Platform;
@@ -37,24 +37,20 @@ export function AlertsPanel({ platform, settings, watched, loc }: Props) {
     setBusy(true);
     setMsg(null);
     try {
-      const p = await Notification.requestPermission();
-      setPerm(p);
-      if (p !== 'granted') {
+      const r = await requestAlerts({ settings, watched, loc });
+      setPerm(r.perm);
+      if (r.perm !== 'granted') {
         setMsg('Notifications were not allowed. You can change this in your browser or system settings.');
         return;
       }
-      setBg(await enableBackground({ settings, watched, loc, prompt: true }));
+      setBg(r.status);
     } finally {
       setBusy(false);
     }
   };
 
-  const test = async () => {
-    const reg = await navigator.serviceWorker?.getRegistration(__BASE__);
-    const opts = { body: 'Notifications work. You will hear from gust when the wind is on.', icon: __BASE__ + 'icons/icon-192.png', tag: 'gust-test' };
-    if (reg) await reg.showNotification('gust', opts);
-    else new Notification('gust', opts);
-  };
+  const test = () =>
+    showLocalNotification('gust', { body: 'Notifications work. You will hear from gust when the wind is on.', icon: __BASE__ + 'icons/icon-192.png', tag: 'gust-test' });
 
   const iosNeedsInstall = platform.ios && !platform.standalone;
 
