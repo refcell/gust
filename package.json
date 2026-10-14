@@ -11,6 +11,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
+    "test:server": "pnpm --dir server test",
+    "typecheck:server": "tsc -p server",
     "e2e": "playwright test",
     "icons": "node scripts/icons.mjs"
   },
