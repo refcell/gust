@@ -87,6 +87,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Per-spot mute (`settings.muted`): enforced in `computeAlerts` (page + SW) and muted spots are not
   sent to the push server.
 
+- e2e also runs on WebKit with iPhone 15 emulation (`iphone` project) in CI — the closest automated
+  stand-in for iOS Safari. Real-device acceptance remains the owner's step.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
@@ -107,3 +110,5 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 3: dataset safety audit merged (112 spots narrowed), +169 spots via three parallel lanes,
   Install row in app Settings, iOS sheet illustration, stray-0 render fix, clock-relative e2e mocks,
   server cron delivery-aware dedup, second advisor gate passed.
+- Loop 4: per-spot mute, deep-link scroll, fetch auto-retry, 18 inland coordinates corrected
+  (elevation re-check queued after the Open-Meteo hourly limit resets), WebKit iPhone e2e in CI.
