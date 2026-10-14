@@ -1,6 +1,36 @@
 import type { Settings } from '../lib/types';
 import { fromKnots, toKnots, UNIT_LABEL, type SpeedUnit } from '../lib/units';
 import { sanitize } from '../lib/settings';
+import { useEffect, useState } from 'preact/hooks';
+import { canPromptInstall, onInstallChange, promptInstall } from './install';
+import { detectPlatform } from '../lib/platform';
+
+function InstallRow() {
+  const [can, setCan] = useState(canPromptInstall);
+  useEffect(() => onInstallChange(() => setCan(canPromptInstall())), []);
+  const p = detectPlatform();
+  if (p.standalone) return null;
+  if (can)
+    return (
+      <fieldset>
+        <legend>Install</legend>
+        <p class="small muted">Install gust to get it on your home screen and enable background alerts.</p>
+        <button class="btn" onClick={() => promptInstall()}>
+          Install gust
+        </button>
+      </fieldset>
+    );
+  if (p.ios)
+    return (
+      <fieldset>
+        <legend>Install</legend>
+        <p class="small muted">
+          Tap Share, then Add to Home Screen. Notifications on iPhone only work from the installed app.
+        </p>
+      </fieldset>
+    );
+  return null;
+}
 
 export function SettingsPanel({ settings, onChange }: { settings: Settings; onChange: (s: Settings) => void }) {
   const u = settings.unit;
@@ -12,6 +42,7 @@ export function SettingsPanel({ settings, onChange }: { settings: Settings; onCh
   return (
     <section class="panel" aria-labelledby="settings-h">
       <h2 id="settings-h">Settings</h2>
+      <InstallRow />
       <fieldset>
         <legend>Units</legend>
         <div class="seg" role="radiogroup" aria-label="Wind speed unit">
