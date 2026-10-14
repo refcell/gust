@@ -10,6 +10,8 @@ export default defineConfig({
   projects: [
     { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /pwa\.spec/ },
     { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: /pwa\.spec/ },
+    // Safari engine with iPhone emulation (closest automated stand-in for iOS).
+    { name: 'iphone', use: { ...devices['iPhone 15'] }, testIgnore: /pwa\.spec/ },
     // Service worker enabled: catches precache/install failures and offline regressions.
     { name: 'pwa', use: { ...devices['Pixel 7'], serviceWorkers: 'allow' }, testMatch: /pwa\.spec/ },
   ],
