@@ -23,30 +23,34 @@ for (let i = 0; i < 50; i++) {
 
 // Mixed, realistic-looking conditions so the demo shows every rating.
 const profile = [
-  { s: 21, g: 26, d: 280 },
-  { s: 18, g: 23, d: 250 },
+  { s: 21, g: 26, d: 290 },
+  { s: 18, g: 23, d: 280 },
   { s: 24, g: 31, d: 300 },
   { s: 13, g: 17, d: 270 },
   { s: 19, g: 25, d: 95 },
   { s: 9, g: 12, d: 260 },
   { s: 33, g: 41, d: 290 },
 ];
+const OFFSET = -25200;
+const localIso = (ms) => new Date(ms + OFFSET * 1000).toISOString().slice(0, 16);
 function body(url) {
   const lats = new URL(url).searchParams.get('latitude').split(',');
-  const today = new Date().toISOString().slice(0, 10);
-  const days = [0, 1, 2].map((d) => new Date(Date.now() + d * 864e5).toISOString().slice(0, 10));
+  const nowLocal = localIso(Date.now());
+  const current = nowLocal.slice(0, 14) + String(Math.floor(Number(nowLocal.slice(14, 16)) / 15) * 15).padStart(2, '0');
+  const day0 = Date.parse(nowLocal.slice(0, 10) + 'T00:00:00Z') - OFFSET * 1000;
   const loc = (i) => {
     const p = profile[i % profile.length];
     const time = [], ws = [], wg = [], wd = [];
-    for (const day of days)
-      for (let h = 0; h < 24; h++) {
-        time.push(`${day}T${String(h).padStart(2, '0')}:00`);
-        const k = Math.max(0, Math.sin(((h - 8) / 12) * Math.PI)) * (0.7 + 0.3 * Math.sin(i + h / 5));
-        ws.push(+(6 + k * (p.s + 2)).toFixed(1));
-        wg.push(+(9 + k * (p.g + 2)).toFixed(1));
-        wd.push(p.d === 95 ? 95 : 270 + Math.round(10 * Math.sin(h / 4)));
-      }
-    return { utc_offset_seconds: -25200, current: { time: `${today}T14:00`, wind_speed_10m: p.s, wind_gusts_10m: p.g, wind_direction_10m: p.d }, hourly: { time, wind_speed_10m: ws, wind_gusts_10m: wg, wind_direction_10m: wd } };
+    for (let k = 0; k < 72; k++) {
+      const t = localIso(day0 + k * 3600_000);
+      const h = Number(t.slice(11, 13));
+      time.push(t);
+      const f = Math.max(0, Math.sin(((h - 8) / 12) * Math.PI)) * (0.7 + 0.3 * Math.sin(i + h / 5));
+      ws.push(+(6 + f * (p.s + 2)).toFixed(1));
+      wg.push(+(9 + f * (p.g + 2)).toFixed(1));
+      wd.push(p.d === 95 ? 95 : 285 + Math.round(10 * Math.sin(h / 4)));
+    }
+    return { utc_offset_seconds: OFFSET, current: { time: current, wind_speed_10m: p.s, wind_gusts_10m: p.g, wind_direction_10m: p.d }, hourly: { time, wind_speed_10m: ws, wind_gusts_10m: wg, wind_direction_10m: wd } };
   };
   return lats.length > 1 ? lats.map((_, i) => loc(i)) : loc(0);
 }
