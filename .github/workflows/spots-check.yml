@@ -18,8 +18,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node scripts/check-spots.mjs 15 | tee report.txt
       - run: |
+          set -o pipefail
+          node scripts/check-spots.mjs 15 | tee report.txt
+        timeout-minutes: 15
+      - if: always()
+        run: |
           echo '### Spot coordinate check' >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           cat report.txt >> "$GITHUB_STEP_SUMMARY"
