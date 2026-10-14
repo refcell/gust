@@ -21,6 +21,8 @@ import { formatSpeed } from '../lib/units';
 
 type LocStatus = 'idle' | 'locating' | 'ok' | 'denied' | 'error' | 'unsupported';
 type View = 'spots' | 'places' | 'alerts' | 'settings';
+type SpotsMode = 'list' | 'map';
+const MODE_KEY = 'gust.spotsMode';
 interface Loc extends LatLon {
   at: number;
   label?: string;
@@ -68,6 +70,10 @@ export function App() {
   const [openId, setOpenId] = useState<string | null>(params.get('spot'));
   const [online, setOnline] = useState(navigator.onLine);
   const [notifPerm, setNotifPerm] = useState<NotificationPermission | 'unsupported'>(() => ('Notification' in window ? Notification.permission : 'unsupported'));
+  const [spotsMode, setSpotsModeState] = useState<SpotsMode>(() => (localStorage.getItem(MODE_KEY) === 'map' ? 'map' : 'list'));
+  const [MapView, setMapView] = useState<typeof import('./SpotMap').default | null>(null);
+  const [mapError, setMapError] = useState(false);
+  const [scrollTo, setScrollTo] = useState<string | null>(null);
   const [bannerDismissed, setBannerDismissed] = useState(() => localStorage.getItem('gust.alertBanner') === 'dismissed');
 
   // Load the curated dataset once.
@@ -222,6 +228,38 @@ export function App() {
     }
   }, [openId, fetchedAt]);
 
+  const setSpotsMode = (m: SpotsMode) => {
+    setSpotsModeState(m);
+    localStorage.setItem(MODE_KEY, m);
+  };
+
+  // The map is a separate chunk, loaded only when the map view is first shown.
+  useEffect(() => {
+    if (spotsMode !== 'map' || MapView) return;
+    let cancelled = false;
+    setMapError(false);
+    import('./SpotMap')
+      .then((m) => {
+        if (!cancelled) setMapView(() => m.default);
+      })
+      .catch(() => {
+        if (!cancelled) setMapError(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [spotsMode, MapView]);
+
+  // "Open details" from the map: once the list renders, scroll the spot into view and focus it.
+  useEffect(() => {
+    if (!scrollTo || spotsMode !== 'list') return;
+    const li = document.getElementById(`spot-${scrollTo}`)?.closest('li');
+    if (!li) return;
+    setScrollTo(null);
+    li.scrollIntoView({ block: 'center' });
+    li.querySelector<HTMLElement>('.spot-head')?.focus({ preventScroll: true });
+  });
+
   // Re-check on resume (the main alert path on iOS).
   const refreshRef = useRef(refresh);
   refreshRef.current = refresh;
@@ -303,6 +341,20 @@ export function App() {
     document.getElementById(`tab-${v}`)?.focus();
   };
 
+  // Map data: every shown spot once, centred on the user (or the first place).
+  const mapItems = useMemo(() => {
+    const seen = new Map<string, NearbySpot>();
+    for (const g of groups) for (const n of g.items) if (!seen.has(n.spot.id)) seen.set(n.spot.id, n);
+    return [...seen.values()];
+  }, [groups]);
+  const mapOrigin: LatLon | null = loc ?? places[0] ?? null;
+  const mapFitExtra = useMemo(() => (groups[0]?.fallback ? groups[0].items.map((n) => ({ lat: n.spot.lat, lon: n.spot.lon })) : []), [groups]);
+  const openFromMap = (id: string) => {
+    setOpenId(id);
+    setScrollTo(id);
+    setSpotsMode('list');
+  };
+
   const sortItems = (items: NearbySpot[]) =>
     [...items].sort((a, b) => {
       const wa = wind[a.spot.id];
@@ -347,6 +399,15 @@ export function App() {
             ) : (
               <LocationBar loc={loc} status={locStatus} onLocate={locate} demo={demo} />
             )}
+            {!showWelcome && mapOrigin && (
+              <div class="seg mode" role="group" aria-label="Show spots as">
+                {(['list', 'map'] as const).map((m) => (
+                  <button key={m} type="button" class={spotsMode === m ? 'on' : ''} aria-pressed={spotsMode === m} onClick={() => setSpotsMode(m)}>
+                    {m === 'list' ? 'List' : 'Map'}
+                  </button>
+                ))}
+              </div>
+            )}
             {showBanner && (
               <div class="banner" role="region" aria-label="Alerts">
                 <p class="small">Get a notification when a spot near you turns good.</p>
@@ -371,7 +432,25 @@ export function App() {
               </p>
             )}
             {!allSpots && !error && !showWelcome && <p class="muted">Loading spots…</p>}
-            {groups.length > 0 && !fetchedAt && !error && (
+            {spotsMode === 'map' && !showWelcome && mapOrigin && allSpots && (
+              MapView ? (
+                <MapView
+                  items={mapItems}
+                  wind={wind}
+                  settings={settings}
+                  user={loc}
+                  origin={mapOrigin}
+                  radiusKm={settings.radiusKm}
+                  fitExtra={mapFitExtra}
+                  onOpen={openFromMap}
+                />
+              ) : (
+                <p class="muted" role="status">
+                  {mapError ? 'Could not load the map. Check your connection.' : 'Loading map…'}
+                </p>
+              )
+            )}
+            {spotsMode === 'list' && groups.length > 0 && !fetchedAt && !error && (
               <ul class="spots skeleton" aria-label={`Checking wind at ${watched.length + shownOnly.length} spots`}>
                 {[...watched, ...shownOnly].slice(0, 6).map((sp) => (
                   <li key={sp.id} class="spot">
@@ -385,7 +464,7 @@ export function App() {
                 ))}
               </ul>
             )}
-            {(fetchedAt > 0 || error) && groups.map((g) => (
+            {spotsMode === 'list' && (fetchedAt > 0 || error) && groups.map((g) => (
               <section key={g.key} class="group" aria-label={g.title}>
                 <h2>
                   {g.title}
