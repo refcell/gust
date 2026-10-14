@@ -33,3 +33,21 @@ test('service worker installs, precaches the shell, and the app works offline', 
   await expect(page.getByRole('button', { name: 'Install gust' })).toBeVisible();
   await context.setOffline(false);
 });
+
+test('landing and app are installable with a valid manifest (Chrome installability checks)', async ({ page, context }) => {
+  await context.route(/open-meteo|overpass/, (route) => route.abort());
+  for (const path of ['/gust/', '/gust/app/']) {
+    await page.goto(path);
+    await expect.poll(() => page.evaluate(async () => !!(await navigator.serviceWorker.ready).active), { timeout: 10_000 }).toBe(true);
+    const cdp = await context.newCDPSession(page);
+    const { installabilityErrors } = await cdp.send('Page.getInstallabilityErrors');
+    expect(installabilityErrors, path).toEqual([]);
+    const { errors, url } = await cdp.send('Page.getAppManifest');
+    expect(errors, path).toEqual([]);
+    expect(url).toMatch(/manifest\.webmanifest$/);
+    await cdp.detach();
+  }
+  const m = await (await page.request.get('/gust/manifest.webmanifest')).json();
+  expect(m).toMatchObject({ id: '/gust/app/', scope: '/gust/', display: 'standalone' });
+  expect(m.icons.some((i: { sizes: string; purpose?: string }) => i.sizes === '512x512' && i.purpose?.includes('maskable'))).toBe(true);
+});
