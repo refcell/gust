@@ -76,6 +76,17 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Advisor gate (kimi-k3, after gpt-6-astra hit quota and a gpt-6.1-sol run dropped): "Definition of
   done met apart from physical-device testing", its one must-fix (cron state commit) done.
 
+- Open-Meteo limits are per IP and weighted by location count (minutely/hourly/daily). Bulk
+  scripts (`check-spots`, `snap-spots`) can exhaust the minute budget and make the app on the same
+  network fail for a minute; the app now shows "Retrying in a minute" and retries automatically.
+  For the push server, all subscribers share Cloudflare egress IPs: dedupe points (done) and keep
+  the cron at 30 min; above a few hundred distinct spots use the Open-Meteo commercial API.
+- Spot coordinate check: `scripts/check-spots.mjs` flags coastal spots above 25 m (Open-Meteo
+  elevation); `scripts/snap-spots.mjs` moves listed ids to the nearest 0.5–5 m cell adjacent to sea.
+  Lakes/rivers at altitude (jordanelle, wasaga, campione, dougs-beach) are expected and skipped.
+- Per-spot mute (`settings.muted`): enforced in `computeAlerts` (page + SW) and muted spots are not
+  sent to the push server.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test

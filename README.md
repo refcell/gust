@@ -46,7 +46,7 @@ Web apps get fewer background privileges than native apps. gust uses every path 
 
 ## Data sources
 
-- **Wind:** [Open-Meteo](https://open-meteo.com/) forecast API (CC BY 4.0). No key; the free tier allows fewer than 10,000 calls per day for non-commercial use. gust batches up to 50 spots per request and re-checks only when data is older than 10 minutes.
+- **Wind:** [Open-Meteo](https://open-meteo.com/) forecast API (CC BY 4.0). No key; the free tier allows fewer than 10,000 calls per day for non-commercial use. gust batches up to 50 spots per request, re-checks only when data is older than 10 minutes, and retries a minute after a failure. Limits are per IP and weighted by the number of locations.
 - **Spots:** the curated [`data/spots.json`](data/spots.json) (schema in [`data/README.md`](data/README.md)), plus [OpenStreetMap](https://www.openstreetmap.org/copyright) via Overpass. Overpass is shared infrastructure, so OSM lookups are cached per area for 14 days and capped per device per day. For OSM spots without known sectors, gust infers the shore orientation from nearby `natural=coastline` ways (land on the left, water on the right) and treats ±100° around the seaward normal as rideable.
 - **Place search:** Open-Meteo geocoding API.
 
