@@ -1,10 +1,11 @@
-import { DEFAULT_SETTINGS, type Place, type Settings } from './types';
+import { DEFAULT_SETTINGS, type Place, type Settings, type Spot } from './types';
 import type { LatLon } from './geo';
 
 const LS = {
   settings: 'gust.settings',
   places: 'gust.places',
   lastLoc: 'gust.lastLocation',
+  favSpots: 'gust.favSpots',
 };
 
 function read<T>(key: string, fallback: T): T {
@@ -64,4 +65,18 @@ export function loadLastLocation(): (LatLon & { at: number; label?: string }) | 
 
 export function saveLastLocation(l: LatLon & { at: number; label?: string }): void {
   localStorage.setItem(LS.lastLoc, JSON.stringify(l));
+}
+
+/** Snapshots of favourited spots, so favourites stay watched when their source data changes. */
+export function loadFavSpots(): Spot[] {
+  try {
+    const v = JSON.parse(localStorage.getItem(LS.favSpots) ?? '[]');
+    return Array.isArray(v) ? v.filter((s) => s && typeof s.id === 'string' && Number.isFinite(s.lat) && Number.isFinite(s.lon)) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveFavSpots(spots: Spot[]): void {
+  localStorage.setItem(LS.favSpots, JSON.stringify(spots));
 }

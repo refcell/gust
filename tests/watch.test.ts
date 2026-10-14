@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { favoriteItems, favoritesFirst, watchSets, type SpotGroup } from '../src/lib/watch';
+import { backfillFavoriteSnapshots, favoriteItems, favoritesFirst, toggleFavoriteSnapshot, watchSets, withFavoriteSnapshots, type SpotGroup } from '../src/lib/watch';
 import type { Spot } from '../src/lib/types';
 
 const spot = (id: string, lat = 0, lon = 0): Spot => ({ id, name: id, lat, lon });
@@ -53,10 +53,16 @@ describe('favoriteItems', () => {
     expect(r[0].distanceKm).toBeCloseTo(222.4, 0);
   });
 
-  it('is empty without favourites or an origin', () => {
+  it('is empty without favourites', () => {
     expect(favoriteItems(all, undefined, groups, { lat: 0, lon: 0 })).toEqual([]);
     expect(favoriteItems(all, [], groups, { lat: 0, lon: 0 })).toEqual([]);
-    expect(favoriteItems(all, ['fav'], groups, null)).toEqual([]);
+  });
+
+  it('without an origin still lists favourites (distance unknown, by name), and they are watched', () => {
+    const r = favoriteItems(all, ['fav', 'far2'], [], null);
+    expect(r.map((n) => n.spot.id)).toEqual(['far2', 'fav']);
+    expect(r.every((n) => Number.isNaN(n.distanceKm))).toBe(true);
+    expect(watchSets([{ items: r, fallback: false }], ['fav', 'far2']).watched.map((s) => s.id)).toEqual(['far2', 'fav']);
   });
 });
 
@@ -66,5 +72,31 @@ describe('favoritesFirst', () => {
     const r = favoritesFirst(items, ['far2', 'a'], (x, y) => x.distanceKm - y.distanceKm);
     expect(r.map((n) => n.spot.id)).toEqual(['a', 'far2', 'b', 'far1']);
     expect(items[0].spot.id).toBe('a'); // input untouched
+  });
+});
+
+describe('favourite snapshots', () => {
+  const osmFav: Spot = { id: 'osm-1', name: 'Lagoon', lat: 40, lon: 10, source: 'osm' };
+
+  it('keeps an OSM favourite in the universe after the OSM dataset changes', () => {
+    const snaps = toggleFavoriteSnapshot([], osmFav, true);
+    const universe = withFavoriteSnapshots([a, b], ['osm-1'], snaps); // OSM data no longer has osm-1
+    expect(universe.map((s) => s.id)).toEqual(['a', 'b', 'osm-1']);
+    const favs = favoriteItems(universe, ['osm-1'], [{ items: [near(a)], fallback: false }], { lat: 0, lon: 0 });
+    expect(favs.map((n) => n.spot.id)).toEqual(['osm-1']);
+  });
+
+  it('prefers current data, ignores snapshots of non-favourites, and removes on unfavourite', () => {
+    const snaps = [osmFav, { ...a, name: 'old a' }];
+    expect(withFavoriteSnapshots([a], ['a', 'osm-1'], snaps)).toEqual([a, osmFav]);
+    expect(withFavoriteSnapshots([a], ['a'], snaps)).toEqual([a]);
+    expect(toggleFavoriteSnapshot(snaps, osmFav, false)).toEqual([{ ...a, name: 'old a' }]);
+    expect(toggleFavoriteSnapshot(snaps, a, true)).toEqual([osmFav, a]);
+  });
+
+  it('backfills snapshots for favourites present in the data', () => {
+    expect(backfillFavoriteSnapshots([osmFav], [a, b, fav], ['osm-1', 'fav', 'missing'])).toEqual([osmFav, fav]);
+    expect(backfillFavoriteSnapshots([osmFav], [a], ['osm-1'])).toBeNull();
+    expect(backfillFavoriteSnapshots([], [a], ['missing'])).toBeNull();
   });
 });

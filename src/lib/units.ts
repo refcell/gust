@@ -22,6 +22,7 @@ export function formatSpeed(kn: number | null | undefined, unit: SpeedUnit, with
 }
 
 export function formatDistance(km: number): string {
+  if (!Number.isFinite(km)) return 'distance unknown';
   if (km < 1) return `${Math.round(km * 1000)} m`;
   if (km < 10) return `${km.toFixed(1)} km`;
   return `${Math.round(km)} km`;
