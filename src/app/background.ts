@@ -73,3 +73,17 @@ export async function enableBackground(o: { settings: Settings; watched: Spot[];
   }
   return status;
 }
+
+/** Ask for notification permission (must run from a user gesture), then enable background paths. */
+export async function requestAlerts(o: { settings: Settings; watched: Spot[]; loc: LatLon | null }): Promise<{ perm: NotificationPermission; status: BackgroundStatus | null }> {
+  const perm = await Notification.requestPermission();
+  if (perm !== 'granted') return { perm, status: null };
+  return { perm, status: await enableBackground({ ...o, prompt: true }) };
+}
+
+/** Show a notification through the service worker when possible (required on Android and iOS). */
+export async function showLocalNotification(title: string, options: NotificationOptions): Promise<void> {
+  const reg = await navigator.serviceWorker?.getRegistration(__BASE__);
+  if (reg) await reg.showNotification(title, options);
+  else new Notification(title, options);
+}
