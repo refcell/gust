@@ -2,10 +2,14 @@
 
 ## Status
 
-Loop 1: PWA skeleton + landing page shipped to Pages. App shows nearby curated spots with live
-Open-Meteo wind, scores, 48 h hourly chart, settings, saved places, alerts panel (in-app
-notifications on open/resume, Periodic Background Sync registration on Chromium, Web Push
-client gated on `VITE_PUSH_API`). 418 curated spots (185 US). Unit tests + Playwright e2e.
+Milestone 1 (installable PWA with real nearby spots, live wind, scores, in-app notifications) is
+live at https://refcell.github.io/gust/ and verified with `scripts/verify-live.mjs` (real network,
+Chromium installability via CDP, SW active, offline reload). Landing page with install flows (BIP,
+iOS sheet, in-app browser detection, desktop QR). OSM Overpass augmentation + coastline sector
+inference merged. Push backend (`server/`, Cloudflare Worker) merged and tested, not deployed (no
+credentials). Android APK workflow merged; first run failed on minSdk (fixed to 24), re-running.
+Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the dataset side-off audit
+(worker lane in flight).
 
 ## Decisions
 
@@ -39,17 +43,39 @@ client gated on `VITE_PUSH_API`). 418 curated spots (185 US). Unit tests + Playw
 - First-run alerts banner on the Spots tab (not on iOS until installed). Enabling alerts shows an
   immediate confirmation notification listing spots that are on now.
 
+- OSM: cache per 0.5° tile + radius bucket (25/50/100 km) for 14 days in localStorage; failures
+  cached 1 h; max 6 Overpass calls per device per day; backoff 1 h after both endpoints fail.
+  Coastline inference: nearest segment within 1.5 km, seaward normal ±100°; closed lakes >= 0.5 km².
+  OSM spots carry a "check locally" note. Live check from a browser on the Pages origin got 504 from
+  both public endpoints (overloaded), CORS fine; code degrades to curated-only.
+- Push backend: own RFC 8291 aes128gcm + VAPID ES256 on WebCrypto (no deps; matches the RFC test
+  vector). KV writes only on change (free tier 1000 writes/day). Max 3 notifications per subscriber
+  per run, rest folded into a summary. Quiet hours 22:00–06:00 subscriber tz. Not deployed: no
+  wrangler/Cloudflare/Deno credentials on this machine. Fallback: in-app checks + Periodic Background
+  Sync (Android). Upgrade: `cd server && wrangler login && ...` (server/README.md), then set repo
+  variables VITE_PUSH_API / VITE_VAPID_PUBLIC_KEY; CI builds with push enabled.
+- Data validity: wind samples must be finite, speeds >= 0, direction 0..360; invalid current data
+  drops the spot; scoring fails closed (null gust => too strong, NaN speed/dir => "No data").
+- Staleness: each SpotWind has `observedAt` (epoch of the current sample). Data older than 90 min is
+  stale: shown with a notice, never used for alerts or to overwrite alert state. Forecast alerts
+  require `now < start <= now + 24h`. Forecast runs break on missing hours.
+- Forecast-window dedup is only recorded when notifications can be delivered.
+- e2e has a `pwa` project with the service worker enabled (install, precache, offline).
+- Light theme accent/good colours darkened to pass WCAG AA for normal text.
+
 ## Next
 
-1. Verify Pages deploy live; fetch URLs.
-2. OSM Overpass augmentation + coastline sector inference (cached).
-3. README full docs + demo recording (Playwright mobile + ffmpeg).
-4. Push backend in `server/` (Cloudflare Worker + KV + cron, VAPID) with tests and deploy docs.
-5. Android APK (Bubblewrap/TWA) in Actions + Release; "Download APK" link.
-6. Advisor review before milestone.
+1. Merge dataset side-off audit; confirm Android APK release builds; verify the release asset.
+2. Second advisor review (different family) of the fixes.
+3. Fallback (outside-radius) spots: show but do not watch for alerts.
+4. More spots / better direction inference; onboarding polish; iOS sheet illustration.
+5. Re-record demo after UI changes.
 
 ## Log
 
 - Repo created with MISSION.md.
 - Loop 1: scaffold, core libs (units, sectors, geo, score, forecast, alerts, open-meteo), app UI,
   landing page, SW, icons, tests, CI + Pages workflow, curated dataset (worker lane).
+- Loop 2: merged OSM lane, push backend lane, APK lane; stable APK keystore secrets; README with
+  demo; first-run alerts banner; CLS fix; advisor review + fixes (validation, staleness, gaps,
+  delivery-aware dedup, contrast, SW e2e gate).
