@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { Platform } from '../lib/platform';
 import type { Settings, Spot } from '../lib/types';
 import type { LatLon } from '../lib/geo';
+import { pushSpots } from '../lib/pushsync';
 import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, type BackgroundStatus } from './background';
 
 interface Props {
@@ -10,11 +11,13 @@ interface Props {
   onSettings: (s: Settings) => void;
   watched: Spot[];
   loc: LatLon | null;
+  /** Last location and saved places (which spots the push server watches). */
+  origins: LatLon[];
 }
 
 type Perm = NotificationPermission | 'unsupported';
 
-export function AlertsPanel({ platform, settings, watched, loc }: Props) {
+export function AlertsPanel({ platform, settings, watched, loc, origins }: Props) {
   const [perm, setPerm] = useState<Perm>(() => ('Notification' in window ? Notification.permission : 'unsupported'));
   const [bg, setBg] = useState<BackgroundStatus | null>(null);
   const [busy, setBusy] = useState(false);
@@ -24,7 +27,7 @@ export function AlertsPanel({ platform, settings, watched, loc }: Props) {
   useEffect(() => {
     let cancelled = false;
     if (perm === 'granted') {
-      enableBackground({ settings, watched, loc, prompt: false }).then((s) => {
+      enableBackground({ settings, watched, loc, origins, prompt: false }).then((s) => {
         if (!cancelled) setBg(s);
       });
     }
@@ -37,7 +40,7 @@ export function AlertsPanel({ platform, settings, watched, loc }: Props) {
     setBusy(true);
     setMsg(null);
     try {
-      const r = await requestAlerts({ settings, watched, loc });
+      const r = await requestAlerts({ settings, watched, loc, origins });
       setPerm(r.perm);
       if (r.perm !== 'granted') {
         setMsg('Notifications were not allowed. You can change this in your browser or system settings.');
@@ -53,6 +56,9 @@ export function AlertsPanel({ platform, settings, watched, loc }: Props) {
     showLocalNotification('gust', { body: 'Notifications work. You will hear from gust when the wind is on.', icon: __BASE__ + 'icons/icon-192.png', tag: 'gust-test' });
 
   const iosNeedsInstall = platform.ios && !platform.standalone;
+  // The push server watches at most MAX_PUSH_SPOTS spots; say so when some are left out.
+  const cover = pushSpots(watched, settings, origins);
+  const capped = pushConfigured && cover.spots.length < cover.total;
 
   return (
     <section class="panel" aria-labelledby="alerts-h">
@@ -102,6 +108,11 @@ export function AlertsPanel({ platform, settings, watched, loc }: Props) {
         </li>
       </ul>
       <p class="small muted">Watching {watched.length} spots.</p>
+      {capped && (
+        <p class="notice small" role="note">
+          Background alerts cover your {cover.spots.length} nearest/favourite spots (of {cover.total} watched); in-app checks cover all.
+        </p>
+      )}
     </section>
   );
 }

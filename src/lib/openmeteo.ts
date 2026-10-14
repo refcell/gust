@@ -79,3 +79,22 @@ export async function fetchWind(points: readonly LatLon[], fetchImpl: typeof fet
   }
   return out;
 }
+
+/** Samples fetched less than this long ago are reused instead of refetched. */
+export const FRESH_MS = 10 * 60_000;
+
+/**
+ * Which spots need a network fetch: those without a sample fetched within `maxAgeMs`. `fresh`
+ * holds the reusable samples by spot id (e.g. after a scoring-only settings change).
+ */
+export function splitFresh<S extends { id: string }>(spots: readonly S[], wind: Readonly<Record<string, SpotWind | undefined>>, now = Date.now(), maxAgeMs = FRESH_MS): { fresh: Record<string, SpotWind>; missing: S[] } {
+  const fresh: Record<string, SpotWind> = {};
+  const missing: S[] = [];
+  for (const s of spots) {
+    const w = wind[s.id];
+    const age = w ? now - w.fetchedAt : Infinity;
+    if (w && age >= 0 && age < maxAgeMs) fresh[s.id] = w;
+    else missing.push(s);
+  }
+  return { fresh, missing };
+}

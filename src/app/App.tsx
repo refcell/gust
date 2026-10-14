@@ -6,20 +6,21 @@ import { AlertsPanel } from './AlertsPanel';
 import { PlacesPanel } from './PlacesPanel';
 import { Welcome } from './Welcome';
 import { runCheck, K, notificationOptions } from '../lib/check';
-import { kvGet, kvSet } from '../lib/kv';
-import { fetchWind } from '../lib/openmeteo';
+import { kvGet } from '../lib/kv';
+import { fetchWind, splitFresh } from '../lib/openmeteo';
+import { createCoalescer } from '../lib/coalesce';
 import { nearbySpots, nearestSpots, type NearbySpot } from '../lib/spots';
 import { scoreWind } from '../lib/score';
-import { loadLastLocation, loadPlaces, loadSettings, saveLastLocation, savePlaces, saveSettings } from '../lib/settings';
+import { loadFavSpots, loadLastLocation, loadPlaces, loadSettings, saveFavSpots, saveLastLocation, savePlaces, saveSettings } from '../lib/settings';
 import type { Place, Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { detectPlatform } from '../lib/platform';
 import { augmentWithOsm } from './osm';
-import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, syncPush } from './background';
-import { syncKey } from '../lib/pushsync';
+import { persistBackground, pushConfigured, requestAlerts, showLocalNotification, syncPush } from './background';
+import { nextRevision, syncKey } from '../lib/pushsync';
 import { isStale } from '../lib/time';
 import { formatSpeed } from '../lib/units';
-import { favoriteItems, favoritesFirst, watchSets } from '../lib/watch';
+import { backfillFavoriteSnapshots, favoriteItems, favoritesFirst, toggleFavoriteSnapshot, watchSets, withFavoriteSnapshots } from '../lib/watch';
 
 type LocStatus = 'idle' | 'locating' | 'ok' | 'denied' | 'error' | 'unsupported';
 type View = 'spots' | 'places' | 'alerts' | 'settings';
@@ -31,7 +32,7 @@ interface Loc extends LatLon {
   source: 'gps' | 'demo' | 'last';
 }
 
-/** Re-check wind on resume when the last fetch is older than this. */
+/** Re-check wind on resume when the last fetch is older than this (same as the reuse window). */
 const STALE_MS = 10 * 60_000;
 const DEMO: Loc = { lat: 37.8043, lon: -122.4659, at: 0, label: 'San Francisco (demo)', source: 'demo' };
 
@@ -64,6 +65,8 @@ export function App() {
   const [locStatus, setLocStatus] = useState<LocStatus>('idle');
   const [curated, setCurated] = useState<Spot[] | null>(null);
   const [osm, setOsm] = useState<Spot[]>([]);
+  // Snapshots of favourited spots: favourites stay watched when they drop out of the OSM data.
+  const [favSpots, setFavSpots] = useState<Spot[]>(loadFavSpots);
   const [wind, setWind] = useState<Record<string, SpotWind>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -129,7 +132,18 @@ export function App() {
     };
   }, [demo, locate]);
 
-  const allSpots = useMemo(() => (curated ? [...curated, ...osm] : null), [curated, osm]);
+  const allSpots = useMemo(
+    () => (curated ? withFavoriteSnapshots([...curated, ...osm], settings.favorites, favSpots) : null),
+    [curated, osm, settings.favorites, favSpots],
+  );
+
+  // Favourites made before snapshots existed: save their snapshot once the spot is loaded
+  // (storage only; `allSpots` already contains them).
+  useEffect(() => {
+    if (!allSpots) return;
+    const next = backfillFavoriteSnapshots(loadFavSpots(), allSpots, settings.favorites);
+    if (next) saveFavSpots(next);
+  }, [allSpots, settings.favorites]);
 
   // Augment with OpenStreetMap spots around the current location.
   useEffect(() => {
@@ -175,40 +189,49 @@ export function App() {
   const { watched, shownOnly } = useMemo(() => watchSets(groups, settings.favorites), [groups, settings.favorites]);
   const watchKey = [...watched, ...shownOnly].map((s) => s.id).join('|');
 
-  const refresh = useCallback(async () => {
+  // Latest state for the refresh runner (it is created once; see `refresh` below).
+  const windRef = useRef(wind);
+  windRef.current = wind;
+  const doRefresh = async (force: boolean) => {
     if (watched.length === 0 && shownOnly.length === 0) return;
-    setLoading(true);
+    // Reuse samples fetched in the last 10 minutes (scoring-only changes: wind window, units,
+    // mute, favourites); fetch only missing or older ones. `force` (Refresh button) refetches all.
+    const { fresh, missing } = force ? { fresh: {}, missing: [...watched, ...shownOnly] } : splitFresh([...watched, ...shownOnly], windRef.current);
+    const fetching = missing.length > 0;
+    if (fetching) setLoading(true);
     setError(null);
     try {
-      await kvSet(K.settings, settings);
-      await kvSet(K.watch, watched);
       const granted = 'Notification' in window && Notification.permission === 'granted';
+      const extraSpots = shownOnly.filter((s) => !fresh[s.id]);
       const [{ alerts, wind: w }, extra] = await Promise.all([
-        runCheck({ spots: watched, settings, deliver: granted }),
-        shownOnly.length ? fetchWind(shownOnly) : Promise.resolve([]),
+        runCheck({ spots: watched, settings, deliver: granted, cached: fresh }),
+        extraSpots.length ? fetchWind(extraSpots) : Promise.resolve([]),
       ]);
+      for (const s of shownOnly) if (fresh[s.id]) w[s.id] = fresh[s.id];
       extra.forEach((x, i) => {
-        if (x) w[shownOnly[i].id] = x;
+        if (x) w[extraSpots[i].id] = x;
       });
       if (Object.keys(w).length === 0) throw new Error('no data');
       setWind((prev) => ({ ...prev, ...w }));
-      setFetchedAt(Date.now());
+      if (fetching) setFetchedAt(Date.now());
       for (const a of alerts) await showLocalNotification(a.title, notificationOptions(a));
-      // Keep background paths (periodic sync, push subscription) in sync with the watched spots.
-      if (granted) enableBackground({ settings, watched, loc, prompt: false }).catch(() => undefined);
     } catch {
-      setError(online ? 'Could not reach the wind service. Retrying in a minute.' : 'Offline — showing the last wind data.');
+      setError(navigator.onLine ? 'Could not reach the wind service. Retrying in a minute.' : 'Offline — showing the last wind data.');
       const last = await kvGet<Record<string, SpotWind>>(K.lastWind).catch(() => undefined);
       if (last) setWind((prev) => ({ ...last, ...prev }));
     } finally {
-      setLoading(false);
+      if (fetching) setLoading(false);
     }
-  }, [watchKey, settings, online]);
+  };
+  const doRefreshRef = useRef(doRefresh);
+  doRefreshRef.current = doRefresh;
+  // One refresh in flight at a time; a request during it schedules one follow-up with the latest state.
+  const refresh = useMemo(() => createCoalescer((force) => doRefreshRef.current(force)), []);
 
-  // Fetch whenever the watched set or settings change.
+  // Re-check whenever the watched set or settings change (reusing fresh samples).
   useEffect(() => {
     refresh();
-  }, [refresh]);
+  }, [watchKey, settings, refresh]);
 
   // After a failed fetch (rate limit, flaky network), retry once a minute while online.
   useEffect(() => {
@@ -217,20 +240,27 @@ export function App() {
     return () => clearTimeout(t);
   }, [error, online, loading, refresh]);
 
-  // Keep the push backend's copy of the settings and watched spots (muted spots excluded) in sync
-  // on its own, so muting takes effect even while the wind fetch is failing. Debounced; requests are
-  // serialized latest-wins in background.ts. No-op without VITE_PUSH_API or a push subscription, and
-  // skipped until the spot list has loaded (an empty watch list would wipe the backend's spots).
+  // Keep the background copies of the settings and watched spots in sync, on their own (not on the
+  // wind fetch), so muting takes effect even while the fetch is failing: IndexedDB for the service
+  // worker right away, the push backend (muted spots excluded) debounced. Each change gets a new
+  // revision; older revisions are dropped before they are saved or posted. Skipped until the spot
+  // list has loaded (an empty watch list would wipe the background copies).
   const locRef = useRef(loc);
   locRef.current = loc;
-  const pushKey = pushConfigured && curated ? syncKey(settings, watched) : '';
+  const origins: LatLon[] = useMemo(() => (loc ? [loc, ...places] : places), [loc, places]);
+  const originsRef = useRef(origins);
+  originsRef.current = origins;
+  const bgKey = curated ? syncKey(settings, watched) : '';
   useEffect(() => {
-    if (!pushKey) return;
+    if (!bgKey) return;
+    const intent = { rev: nextRevision(), settings, watched, loc: locRef.current, origins: originsRef.current };
+    persistBackground(intent).catch(() => undefined);
+    if (!pushConfigured) return;
     const t = setTimeout(() => {
-      syncPush({ settings, watched, loc: locRef.current }).catch(() => undefined);
+      syncPush(intent).catch(() => undefined);
     }, 1500);
     return () => clearTimeout(t);
-  }, [pushKey]);
+  }, [bgKey]);
 
   // Deep links (?spot=id, used by notifications): scroll the spot into view once it renders.
   const scrolledRef = useRef(false);
@@ -276,13 +306,11 @@ export function App() {
   });
 
   // Re-check on resume (the main alert path on iOS).
-  const refreshRef = useRef(refresh);
-  refreshRef.current = refresh;
   const fetchedRef = useRef(fetchedAt);
   fetchedRef.current = fetchedAt;
   useEffect(() => {
     const onVis = () => {
-      if (document.visibilityState === 'visible' && Date.now() - fetchedRef.current > STALE_MS) refreshRef.current();
+      if (document.visibilityState === 'visible' && Date.now() - fetchedRef.current > STALE_MS) refresh();
     };
     document.addEventListener('visibilitychange', onVis);
     const t = setInterval(onVis, 60_000);
@@ -290,10 +318,10 @@ export function App() {
       document.removeEventListener('visibilitychange', onVis);
       clearInterval(t);
     };
-  }, []);
+  }, [refresh]);
 
   const enableAlerts = async () => {
-    const r = await requestAlerts({ settings, watched, loc });
+    const r = await requestAlerts({ settings, watched, loc, origins });
     setNotifPerm(r.perm);
     if (r.perm !== 'granted') return;
     // Confirm right away, listing spots that are already on.
@@ -391,7 +419,7 @@ export function App() {
           {loading ? 'Updating…' : fetchedAt ? `Updated ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
           {!online && ' · offline'}
         </span>
-        <button class="icon-btn" onClick={() => refresh()} disabled={loading || watched.length + shownOnly.length === 0} aria-label="Refresh wind">
+        <button class="icon-btn" onClick={() => refresh(true)} disabled={loading || watched.length + shownOnly.length === 0} aria-label="Refresh wind">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
             <path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -514,6 +542,9 @@ export function App() {
                       favorite={settings.favorites?.includes(n.spot.id)}
                       onFavorite={(f) => {
                         const rest = (settings.favorites ?? []).filter((id) => id !== n.spot.id);
+                        const snaps = toggleFavoriteSnapshot(loadFavSpots(), n.spot, f);
+                        saveFavSpots(snaps);
+                        setFavSpots(snaps);
                         updateSettings({ ...settings, favorites: f ? [...rest, n.spot.id] : rest });
                       }}
                     />
@@ -524,7 +555,7 @@ export function App() {
           </>
         )}
         {view === 'places' && <PlacesPanel places={places} onChange={updatePlaces} loc={loc} />}
-        {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} />}
+        {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} />}
         {view === 'settings' && <SettingsPanel settings={settings} onChange={updateSettings} />}
         </div>
       </main>

@@ -3,8 +3,9 @@ import type { PushSubscriptionJSON } from './webpush';
 import type { Sector } from '../../src/lib/sectors';
 import { DEFAULT_SETTINGS, type Settings } from '../../src/lib/types';
 import type { SpeedUnit } from '../../src/lib/units';
+import { MAX_PUSH_SPOTS } from '../../src/lib/limits';
 
-export const MAX_SPOTS = 60;
+export const MAX_SPOTS = MAX_PUSH_SPOTS;
 export const MAX_BODY_BYTES = 64 * 1024;
 
 export interface SubSpot {
