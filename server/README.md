@@ -15,13 +15,15 @@ A small Web Push sender for gust: a Cloudflare Worker with a KV namespace and a 
 
 | Method | Path           | Body / response |
 | ------ | -------------- | --------------- |
-| POST   | `/subscribe`   | `{subscription, settings, location, spots: [{id, name, lat, lon, sectors}], tz}` → `{ok: true}`. Upsert keyed by SHA-256 of the endpoint. Max 60 spots, 64 KB body. |
+| POST   | `/subscribe`   | `{subscription, settings, location, spots: [{id, name, lat, lon, sectors}], tz}` → `{ok: true}`. Upsert keyed by SHA-256 of the endpoint. Max 60 spots (`MAX_PUSH_SPOTS` in `../src/lib/limits.ts`, shared with the app, which sends favourites first, then the nearest, and never muted spots), 64 KB body. |
 | POST   | `/unsubscribe` | `{endpoint}` → `{ok: true}` |
 | GET    | `/health`      | `{ok: true, subscribers: n}` |
 | GET    | `/vapid`       | `{publicKey}` |
 
-CORS allows `https://refcell.github.io` and `http://localhost:*` / `http://127.0.0.1:*`. Add more
-with the `ALLOWED_ORIGINS` var. POSTs from other browser origins get 403.
+CORS allows `https://refcell.github.io` and `http://localhost:*` / `http://127.0.0.1:*` /
+`http://[::1]:*`. Add more with the `ALLOWED_ORIGINS` var. POSTs from other browser origins get 403.
+`/subscribe` has no authentication (a browser client cannot hold a secret): add a Cloudflare
+rate-limiting rule for it before deploying publicly.
 
 Push payloads are `{title, body, tag, url}`; the app's service worker shows them as-is. A
 subscriber gets at most 3 notifications per run; extra alerts are folded into one summary. A push
@@ -71,9 +73,10 @@ For local development put the same values in `.env.local` at the repo root.
 ### Limits
 
 - Workers free plan: 50 subrequests per invocation. Each Open-Meteo request (up to 50 unique
-  spots) and each push counts as one, so one cron run serves roughly 40 notifications. When
-  `MAX_PUSHES` is reached, the rest of that run's alerts are dropped (state still advances).
-  On the paid plan, raise `MAX_PUSHES` (limit 1000 subrequests).
+  spots) and each push counts as one, so one cron run serves roughly 40 notifications. Alerts
+  cut by `MAX_PUSHES`, or whose push failed, are rolled back in the subscriber's state and resent
+  on the next run (a duplicate is preferred over a lost alert). On the paid plan, raise
+  `MAX_PUSHES` (limit 1000 subrequests).
 - KV free plan: 1000 writes per day. A subscriber's state is written only when a rating changes
   or an alert fires, typically a few times a day per subscriber, so the free plan covers on the
   order of a hundred subscribers. Beyond that, use the paid plan or reduce the cron frequency.
@@ -92,8 +95,8 @@ curl 'http://localhost:8787/__scheduled?cron=*/30+*+*+*+*'   # run the cron loca
 
 The server tests import only the worker source and `../src/lib`, so the root `pnpm test` runs
 them too, and CI covers them without installing `server/` dependencies. From the repo root,
-`pnpm test:server` runs them with the server's own vitest, and `pnpm typecheck:server` typechecks
-the worker.
+`pnpm test:server` runs them with the server's own vitest (run `pnpm i` in `server/` first), and
+`pnpm typecheck:server` typechecks the worker (no `server/` install needed).
 
 ## Deno Deploy alternative
 
