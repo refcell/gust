@@ -12,10 +12,10 @@ const at = (northM: number, eastM: number) => ({
 const coast = (...pts: { lat: number; lon: number }[]): ShoreFeature => ({ kind: 'coastline', points: pts });
 
 describe('sectorsFromNormal', () => {
-  it('spans normal ± 100 and wraps', () => {
-    expect(sectorsFromNormal(90)).toEqual([[350, 190]]);
-    expect(sectorsFromNormal(0)).toEqual([[260, 100]]);
-    expect(sectorsFromNormal(270)).toEqual([[170, 10]]);
+  it('spans normal ± 90 and wraps', () => {
+    expect(sectorsFromNormal(90)).toEqual([[0, 180]]);
+    expect(sectorsFromNormal(0)).toEqual([[270, 90]]);
+    expect(sectorsFromNormal(270)).toEqual([[180, 0]]);
   });
 });
 
@@ -25,7 +25,7 @@ describe('inferShore', () => {
     const r = inferShore(spot, [coast(at(-2000, 200), at(2000, 200))]);
     expect(r).not.toBeNull();
     expect(r!.normalDeg).toBeCloseTo(90, 3);
-    expect(r!.sectors).toEqual([[350, 190]]);
+    expect(r!.sectors).toEqual([[0, 180]]);
     expect(r!.distanceKm).toBeCloseTo(0.2, 2);
     expect(inSector(90, r!.sectors[0])).toBe(true); // onshore
     expect(inSector(0, r!.sectors[0])).toBe(true); // side-shore
@@ -41,7 +41,7 @@ describe('inferShore', () => {
     // Travelling west, the right-hand side is north.
     const r = inferShore(spot, [coast(at(500, 3000), at(500, -3000))]);
     expect(r!.normalDeg).toBeCloseTo(0, 3);
-    expect(r!.sectors).toEqual([[260, 100]]);
+    expect(r!.sectors).toEqual([[270, 90]]);
   });
 
   it('uses the nearest segment of a bent coastline', () => {

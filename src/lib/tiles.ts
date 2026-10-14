@@ -57,15 +57,39 @@ export function metersPerPixel(lat: number, z: number): number {
   return (40075016.686 * Math.cos((lat * Math.PI) / 180)) / worldSize(z);
 }
 
-/** Centre (normalized) and zoom that fit all points into a w x h viewport with `pad` pixels of margin. */
+/**
+ * Shortest wrapped horizontal extent of normalized x values: the complement of the largest gap
+ * between neighbours on the 0..1 circle. Returns the start (in 0..1) and the span; start + span
+ * may exceed 1 when the extent crosses the antimeridian.
+ */
+export function wrappedSpanX(xs: readonly number[]): { start: number; span: number } {
+  const s = xs.map((x) => x - Math.floor(x)).sort((a, b) => a - b);
+  if (s.length === 0) return { start: 0, span: 0 };
+  // Default: the gap across the antimeridian (no wrap); preferred on ties.
+  let gap = 1 - s[s.length - 1] + s[0];
+  let start = s[0];
+  for (let i = 1; i < s.length; i++) {
+    if (s[i] - s[i - 1] > gap) {
+      gap = s[i] - s[i - 1];
+      start = s[i];
+    }
+  }
+  return { start, span: Math.max(0, 1 - gap) };
+}
+
+/**
+ * Centre (normalized, x in 0..1) and zoom that fit all points into a w x h viewport with `pad`
+ * pixels of margin. Longitude uses the shortest wrapped extent, so points either side of the
+ * antimeridian fit around 180° rather than across the whole world.
+ */
 export function fitBounds(points: LatLon[], w: number, h: number, pad = 24): { center: Pt; zoom: number } {
   const ps = points.map(project);
-  const minX = Math.min(...ps.map((p) => p.x));
-  const maxX = Math.max(...ps.map((p) => p.x));
+  const { start, span } = wrappedSpanX(ps.map((p) => p.x));
   const minY = Math.min(...ps.map((p) => p.y));
   const maxY = Math.max(...ps.map((p) => p.y));
-  const center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
-  const spanX = Math.max(maxX - minX, 1e-9) * TILE;
+  const cx = start + span / 2;
+  const center = { x: cx >= 1 ? cx - 1 : cx, y: (minY + maxY) / 2 };
+  const spanX = Math.max(span, 1e-9) * TILE;
   const spanY = Math.max(maxY - minY, 1e-9) * TILE;
   const zoom = Math.log2(Math.min(Math.max(1, w - 2 * pad) / spanX, Math.max(1, h - 2 * pad) / spanY));
   return { center, zoom: clampZoom(zoom) };
