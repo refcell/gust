@@ -201,3 +201,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 9: Kimi review fixes, Lighthouse CI, landing demo poster (TBT), coordinate check in CI.
 - Loop 10: marine conditions, calendar export (iOS background fallback), DST-correct window times
   (213 unit, 90 e2e).
+- Docs audit: README, data/README, server/README checked against code (features, limits, scripts, workflows, spot ids).
