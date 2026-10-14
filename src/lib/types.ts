@@ -32,6 +32,8 @@ export interface Settings {
   forecastAlerts: boolean;
   /** Minimum consecutive good hours for a forecast window. */
   minWindowHours: number;
+  /** Spot ids that never send notifications. */
+  muted?: string[];
 }
 
 export const DEFAULT_SETTINGS: Settings = {

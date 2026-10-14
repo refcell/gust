@@ -61,7 +61,7 @@ export async function enableBackground(o: { settings: Settings; watched: Spot[];
             subscription: sub.toJSON(),
             settings: o.settings,
             location: o.loc,
-            spots: o.watched.map((s) => ({ id: s.id, name: s.name, lat: s.lat, lon: s.lon, sectors: s.sectors ?? [] })),
+            spots: o.watched.filter((s) => !(o.settings.muted ?? []).includes(s.id)).map((s) => ({ id: s.id, name: s.name, lat: s.lat, lon: s.lon, sectors: s.sectors ?? [] })),
             tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
           }),
         });
