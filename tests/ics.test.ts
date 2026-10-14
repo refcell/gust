@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildIcs, calendarWindows, escapeText, eventUid, foldLine, icsDate, type CalendarWindow } from '../src/lib/ics';
-import { localIsoToEpochInZone } from '../src/lib/time';
+import { buildIcs, calendarWindows, escapeText, eventUid, foldLine, icsDate, MAX_SEQUENCE, nextSequence, type CalendarWindow } from '../src/lib/ics';
+import { localIsoToEpoch } from '../src/lib/time';
 import { parseLocation } from '../src/lib/openmeteo';
 import { DEFAULT_SETTINGS, type Spot, type SpotWind, type WindSample } from '../src/lib/types';
 
@@ -9,7 +9,7 @@ const W = (time: string, speedKn: number, dirDeg = 270): WindSample => ({ time, 
 const spot: Spot = { id: 'test-beach', name: 'Test Beach, North; Bay', lat: 37.80512, lon: -122.46789, sectors: [[225, 315]] };
 
 function windOf(hourly: WindSample[], utcOffsetSeconds: number, timezone?: string, current = hourly[0].time): SpotWind {
-  const observedAt = localIsoToEpochInZone(current, timezone, utcOffsetSeconds);
+  const observedAt = localIsoToEpoch(current, utcOffsetSeconds);
   return { current: { ...hourly[0], time: current }, hourly, utcOffsetSeconds, timezone, fetchedAt: observedAt, observedAt };
 }
 
@@ -117,23 +117,25 @@ describe('calendarWindows', () => {
     const [w] = calendarWindows([{ spot, wind: fresh }], DEFAULT_SETTINGS, now + 2 * 3600_000);
     expect(icsDate(w.startMs)).toBe('20260601T180000Z');
   });
-  it('uses the IANA zone across a DST change (Europe/Berlin, 29 Mar 2026)', () => {
-    // Open-Meteo reports the offset at request time (+01:00); after 02:00 local the zone is +02:00.
-    const h = ['2026-03-28T23:00', '2026-03-29T00:00', '2026-03-29T01:00', '2026-03-29T03:00', '2026-03-29T04:00', '2026-03-29T05:00'].map((t) => W(t, 20));
-    const bw = windOf(h, 3600, 'Europe/Berlin', '2026-03-28T23:00');
-    const wins = calendarWindows([{ spot, wind: bw }], DEFAULT_SETTINGS, bw.observedAt);
-    expect(wins).toHaveLength(2); // the skipped 02:00 hour breaks the run
-    expect(icsDate(wins[0].startMs)).toBe('20260328T220000Z');
-    expect(icsDate(wins[0].endMs)).toBe('20260329T010000Z');
-    expect(icsDate(wins[1].startMs)).toBe('20260329T010000Z');
-    expect(icsDate(wins[1].endMs)).toBe('20260329T040000Z');
-    // Without the zone, the fixed offset is used (one hour off after the change).
-    const fixed = calendarWindows([{ spot, wind: { ...bw, timezone: undefined } }], DEFAULT_SETTINGS, bw.observedAt);
-    expect(icsDate(fixed[1].startMs)).toBe('20260329T020000Z');
+  it('uses the response\'s fixed offset across a DST change (Adelaide, 4 Oct 2026, +10:30)', () => {
+    // Open-Meteo keeps one offset for the whole series (verified against timeformat=unixtime):
+    // hours stay continuous through the change, so a 01:00-04:00 window is 3 h long.
+    const h = ['2026-10-04T00:00', '2026-10-04T01:00', '2026-10-04T02:00', '2026-10-04T03:00', '2026-10-04T04:00'].map((t, i) => W(t, i === 0 ? 5 : 20));
+    const aw = windOf(h, 37800, 'Australia/Adelaide');
+    const [w] = calendarWindows([{ spot, wind: aw }], DEFAULT_SETTINGS, aw.observedAt);
+    expect(icsDate(w.startMs)).toBe('20261003T143000Z');
+    expect(w.endMs - w.startMs).toBe(4 * 3600_000);
   });
-  it('fall back in New York keeps hours in UTC order', () => {
-    expect(icsDate(localIsoToEpochInZone('2026-11-01T00:30', 'America/New_York', -14400))).toBe('20261101T043000Z');
-    expect(icsDate(localIsoToEpochInZone('2026-11-01T03:00', 'America/New_York', -14400))).toBe('20261101T080000Z');
+  it('SEQUENCE strictly increases, survives same-minute exports and clock rollback, stays 32-bit', () => {
+    const t = Date.UTC(2026, 5, 1, 12);
+    const s1 = nextSequence(null, t);
+    const s2 = nextSequence(s1, t + 10_000);
+    const s3 = nextSequence(s2, t - 86_400_000);
+    expect(s2).toBeGreaterThan(s1);
+    expect(s3).toBeGreaterThan(s2);
+    expect(nextSequence(MAX_SEQUENCE, t)).toBe(MAX_SEQUENCE);
+    expect(nextSequence(Number.NaN, t)).toBe(Math.floor(t / 60_000));
+    expect(buildIcs([win], { now: t, sequence: 42 })).toContain('SEQUENCE:42');
   });
   it('parseLocation keeps the Open-Meteo timezone', () => {
     const loc = { utc_offset_seconds: 3600, timezone: 'Europe/Berlin', current: { time: '2026-03-28T23:00', wind_speed_10m: 20, wind_gusts_10m: 24, wind_direction_10m: 270 }, hourly: { time: [], wind_speed_10m: [], wind_gusts_10m: [], wind_direction_10m: [] } };

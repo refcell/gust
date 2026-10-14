@@ -48,7 +48,7 @@ Web apps get fewer background privileges than native apps. gust uses every path 
 | Background checks without a server | no (WebKit has no Periodic Background Sync) | yes, Periodic Background Sync, at the browser's discretion (typically a few times a day) | yes, Periodic Background Sync if installed |
 | Background checks with the push server | yes, Web Push (iOS 16.4+) | yes, Web Push | yes, Web Push |
 | Location in the background | no | no | no |
-| Calendar reminders for forecast windows (.ics export) | yes, Calendar alarms fire in the background | yes | yes |
+| Calendar reminders for forecast windows (.ics export) | yes, Calendar alarms fire in the background (installed-app handoff to Calendar not yet verified on a device) | yes | yes |
 
 - Notifications on iOS only work after installing to the Home Screen and are requested from a button tap, as WebKit requires.
 - Phones never give web apps location in the background. Background checks use the last location gust saw while open, plus your saved places. Save the places you ride.

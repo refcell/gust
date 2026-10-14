@@ -105,3 +105,14 @@ describe('marine', () => {
     expect(wetsuitHint(23)).toBe('boardshorts or lycra');
   });
 });
+
+describe('expired marine forecasts', () => {
+  it('currentIndex rejects times after the last hour ends', async () => {
+    const { currentIndex } = await import('../src/lib/marine');
+    const h = [{ at: 0 }, { at: 3600_000 }] as never;
+    expect(currentIndex(h, 3600_000 + 10)).toBe(1);
+    expect(currentIndex(h, 2 * 3600_000)).toBe(-1);
+    expect(currentIndex(h, 7 * 86_400_000)).toBe(-1);
+    expect(currentIndex(h, -1)).toBe(-1);
+  });
+});

@@ -17,7 +17,8 @@ export function loadMarine(key: string, lat: number, lon: number, now = Date.now
   if (pending) return pending;
   const p = (async () => {
     try {
-      const res = await fetch(marineUrl(lat, lon));
+      // Bounded: a hung request must not hold the in-flight slot (and block retries) forever.
+      const res = await fetch(marineUrl(lat, lon), { signal: AbortSignal.timeout(10_000) });
       // 4xx: the API has no marine grid here (treated like all-null data). 5xx/network: retry later.
       if (!res.ok && res.status >= 500) throw new Error(`marine ${res.status}`);
       const data = res.ok ? parseMarine(await res.json()) : null;

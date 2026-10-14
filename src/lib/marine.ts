@@ -80,13 +80,15 @@ export function parseMarine(json: unknown): MarineData | null {
   return any ? { utcOffsetSeconds: offset, hourly } : null;
 }
 
-/** Index of the hour containing `now` (last hour starting at or before now), or -1. */
+/** Index of the hour containing `now`, or -1 (before the series, or after its last hour ends: an
+ * expired forecast, e.g. an old cached response offline, must not look current). */
 export function currentIndex(hourly: readonly MarineHour[], now: number): number {
   let idx = -1;
   for (let i = 0; i < hourly.length; i++) {
     if (hourly[i].at <= now) idx = i;
     else break;
   }
+  if (idx >= 0 && now >= hourly[idx].at + 3600_000) return -1;
   return idx;
 }
 
