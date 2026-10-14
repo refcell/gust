@@ -1,0 +1,236 @@
+:root {
+  --bg: #fafaf9;
+  --fg: #111214;
+  --muted: #5f6368;
+  --line: #e4e4e2;
+  --accent: #0a7cff;
+  color-scheme: light dark;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0c0e;
+    --fg: #ececea;
+    --muted: #9aa0a6;
+    --line: #23252a;
+    --accent: #4da3ff;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.55;
+  font-size: 17px;
+}
+a {
+  color: var(--fg);
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+a:hover {
+  text-decoration-color: currentColor;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 16px;
+  top: 16px;
+}
+.nav,
+main,
+.foot {
+  max-width: 680px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: calc(24px + env(safe-area-inset-top));
+  padding-bottom: 24px;
+}
+.nav nav {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+}
+.nav nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.nav nav a:hover {
+  color: var(--fg);
+}
+.mark {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.intro {
+  padding: 56px 0 40px;
+}
+h1 {
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  margin: 0 0 20px;
+  max-width: 16em;
+}
+.lede {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin: 0 0 32px;
+  max-width: 34em;
+}
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.primary {
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  background: var(--fg);
+  color: var(--bg);
+  border: 0;
+  border-radius: 10px;
+  padding: 14px 28px;
+  cursor: pointer;
+}
+.primary:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.secondary {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.note {
+  color: var(--muted);
+  font-size: 0.92rem;
+  min-height: 1.4em;
+  margin: 16px 0 0;
+}
+.demo {
+  padding: 24px 0 48px;
+  text-align: center;
+}
+.phone {
+  width: 320px;
+  max-width: 100%;
+  height: 640px;
+  margin: 0 auto;
+  border: 10px solid var(--fg);
+  border-radius: 44px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.phone iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.caption {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 12px;
+}
+h2 {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+.how,
+.qr {
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+.how p {
+  margin: 0 0 16px;
+  max-width: 36em;
+}
+.qr-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.qr-code {
+  width: 160px;
+  height: 160px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 8px;
+  color: #000;
+}
+.qr-code svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.url {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.foot {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  padding-bottom: calc(48px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.foot a {
+  color: var(--muted);
+}
+dialog {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg);
+  color: var(--fg);
+  max-width: 420px;
+  width: calc(100% - 32px);
+  padding: 24px;
+}
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+.steps {
+  padding-left: 20px;
+  margin: 0 0 16px;
+}
+.steps li {
+  margin: 0 0 14px;
+}
+.steps li span {
+  display: inline;
+}
+.steps svg {
+  display: block;
+  margin-top: 6px;
+  color: var(--accent);
+}
+dialog .primary {
+  width: 100%;
+}

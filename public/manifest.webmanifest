@@ -1,0 +1,55 @@
+{
+  "id": "/gust/app/",
+  "name": "gust \u2014 wind alerts for kiteboarding",
+  "short_name": "gust",
+  "description": "Kite spots near you, scored from live and forecast wind. Alerts when the wind is on.",
+  "start_url": "/gust/app/?source=pwa",
+  "scope": "/gust/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0c0e",
+  "theme_color": "#0b0c0e",
+  "categories": [
+    "sports",
+    "weather",
+    "travel"
+  ],
+  "icons": [
+    {
+      "src": "/gust/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/gust/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/gust/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/gust/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nearby spots",
+      "url": "/gust/app/?source=shortcut",
+      "icons": [
+        {
+          "src": "/gust/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
