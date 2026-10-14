@@ -126,6 +126,16 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Playwright `reuseExistingServer: false`: a worker's leftover `vite preview` on :4173 silently
   served an old worktree build and failed 15 e2e tests; now a busy port fails loudly.
 
+- Lighthouse (mobile, `?demo=1`) reported CLS 0.384 on a loaded spot card twice; a real-browser
+  layout-shift observer under 4x CPU + slow-4G throttling records 0.001 (the "Updated" text). The
+  skeleton now mirrors group sections/headings anyway. Lighthouse's own Chrome launch then failed
+  on this machine ("Connection closed"); re-measure in CI later. Treat as lab-only for now.
+- Advisor (gpt-6.1-sol) review of loops 6-7: blockers (stale weather completions re-sending
+  unmuted settings; inferred ±100° sectors include cross-offshore; >60 watched spots rejected by
+  the server) and should-fix (refetch on scoring-only changes, OSM favourites lost when the dataset
+  changes, tile freshness per OSM policy, stale shore cache, antimeridian). Two fix lanes.
+- `PW_PORT` overrides the e2e port so parallel worktrees can run Playwright side by side.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
