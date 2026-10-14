@@ -90,12 +90,22 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - e2e also runs on WebKit with iPhone 15 emulation (`iphone` project) in CI — the closest automated
   stand-in for iOS Safari. Real-device acceptance remains the owner's step.
 
+- OSM shore inference: one Overpass bbox query per tile (new spots + 2 km, sides capped at 40 km,
+  fallback nearest 15 then shrink). Coastline + natural=water (untagged = lake) incl. multipolygon
+  outer rings; nearest shore a water=river polygon -> unknown. Spots outside the queried box are
+  cached unknown (14 d). Full geometry kept (trimming breaks ring closure).
+- First run: a Welcome card (Share location / Enable alerts / or add a place) replaces the empty
+  state; tab bar is an ARIA tablist (arrow/Home/End); "gust" is the h1.
+- Accessibility gate: `e2e/a11y.spec.ts` (axe) fails on serious/critical WCAG 2.1 A/AA issues on the
+  landing page and every app view, light and dark. Moderate "duplicate landmark" from the embedded
+  demo iframe accepted.
+- CI runs Chrome installability + manifest checks (CDP) for landing and app.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
    notification; Android Chrome install + APK sideload. Everything else is verified in CI/live.
 2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
-3. Better direction inference for unknown-sector OSM spots (bbox shore query per tile).
 4. Per-spot favourites / mute; share links (?spot=id) scroll into view.
 5. Verify lower-confidence spot coordinates against OSM coastline data (scripted check).
 
@@ -112,3 +122,5 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   server cron delivery-aware dedup, second advisor gate passed.
 - Loop 4: per-spot mute, deep-link scroll, fetch auto-retry, 18 inland coordinates corrected
   (elevation re-check queued after the Open-Meteo hourly limit resets), WebKit iPhone e2e in CI.
+- Loop 5: Chrome installability e2e, OSM bbox shore inference with lakes/rivers, Welcome card,
+  ARIA tabs, axe audit (57 e2e passing, 124 unit).
