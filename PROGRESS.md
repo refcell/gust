@@ -150,6 +150,17 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   symlinked node_modules).
 - `PW_PORT` overrides the e2e port so parallel worktrees can run Playwright side by side.
 
+- Lighthouse runs in CI after each deploy (report-only, reports uploaded): live app 100/100/100/100
+  with CLS 0.001, so the local 0.384 was a local artifact. Landing scored 90-93, all from the
+  embedded demo booting (TBT 340 ms). The landing now shows a still poster (light/dark JPEGs from
+  `scripts/poster.mjs`) and boots the live app only when the phone frame is >= 60% visible or on
+  "Start live demo"; no-JS gets a link.
+- Kimi K3 review of loop 8: no must-fix. Fixed: favourite snapshots refresh when the dataset entry
+  changes (safety corrections win) and stay storage-backed; cached tiles drop wire-encoding headers.
+  Accepted: "latest value" refs written during render (Preact sync render; documented pattern).
+- Spot coordinate check runs on the runner (retries 429/network); vietnam-hon-rom moved off inland
+  hills to an approximate beach position; known inland lake spots skipped by name.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
@@ -177,3 +188,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   44 server, 66 e2e).
 - Loop 7: map clustering, favourites (watched beyond radius), +41 spots, e2e server isolation.
 - Loop 8: advisor blockers + should-fix all addressed (186 unit, 44 server, 72 e2e).
+- Loop 9: Kimi review fixes, Lighthouse CI, landing demo poster (TBT), coordinate check in CI.

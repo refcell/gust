@@ -45,16 +45,27 @@ export function toggleFavoriteSnapshot(snapshots: readonly Spot[], spot: Spot, f
  * snapshots existed). Returns null when nothing is missing.
  */
 export function backfillFavoriteSnapshots(snapshots: readonly Spot[], spots: readonly Spot[], favorites: readonly string[] | undefined): Spot[] | null {
-  const have = new Set(snapshots.map((s) => s.id));
-  const missing = new Set((favorites ?? []).filter((id) => !have.has(id)));
-  if (!missing.size) return null;
-  const add: Spot[] = [];
-  for (const s of spots) {
-    if (!missing.has(s.id)) continue;
-    add.push(s);
-    missing.delete(s.id);
+  // Add snapshots for favourites that lack one, and refresh snapshots whose spot is still in the
+  // dataset but changed (e.g. a dataset-safety correction), so a later removal never revives
+  // stale sectors.
+  const fav = new Set(favorites ?? []);
+  const current = new Map(spots.filter((s) => fav.has(s.id)).map((s) => [s.id, s]));
+  let changed = false;
+  const next = snapshots.map((snap) => {
+    const cur = current.get(snap.id);
+    if (cur && JSON.stringify(cur) !== JSON.stringify(snap)) {
+      changed = true;
+      return cur;
+    }
+    return snap;
+  });
+  const have = new Set(next.map((s) => s.id));
+  for (const [id, cur] of current) {
+    if (have.has(id)) continue;
+    next.push(cur);
+    changed = true;
   }
-  return add.length ? [...snapshots, ...add] : null;
+  return changed ? next : null;
 }
 
 /**

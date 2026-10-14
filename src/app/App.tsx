@@ -133,12 +133,14 @@ export function App() {
   }, [demo, locate]);
 
   const allSpots = useMemo(
-    () => (curated ? withFavoriteSnapshots([...curated, ...osm], settings.favorites, favSpots) : null),
+    // Snapshots are read from storage (kept current by the effect below); `favSpots` only bumps
+    // the memo when a favourite is toggled.
+    () => (curated ? withFavoriteSnapshots([...curated, ...osm], settings.favorites, loadFavSpots()) : null),
     [curated, osm, settings.favorites, favSpots],
   );
 
-  // Favourites made before snapshots existed: save their snapshot once the spot is loaded
-  // (storage only; `allSpots` already contains them).
+  // Keep stored favourite snapshots current: add missing ones and refresh changed ones while the
+  // spot is loaded (storage only; `allSpots` reads storage when the dataset changes).
   useEffect(() => {
     if (!allSpots) return;
     const next = backfillFavoriteSnapshots(loadFavSpots(), allSpots, settings.favorites);

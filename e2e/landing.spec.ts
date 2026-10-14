@@ -6,9 +6,27 @@ test('landing page has install button, demo, and links', async ({ page }) => {
   await page.goto('/gust/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('wind is on');
   await expect(page.getByRole('button', { name: 'Install gust' })).toBeVisible();
-  await expect(page.locator('iframe[title^="gust app"]')).toBeAttached();
+  // Demo: a still poster first; the live app boots on Start (or when the frame is mostly in view).
+  await expect(page.locator('.phone .poster img')).toBeVisible();
   await expect(page.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/refcell/gust');
   await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/gust/manifest.webmanifest');
+});
+
+test('the live demo boots when scrolled into view', async ({ page }) => {
+  await mockNetwork(page);
+  await page.goto('/gust/');
+  await page.locator('.demo .phone').evaluate((el) => el.scrollIntoView({ block: 'center' }));
+  await expect(page.frameLocator('iframe[title^="gust app"]').getByText(/Updated \d/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Start live demo' })).toBeHidden();
+});
+
+test('Start live demo boots the app on demand', async ({ page }) => {
+  // Short viewport: the frame can never be 60% visible, so only the button starts it.
+  await page.setViewportSize({ width: 400, height: 300 });
+  await mockNetwork(page);
+  await page.goto('/gust/');
+  await page.getByRole('button', { name: 'Start live demo' }).click();
+  await expect(page.frameLocator('iframe[title^="gust app"]').getByText(/Updated \d/)).toBeVisible();
 });
 
 test('desktop shows a QR code', async ({ page, isMobile }) => {

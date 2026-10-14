@@ -64,6 +64,9 @@ async function tileCacheFirst(event: FetchEvent): Promise<Response> {
   if (!res.ok) return hit ?? res;
   const headers = new Headers(res.headers);
   headers.set(FETCHED_HEADER, String(Date.now()));
+  // The blob below is the decoded body: drop headers that describe the wire encoding.
+  headers.delete('content-encoding');
+  headers.delete('content-length');
   const copy = new Response(await res.clone().blob(), { status: res.status, statusText: res.statusText, headers });
   event.waitUntil(
     (async () => {
