@@ -3,6 +3,7 @@
 import { chromium } from '@playwright/test';
 import { spawn, execFileSync } from 'node:child_process';
 import { mkdirSync, readdirSync, rmSync, renameSync } from 'node:fs';
+import { marineBody } from '../e2e/mocks.ts';
 
 const FFMPEG = process.env.FFMPEG ?? (process.platform === 'darwin' ? '/opt/homebrew/bin/ffmpeg' : 'ffmpeg');
 const PORT = 4179;
@@ -68,6 +69,7 @@ const ctx = await browser.newContext({
   recordVideo: { dir: tmp, size: { width: 390, height: 844 } },
 });
 await ctx.route('https://api.open-meteo.com/**', (r) => r.fulfill({ contentType: 'application/json', body: JSON.stringify(body(r.request().url())) }));
+await ctx.route('https://marine-api.open-meteo.com/**', (r) => r.fulfill({ contentType: 'application/json', body: JSON.stringify(marineBody()) }));
 await ctx.route(/overpass/, (r) => r.fulfill({ contentType: 'application/json', body: '{"elements":[]}' }));
 const page = await ctx.newPage();
 const pause = (ms) => page.waitForTimeout(ms);
