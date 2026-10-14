@@ -33,7 +33,7 @@ jobs:
         env:
           VITE_PUSH_API: ${{ vars.VITE_PUSH_API }}
           VITE_VAPID_PUBLIC_KEY: ${{ vars.VITE_VAPID_PUBLIC_KEY }}
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps chromium webkit
       - run: pnpm e2e
       - uses: actions/upload-artifact@v4
         if: failure()
