@@ -120,3 +120,48 @@ test.describe('first run', () => {
     await expect(spots).toBeFocused();
   });
 });
+
+test.describe('calendar export', () => {
+  test.beforeEach(async ({ page, context }) => {
+    await mockNetwork(page);
+    await context.grantPermissions(['geolocation']);
+    await context.setGeolocation({ latitude: 37.8, longitude: -122.45 });
+  });
+
+  test('downloads an .ics with the upcoming good windows', async ({ page }) => {
+    await page.goto('/gust/app/');
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    await page.getByRole('tab', { name: 'Alerts' }).click();
+    const button = page.getByRole('button', { name: 'Add good windows to calendar' });
+    await expect(button).toBeEnabled();
+    await expect(page.getByText(/re-export to refresh/)).toBeVisible();
+    const [download] = await Promise.all([page.waitForEvent('download'), button.click()]);
+    expect(download.suggestedFilename()).toBe('gust-windows.ics');
+    const path = await download.path();
+    const { readFile } = await import('node:fs/promises');
+    const raw = await readFile(path, 'utf8');
+    expect(raw).toContain('\r\n');
+    expect(raw.replace(/\r\n/g, '')).not.toContain('\n');
+    const ics = raw.replace(/\r\n /g, '');
+    expect(ics).toMatch(/^BEGIN:VCALENDAR\r\n/);
+    expect(ics).toContain('SUMMARY:Wind on: Crissy Field (East Beach) (22 kn)');
+    expect(ics).toMatch(/DTSTART:\d{8}T\d{6}Z\r\n/);
+    expect(ics).toMatch(/DTEND:\d{8}T\d{6}Z\r\n/);
+    expect(ics).toMatch(/UID:crissy-field-\d{8}T\d{6}Z@gust\.refcell\.github\.io/);
+    expect(ics).toContain('https://refcell.github.io/gust/app/?spot=crissy-field');
+    expect(ics).toMatch(/GEO:-?\d+\.\d+;-?\d+\.\d+/);
+    expect(ics).toContain('gusts to 27 kn\\, from W (270°)');
+    expect(ics).toMatch(/BEGIN:VALARM\r\nACTION:DISPLAY\r\n[^\r]+\r\nTRIGGER:-PT60M\r\nEND:VALARM/);
+    // Mock wind is good 11:00-18:00 local (UTC-7) every day: 18:00Z-02:00Z.
+    expect(ics).toMatch(/DTSTART:\d{8}T180000Z/);
+  });
+
+  test('disables the button when there are no good windows', async ({ page }) => {
+    // The mock's good runs last 8 hours; require 12.
+    await page.addInitScript(() => localStorage.setItem('gust.settings', JSON.stringify({ minWindowHours: 12 })));
+    await page.goto('/gust/app/');
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    await page.getByRole('tab', { name: 'Alerts' }).click();
+    await expect(page.getByRole('button', { name: 'No good windows in the next 48 h' })).toBeDisabled();
+  });
+});

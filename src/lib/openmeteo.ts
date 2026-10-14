@@ -22,6 +22,7 @@ export function forecastUrl(points: readonly LatLon[], days = 3): string {
 
 interface OMLocation {
   utc_offset_seconds: number;
+  timezone?: string;
   current?: { time: string; wind_speed_10m: number; wind_gusts_10m: number; wind_direction_10m: number };
   hourly?: { time: string[]; wind_speed_10m: (number | null)[]; wind_gusts_10m: (number | null)[]; wind_direction_10m: (number | null)[] };
 }
@@ -56,6 +57,7 @@ export function parseLocation(loc: OMLocation, fetchedAt = Date.now()): SpotWind
     current: { time: c.time, speedKn: c.wind_speed_10m, gustKn: c.wind_gusts_10m, dirDeg: c.wind_direction_10m },
     hourly,
     utcOffsetSeconds: offset,
+    ...(typeof loc.timezone === 'string' && loc.timezone ? { timezone: loc.timezone } : {}),
     fetchedAt,
     observedAt: localIsoToEpoch(c.time, offset),
   };
