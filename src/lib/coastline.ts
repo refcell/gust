@@ -32,8 +32,12 @@ export interface ShoreInference {
 
 /** Spots farther than this from any shore get no inference. */
 export const MAX_SHORE_KM = 1.5;
-/** Half-width of the rideable sector around the seaward normal. */
-export const SECTOR_HALF_WIDTH = 100;
+/**
+ * Half-width of the rideable sector around the seaward normal. 90° = side-shore at most: inferred
+ * orientation is approximate, so cross-offshore is never included (the scorer's marginal band
+ * already adds MARGINAL_DEG beyond this, capped at "ok").
+ */
+export const SECTOR_HALF_WIDTH = 90;
 /** Ignore water polygons smaller than this (ponds, pools), km². */
 export const MIN_WATER_AREA_KM2 = 0.5;
 
@@ -124,7 +128,7 @@ export function assembleRingsWithRest(ways: readonly LatLon[][]): { rings: LatLo
   return { rings, rest };
 }
 
-/** Rideable sector for a given seaward normal: [normal - 100, normal + 100], normalised. */
+/** Rideable sector for a given seaward normal: [normal - halfWidth, normal + halfWidth], normalised. */
 export function sectorsFromNormal(normalDeg: number, halfWidth = SECTOR_HALF_WIDTH): Sector[] {
   return [[normDeg(normalDeg - halfWidth), normDeg(normalDeg + halfWidth)]];
 }

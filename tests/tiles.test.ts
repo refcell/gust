@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clampZoom, fitBounds, fromPixel, metersPerPixel, normalize, project, toPixel, toTile, unproject, visibleTiles, worldSize, zoomAround, MAX_LAT } from '../src/lib/tiles';
+import { clampZoom, fitBounds, wrappedSpanX, fromPixel, metersPerPixel, normalize, project, toPixel, toTile, unproject, visibleTiles, worldSize, zoomAround, MAX_LAT } from '../src/lib/tiles';
 
 describe('tile math', () => {
   it('projects the origin to the centre of the world', () => {
@@ -90,5 +90,27 @@ describe('tile math', () => {
     expect(wrapped.map((t) => t.x).sort()).toEqual([0, 0, 7, 7]);
     // Fractional zoom scales tiles.
     expect(visibleTiles({ x: 0.5, y: 0.5 }, 3.4, 256, 256)[0].size).toBe(Math.round(256 * 2 ** 0.4));
+  });
+});
+
+describe('antimeridian fitting', () => {
+  it('fits spots at 179.9 and -179.9 centred near 180 at a close zoom', () => {
+    const { center, zoom } = fitBounds([{ lat: -17, lon: 179.9 }, { lat: -17.1, lon: -179.9 }], 400, 400, 20);
+    expect(Math.min(center.x, 1 - center.x)).toBeLessThan(1e-6);
+    expect(Math.abs(unproject(center).lon)).toBeCloseTo(180, 4);
+    expect(zoom).toBeGreaterThan(9);
+  });
+  it('handles a fit box whose edge passes 180 (origin near the dateline)', () => {
+    const { center } = fitBounds([{ lat: 1, lon: 179.5 }, { lat: -1, lon: 180.5 }], 400, 400);
+    expect(center.x).toBeGreaterThanOrEqual(0);
+    expect(center.x).toBeLessThan(1);
+    expect(Math.abs(unproject(center).lon)).toBeCloseTo(180, 4);
+  });
+  it('wrappedSpanX picks the shortest extent and does not wrap ordinary spans', () => {
+    expect(wrappedSpanX([0.2, 0.4])).toEqual({ start: 0.2, span: expect.closeTo(0.2) as number });
+    const w = wrappedSpanX([0.95, 0.05]);
+    expect(w.start).toBe(0.95);
+    expect(w.span).toBeCloseTo(0.1);
+    expect(wrappedSpanX([0.5])).toEqual({ start: 0.5, span: 0 });
   });
 });

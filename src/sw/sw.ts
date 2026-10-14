@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 import { notificationOptions, runCheck } from '../lib/check';
+import { FETCHED_HEADER, isTileFresh } from '../lib/tilecache';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -42,23 +43,36 @@ async function networkFirst(req: Request, cacheName: string): Promise<Response> 
   }
 }
 
-/** Cache-first (stale is fine for map tiles); evicts the oldest entries above TILE_MAX. */
+/**
+ * OSM tiles: cache-first while fresh (Cache-Control max-age / Expires, else 7 days; see
+ * lib/tilecache.ts). Stale tiles are revalidated from the network, and the stale copy is served
+ * when offline or on error. Eviction is FIFO by (re)fetch time: fresh hits are not re-put (that
+ * would copy the body on every hit), refetches move the tile to the end. Capped at TILE_MAX.
+ */
 async function tileCacheFirst(event: FetchEvent): Promise<Response> {
   const req = event.request;
   const cache = await caches.open(TILE_CACHE);
   const hit = await cache.match(req);
-  if (hit) return hit;
-  const res = await fetch(req);
-  if (res.ok) {
-    const copy = res.clone();
-    event.waitUntil(
-      (async () => {
-        await cache.put(req, copy);
-        const keys = await cache.keys();
-        for (const k of keys.slice(0, Math.max(0, keys.length - TILE_MAX))) await cache.delete(k);
-      })(),
-    );
+  if (hit && isTileFresh(hit.headers, Date.now())) return hit;
+  let res: Response;
+  try {
+    res = await fetch(req);
+  } catch (e) {
+    if (hit) return hit;
+    throw e;
   }
+  if (!res.ok) return hit ?? res;
+  const headers = new Headers(res.headers);
+  headers.set(FETCHED_HEADER, String(Date.now()));
+  const copy = new Response(await res.clone().blob(), { status: res.status, statusText: res.statusText, headers });
+  event.waitUntil(
+    (async () => {
+      await cache.delete(req);
+      await cache.put(req, copy);
+      const keys = await cache.keys();
+      for (const k of keys.slice(0, Math.max(0, keys.length - TILE_MAX))) await cache.delete(k);
+    })(),
+  );
   return res;
 }
 

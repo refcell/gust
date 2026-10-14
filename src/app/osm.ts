@@ -9,11 +9,17 @@ import type { Spot } from '../lib/types';
 type ShoreMap = Record<string, { normal: number; sectors: Sector[] } | null>;
 
 const DEDUPE_KM = 1.5;
+/**
+ * Bump when shore inference changes (v2: lake-island fix + ±90° inferred sectors) so derived
+ * sectors cached by older versions are ignored and recomputed.
+ */
+export const SHORE_CACHE_VERSION = 2;
+export const shoreCacheKey = (tileKey: string) => `shore:v${SHORE_CACHE_VERSION}:${tileKey}`;
 const inflight = new Map<string, Promise<Spot[]>>();
 
 /** Seaward normals for `spots`, cached per tile. Spots missing from the result are unknown. */
 async function shoreFor(tileKey: string, spots: OsmKiteSpot[], deps?: OverpassDeps): Promise<ShoreMap> {
-  const key = `shore:${tileKey}`;
+  const key = shoreCacheKey(tileKey);
   const hit = cacheGet<ShoreMap>(key, deps);
   if (hit) return hit.ok ? hit.value : {};
   // One bbox query around the tile's new spots (nearest first; capped, see planShoreQuery).
