@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? 'github' : 'list',
   use: { baseURL: `http://localhost:${PORT}`, trace: 'retain-on-failure', serviceWorkers: 'block' },
-  webServer: { command: `pnpm preview --port ${PORT} --strictPort`, url: `http://localhost:${PORT}/gust/`, reuseExistingServer: false },
+  webServer: { command: `./node_modules/.bin/vite preview --port ${PORT} --strictPort`, url: `http://localhost:${PORT}/gust/`, reuseExistingServer: false },
   projects: [
     { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /pwa\.spec/ },
     { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: /pwa\.spec/ },
