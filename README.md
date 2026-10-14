@@ -15,7 +15,7 @@ https://github.com/refcell/gust/raw/main/assets/demo.mp4
 Open **https://refcell.github.io/gust/** on your phone.
 
 - **iPhone (iOS 16.4+):** open it in Safari, tap **Install gust**, then follow the sheet: Share, Add to Home Screen, Add. Open gust from the Home Screen and allow location and notifications. Chrome and Edge on iOS 16.4+ can also add to the Home Screen from their share menu. In-app browsers (Instagram, Facebook, TikTok, ...) cannot install; open the page in Safari.
-- **Android:** open it in Chrome and tap **Install gust** (or Install app from the browser menu). An APK is also attached to the [latest release](https://github.com/refcell/gust/releases/latest) for sideloading.
+- **Android:** open it in Chrome and tap **Install gust** (or Install app from the browser menu). An APK for sideloading is attached to the [apk-latest release](https://github.com/refcell/gust/releases/tag/apk-latest) ([direct download](https://github.com/refcell/gust/releases/download/apk-latest/app-release-signed.apk)).
 - **Desktop:** the landing page shows a QR code that opens the site on your phone. Chrome and Edge can also install it as a desktop app.
 
 No App Store and no account. Settings and saved places stay on the device.
