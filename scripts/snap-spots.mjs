@@ -4,8 +4,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const ids = process.argv.slice(2);
 const spots = JSON.parse(readFileSync('data/spots.json', 'utf8'));
-const STEP_M = 200;
-const N = 10; // grid half-width in steps (~2 km)
+const STEP_M = 250;
+const N = 12; // grid half-width in steps (~3 km)
 
 async function elevations(points) {
   const out = [];
@@ -35,8 +35,18 @@ for (const id of ids) {
   const grid = [];
   for (let y = -N; y <= N; y++) for (let x = -N; x <= N; x++) grid.push({ lat: s.lat + y * dLat, lon: s.lon + x * dLon, d: Math.hypot(x, y) });
   const el = await elevations(grid);
-  // Nearest low point that has higher ground next to it (a shoreline, not open water far out).
-  const low = grid.map((g, i) => ({ ...g, e: el[i] })).filter((g) => g.e <= 5 && g.e >= 0.5).sort((a, b) => a.d - b.d)[0];
+  // Nearest low point (0.5-5 m) with open water (elevation 0) in an adjacent cell: the shoreline.
+  const W = 2 * N + 1;
+  const cells = grid.map((g, i) => ({ ...g, e: el[i], i }));
+  const seaNext = (i) => {
+    const y = Math.floor(i / W), x = i % W;
+    for (const [dy, dx] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const yy = y + dy, xx = x + dx;
+      if (yy >= 0 && yy < W && xx >= 0 && xx < W && el[yy * W + xx] <= 0) return true;
+    }
+    return false;
+  };
+  const low = cells.filter((g) => g.e <= 5 && g.e >= 0.5 && seaNext(g.i)).sort((a, b) => a.d - b.d)[0];
   if (!low) {
     console.log(`skip ${id}: no shore point found`);
     continue;
