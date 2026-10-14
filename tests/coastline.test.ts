@@ -97,4 +97,37 @@ describe('inferShore', () => {
     const farRiver: ShoreFeature = { kind: 'river', points: [at(1000, -3000), at(1000, 3000)] };
     expect(inferShore(spot, [farRiver, sea])!.normalDeg).toBeCloseTo(180, 3);
   });
+
+  describe('lake islands (multipolygon inner rings)', () => {
+    // 6 km x 6 km lake whose west bank is 1.5 km west of the spot; a 1 km x 1 km island whose
+    // west shore is 50 m west of the spot, so the spot sits ON the island near its west shore.
+    const lake = [at(-3000, -1500), at(-3000, 4500), at(3000, 4500), at(3000, -1500), at(-3000, -1500)];
+    const island = [at(-500, -50), at(-500, 950), at(500, 950), at(500, -50), at(-500, -50)];
+
+    it('a spot on the west shore of an island faces west (water outside the island), either winding', () => {
+      for (const ring of [island, [...island].reverse()]) {
+        const r = inferShore(spot, [
+          { kind: 'water', points: lake },
+          { kind: 'island', points: ring },
+        ]);
+        expect(r).not.toBeNull();
+        expect(r!.normalDeg).toBeCloseTo(270, 3);
+        expect(inSector(90, r!.sectors[0])).toBe(false); // east wind blows off the island: offshore
+        expect(inSector(270, r!.sectors[0])).toBe(true);
+      }
+    });
+
+    it('without the island the farther mainland bank would mislead (regression guard)', () => {
+      // Mainland west bank is 1.45 km away and faces east; that must never apply to an island spot.
+      const r = inferShore(spot, [{ kind: 'water', points: lake }]);
+      expect(r!.normalDeg).toBeCloseTo(90, 3);
+    });
+
+    it('a nearer unclosed or ambiguous boundary blocks inference from a farther one', () => {
+      const lakeOnly: ShoreFeature = { kind: 'water', points: lake };
+      expect(inferShore(spot, [lakeOnly, { kind: 'ambiguous', points: [at(-500, -50), at(500, -50)] }])).toBeNull();
+      expect(inferShore(spot, [lakeOnly, { kind: 'water', points: [at(-500, -50), at(500, -50)] }])).toBeNull();
+      expect(inferShore(spot, [lakeOnly, { kind: 'island', points: [at(-500, -50), at(500, -50)] }])).toBeNull();
+    });
+  });
 });
