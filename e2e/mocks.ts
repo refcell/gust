@@ -41,7 +41,11 @@ export function openMeteoBody(url: string) {
   return lats.length > 1 ? lats.map((_, i) => loc(i)) : loc(0);
 }
 
+/** 1x1 transparent PNG served for every OpenStreetMap tile. */
+export const PNG_1X1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
+
 export async function mockNetwork(page: Page) {
+  await page.route('https://tile.openstreetmap.org/**', (route) => route.fulfill({ status: 200, contentType: 'image/png', headers: { 'access-control-allow-origin': '*' }, body: PNG_1X1 }));
   await page.route('https://api.open-meteo.com/**', (route: Route) =>
     route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(openMeteoBody(route.request().url())) }),
   );
