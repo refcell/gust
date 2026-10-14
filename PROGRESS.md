@@ -101,12 +101,24 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   demo iframe accepted.
 - CI runs Chrome installability + manifest checks (CDP) for landing and app.
 
+- Map view: List | Map toggle (persisted `gust.spotsMode`); dependency-free slippy map in a lazy
+  chunk (3.1 kB gzip) on OSM raster tiles with attribution; markers are buttons with rating letters
+  + full aria-labels; SW runtime cache `gust-tiles` (cache-first, 200 entries, CORS so no opaque
+  responses). Marker clustering is a later improvement.
+- +59 spots (646 total) favouring confidence over count; uncertain orientation -> sectors [].
+  8 BC spots corrected to country CA.
+- Advisor (gpt-6.1-sol) review of loops 4-5: blocker (lake-island shore inference), should-fix
+  (per-alert cron rollback, mute sync independent of weather fetch, axe gate failing open). Axe
+  gate now a static import (fails closed); the other three are in a fix lane.
+- Session reloads stop async workflows (not resumable): relaunch the same workflow; bulk scripts
+  that rewrite data/spots.json must not run concurrently with merges.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
    notification; Android Chrome install + APK sideload. Everything else is verified in CI/live.
 2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
-4. Per-spot favourites / mute; share links (?spot=id) scroll into view.
+4. Map marker clustering; favourites.
 5. Verify lower-confidence spot coordinates against OSM coastline data (scripted check).
 
 ## Log
@@ -124,3 +136,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   (elevation re-check queued after the Open-Meteo hourly limit resets), WebKit iPhone e2e in CI.
 - Loop 5: Chrome installability e2e, OSM bbox shore inference with lakes/rivers, Welcome card,
   ARIA tabs, axe audit (57 e2e passing, 124 unit).
+- Loop 6: map view, +59 spots, BC country fix, axe fail-closed, advisor review (fixes in progress).
