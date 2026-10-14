@@ -5,6 +5,9 @@ declare const self: ServiceWorkerGlobalScope;
 
 const CACHE = `gust-${__SW_VERSION__}`;
 const DATA_CACHE = 'gust-data';
+/** Runtime cache for OpenStreetMap tiles (never precached), capped to TILE_MAX entries. */
+const TILE_CACHE = 'gust-tiles';
+const TILE_MAX = 200;
 const ICONS = ['icon-192.png', 'icon-512.png', 'badge-96.png', 'apple-touch-icon.png', 'icon.svg'].map((f) => __BASE__ + 'icons/' + f);
 const SHELL = [__BASE__, __BASE__ + 'app/', __BASE__ + 'manifest.webmanifest', ...ICONS, ...__PRECACHE__.filter((f) => !f.endsWith('.html'))];
 
@@ -20,7 +23,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     (async () => {
-      for (const k of await caches.keys()) if (k !== CACHE && k !== DATA_CACHE) await caches.delete(k);
+      for (const k of await caches.keys()) if (k !== CACHE && k !== DATA_CACHE && k !== TILE_CACHE) await caches.delete(k);
       await self.clients.claim();
     })(),
   );
@@ -39,6 +42,26 @@ async function networkFirst(req: Request, cacheName: string): Promise<Response> 
   }
 }
 
+/** Cache-first (stale is fine for map tiles); evicts the oldest entries above TILE_MAX. */
+async function tileCacheFirst(event: FetchEvent): Promise<Response> {
+  const req = event.request;
+  const cache = await caches.open(TILE_CACHE);
+  const hit = await cache.match(req);
+  if (hit) return hit;
+  const res = await fetch(req);
+  if (res.ok) {
+    const copy = res.clone();
+    event.waitUntil(
+      (async () => {
+        await cache.put(req, copy);
+        const keys = await cache.keys();
+        for (const k of keys.slice(0, Math.max(0, keys.length - TILE_MAX))) await cache.delete(k);
+      })(),
+    );
+  }
+  return res;
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -46,6 +69,10 @@ self.addEventListener('fetch', (event) => {
 
   if (url.hostname === 'api.open-meteo.com' || url.hostname.includes('overpass')) {
     event.respondWith(networkFirst(req, DATA_CACHE));
+    return;
+  }
+  if (url.hostname === 'tile.openstreetmap.org') {
+    event.respondWith(tileCacheFirst(event));
     return;
   }
   if (url.origin !== self.location.origin || !url.pathname.startsWith(__BASE__)) return;

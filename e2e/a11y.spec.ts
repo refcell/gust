@@ -62,6 +62,13 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await expect(page.getByRole('img', { name: /Wind for the next 48 hours/ })).toBeVisible();
       await audit(page, 'spots (expanded)');
 
+      await page.getByRole('button', { name: 'Map', exact: true }).click();
+      for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Zoom in' }).click();
+      await page.getByRole('button', { name: /^Crissy Field[^,]*, / }).click();
+      await expect(page.getByRole('button', { name: 'Open details' })).toBeVisible();
+      await audit(page, 'spots map (selected)');
+      await page.getByRole('button', { name: 'List', exact: true }).click();
+
       for (const name of ['Settings', 'Alerts', 'Places']) {
         await page.getByRole('tab', { name }).click();
         await expect(page.getByRole('heading', { level: 2, name })).toBeVisible();
