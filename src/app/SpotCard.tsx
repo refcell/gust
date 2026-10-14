@@ -15,7 +15,9 @@ interface Props {
 
 export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle }: Props) {
   const sc = wind ? scoreWind(wind.current, spot.sectors, settings) : null;
-  const next = wind ? goodWindows(wind.hourly, spot.sectors, settings, wind.current.time.slice(0, 13) + ':00')[0] : undefined;
+  const nowHour = wind ? wind.current.time.slice(0, 13) + ':00' : '';
+  const next = wind ? goodWindows(wind.hourly, spot.sectors, settings, nowHour)[0] : undefined;
+  const ongoing = next && next.start <= nowHour;
   const detailId = `spot-${spot.id}`;
   return (
     <li class={`spot r-${sc?.rating ?? 'none'}`}>
@@ -29,27 +31,31 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle }: P
           </span>
           {next && (
             <span class="spot-next small">
-              Next good: {relativeDay(next.start, wind!.current.time)}, {next.hours}h
+              {ongoing && sc?.rating === 'good'
+                ? `Good until ${endHour(next.end)}`
+                : `Next good: ${relativeDay(next.start, wind!.current.time)}, ${next.hours}h`}
             </span>
           )}
         </span>
-        <span class="spot-wind">
-          {wind ? (
-            <>
-              <Arrow deg={wind.current.dirDeg} />
-              <span class="speed">
-                <strong>{formatSpeed(wind.current.speedKn, settings.unit, false)}</strong>
-                <span class="small muted">
-                  {' '}
-                  g{formatSpeed(wind.current.gustKn, settings.unit, false)}
+        <span class="spot-right">
+          <span class="spot-wind">
+            {wind ? (
+              <>
+                <Arrow deg={wind.current.dirDeg} />
+                <span class="speed">
+                  <strong>{formatSpeed(wind.current.speedKn, settings.unit, false)}</strong>
+                  <span class="small muted">
+                    {' '}
+                    g{formatSpeed(wind.current.gustKn, settings.unit, false)}
+                  </span>
                 </span>
-              </span>
-            </>
-          ) : (
-            <span class="muted small">–</span>
-          )}
+              </>
+            ) : (
+              <span class="muted small">–</span>
+            )}
+          </span>
+          {sc && <Badge rating={sc.rating} />}
         </span>
-        {sc && <Badge rating={sc.rating} />}
       </button>
       {open && (
         <div class="spot-detail" id={detailId}>
@@ -140,4 +146,10 @@ function Hourly({ wind, spot, settings }: { wind: SpotWind; spot: Spot; settings
 
 function weekday(iso: string): string {
   return new Date(iso.slice(0, 10) + 'T00:00:00Z').toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' });
+}
+
+/** The hour after the last good hour, e.g. "2026-06-01T17:00" -> "18:00". */
+function endHour(lastGood: string): string {
+  const h = (Number(lastGood.slice(11, 13)) + 1) % 24;
+  return `${String(h).padStart(2, '0')}:00`;
 }
