@@ -1,5 +1,6 @@
 // Moves the given spots to the nearest point (within ~2.5 km) whose elevation is <= 5 m, i.e. onto the shore.
 // Usage: node scripts/snap-spots.mjs id1 id2 ...
+// Expensive: ~600 weighted Open-Meteo calls per spot (per-IP limits: minutely/hourly/daily). Use for 1-3 spots at a time.
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const ids = process.argv.slice(2);
