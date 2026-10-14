@@ -45,7 +45,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 
 - OSM: cache per 0.5° tile + radius bucket (25/50/100 km) for 14 days in localStorage; failures
   cached 1 h; max 6 Overpass calls per device per day; backoff 1 h after both endpoints fail.
-  Coastline inference: nearest segment within 1.5 km, seaward normal ±100°; closed lakes >= 0.5 km².
+  Coastline inference: nearest segment within 1.5 km, seaward normal ±90° (was ±100°; narrowed in loop 8 so inferred sectors never include cross-offshore); closed lakes >= 0.5 km².
   OSM spots carry a "check locally" note. Live check from a browser on the Pages origin got 504 from
   both public endpoints (overloaded), CORS fine; code degrades to curated-only.
 - Push backend: own RFC 8291 aes128gcm + VAPID ES256 on WebCrypto (no deps; matches the RFC test
@@ -133,7 +133,21 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Advisor (gpt-6.1-sol) review of loops 6-7: blockers (stale weather completions re-sending
   unmuted settings; inferred ±100° sectors include cross-offshore; >60 watched spots rejected by
   the server) and should-fix (refetch on scoring-only changes, OSM favourites lost when the dataset
-  changes, tile freshness per OSM policy, stale shore cache, antimeridian). Two fix lanes.
+  changes, tile freshness per OSM policy, stale shore cache, antimeridian). All fixed:
+  - Settings/watch list persist + push sync only from the settings path, with revisions (older
+    intents dropped before save/POST); refreshes never write settings.
+  - Push sends <= 60 spots (`src/lib/limits.ts`, shared with the server): favourites nearest first,
+    then nearest; Alerts panel says when background alerts cover N of M.
+  - Refresh reuses samples < 10 min old and fetches only missing spots; one refresh in flight plus
+    at most one follow-up. Refresh button forces all.
+  - Favourite spot snapshots (`gust.favSpots`) keep OSM favourites watched while travelling; with no
+    origin, favourites are still listed/watched ("distance unknown").
+  - Inferred sectors normal ±90°; shore cache key `shore:v2:` discards older inference.
+  - Tile cache honours max-age/Expires, else 7 days (fetch time in `x-gust-fetched`); stale tiles
+    revalidate with offline fallback; FIFO cap 200.
+  - Dateline-aware fitting (shortest wrapped span) and clustering (periodic x).
+- e2e webServer runs `./node_modules/.bin/vite preview` (pnpm refuses in worktrees with a
+  symlinked node_modules).
 - `PW_PORT` overrides the e2e port so parallel worktrees can run Playwright side by side.
 
 ## Next
@@ -162,3 +176,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 6: map view, +59 spots, BC country fix, axe fail-closed, advisor review fixed (144 unit,
   44 server, 66 e2e).
 - Loop 7: map clustering, favourites (watched beyond radius), +41 spots, e2e server isolation.
+- Loop 8: advisor blockers + should-fix all addressed (186 unit, 44 server, 72 e2e).
