@@ -1,0 +1,22 @@
+name = "gust-push"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# Create with: npx wrangler kv namespace create SUBS  -> paste the id below.
+[[kv_namespaces]]
+binding = "SUBS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[triggers]
+crons = ["*/30 * * * *"]
+
+[vars]
+APP_URL = "https://refcell.github.io/gust/app/"
+# Extra CORS origins (comma separated). refcell.github.io and http://localhost:* are always allowed.
+ALLOWED_ORIGINS = ""
+# Subscriber-local quiet hours ("start-end", 24h). Empty disables.
+QUIET_HOURS = "22-6"
+# Max push requests per cron run. Free plan allows 50 subrequests per invocation (Open-Meteo calls count too).
+MAX_PUSHES = "40"
+
+# Secrets (wrangler secret put ...): VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT
