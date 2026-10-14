@@ -1,3 +1,5 @@
+import { Arrow } from './Arrow';
+import { Marine } from './Marine';
 import { goodWindows, relativeDay } from '../lib/forecast';
 import { RATING_LABEL, scoreWind, type Rating } from '../lib/score';
 import { compass, describeSectors } from '../lib/sectors';
@@ -78,6 +80,7 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, mut
             </p>
           )}
           {wind && <Hourly wind={wind} spot={spot} settings={settings} />}
+          <Marine spot={spot} unit={settings.unit} />
           <dl class="facts small">
             <dt>Rideable from</dt>
             <dd>{spot.sectors?.length ? describeSectors(spot.sectors) : 'Unknown — scored on speed only'}</dd>
@@ -120,17 +123,6 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, mut
 
 export function Badge({ rating }: { rating: Rating }) {
   return <span class={`badge b-${rating}`}>{RATING_LABEL[rating]}</span>;
-}
-
-/** Arrow pointing where the wind blows to (the path points down = south at 0°, i.e. wind from north). */
-function Arrow({ deg }: { deg: number }) {
-  return (
-    <svg class="arrow" viewBox="0 0 24 24" width="22" height="22" role="img" aria-label={`from ${compass(deg)}`}>
-      <g transform={`rotate(${deg} 12 12)`}>
-        <path d="M12 3v16M6 13l6 7 6-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-      </g>
-    </svg>
-  );
 }
 
 function Hourly({ wind, spot, settings }: { wind: SpotWind; spot: Spot; settings: Settings }) {

@@ -41,6 +41,27 @@ export function openMeteoBody(url: string) {
   return lats.length > 1 ? lats.map((_, i) => loc(i)) : loc(0);
 }
 
+/**
+ * Deterministic Open-Meteo Marine response relative to the real clock: 1.2 m at 9 s from 270°,
+ * 16 °C water, and a tide with a 12 h period (high at 03/15, low at 09/21 local). `nulls` mimics an
+ * inland point (every series null).
+ */
+export function marineBody(nulls = false) {
+  const now = Date.now();
+  const day0 = Date.parse(localIso(now).slice(0, 10) + 'T00:00:00Z') - OFFSET * 1000;
+  const time: string[] = [];
+  const level: (number | null)[] = [];
+  for (let i = 0; i < 72; i++) {
+    time.push(localIso(day0 + i * 3600_000));
+    level.push(nulls ? null : Math.round(Math.cos(((i - 3) / 12) * 2 * Math.PI) * 100) / 100);
+  }
+  const fill = (v: number) => time.map(() => (nulls ? null : v));
+  return {
+    utc_offset_seconds: OFFSET,
+    hourly: { time, wave_height: fill(1.2), wave_period: fill(9), wave_direction: fill(270), sea_surface_temperature: fill(16), sea_level_height_msl: level },
+  };
+}
+
 /** 1x1 transparent PNG served for every OpenStreetMap tile. */
 export const PNG_1X1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
 
@@ -48,6 +69,9 @@ export async function mockNetwork(page: Page) {
   await page.route('https://tile.openstreetmap.org/**', (route) => route.fulfill({ status: 200, contentType: 'image/png', headers: { 'access-control-allow-origin': '*' }, body: PNG_1X1 }));
   await page.route('https://api.open-meteo.com/**', (route: Route) =>
     route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(openMeteoBody(route.request().url())) }),
+  );
+  await page.route('https://marine-api.open-meteo.com/**', (route: Route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(marineBody()) }),
   );
   await page.route('https://overpass-api.de/**', (route) => route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"elements":[]}' }));
   await page.route('https://overpass.kumi.systems/**', (route) => route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"elements":[]}' }));

@@ -774,3 +774,6 @@ input[type='search'] {
 .fav-btn {
   min-height: 44px;
 }
+.marine-arrow .arrow {
+  vertical-align: -3px;
+}

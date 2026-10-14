@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { mockNetwork } from './mocks';
+import { marineBody, mockNetwork } from './mocks';
 
 test.describe('app', () => {
   test.beforeEach(async ({ page, context }) => {
@@ -27,6 +27,36 @@ test.describe('app', () => {
     await expect(head).toHaveAttribute('aria-expanded', 'true');
     await expect(page.getByRole('img', { name: 'Wind for the next 48 hours' })).toBeVisible();
     await expect(page.getByText('Rideable from')).toBeVisible();
+  });
+
+  test('expanded spot shows waves, water temperature and tide (fetched lazily)', async ({ page }) => {
+    const marine: string[] = [];
+    page.on('request', (r) => {
+      if (r.url().startsWith('https://marine-api.open-meteo.com/')) marine.push(r.url());
+    });
+    await page.goto('/gust/app/');
+    await expect(page.getByText('Crissy Field')).toBeVisible();
+    expect(marine).toHaveLength(0);
+    await page.getByRole('button', { name: /Crissy Field/ }).click();
+    const box = page.getByLabel('Marine conditions');
+    await expect(box.getByText('1.2 m at 9 s from W')).toBeVisible();
+    await expect(box.getByText(/16 °C · 4\/3 mm \(rough guide\)/)).toBeVisible();
+    await expect(box.getByText(/^(Rising|Falling) · (high|low) \d\d:00$/)).toBeVisible();
+    expect(marine).toHaveLength(1);
+  });
+
+  test('marine data with only nulls (inland) shows nothing', async ({ page }) => {
+    await page.route('https://marine-api.open-meteo.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(marineBody(true)) }),
+    );
+    const done = page.waitForResponse((r) => r.url().startsWith('https://marine-api.open-meteo.com/'));
+    await page.goto('/gust/app/');
+    await page.getByRole('button', { name: /Crissy Field/ }).click();
+    await done;
+    await expect(page.getByText('Rideable from')).toBeVisible();
+    await expect(page.getByLabel('Marine conditions')).toHaveCount(0);
+    await expect(page.getByText('Water temp')).toHaveCount(0);
+    await expect(page.getByText('Tide', { exact: true })).toHaveCount(0);
   });
 
   test('changes units in settings', async ({ page }) => {
