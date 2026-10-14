@@ -99,4 +99,11 @@ describe('favourite snapshots', () => {
     expect(backfillFavoriteSnapshots([osmFav], [a], ['osm-1'])).toBeNull();
     expect(backfillFavoriteSnapshots([], [a], ['missing'])).toBeNull();
   });
+
+  it('refreshes a snapshot when the dataset entry changed (safety corrections win)', () => {
+    const old: Spot = { ...spot('x'), sectors: [[0, 200]] };
+    const fixed: Spot = { ...spot('x'), sectors: [[20, 160]] };
+    expect(backfillFavoriteSnapshots([old], [fixed], ['x'])).toEqual([fixed]);
+    expect(backfillFavoriteSnapshots([fixed], [fixed], ['x'])).toBeNull();
+  });
 });

@@ -77,3 +77,29 @@ if (!p.mobile) {
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   navigator.serviceWorker.register(__BASE__ + 'sw.js', { scope: __BASE__ }).catch(() => undefined);
 }
+
+// Live demo: show a still of the app first and boot the real app (in an iframe) only when the
+// frame is mostly in view or the visitor taps Start, so it does not compete with the landing page
+// for the main thread on first load.
+const phone = document.querySelector<HTMLElement>('.demo .phone');
+const startBtn = document.getElementById('demo-start') as HTMLButtonElement | null;
+if (phone && startBtn) {
+  let io: IntersectionObserver | null = null;
+  const start = (focus: boolean) => {
+    io?.disconnect();
+    if (phone.querySelector('iframe')) return;
+    const frame = document.createElement('iframe');
+    frame.src = '/gust/app/?demo=1';
+    frame.title = 'gust app, live demo with a fixed location';
+    phone.append(frame);
+    phone.classList.add('live');
+    startBtn.hidden = true;
+    if (focus) frame.focus();
+  };
+  startBtn.hidden = false;
+  startBtn.addEventListener('click', () => start(true));
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver((entries) => entries.some((e) => e.intersectionRatio >= 0.6) && start(false), { threshold: 0.6 });
+    io.observe(phone);
+  }
+}

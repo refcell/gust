@@ -41,7 +41,12 @@
 
       <section class="demo" aria-label="Live demo">
         <div class="phone">
-          <iframe src="/gust/app/?demo=1" title="gust app, live demo with a fixed location" loading="lazy"></iframe>
+          <picture class="poster">
+            <source srcset="/gust/demo-poster-dark.jpg" media="(prefers-color-scheme: dark)" />
+            <img src="/gust/demo-poster-light.jpg" width="300" height="620" alt="" decoding="async" fetchpriority="low" />
+          </picture>
+          <button id="demo-start" class="primary demo-start" type="button" hidden>Start live demo</button>
+          <noscript><a class="primary demo-start" href="/gust/app/?demo=1">Open the live demo</a></noscript>
         </div>
         <p class="caption">The real app, running live with a fixed location in San Francisco.</p>
       </section>
