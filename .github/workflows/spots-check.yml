@@ -1,0 +1,26 @@
+name: Spot coordinate check
+
+# Flags coastal spots whose coordinates sit well above sea level (probably inland), using the
+# Open-Meteo elevation API from the runner (its own rate-limit budget). Report only; never blocks.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-spots.mjs 15 | tee report.txt
+      - run: |
+          echo '### Spot coordinate check' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat report.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
