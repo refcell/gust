@@ -6,6 +6,7 @@ import { AlertsPanel } from './AlertsPanel';
 import { PlacesPanel } from './PlacesPanel';
 import { runCheck, K, notificationOptions } from '../lib/check';
 import { kvGet, kvSet } from '../lib/kv';
+import { fetchWind } from '../lib/openmeteo';
 import { nearbySpots, nearestSpots, type NearbySpot } from '../lib/spots';
 import { scoreWind } from '../lib/score';
 import { loadLastLocation, loadPlaces, loadSettings, saveLastLocation, savePlaces, saveSettings } from '../lib/settings';
@@ -150,22 +151,31 @@ export function App() {
     return out;
   }, [allSpots, loc, places, settings.radiusKm]);
 
-  const watched = useMemo(() => {
-    const seen = new Map<string, Spot>();
-    for (const g of groups) for (const n of g.items) seen.set(n.spot.id, n.spot);
-    return [...seen.values()];
+  // Spots inside the radius are watched for alerts; fallback (nearest, outside radius) are only shown.
+  const [watched, shownOnly] = useMemo(() => {
+    const w = new Map<string, Spot>();
+    const f = new Map<string, Spot>();
+    for (const g of groups) for (const n of g.items) (g.fallback ? f : w).set(n.spot.id, n.spot);
+    for (const id of w.keys()) f.delete(id);
+    return [[...w.values()], [...f.values()]];
   }, [groups]);
-  const watchKey = watched.map((s) => s.id).join('|');
+  const watchKey = [...watched, ...shownOnly].map((s) => s.id).join('|');
 
   const refresh = useCallback(async () => {
-    if (watched.length === 0) return;
+    if (watched.length === 0 && shownOnly.length === 0) return;
     setLoading(true);
     setError(null);
     try {
       await kvSet(K.settings, settings);
       await kvSet(K.watch, watched);
       const granted = 'Notification' in window && Notification.permission === 'granted';
-      const { alerts, wind: w } = await runCheck({ spots: watched, settings, deliver: granted });
+      const [{ alerts, wind: w }, extra] = await Promise.all([
+        runCheck({ spots: watched, settings, deliver: granted }),
+        shownOnly.length ? fetchWind(shownOnly) : Promise.resolve([]),
+      ]);
+      extra.forEach((x, i) => {
+        if (x) w[shownOnly[i].id] = x;
+      });
       if (Object.keys(w).length === 0) throw new Error('no data');
       setWind((prev) => ({ ...prev, ...w }));
       setFetchedAt(Date.now());
@@ -241,7 +251,7 @@ export function App() {
 
   // Oldest sample among watched spots, if any is stale (e.g. served from the offline cache).
   const staleAt = (() => {
-    const ws = watched.map((s) => wind[s.id]).filter(Boolean) as SpotWind[];
+    const ws = [...watched, ...shownOnly].map((s) => wind[s.id]).filter(Boolean) as SpotWind[];
     const stale = ws.filter((w) => isStale(w));
     return stale.length ? Math.min(...stale.map((w) => w.observedAt || w.fetchedAt)) : 0;
   })();
@@ -265,7 +275,7 @@ export function App() {
           {loading ? 'Updating…' : fetchedAt ? `Updated ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
           {!online && ' · offline'}
         </span>
-        <button class="icon-btn" onClick={() => refresh()} disabled={loading || watched.length === 0} aria-label="Refresh wind">
+        <button class="icon-btn" onClick={() => refresh()} disabled={loading || watched.length + shownOnly.length === 0} aria-label="Refresh wind">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
             <path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -309,8 +319,8 @@ export function App() {
               </div>
             )}
             {groups.length > 0 && !fetchedAt && !error && (
-              <ul class="spots skeleton" aria-label={`Checking wind at ${watched.length} spots`}>
-                {watched.slice(0, 6).map((sp) => (
+              <ul class="spots skeleton" aria-label={`Checking wind at ${watched.length + shownOnly.length} spots`}>
+                {[...watched, ...shownOnly].slice(0, 6).map((sp) => (
                   <li key={sp.id} class="spot">
                     <div class="spot-head">
                       <span class="spot-main">
