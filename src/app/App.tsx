@@ -557,7 +557,7 @@ export function App() {
           </>
         )}
         {view === 'places' && <PlacesPanel places={places} onChange={updatePlaces} loc={loc} />}
-        {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} />}
+        {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} wind={wind} />}
         {view === 'settings' && <SettingsPanel settings={settings} onChange={updateSettings} />}
         </div>
       </main>
