@@ -28,7 +28,12 @@ export interface ShoreInference {
   distanceKm: number;
   /** Rideable wind-from sector: onshore through side-shore, offshore excluded. */
   sectors: Sector[];
+  /** Kind of the nearest shore feature (`coastline` = sea, `water` / `island` = lake). */
+  kind: 'coastline' | 'water' | 'island';
 }
+
+/** Why `inferShoreDetailed` made no inference. */
+export type NoShoreReason = 'no-shore-within-range' | 'nearest-shore-river' | 'nearest-shore-ambiguous';
 
 /** Spots farther than this from any shore get no inference. */
 export const MAX_SHORE_KM = 1.5;
@@ -138,7 +143,13 @@ export function sectorsFromNormal(normalDeg: number, halfWidth = SECTOR_HALF_WID
  * Returns null when nothing usable is within `maxKm`.
  */
 export function inferShore(spot: LatLon, features: readonly ShoreFeature[], maxKm = MAX_SHORE_KM): ShoreInference | null {
-  let best: { d: number; normal: number; ambiguous: boolean } | null = null;
+  const r = inferShoreDetailed(spot, features, maxKm);
+  return 'reason' in r ? null : r;
+}
+
+/** Like `inferShore`, but says why no inference was made. */
+export function inferShoreDetailed(spot: LatLon, features: readonly ShoreFeature[], maxKm = MAX_SHORE_KM): ShoreInference | { reason: NoShoreReason } {
+  let best: { d: number; normal: number; ambiguous: boolean; kind: ShoreFeature['kind'] } | null = null;
   for (const f of features) {
     if (f.points.length < 2) continue;
     const pts = f.points.map((p) => project(spot, p));
@@ -166,10 +177,12 @@ export function inferShore(spot: LatLon, features: readonly ShoreFeature[], maxK
       const b = pts[i + 1];
       if (a.x === b.x && a.y === b.y) continue;
       const d = distToSegment(a, b);
-      if (!best || d < best.d) best = { d, normal: normDeg(planarBearing(a, b) + side), ambiguous };
+      if (!best || d < best.d) best = { d, normal: normDeg(planarBearing(a, b) + side), ambiguous, kind: f.kind };
     }
   }
   // Nearest shore is a river or has no known water side: leave it unknown.
-  if (!best || best.ambiguous || best.d / 1000 > maxKm) return null;
-  return { normalDeg: best.normal, distanceKm: best.d / 1000, sectors: sectorsFromNormal(best.normal) };
+  if (!best || best.d / 1000 > maxKm) return { reason: 'no-shore-within-range' };
+  if (best.ambiguous) return { reason: best.kind === 'river' ? 'nearest-shore-river' : 'nearest-shore-ambiguous' };
+  const kind = best.kind === 'coastline' || best.kind === 'water' ? best.kind : 'island';
+  return { normalDeg: best.normal, distanceKm: best.d / 1000, sectors: sectorsFromNormal(best.normal), kind };
 }
