@@ -87,11 +87,13 @@ export function applySuggestions<T extends CuratedSpot>(
   maxDistanceM = APPLY_MAX_DISTANCE_M,
 ): { spots: T[]; applied: string[]; skipped: string[] } {
   const byId = new Map<string, KnownSuggestion>();
+  const skipped: string[] = [];
   for (const s of suggestions) {
-    if (isKnown(s) && s.review === 'approved' && (s.shoreKind === 'sea' || s.shoreKind === 'lake') && s.distanceM <= maxDistanceM) byId.set(s.id, s);
+    if (!isKnown(s) || s.review !== 'approved') continue;
+    if ((s.shoreKind === 'sea' || s.shoreKind === 'lake') && s.distanceM <= maxDistanceM) byId.set(s.id, s);
+    else skipped.push(`${s.id} (approved but ${s.distanceM} m from a ${s.shoreKind} shore)`);
   }
   const applied: string[] = [];
-  const skipped: string[] = [];
   const out = spots.map((spot) => {
     const s = byId.get(spot.id);
     if (!s || selectUnknown([spot]).length === 0) return spot;

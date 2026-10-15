@@ -81,7 +81,7 @@ describe('selectPending / mergeChecks', () => {
 describe('summarize', () => {
   it('counts and lists far and no-shore spots, farthest first', () => {
     const lines = summarize([measured('a', 100), measured('b', 400), measured('c', 2000), failed('d', 'no-shore-within-range'), failed('e')], 6);
-    expect(lines[0]).toBe('5/6 spots checked: 3 measured (coastline 3), 1 no shore in range, 1 Overpass failures');
+    expect(lines[0]).toBe('5/6 spots checked: 3 measured (coastline 3), 1 no shore in range, 1 Overpass failure');
     expect(lines.slice(1)).toEqual([
       '2 farther than 300 m from any shore:',
       '  c: 2000 m (coastline) nearest 0.001,0.002',
@@ -136,5 +136,16 @@ describe('checkAll', () => {
     const fetch = vi.fn(async () => res(504));
     const out = await checkAll([spot('a')], { fetch, ...fakeClock(), backoffMs: [1000] });
     expect(out).toEqual([failed('a')]);
+  });
+});
+
+describe('applyPositions near-duplicate guard', () => {
+  it('skips a move that lands within 1.5 km of another spot', async () => {
+    const { applyPositions } = await import('../scripts/shore-positions');
+    const a = { id: 'a', name: 'A', lat: 0, lon: 0, sectors: [] };
+    const b = { id: 'b', name: 'B', lat: 0, lon: 0.03, sectors: [] }; // ~3.3 km east
+    const r = applyPositions([a, b], [{ id: 'a', lat: 0, lon: 0, proposedLat: 0, proposedLon: 0.025, review: 'approved' } as never]);
+    expect(r.applied).toEqual([]);
+    expect(r.skipped[0]).toMatch(/within 1.5 km of b/);
   });
 });

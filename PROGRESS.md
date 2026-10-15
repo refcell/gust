@@ -265,3 +265,8 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   full-page screenshot grows the viewport, the demo frame becomes 60% visible and the app iframe
   boots mid-trace. Auto-boot now waits for a first scroll/wheel/touch/pointer/key event before
   observing visibility; e2e covers a 3000 px viewport without engagement.
+- Loop 22: Kimi K3 review of the shore check. Fixed: approved moves within 1.5 km of another spot
+  are skipped, and a dataset test fails on any pair within 1.5 km not on a 6-pair known-close list;
+  `--only`/`--limit` values starting with `--` are rejected and cannot switch modes; workflow
+  concurrency group; approved-but-ineligible sector suggestions are reported as skipped; README
+  caveat for 2-3 km proposals.

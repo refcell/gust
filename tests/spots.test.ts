@@ -63,3 +63,24 @@ describe('dataset', () => {
     }
   });
 });
+
+describe('curated dataset proximity', () => {
+  // Distinct launches that are deliberately closer than the 1.5 km merge radius.
+  const KNOWN_CLOSE = new Set([
+    'hood-river-event-site|hood-river-hook',
+    'hood-river-event-site|hood-river-sandbar',
+    'kanaha|kite-beach-maui',
+    'avon-soundside|avon-oceanside',
+    'hvide-sande-north-sea|hvide-sande-fjord',
+    'bloubergstrand|big-bay',
+  ]);
+  it('has no unlisted pair of spots within 1.5 km', () => {
+    const list = spots as Spot[];
+    const close: string[] = [];
+    for (let i = 0; i < list.length; i++)
+      for (let j = i + 1; j < list.length; j++)
+        if (distanceKm(list[i], list[j]) < 1.5 && !KNOWN_CLOSE.has(`${list[i].id}|${list[j].id}`) && !KNOWN_CLOSE.has(`${list[j].id}|${list[i].id}`))
+          close.push(`${list[i].id}|${list[j].id}`);
+    expect(close).toEqual([]);
+  });
+});

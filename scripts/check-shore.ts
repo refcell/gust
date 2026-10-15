@@ -24,19 +24,28 @@ const PROPOSALS = 'data/position-proposals.json';
 const args = process.argv.slice(2);
 const flag = (name: string): string | undefined => {
   const i = args.indexOf(name);
-  return i >= 0 ? args[i + 1] : undefined;
+  if (i < 0) return undefined;
+  const v = args[i + 1];
+  // A value that looks like a flag (e.g. a workflow input of "--propose") must not switch modes.
+  if (v === undefined || v.startsWith('--')) throw new Error(`${name} needs a value, got ${v ?? 'nothing'}`);
+  return v;
 };
+// Mode flags only count as standalone arguments, never as the value of --only / --limit.
+const valueIdx = new Set(['--only', '--limit'].map((n) => args.indexOf(n)).filter((i) => i >= 0).map((i) => i + 1));
+const has = (name: string) => args.some((a, i) => a === name && !valueIdx.has(i));
+flag('--only');
+flag('--limit');
 const readJson = <T>(path: string, fallback: T): T => (existsSync(path) ? (JSON.parse(readFileSync(path, 'utf8')) as T) : fallback);
 
 const spots = JSON.parse(readFileSync(SPOTS, 'utf8')) as CuratedSpot[];
 const prev = readJson<ShoreCheck[]>(CHECKS, []);
 
-if (args.includes('--apply-positions')) {
+if (has('--apply-positions')) {
   const r = applyPositions(spots, readJson<PositionProposal[]>(PROPOSALS, []));
   writeFileSync(SPOTS, formatSpots(r.spots));
   console.log(`moved ${r.applied.length} spots: ${r.applied.join(', ') || '(none)'}`);
   if (r.skipped.length) console.log(`skipped: ${r.skipped.join('; ')}`);
-} else if (args.includes('--propose')) {
+} else if (has('--propose')) {
   const proposals = proposePositions(spots, prev, readJson<PositionProposal[]>(PROPOSALS, []));
   writeFileSync(PROPOSALS, JSON.stringify(proposals, null, 2) + '\n');
   console.log(`wrote ${PROPOSALS}: ${proposals.length} proposals (${proposals.filter((p) => p.review).length} already reviewed)`);
