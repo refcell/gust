@@ -1,7 +1,7 @@
 name: ntfy alerts
 
 # No-account background alerts: every 15 minutes, score the spots from GUST_ALERTS_CONFIG
-# (repository variable, copied from the app's Alerts panel) and publish new alerts to the ntfy
+# (repository secret, copied from the app's Alerts panel) and publish new alerts to the ntfy
 # topic in the NTFY_TOPIC secret. Unconfigured repos and forks exit 0 with a notice.
 # GitHub may delay scheduled runs by several minutes (more at busy times) and disables schedules in
 # public repos after 60 days without repository activity.
@@ -28,7 +28,8 @@ jobs:
     env:
       NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
       NTFY_SERVER: ${{ vars.NTFY_SERVER }}
-      GUST_ALERTS_CONFIG: ${{ vars.GUST_ALERTS_CONFIG }}
+      # A secret, not a variable: job env values appear in public run logs; secrets are masked.
+      GUST_ALERTS_CONFIG: ${{ secrets.GUST_ALERTS_CONFIG }}
       GUST_STATE_FILE: .gust-ntfy/state.json
     steps:
       - name: Check configuration
@@ -36,7 +37,7 @@ jobs:
         shell: bash
         run: |
           if [ -z "$NTFY_TOPIC" ] || [ -z "$GUST_ALERTS_CONFIG" ]; then
-            echo '::notice::ntfy alerts are not configured: set the NTFY_TOPIC secret and the GUST_ALERTS_CONFIG variable (Settings > Secrets and variables > Actions). Skipping.'
+            echo '::notice::ntfy alerts are not configured: set the NTFY_TOPIC and GUST_ALERTS_CONFIG secrets (Settings > Secrets and variables > Actions). Skipping.'
             echo 'enabled=false' >> "$GITHUB_OUTPUT"
           else
             echo 'enabled=true' >> "$GITHUB_OUTPUT"

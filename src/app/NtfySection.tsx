@@ -67,7 +67,7 @@ export function NtfySection({ settings, places, loc }: Props) {
         <a href="https://ntfy.sh" target="_blank" rel="noopener">
           ntfy
         </a>{' '}
-        app. GitHub can delay scheduled runs by several minutes, so alerts may arrive late.
+        app. GitHub can delay scheduled runs by several minutes, so alerts may arrive late; nothing is sent during quiet hours (22:00-06:00), and GitHub pauses schedules in a public repo after 60 days without commits.
       </p>
       <ol class="caps small">
         <li>Install the ntfy app (App Store or Google Play).</li>
@@ -102,7 +102,7 @@ export function NtfySection({ settings, places, loc }: Props) {
           <a href={REPO_URL} target="_blank" rel="noopener">
             refcell/gust
           </a>{' '}
-          (owner) or your fork of it: Settings, Secrets and variables, Actions. Add the secret <code>NTFY_TOPIC</code> with the topic and the variable <code>GUST_ALERTS_CONFIG</code> with the config. In a fork, enable workflows on the Actions tab. Copy the config again after changing places or settings.
+          (owner) or your fork of it: Settings, Secrets and variables, Actions. Add two secrets: <code>NTFY_TOPIC</code> with the topic and <code>GUST_ALERTS_CONFIG</code> with the config (a secret keeps your places out of the public run logs). In a fork, enable workflows on the Actions tab. Copy the config again after changing places or settings.
         </li>
       </ol>
       {msg && (
