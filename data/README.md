@@ -1,7 +1,7 @@
 # Spot dataset
 
 `spots.json` is the curated list of kiteboarding spots bundled with gust. It has
-687 spots worldwide, 320 of them in the US, across 75 countries. The app merges these with OpenStreetMap
+720 spots worldwide, 320 of them in the US, across 87 countries. The app merges these with OpenStreetMap
 `sport=kitesurfing` results at runtime.
 
 ## Schema
@@ -130,7 +130,9 @@ are welcome:
 Some positions come from a town or kite-school location rather than the waterline and may be a
 few hundred metres off: `chicxulub`, `hurghada-north`, `wadi-lahami`, `curacao-sint-joris`,
 `cuba-varadero-kawama`, `uae-umm-al-quwain-kite-beach`, `rhodes-theologos`, `vietnam-hon-rom`,
-`grapevine-lake-murrell-park`, `galveston-8-mile-road`, and entries whose notes say "Approximate
+`grapevine-lake-murrell-park`, `galveston-8-mile-road`, `madagascar-emerald-sea`, `oman-filim`,
+`lombok-ekas`, `lombok-kuta`, `bulgaria-burgas`, `latvia-vakarbulli`, `guadeloupe-bois-jolan`,
+`romania-vadu`, `belgium-oostende`, `finland-yyteri`, `sumbawa-lakey`, and entries whose notes say "Approximate
 position". `node scripts/check-spots.mjs [maxMeters]` flags coastal spots that sit more than 25 m
 (by default) above sea level using Open-Meteo elevation; known lakes and rivers at altitude are
 skipped. The Spot coordinate check workflow runs it weekly with a 15 m threshold.
