@@ -277,3 +277,11 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   dark, mocked network): map controls no longer overlap the sticky header, aligned fact lists and
   card text, spot action buttons grouped, all tap targets >= 44 px, wrapping fixes, tab switches
   scroll to top. Header is 8 px taller (44 px refresh button).
+- Loop 25: shore check run 1 measured 333/720 spots (386 Overpass failures; run 2 dispatched, it
+  resumes from the committed data/shore-check.json). Decision: only review moves > 1 km (wind grid
+  cells are >= 1.5 km, so sub-km errors only affect map placement and shore inference). Moved 10:
+  salinas-del-rey, rodrigues-mourouk, taiwan-penghu, lake-mead-boulder-beach, cheney-reservoir,
+  new-caledonia-poe, sri-lanka-mannar, au-hobart-seven-mile-beach, el-gouna to the nearest shore,
+  and el-yaque hand-set ~4.8 km south to the town beach (proposal pointed at a lagoon; fits its
+  curated S-facing sectors). Rejected skyway-beach (causeway) and ilha-do-guajiru (lagoon). The
+  other 158 proposals (150 m-1 km) stay unreviewed.
