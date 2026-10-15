@@ -1,0 +1,62 @@
+name: ntfy alerts
+
+# No-account background alerts: every 15 minutes, score the spots from GUST_ALERTS_CONFIG
+# (repository variable, copied from the app's Alerts panel) and publish new alerts to the ntfy
+# topic in the NTFY_TOPIC secret. Unconfigured repos and forks exit 0 with a notice.
+# GitHub may delay scheduled runs by several minutes (more at busy times) and disables schedules in
+# public repos after 60 days without repository activity.
+#
+# Dedup state (.gust-ntfy/state.json) is carried between runs with actions/cache: restore the
+# newest entry by prefix, save under a new key per run (cache entries are immutable). A missing or
+# expired cache is a first run: spots that are already good do not alert.
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ntfy-alerts
+  cancel-in-progress: false
+
+jobs:
+  alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      NTFY_SERVER: ${{ vars.NTFY_SERVER }}
+      GUST_ALERTS_CONFIG: ${{ vars.GUST_ALERTS_CONFIG }}
+      GUST_STATE_FILE: .gust-ntfy/state.json
+    steps:
+      - name: Check configuration
+        id: cfg
+        shell: bash
+        run: |
+          if [ -z "$NTFY_TOPIC" ] || [ -z "$GUST_ALERTS_CONFIG" ]; then
+            echo '::notice::ntfy alerts are not configured: set the NTFY_TOPIC secret and the GUST_ALERTS_CONFIG variable (Settings > Secrets and variables > Actions). Skipping.'
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.cfg.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+      - if: steps.cfg.outputs.enabled == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - if: steps.cfg.outputs.enabled == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: .gust-ntfy
+          key: gust-ntfy-state-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: gust-ntfy-state-
+      - if: steps.cfg.outputs.enabled == 'true'
+        run: node --import ./scripts/ts-resolve.mjs scripts/ntfy-alerts.ts
+      - if: always() && steps.cfg.outputs.enabled == 'true' && hashFiles('.gust-ntfy/state.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .gust-ntfy
+          key: gust-ntfy-state-${{ github.run_id }}-${{ github.run_attempt }}

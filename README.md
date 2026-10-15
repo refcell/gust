@@ -47,6 +47,7 @@ Web apps get fewer background privileges than native apps. gust uses every path 
 | Local notification when a spot turns good | yes (iOS 16.4+, installed only) | yes | yes |
 | Background checks without a server | no (WebKit has no Periodic Background Sync) | yes, Periodic Background Sync, at the browser's discretion (typically a few times a day) | yes, Periodic Background Sync if installed |
 | Background checks with the push server | yes, Web Push (iOS 16.4+) | yes, Web Push | yes, Web Push |
+| Background checks with ntfy + GitHub Actions (no account) | yes, ntfy app | yes, ntfy app | yes, ntfy web or desktop |
 | Location in the background | no | no | no |
 | Calendar reminders for forecast windows (.ics export) | yes, Calendar alarms fire in the background (installed-app handoff to Calendar not yet verified on a device) | yes | yes |
 
@@ -55,7 +56,19 @@ Web apps get fewer background privileges than native apps. gust uses every path 
 - The push server is optional and self-hosted (see below). The public build enables Web Push only when it is built with `VITE_PUSH_API` set. Without it, iPhone alerts happen when you open the app.
 - In-app checks run when the app opens, when it returns to the foreground, and every minute while it is visible, if the data is older than 10 minutes.
 - The push server watches at most 60 spots per device: favourites first, then the nearest. The Alerts tab says when background alerts cover fewer spots than the app does. It sends at most 3 notifications per device per run (the rest are folded into one summary) and none during quiet hours (22:00–06:00 in the device's time zone).
+- No-account background alerts: ntfy + a scheduled GitHub Actions workflow, works on iPhone and Android (see below).
 - No-account background fallback: Alerts → "Add good windows to calendar" exports the next 48 h of good windows at watched spots as an `.ics` file with a reminder 60 minutes before each window. Calendar reminders fire in the background on every platform. It is a forecast snapshot: re-export to refresh (events with the same spot and start time update in place where the calendar supports it).
+
+### Background alerts with ntfy (no account)
+
+A scheduled GitHub Actions workflow (`.github/workflows/ntfy-alerts.yml`, every 15 minutes) runs `scripts/ntfy-alerts.ts`: it resolves the watched spots from a config like the app does (spots within the radius of each place plus favourites, muted ones dropped, at most 60, favourites first), fetches Open-Meteo, scores with the same `src/lib/alerts.ts` code, and publishes new alerts to an [ntfy](https://ntfy.sh) topic. Same rules as the push server: no alert for a spot that is already good on the first run, at most 3 notifications per run plus a summary, quiet hours 22:00–06:00 in the config's time zone (`quietHours`, `""` disables), and failed publishes are rolled back and retried on the next run.
+
+1. Install the ntfy app (iOS or Android) and, in gust, open Alerts → "Background alerts with ntfy". Tap "Generate topic" and subscribe to that topic on `ntfy.sh` in the ntfy app. Anyone who knows the topic can read and post to it, so keep it private (it is stored only in this browser).
+2. Tap "Copy alert config". It holds your saved places (or, without any, your last location rounded to ~100 m), favourites and wind settings, not the topic.
+3. In the repository (`refcell/gust` for the owner, or your fork) go to Settings → Secrets and variables → Actions. Add the secret `NTFY_TOPIC` (the topic) and the variable `GUST_ALERTS_CONFIG` (the config). Optional: variable `NTFY_SERVER` for a self-hosted ntfy server. In a fork, enable workflows on the Actions tab.
+4. Run the "ntfy alerts" workflow once from the Actions tab (Run workflow) to check the setup.
+
+Without the secret or the variable the workflow exits successfully with a notice. Limits: GitHub can delay scheduled runs by several minutes (more at busy times), and disables schedules in public repositories after 60 days without activity. Dedup state (`.gust-ntfy/state.json`) is kept with `actions/cache` (restored by prefix, saved under a new key each run); if the cache is evicted (7 days unused), the next run behaves like a first run. Copy the config again after changing places, favourites or settings. Favourites that are only in OpenStreetMap (not `data/spots.json`) are skipped.
 
 ## Data sources
 

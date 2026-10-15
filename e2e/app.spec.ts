@@ -141,6 +141,38 @@ test.describe('app', () => {
     await page.getByRole('tab', { name: 'Alerts' }).click();
     await expect(page.getByRole('heading', { name: 'On this device' })).toBeVisible();
   });
+
+  test('alerts panel builds the ntfy alert config and a private topic', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem('gust.places', JSON.stringify([{ id: 'p1', name: 'Hood River', lat: 45.7, lon: -121.5 }]));
+      localStorage.setItem('gust.settings', JSON.stringify({ favorites: ['kanaha'], unit: 'mph' }));
+      // Stub the clipboard (permissions differ per engine); keep the copied text for the test.
+      const w = window as unknown as { __copied: string[] };
+      w.__copied = [];
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async (t: string) => void w.__copied.push(t) } });
+    });
+    await page.goto('/gust/app/');
+    await page.getByRole('tab', { name: 'Alerts' }).click();
+    await page.getByText('Background alerts with ntfy').click();
+
+    await page.getByRole('button', { name: 'Copy alert config' }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'Alert config copied.' })).toBeVisible();
+    const copied = () => page.evaluate(() => (window as unknown as { __copied: string[] }).__copied);
+    const config = JSON.parse((await copied())[0]);
+    expect(config.places).toEqual([{ name: 'Hood River', lat: 45.7, lon: -121.5 }]);
+    expect(config.favorites).toEqual(['kanaha']);
+    expect(config.settings).toMatchObject({ unit: 'mph', minKn: 15, radiusKm: 50 });
+    expect(typeof config.timezone).toBe('string');
+
+    await page.getByRole('button', { name: 'Generate topic' }).click();
+    const topic = (await page.locator('.ntfy-topic').textContent()) ?? '';
+    expect(topic).toMatch(/^[a-z0-9]{24}$/);
+    expect(await page.evaluate(() => localStorage.getItem('gust.ntfyTopic'))).toBe(topic);
+    await page.getByRole('button', { name: 'Copy topic' }).click();
+    expect((await copied())[1]).toBe(topic);
+    // The topic stays on the device: never part of the config.
+    expect((await copied())[0]).not.toContain(topic);
+  });
 });
 
 test.describe('first run', () => {
