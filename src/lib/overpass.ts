@@ -39,6 +39,8 @@ export interface OverpassDeps {
   /** Defaults to localStorage, or an in-memory store when that is unavailable. */
   storage?: KV;
   now?: () => number;
+  /** Per-request timeout (default 25 s; batch scripts allow longer for queued servers). */
+  timeoutMs?: number;
 }
 
 interface Resolved {
@@ -323,7 +325,7 @@ export async function overpassPost(query: string, deps?: OverpassDeps): Promise<
     b.n += 1;
     writeJson(d.storage, 'budget', b);
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    const timer = ctrl ? setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS) : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), deps?.timeoutMs ?? FETCH_TIMEOUT_MS) : null;
     try {
       const res = await doFetch(url, {
         method: 'POST',

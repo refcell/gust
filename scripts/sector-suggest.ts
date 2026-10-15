@@ -177,7 +177,8 @@ export async function fetchSpotFeatures(spot: CuratedSpot, http: ReturnType<type
   const backoff = d.backoffMs ?? RETRY_BACKOFF_MS;
   for (let attempt = 0; ; attempt++) {
     const from = http.statuses.length;
-    const json = await overpassPost(query, { fetch: http.fetch, storage: noStorage, now: d.now });
+    // Busy instances queue requests before the 25 s query timeout starts, so allow 2 min per request.
+    const json = await overpassPost(query, { fetch: http.fetch, storage: noStorage, now: d.now, timeoutMs: 120_000 });
     if (json !== null) return parseShoreFeatures(json);
     const seen = http.statuses.slice(from);
     const retryable = seen.some((s) => s === 429 || s === 504 || s === 'error');
