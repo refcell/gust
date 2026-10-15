@@ -1,0 +1,35 @@
+name: Infer spot sectors
+
+# Suggests rideable sectors for curated spots with unknown sectors from OSM coastline data
+# (one Overpass request per spot, >= 5 s apart, from the runner's own IP budget).
+# Review only: uploads data/sector-suggestions.json as an artifact and never commits.
+# Apply locally after review: node --import ./scripts/ts-resolve.mjs scripts/infer-sectors.ts --apply
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  infer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --import ./scripts/ts-resolve.mjs scripts/infer-sectors.ts | tee report.txt
+        shell: bash
+        timeout-minutes: 30
+      - if: always()
+        run: |
+          echo '### Sector suggestions' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat report.txt >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sector-suggestions
+          path: data/sector-suggestions.json
+          if-no-files-found: warn
