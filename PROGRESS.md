@@ -249,3 +249,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   README/data README document the inference workflow. Share-sheet acceptance on a real iPhone stays
   on the owner's device checklist.
 - Loop 17: third inference run: 3 more approved (zanzibar-bwejuu, bulgaria-burgas, martinique-cap-chevalier), lithuania-svencele rejected (lagoon shore faced the wrong way). 28 spots keep failing Overpass from the runner; left [] (speed-only scoring).
+- Loop 18: root cause of repeated Overpass failures was our 25 s client timeout (busy instances
+  queue requests before the 25 s query timeout starts); `OverpassDeps.timeoutMs` lets the script
+  allow 120 s (app unchanged). Fourth run inferred 15 of 28: 7 approved (djerba x2, bali-mertasari,
+  sumbawa-lakey, romania-vadu, antigua-nonsuch-bay, finland-yyteri); rejected >500 m entries,
+  lagoon spots where the outer coast was picked (Emerald Sea, Filim, Kappalady), the Rewa spit, and
+  Puerto Velero (sector would exclude its NE trades). 13 still fail.
