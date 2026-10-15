@@ -22,6 +22,19 @@ export interface Alert {
   kind: 'now' | 'forecast';
 }
 
+/** Windows for one spot starting closer than this are treated as the same session. */
+export const SAME_WINDOW_MS = 6 * 3600_000;
+
+function nearNotified(notified: Record<string, number>, spotId: string, startMs: number, utcOffsetSeconds: number): boolean {
+  const prefix = `${spotId}@`;
+  for (const k of Object.keys(notified)) {
+    if (!k.startsWith(prefix)) continue;
+    const t = localIsoToEpoch(k.slice(prefix.length), utcOffsetSeconds);
+    if (Number.isFinite(t) && Math.abs(t - startMs) < SAME_WINDOW_MS) return true;
+  }
+  return false;
+}
+
 /**
  * Compare fresh wind to the previous state and return the alerts to show plus the next state.
  * A "now" alert fires when a spot crosses into `good` (not on the first observation unless `alertOnFirst`).
@@ -69,6 +82,9 @@ export function computeAlerts(
         if (!(startMs > now && startMs - now <= horizon)) continue;
         const key = `${spot.id}@${w.start}`;
         if (notified[key]) continue;
+        // Forecast updates shift window starts by an hour or two between checks; a window starting
+        // within SAME_WINDOW_MS of one already notified for this spot is the same session.
+        if (nearNotified(notified, spot.id, startMs, wind.utcOffsetSeconds)) continue;
         notified[key] = now;
         alerts.push({
           tag: `fc-${key}`,
