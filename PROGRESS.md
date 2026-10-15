@@ -192,6 +192,14 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   and resumes (mergeResults never downgrades an inference); job limit 150 min. From that run's log,
   7 suggestions were reviewed and applied; lagoons/causeways and >500 m entries were rejected (list
   in data/README "Sector inference").
+- No-account background push (loop 27): scheduled GitHub Actions workflow `ntfy-alerts.yml`
+  (every 15 min) scores the spots from the GUST_ALERTS_CONFIG repo variable (copied from the app's
+  Alerts panel) with the server's alert logic (3 + summary, quiet hours, rollback on failed publish)
+  and publishes to the ntfy.sh topic in the NTFY_TOPIC secret; the free ntfy app delivers real push
+  on iOS and Android. State persists via actions/cache. Unconfigured: exits 0. Verified live with a
+  throwaway topic (3 forecast alerts published with click links; second run deduped). Limits:
+  GitHub schedule delays, 60-day inactivity disable, cache expiry after 7 days (first-run
+  semantics), topic is a shared secret. Upgrade path stays the Cloudflare push backend.
 - Accepted (loop 26): app Lighthouse performance varies 77-100 between runs with no code change
   (TBT 40-730 ms, LCP 1.3-3.7 s; the 77 followed a data-only commit). CPU profiles at 4x throttle
   (mocked wind, mocked and live Overpass) show ~40 ms of app work, so this is shared-runner noise
@@ -211,7 +219,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
    notification -> calendar export opens in Calendar with reminders; Android Chrome install + APK sideload. Everything else is verified in CI/live.
-2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
+2. Owner: enable ntfy background alerts (README "Background alerts with ntfy"): install ntfy,
+   generate a topic in Alerts, set secret NTFY_TOPIC and variable GUST_ALERTS_CONFIG. Deploy the
+   push backend when credentials exist (server/README.md).
 4. Verify approximate positions (data/README.md) against imagery/elevation.
 5. Verify spot coordinates against OSM shore data: `scripts/check-shore.ts` + manual "Check spot
    positions" workflow (loop 20); review data/position-proposals.json and apply approved moves.
@@ -289,3 +299,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   and el-yaque hand-set ~4.8 km south to the town beach (proposal pointed at a lagoon; fits its
   curated S-facing sectors). Rejected skyway-beach (causeway) and ilha-do-guajiru (lagoon). The
   other 158 proposals (150 m-1 km) stay unreviewed.
+- Loop 27: ntfy background alerts via scheduled Actions (no account); live-verified with a test topic.
