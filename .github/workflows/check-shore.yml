@@ -1,0 +1,53 @@
+name: Check spot positions
+
+# Measures every curated spot's distance to the nearest OSM shore (one Overpass request per spot,
+# >= 5 s apart, from the runner's own IP budget). Review only: uploads data/shore-check.json as an
+# artifact and never commits. ~720 spots take ~2-3 h when Overpass answers promptly; failures and
+# backoff can push past the step limit, in which case commit the artifact and dispatch again
+# (the script resumes from the committed file). See data/README "Shore check".
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Check at most N pending spots (empty = all)'
+        required: false
+        default: ''
+      only:
+        description: 'Comma-separated spot ids (empty = all)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: |
+          args=()
+          if [ -n "$LIMIT" ]; then args+=(--limit "$LIMIT"); fi
+          if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
+          node --import ./scripts/ts-resolve.mjs scripts/check-shore.ts "${args[@]}" | tee report.txt
+        shell: bash
+        env:
+          LIMIT: ${{ inputs.limit }}
+          ONLY: ${{ inputs.only }}
+        timeout-minutes: 330  # GitHub's job limit is 6 h; progress is saved per spot
+      - if: always()
+        run: |
+          echo '### Shore check' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          tail -n 200 report.txt >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shore-check
+          path: data/shore-check.json
+          if-no-files-found: warn

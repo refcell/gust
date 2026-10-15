@@ -186,3 +186,44 @@ export function inferShoreDetailed(spot: LatLon, features: readonly ShoreFeature
   const kind = best.kind === 'coastline' || best.kind === 'water' ? best.kind : 'island';
   return { normalDeg: best.normal, distanceKm: best.d / 1000, sectors: sectorsFromNormal(best.normal), kind };
 }
+
+/** Nearest shore point to a spot, any feature kind (see `nearestShorePoint`). */
+export interface NearestShore {
+  /** Distance from the spot to `point`, km. */
+  distanceKm: number;
+  /** Kind of the nearest shore feature, as classified by the parser. */
+  kind: ShoreFeature['kind'];
+  /** Closest point on the nearest shore segment. */
+  point: LatLon;
+}
+
+/**
+ * Nearest point on any shore feature (coastline, lake, island, river, ambiguous), with no distance
+ * cap. Closed lake rings smaller than `minWaterKm2` are skipped, as in `inferShoreDetailed`, so the
+ * distance matches the inference's nearest shore. Returns null when no feature has a segment.
+ */
+export function nearestShorePoint(spot: LatLon, features: readonly ShoreFeature[], minWaterKm2 = MIN_WATER_AREA_KM2): NearestShore | null {
+  let best: { d: number; x: number; y: number; kind: ShoreFeature['kind'] } | null = null;
+  for (const f of features) {
+    if (f.points.length < 2) continue;
+    const pts = f.points.map((p) => project(spot, p));
+    if (f.kind === 'water' && isClosed(f.points) && Math.abs(signedArea(pts)) / 1e6 < minWaterKm2) continue;
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const a = pts[i];
+      const b = pts[i + 1];
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const len2 = dx * dx + dy * dy;
+      const t = len2 === 0 ? 0 : Math.max(0, Math.min(1, -(a.x * dx + a.y * dy) / len2));
+      const x = a.x + t * dx;
+      const y = a.y + t * dy;
+      const d = Math.hypot(x, y);
+      if (!best || d < best.d) best = { d, x, y, kind: f.kind };
+    }
+  }
+  if (!best) return null;
+  let lon = spot.lon + best.x / (M_PER_DEG * Math.cos((spot.lat * Math.PI) / 180));
+  if (lon > 180) lon -= 360;
+  if (lon < -180) lon += 360;
+  return { distanceKm: best.d / 1000, kind: best.kind, point: { lat: spot.lat + best.y / M_PER_DEG, lon } };
+}
