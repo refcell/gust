@@ -35,6 +35,15 @@ const UNITS: readonly SpeedUnit[] = ['kn', 'mph', 'ms', 'kmh'];
 const QUIET_RE = /^\s*(\d{1,2})\s*-\s*(\d{1,2})\s*$/;
 const round = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
 
+function isHttpUrl(s: string): boolean {
+  try {
+    const u = new URL(s);
+    return (u.protocol === 'https:' || u.protocol === 'http:') && u.hostname.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 function settingsSubset(s: Settings): AlertsConfigSettings {
   return {
     unit: s.unit,
@@ -50,11 +59,11 @@ function settingsSubset(s: Settings): AlertsConfigSettings {
 
 /**
  * The `GUST_ALERTS_CONFIG` value for the current app state: saved places (or, without any, the
- * last location rounded to ~100 m), favourites and the alert settings.
+ * last location; coordinates rounded to ~100 m), favourites and the alert settings.
  */
 export function buildAlertsConfig(o: { places: readonly Place[]; settings: Settings; loc?: LatLon | null; timezone: string }): AlertsConfig {
   const places = o.places.length
-    ? o.places.map((p) => ({ name: p.name, lat: round(p.lat, 4), lon: round(p.lon, 4) }))
+    ? o.places.map((p) => ({ name: p.name, lat: round(p.lat, 3), lon: round(p.lon, 3) }))
     : o.loc
       ? [{ name: 'Last location', lat: round(o.loc.lat, 3), lon: round(o.loc.lon, 3) }]
       : [];
@@ -125,7 +134,7 @@ export function parseAlertsConfig(raw: string | undefined): ParseResult {
   const quietHours = v.quietHours === undefined ? DEFAULT_QUIET_HOURS : v.quietHours;
   if (typeof quietHours !== 'string' || (quietHours.trim() !== '' && !QUIET_RE.test(quietHours))) return { ok: false, error: 'quietHours must look like "22-6" (or "" to disable)' };
   const appUrl = v.appUrl === undefined ? DEFAULT_APP_URL : v.appUrl;
-  if (typeof appUrl !== 'string' || !/^https?:\/\//.test(appUrl)) return { ok: false, error: 'appUrl must be an http(s) URL' };
+  if (typeof appUrl !== 'string' || !isHttpUrl(appUrl)) return { ok: false, error: 'appUrl must be an http(s) URL' };
 
   return { ok: true, config: { places, favorites, settings: settingsSubset(merged), timezone, quietHours: quietHours.trim(), appUrl } };
 }

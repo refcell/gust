@@ -26,7 +26,7 @@ CORS allows `https://refcell.github.io` and `http://localhost:*` / `http://127.0
 rate-limiting rule for it before deploying publicly.
 
 Push payloads are `{title, body, tag, url}`; the app's service worker shows them as-is. A
-subscriber gets at most 3 notifications per run; extra alerts are folded into one summary. A push
+subscriber gets at most 3 notifications per run; with more alerts, 2 are sent and the rest are folded into one summary. A push
 service response of 404 or 410 deletes the subscription.
 
 ## Deploy (Cloudflare, free plan)

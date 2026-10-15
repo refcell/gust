@@ -14,6 +14,24 @@ import type { Spot, SpotWind } from '../src/lib/types';
 import { buildPayloads, inQuietHours, localHour, rollback, type OutgoingPush } from '../server/src/cron';
 
 export const DEFAULT_NTFY_SERVER = 'https://ntfy.sh';
+export const PUBLISH_TIMEOUT_MS = 15_000;
+export const WIND_TIMEOUT_MS = 20_000;
+
+/** Remove the topic (a shared secret) from text before it is logged. */
+export function redact(text: string, topic: string): string {
+  if (!topic) return text;
+  return text.split(topic).join('***').split(encodeURIComponent(topic)).join('***');
+}
+
+/** An http(s) ntfy server base URL, or null (checked before the topic is ever appended). */
+export function validServer(server: string): string | null {
+  try {
+    const u = new URL(server);
+    return u.protocol === 'https:' || u.protocol === 'http:' ? u.origin + u.pathname.replace(/\/+$/, '') : null;
+  } catch {
+    return null;
+  }
+}
 export const STATE_VERSION = 1;
 
 /** Persisted between runs (actions/cache). */
@@ -104,7 +122,8 @@ export async function runNtfyAlerts(o: RunOptions): Promise<RunReport> {
   }
   if (spots.length === 0) return report;
 
-  const winds = await fetchWind(spots, fetchImpl);
+  // Bounded so a stalled request cannot eat the job's 10 min limit (state must still be saved).
+  const winds = await fetchWind(spots, (input, init) => fetchImpl(input, { ...init, signal: AbortSignal.timeout(WIND_TIMEOUT_MS) }));
   const entries: { spot: Spot; wind: SpotWind }[] = [];
   spots.forEach((spot, i) => {
     const wind = winds[i];
@@ -121,7 +140,7 @@ export async function runNtfyAlerts(o: RunOptions): Promise<RunReport> {
   for (const push of buildPayloads(alerts, o.config.appUrl)) {
     const { url, init } = ntfyRequest(server, o.topic, push);
     try {
-      const res = await fetchImpl(url, init);
+      const res = await fetchImpl(url, { ...init, signal: AbortSignal.timeout(PUBLISH_TIMEOUT_MS) });
       if (res.ok) {
         report.sent++;
         for (const a of push.alerts) delivered.add(a);
@@ -131,7 +150,7 @@ export async function runNtfyAlerts(o: RunOptions): Promise<RunReport> {
       }
     } catch (e) {
       report.failed++;
-      log(`ntfy request failed for "${push.payload.title}": ${(e as Error).message}`);
+      log(`ntfy request failed for "${push.payload.title}": ${redact((e as Error)?.message ?? String(e), o.topic)}`);
     }
   }
   // Undelivered alerts keep their previous rating / unnotified window, so they retry next run.

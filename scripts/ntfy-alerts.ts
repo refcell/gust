@@ -15,19 +15,30 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { parseAlertsConfig, validTopic } from '../src/lib/ntfy';
 import type { Spot } from '../src/lib/types';
-import { parseState, runNtfyAlerts } from './ntfy';
+import { parseState, runNtfyAlerts, validServer } from './ntfy';
 
 const stateFile = process.env.GUST_STATE_FILE || '.gust-ntfy/state.json';
 const topic = (process.env.NTFY_TOPIC ?? '').trim();
 const rawConfig = process.env.GUST_ALERTS_CONFIG ?? '';
 
 if (!topic || !rawConfig.trim()) {
-  console.log('::notice::ntfy alerts not configured (set secret NTFY_TOPIC and variable GUST_ALERTS_CONFIG). Nothing to do.');
+  console.log('::notice::ntfy alerts not configured (set secrets NTFY_TOPIC and GUST_ALERTS_CONFIG). Nothing to do.');
   process.exit(0);
 }
 if (!validTopic(topic)) {
   console.log('::error::NTFY_TOPIC must be 1-64 letters, digits, "_" or "-".');
   process.exit(1);
+}
+/** NTFY_SERVER, validated before the topic is ever appended (so errors cannot echo it). */
+function serverArg(): string | undefined {
+  const raw = process.env.NTFY_SERVER?.trim();
+  if (!raw) return undefined;
+  const ok = validServer(raw);
+  if (!ok) {
+    console.log('::error::NTFY_SERVER must be an http(s) URL, e.g. https://ntfy.example.com');
+    process.exit(1);
+  }
+  return ok;
 }
 const parsed = parseAlertsConfig(rawConfig);
 if (!parsed.ok) {
@@ -44,7 +55,7 @@ const report = await runNtfyAlerts({
   state,
   allSpots,
   topic,
-  server: process.env.NTFY_SERVER?.trim() || undefined,
+  server: serverArg(),
   log: (m) => console.log(`::warning::${m}`),
 });
 

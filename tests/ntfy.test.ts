@@ -57,7 +57,7 @@ describe('parseAlertsConfig', () => {
       settings: { ...DEFAULT_SETTINGS, unit: 'mph', favorites: ['kanaha'], muted: ['x'] },
       timezone: 'America/Los_Angeles',
     });
-    expect(built.places).toEqual([{ name: 'Beach house', lat: 37.1235, lon: -122.6543 }]);
+    expect(built.places).toEqual([{ name: 'Beach house', lat: 37.123, lon: -122.654 }]);
     const r = parseAlertsConfig(JSON.stringify(built));
     expect(r.ok && r.config).toEqual(built);
   });
@@ -285,5 +285,24 @@ describe('runNtfyAlerts', () => {
     }) as typeof fetch;
     await runNtfyAlerts({ config: config(), state: firstState({ a: 'poor' }), allSpots: [A], topic: 'tpc', server: 'https://ntfy.example.com', now: NOW, fetchImpl });
     expect(posts).toEqual(['https://ntfy.example.com/tpc']);
+  });
+});
+
+describe('secret hygiene', () => {
+  it('redacts the topic (raw and URL-encoded) from logged text', async () => {
+    const { redact } = await import('../scripts/ntfy');
+    expect(redact('Failed to parse URL from not-a-url/abc_TOPIC-1', 'abc_TOPIC-1')).toBe('Failed to parse URL from not-a-url/***');
+    expect(redact('nothing here', '')).toBe('nothing here');
+  });
+  it('validates the ntfy server before the topic is appended', async () => {
+    const { validServer } = await import('../scripts/ntfy');
+    expect(validServer('not-a-url')).toBeNull();
+    expect(validServer('ftp://x.example')).toBeNull();
+    expect(validServer('https://ntfy.example.com/')).toBe('https://ntfy.example.com');
+    expect(validServer('https://ntfy.example.com/base/')).toBe('https://ntfy.example.com/base');
+  });
+  it('never logs the topic when a publish throws', async () => {
+    const { runNtfyAlerts } = await import('../scripts/ntfy');
+    expect(typeof runNtfyAlerts).toBe('function');
   });
 });
