@@ -1,5 +1,25 @@
 [
   {
+    "id": "sherman-island",
+    "name": "Sherman Island",
+    "lat": 38.0445,
+    "lon": -121.797,
+    "distanceM": 840,
+    "shoreKind": "coastline",
+    "proposedLat": 38.05108,
+    "proposedLon": -121.80169
+  },
+  {
+    "id": "rio-vista",
+    "name": "Rio Vista (Sandy Beach Park)",
+    "lat": 38.1472,
+    "lon": -121.6895,
+    "distanceM": 235,
+    "shoreKind": "river",
+    "proposedLat": 38.14766,
+    "proposedLon": -121.69212
+  },
+  {
     "id": "alameda-crown-beach",
     "name": "Alameda Crown Memorial Beach",
     "lat": 37.762,
@@ -18,6 +38,16 @@
     "shoreKind": "coastline",
     "proposedLat": 37.89799,
     "proposedLon": -122.64396
+  },
+  {
+    "id": "davenport-landing",
+    "name": "Davenport Landing",
+    "lat": 37.0248,
+    "lon": -122.212,
+    "distanceM": 353,
+    "shoreKind": "coastline",
+    "proposedLat": 37.02327,
+    "proposedLon": -122.21548
   },
   {
     "id": "belmont-shore",
@@ -80,6 +110,16 @@
     "proposedLon": -156.43178
   },
   {
+    "id": "kaneohe-sandbar",
+    "name": "Kaneohe Bay (Sandbar)",
+    "lat": 21.445,
+    "lon": -157.81,
+    "distanceM": 266,
+    "shoreKind": "coastline",
+    "proposedLat": 21.44273,
+    "proposedLon": -157.8092
+  },
+  {
     "id": "spi-gulf-side",
     "name": "South Padre Island (Gulf Side)",
     "lat": 26.1615,
@@ -108,6 +148,26 @@
     "shoreKind": "coastline",
     "proposedLat": 27.82222,
     "proposedLon": -97.05813
+  },
+  {
+    "id": "bob-hall-pier",
+    "name": "Bob Hall Pier (Corpus Christi)",
+    "lat": 27.5805,
+    "lon": -97.2165,
+    "distanceM": 353,
+    "shoreKind": "coastline",
+    "proposedLat": 27.58184,
+    "proposedLon": -97.21974
+  },
+  {
+    "id": "surfside-beach",
+    "name": "Surfside Beach",
+    "lat": 28.9445,
+    "lon": -95.284,
+    "distanceM": 453,
+    "shoreKind": "coastline",
+    "proposedLat": 28.94766,
+    "proposedLon": -95.28692
   },
   {
     "id": "avon-oceanside",
@@ -181,6 +241,16 @@
     "proposedLon": -82.83307
   },
   {
+    "id": "siesta-key",
+    "name": "Siesta Key",
+    "lat": 27.2655,
+    "lon": -82.553,
+    "distanceM": 166,
+    "shoreKind": "coastline",
+    "proposedLat": 27.26418,
+    "proposedLon": -82.55379
+  },
+  {
     "id": "cape-san-blas",
     "name": "Cape San Blas",
     "lat": 29.67,
@@ -201,6 +271,16 @@
     "proposedLon": -81.36554
   },
   {
+    "id": "tybee-island",
+    "name": "Tybee Island",
+    "lat": 32.022,
+    "lon": -80.845,
+    "distanceM": 271,
+    "shoreKind": "coastline",
+    "proposedLat": 32.02415,
+    "proposedLon": -80.84364
+  },
+  {
     "id": "jekyll-island",
     "name": "Jekyll Island",
     "lat": 31.057,
@@ -209,6 +289,16 @@
     "shoreKind": "coastline",
     "proposedLat": 31.05584,
     "proposedLon": -81.40558
+  },
+  {
+    "id": "sullivans-island",
+    "name": "Sullivan's Island",
+    "lat": 32.763,
+    "lon": -79.836,
+    "distanceM": 534,
+    "shoreKind": "coastline",
+    "proposedLat": 32.75854,
+    "proposedLon": -79.8339
   },
   {
     "id": "sandy-neck",
@@ -229,6 +319,46 @@
     "shoreKind": "coastline",
     "proposedLat": 42.4145,
     "proposedLon": -70.9886
+  },
+  {
+    "id": "wollaston-beach",
+    "name": "Wollaston Beach (Quincy)",
+    "lat": 42.2745,
+    "lon": -71.018,
+    "distanceM": 587,
+    "shoreKind": "coastline",
+    "proposedLat": 42.27858,
+    "proposedLon": -71.01348
+  },
+  {
+    "id": "marthas-vineyard-sylvia",
+    "name": "Joseph Sylvia State Beach (Martha's Vineyard)",
+    "lat": 41.422,
+    "lon": -70.556,
+    "distanceM": 161,
+    "shoreKind": "coastline",
+    "proposedLat": 41.42262,
+    "proposedLon": -70.55425
+  },
+  {
+    "id": "nantucket-madaket",
+    "name": "Madaket Harbor (Nantucket)",
+    "lat": 41.2735,
+    "lon": -70.196,
+    "distanceM": 165,
+    "shoreKind": "coastline",
+    "proposedLat": 41.27472,
+    "proposedLon": -70.19711
+  },
+  {
+    "id": "sherwood-island",
+    "name": "Sherwood Island (Westport)",
+    "lat": 41.114,
+    "lon": -73.333,
+    "distanceM": 272,
+    "shoreKind": "coastline",
+    "proposedLat": 41.11156,
+    "proposedLon": -73.33323
   },
   {
     "id": "jones-beach",
@@ -281,6 +411,16 @@
     "proposedLon": -74.08127
   },
   {
+    "id": "sandy-point-sp",
+    "name": "Sandy Point State Park",
+    "lat": 39.0125,
+    "lon": -76.3975,
+    "distanceM": 191,
+    "shoreKind": "coastline",
+    "proposedLat": 39.0109,
+    "proposedLon": -76.3967
+  },
+  {
     "id": "chics-beach",
     "name": "Chic's Beach (Virginia Beach)",
     "lat": 36.917,
@@ -331,6 +471,16 @@
     "proposedLon": -87.70066
   },
   {
+    "id": "kohler-andrae",
+    "name": "Kohler-Andrae State Park",
+    "lat": 43.67,
+    "lon": -87.716,
+    "distanceM": 214,
+    "shoreKind": "water",
+    "proposedLat": 43.66913,
+    "proposedLon": -87.71363
+  },
+  {
     "id": "racine-north-beach",
     "name": "Racine North Beach",
     "lat": 42.744,
@@ -339,6 +489,26 @@
     "shoreKind": "water",
     "proposedLat": 42.74427,
     "proposedLon": -87.78071
+  },
+  {
+    "id": "duluth-park-point",
+    "name": "Park Point (Duluth)",
+    "lat": 46.755,
+    "lon": -92.089,
+    "distanceM": 367,
+    "shoreKind": "river",
+    "proposedLat": 46.75456,
+    "proposedLon": -92.09377
+  },
+  {
+    "id": "white-bear-lake",
+    "name": "White Bear Lake",
+    "lat": 45.076,
+    "lon": -92.993,
+    "distanceM": 271,
+    "shoreKind": "island",
+    "proposedLat": 45.07691,
+    "proposedLon": -92.98981
   },
   {
     "id": "headlands-beach",
@@ -371,6 +541,26 @@
     "proposedLon": -81.73248
   },
   {
+    "id": "east-harbor-sp",
+    "name": "East Harbor State Park",
+    "lat": 41.548,
+    "lon": -82.812,
+    "distanceM": 215,
+    "shoreKind": "water",
+    "proposedLat": 41.54973,
+    "proposedLon": -82.81314
+  },
+  {
+    "id": "deer-creek",
+    "name": "Deer Creek Reservoir",
+    "lat": 40.43,
+    "lon": -111.497,
+    "distanceM": 355,
+    "shoreKind": "water",
+    "proposedLat": 40.42935,
+    "proposedLon": -111.49289
+  },
+  {
     "id": "bear-lake-rendezvous",
     "name": "Bear Lake (Rendezvous Beach)",
     "lat": 41.84,
@@ -391,15 +581,14 @@
     "proposedLon": -112.17752
   },
   {
-    "id": "lake-mead-boulder-beach",
-    "name": "Lake Mead (Boulder Beach)",
-    "lat": 36.036,
-    "lon": -114.803,
-    "distanceM": 1621,
+    "id": "willard-bay",
+    "name": "Willard Bay",
+    "lat": 41.425,
+    "lon": -112.06,
+    "distanceM": 502,
     "shoreKind": "water",
-    "proposedLat": 36.0477,
-    "proposedLon": -114.79227,
-    "review": "approved"
+    "proposedLat": 41.42059,
+    "proposedLon": -112.0613
   },
   {
     "id": "chatfield-reservoir",
@@ -422,6 +611,26 @@
     "proposedLon": -105.22217
   },
   {
+    "id": "homer-spit",
+    "name": "Homer Spit",
+    "lat": 59.613,
+    "lon": -151.44,
+    "distanceM": 176,
+    "shoreKind": "coastline",
+    "proposedLat": 59.61189,
+    "proposedLon": -151.44221
+  },
+  {
+    "id": "squamish-spit",
+    "name": "Squamish Spit",
+    "lat": 49.714,
+    "lon": -123.159,
+    "distanceM": 530,
+    "shoreKind": "river",
+    "proposedLat": 49.70925,
+    "proposedLon": -123.1595
+  },
+  {
     "id": "wasaga-beach",
     "name": "Wasaga Beach",
     "lat": 44.522,
@@ -430,6 +639,16 @@
     "shoreKind": "river",
     "proposedLat": 44.5229,
     "proposedLon": -80.01682
+  },
+  {
+    "id": "sandbanks",
+    "name": "Sandbanks Provincial Park",
+    "lat": 43.905,
+    "lon": -77.275,
+    "distanceM": 626,
+    "shoreKind": "water",
+    "proposedLat": 43.91061,
+    "proposedLon": -77.27444
   },
   {
     "id": "magdalen-islands",
@@ -492,6 +711,16 @@
     "proposedLon": -113.61046
   },
   {
+    "id": "aruba-hadicurari",
+    "name": "Aruba Fisherman's Huts (Hadicurari)",
+    "lat": 12.5795,
+    "lon": -70.0465,
+    "distanceM": 184,
+    "shoreKind": "coastline",
+    "proposedLat": 12.57962,
+    "proposedLon": -70.04481
+  },
+  {
     "id": "bonaire-atlantis",
     "name": "Bonaire Atlantis Kite Beach",
     "lat": 12.041,
@@ -522,6 +751,16 @@
     "proposedLon": -66.05436
   },
   {
+    "id": "barbados-silver-sands",
+    "name": "Silver Sands (Barbados)",
+    "lat": 13.044,
+    "lon": -59.5165,
+    "distanceM": 314,
+    "shoreKind": "coastline",
+    "proposedLat": 13.04656,
+    "proposedLon": -59.51771
+  },
+  {
     "id": "st-lucia-anse-de-sables",
     "name": "Anse de Sables (St Lucia)",
     "lat": 13.717,
@@ -530,18 +769,6 @@
     "shoreKind": "coastline",
     "proposedLat": 13.71525,
     "proposedLon": -60.94101
-  },
-  {
-    "id": "el-yaque",
-    "name": "El Yaque (Margarita)",
-    "lat": 10.946,
-    "lon": -63.943,
-    "distanceM": 1886,
-    "shoreKind": "water",
-    "proposedLat": 10.904,
-    "proposedLon": -63.957,
-    "review": "approved",
-    "note": "hand-set: town beach south of the airport (proposal pointed at a lagoon)"
   },
   {
     "id": "cabo-de-la-vela",
@@ -554,17 +781,6 @@
     "proposedLon": -72.15066
   },
   {
-    "id": "salinas-del-rey",
-    "name": "Salinas del Rey",
-    "lat": 10.787,
-    "lon": -75.2,
-    "distanceM": 2480,
-    "shoreKind": "coastline",
-    "proposedLat": 10.79915,
-    "proposedLon": -75.21901,
-    "review": "approved"
-  },
-  {
     "id": "taiba",
     "name": "Taiba",
     "lat": -3.5085,
@@ -573,6 +789,16 @@
     "shoreKind": "coastline",
     "proposedLat": -3.50413,
     "proposedLon": -38.90923
+  },
+  {
+    "id": "paracuru",
+    "name": "Paracuru",
+    "lat": -3.4,
+    "lon": -39.03,
+    "distanceM": 529,
+    "shoreKind": "coastline",
+    "proposedLat": -3.40464,
+    "proposedLon": -39.02894
   },
   {
     "id": "ilha-do-guajiru",
@@ -596,6 +822,36 @@
     "proposedLon": -41.40991
   },
   {
+    "id": "atins",
+    "name": "Atins",
+    "lat": -2.575,
+    "lon": -42.745,
+    "distanceM": 173,
+    "shoreKind": "river",
+    "proposedLat": -2.57489,
+    "proposedLon": -42.74655
+  },
+  {
+    "id": "peru-paracas",
+    "name": "Paracas",
+    "lat": -13.838,
+    "lon": -76.263,
+    "distanceM": 528,
+    "shoreKind": "coastline",
+    "proposedLat": -13.83857,
+    "proposedLon": -76.25815
+  },
+  {
+    "id": "tarifa-valdevaqueros",
+    "name": "Valdevaqueros (Tarifa)",
+    "lat": 36.0685,
+    "lon": -5.6955,
+    "distanceM": 157,
+    "shoreKind": "coastline",
+    "proposedLat": 36.06722,
+    "proposedLon": -5.69477
+  },
+  {
     "id": "tarifa-balneario",
     "name": "Balneario (Tarifa)",
     "lat": 36.0175,
@@ -616,6 +872,16 @@
     "proposedLon": -6.07355
   },
   {
+    "id": "sotavento",
+    "name": "Sotavento (Fuerteventura)",
+    "lat": 28.13,
+    "lon": -14.232,
+    "distanceM": 980,
+    "shoreKind": "coastline",
+    "proposedLat": 28.13422,
+    "proposedLon": -14.24077
+  },
+  {
     "id": "flag-beach",
     "name": "Flag Beach (Corralejo)",
     "lat": 28.714,
@@ -624,6 +890,16 @@
     "shoreKind": "coastline",
     "proposedLat": 28.71285,
     "proposedLon": -13.83638
+  },
+  {
+    "id": "costa-teguise",
+    "name": "Costa Teguise (Las Cucharas)",
+    "lat": 28.998,
+    "lon": -13.491,
+    "distanceM": 227,
+    "shoreKind": "coastline",
+    "proposedLat": 28.99768,
+    "proposedLon": -13.4887
   },
   {
     "id": "sant-pere-pescador",
@@ -696,6 +972,16 @@
     "proposedLon": 3.09434
   },
   {
+    "id": "wissant",
+    "name": "Wissant",
+    "lat": 50.885,
+    "lon": 1.66,
+    "distanceM": 260,
+    "shoreKind": "coastline",
+    "proposedLat": 50.88685,
+    "proposedLon": 1.65773
+  },
+  {
     "id": "porto-pollo-sardinia",
     "name": "Porto Pollo (Isola dei Gabbiani)",
     "lat": 41.187,
@@ -704,6 +990,16 @@
     "shoreKind": "coastline",
     "proposedLat": 41.19136,
     "proposedLon": 9.31419
+  },
+  {
+    "id": "lo-stagnone",
+    "name": "Lo Stagnone",
+    "lat": 37.856,
+    "lon": 12.47,
+    "distanceM": 496,
+    "shoreKind": "coastline",
+    "proposedLat": 37.85808,
+    "proposedLon": 12.475
   },
   {
     "id": "silvaplana",
@@ -756,6 +1052,16 @@
     "proposedLon": 4.05226
   },
   {
+    "id": "fehmarn-gold",
+    "name": "Fehmarn (Gold)",
+    "lat": 54.445,
+    "lon": 11.08,
+    "distanceM": 328,
+    "shoreKind": "coastline",
+    "proposedLat": 54.44516,
+    "proposedLon": 11.07495
+  },
+  {
     "id": "wulfener-hals",
     "name": "Wulfener Hals (Fehmarn)",
     "lat": 54.405,
@@ -774,6 +1080,26 @@
     "shoreKind": "coastline",
     "proposedLat": 54.52082,
     "proposedLon": 11.17138
+  },
+  {
+    "id": "norderney",
+    "name": "Norderney",
+    "lat": 53.71,
+    "lon": 7.16,
+    "distanceM": 618,
+    "shoreKind": "coastline",
+    "proposedLat": 53.70647,
+    "proposedLon": 7.16723
+  },
+  {
+    "id": "klitmoller",
+    "name": "Klitmoller (Cold Hawaii)",
+    "lat": 57.041,
+    "lon": 8.48,
+    "distanceM": 363,
+    "shoreKind": "coastline",
+    "proposedLat": 57.04392,
+    "proposedLon": 8.48267
   },
   {
     "id": "romo",
@@ -806,6 +1132,16 @@
     "proposedLon": -0.97739
   },
   {
+    "id": "rhosneigr",
+    "name": "Rhosneigr",
+    "lat": 53.229,
+    "lon": -4.52,
+    "distanceM": 196,
+    "shoreKind": "coastline",
+    "proposedLat": 53.22926,
+    "proposedLon": -4.52292
+  },
+  {
     "id": "brancaster",
     "name": "Brancaster",
     "lat": 52.973,
@@ -824,6 +1160,16 @@
     "shoreKind": "island",
     "proposedLat": 53.37016,
     "proposedLon": -3.17911
+  },
+  {
+    "id": "brandon-bay",
+    "name": "Brandon Bay (Castlegregory)",
+    "lat": 52.26,
+    "lon": -10.02,
+    "distanceM": 366,
+    "shoreKind": "coastline",
+    "proposedLat": 52.26198,
+    "proposedLon": -10.01571
   },
   {
     "id": "rosslare",
@@ -866,6 +1212,16 @@
     "proposedLon": 25.3722
   },
   {
+    "id": "naxos-laguna",
+    "name": "Laguna (Naxos)",
+    "lat": 37.093,
+    "lon": 25.367,
+    "distanceM": 406,
+    "shoreKind": "coastline",
+    "proposedLat": 37.09353,
+    "proposedLon": 25.37152
+  },
+  {
     "id": "rhodes-ialysos",
     "name": "Ialysos (Rhodes)",
     "lat": 36.42,
@@ -884,6 +1240,27 @@
     "shoreKind": "coastline",
     "proposedLat": 39.93932,
     "proposedLon": 25.38424
+  },
+  {
+    "id": "kos-marmari",
+    "name": "Marmari (Kos)",
+    "lat": 36.876,
+    "lon": 27.16,
+    "distanceM": 737,
+    "shoreKind": "water",
+    "proposedLat": 36.88097,
+    "proposedLon": 27.16548
+  },
+  {
+    "id": "montenegro-velika-plaza",
+    "name": "Velika Plaza (Ulcinj)",
+    "lat": 41.87,
+    "lon": 19.3,
+    "distanceM": 1857,
+    "shoreKind": "coastline",
+    "proposedLat": 41.88363,
+    "proposedLon": 19.31291,
+    "review": "approved"
   },
   {
     "id": "turkey-akyaka",
@@ -906,6 +1283,26 @@
     "proposedLon": 25.93883
   },
   {
+    "id": "cyprus-mazotos",
+    "name": "Mazotos",
+    "lat": 34.78,
+    "lon": 33.492,
+    "distanceM": 289,
+    "shoreKind": "coastline",
+    "proposedLat": 34.7774,
+    "proposedLon": 33.49194
+  },
+  {
+    "id": "bloubergstrand",
+    "name": "Bloubergstrand (Kite Beach)",
+    "lat": -33.802,
+    "lon": 18.463,
+    "distanceM": 234,
+    "shoreKind": "coastline",
+    "proposedLat": -33.80366,
+    "proposedLon": 18.46145
+  },
+  {
     "id": "sunset-beach-ct",
     "name": "Sunset Beach (Milnerton)",
     "lat": -33.843,
@@ -916,6 +1313,68 @@
     "proposedLon": 18.48511
   },
   {
+    "id": "strand-za",
+    "name": "Strand Beach",
+    "lat": -34.115,
+    "lon": 18.82,
+    "distanceM": 203,
+    "shoreKind": "coastline",
+    "proposedLat": -34.11431,
+    "proposedLon": 18.82204
+  },
+  {
+    "id": "dakhla-lagoon",
+    "name": "Dakhla Lagoon",
+    "lat": 23.85,
+    "lon": -15.83,
+    "distanceM": 1915,
+    "shoreKind": "coastline",
+    "proposedLat": 23.86142,
+    "proposedLon": -15.84407,
+    "review": "rejected"
+  },
+  {
+    "id": "dakhla-speed-spot",
+    "name": "Dakhla Speed Spot",
+    "lat": 23.866,
+    "lon": -15.765,
+    "distanceM": 2057,
+    "shoreKind": "coastline",
+    "proposedLat": 23.87202,
+    "proposedLon": -15.7841,
+    "review": "rejected"
+  },
+  {
+    "id": "moulay-bouzerktoun",
+    "name": "Moulay Bouzerktoun",
+    "lat": 31.635,
+    "lon": -9.68,
+    "distanceM": 430,
+    "shoreKind": "coastline",
+    "proposedLat": 31.63422,
+    "proposedLon": -9.67556
+  },
+  {
+    "id": "zanzibar-jambiani",
+    "name": "Jambiani (Zanzibar)",
+    "lat": -6.315,
+    "lon": 39.55,
+    "distanceM": 300,
+    "shoreKind": "coastline",
+    "proposedLat": -6.31593,
+    "proposedLon": 39.54745
+  },
+  {
+    "id": "kenya-diani",
+    "name": "Diani Beach",
+    "lat": -4.29,
+    "lon": 39.595,
+    "distanceM": 486,
+    "shoreKind": "coastline",
+    "proposedLat": -4.28829,
+    "proposedLon": 39.59097
+  },
+  {
     "id": "kenya-watamu",
     "name": "Watamu",
     "lat": -3.357,
@@ -924,17 +1383,6 @@
     "shoreKind": "coastline",
     "proposedLat": -3.35517,
     "proposedLon": 40.02536
-  },
-  {
-    "id": "el-gouna",
-    "name": "El Gouna",
-    "lat": 27.43,
-    "lon": 33.68,
-    "distanceM": 1107,
-    "shoreKind": "coastline",
-    "proposedLat": 27.42375,
-    "proposedLon": 33.67129,
-    "review": "approved"
   },
   {
     "id": "safaga",
@@ -965,6 +1413,17 @@
     "shoreKind": "coastline",
     "proposedLat": -19.98483,
     "proposedLon": 57.62947
+  },
+  {
+    "id": "djerba",
+    "name": "Djerba (Sidi Mahrez)",
+    "lat": 33.81,
+    "lon": 11.03,
+    "distanceM": 1937,
+    "shoreKind": "coastline",
+    "proposedLat": 33.80377,
+    "proposedLon": 11.04955,
+    "review": "approved"
   },
   {
     "id": "walvis-bay",
@@ -1017,6 +1476,26 @@
     "proposedLon": 109.03078
   },
   {
+    "id": "boracay-bulabog",
+    "name": "Bulabog Beach (Boracay)",
+    "lat": 11.964,
+    "lon": 121.935,
+    "distanceM": 317,
+    "shoreKind": "coastline",
+    "proposedLat": 11.96116,
+    "proposedLon": 121.93511
+  },
+  {
+    "id": "kalpitiya",
+    "name": "Kalpitiya Lagoon",
+    "lat": 8.18,
+    "lon": 79.728,
+    "distanceM": 516,
+    "shoreKind": "water",
+    "proposedLat": 8.18462,
+    "proposedLon": 79.72844
+  },
+  {
     "id": "hua-hin",
     "name": "Hua Hin",
     "lat": 12.56,
@@ -1027,6 +1506,16 @@
     "proposedLon": 99.96353
   },
   {
+    "id": "pranburi",
+    "name": "Pranburi (Pak Nam Pran)",
+    "lat": 12.39,
+    "lon": 99.99,
+    "distanceM": 795,
+    "shoreKind": "coastline",
+    "proposedLat": 12.39232,
+    "proposedLon": 99.99691
+  },
+  {
     "id": "india-rameswaram",
     "name": "Rameswaram (Dhanushkodi)",
     "lat": 9.17,
@@ -1035,6 +1524,16 @@
     "shoreKind": "coastline",
     "proposedLat": 9.17223,
     "proposedLon": 79.42263
+  },
+  {
+    "id": "india-mandvi",
+    "name": "Mandvi (Gujarat)",
+    "lat": 22.82,
+    "lon": 69.33,
+    "distanceM": 815,
+    "shoreKind": "coastline",
+    "proposedLat": 22.82654,
+    "proposedLon": 69.33359
   },
   {
     "id": "china-pingtan",
@@ -1067,15 +1566,24 @@
     "proposedLon": 137.72995
   },
   {
-    "id": "taiwan-penghu",
-    "name": "Penghu (Aimen Beach)",
-    "lat": 23.565,
-    "lon": 119.62,
-    "distanceM": 1632,
+    "id": "japan-uchinada",
+    "name": "Uchinada",
+    "lat": 36.65,
+    "lon": 136.62,
+    "distanceM": 708,
     "shoreKind": "coastline",
-    "proposedLat": 23.57868,
-    "proposedLon": 119.62574,
-    "review": "approved"
+    "proposedLat": 36.64587,
+    "proposedLon": 136.62603
+  },
+  {
+    "id": "perth-pinnaroo",
+    "name": "Pinnaroo Point",
+    "lat": -31.803,
+    "lon": 115.738,
+    "distanceM": 756,
+    "shoreKind": "coastline",
+    "proposedLat": -31.80077,
+    "proposedLon": 115.73045
   },
   {
     "id": "exmouth-town-beach",
@@ -1138,6 +1646,16 @@
     "proposedLon": 174.70291
   },
   {
+    "id": "nz-orewa",
+    "name": "Orewa",
+    "lat": -36.585,
+    "lon": 174.699,
+    "distanceM": 184,
+    "shoreKind": "coastline",
+    "proposedLat": -36.58563,
+    "proposedLon": 174.6971
+  },
+  {
     "id": "nz-takapuna",
     "name": "Takapuna",
     "lat": -36.79,
@@ -1146,6 +1664,26 @@
     "shoreKind": "island",
     "proposedLat": -36.78792,
     "proposedLon": 174.77178
+  },
+  {
+    "id": "nz-muriwai",
+    "name": "Muriwai",
+    "lat": -36.83,
+    "lon": 174.42,
+    "distanceM": 369,
+    "shoreKind": "coastline",
+    "proposedLat": -36.83032,
+    "proposedLon": 174.42413
+  },
+  {
+    "id": "nz-mount-maunganui",
+    "name": "Mount Maunganui",
+    "lat": -37.637,
+    "lon": 176.185,
+    "distanceM": 313,
+    "shoreKind": "coastline",
+    "proposedLat": -37.63484,
+    "proposedLon": 176.18728
   },
   {
     "id": "nz-tahunanui",
@@ -1168,15 +1706,24 @@
     "proposedLon": 166.44279
   },
   {
-    "id": "new-caledonia-poe",
-    "name": "Poe Beach",
-    "lat": -21.6,
-    "lon": 165.4,
-    "distanceM": 1454,
+    "id": "texas-city-dike",
+    "name": "Texas City Dike",
+    "lat": 29.385,
+    "lon": -94.89,
+    "distanceM": 207,
     "shoreKind": "coastline",
-    "proposedLat": -21.61297,
-    "proposedLon": 165.39827,
-    "review": "approved"
+    "proposedLat": 29.38445,
+    "proposedLon": -94.88796
+  },
+  {
+    "id": "crystal-beach-bolivar",
+    "name": "Crystal Beach (Bolivar Peninsula)",
+    "lat": 29.452,
+    "lon": -94.64,
+    "distanceM": 417,
+    "shoreKind": "coastline",
+    "proposedLat": 29.44875,
+    "proposedLon": -94.63786
   },
   {
     "id": "windy-point-lake-travis",
@@ -1189,17 +1736,6 @@
     "proposedLon": -97.8963
   },
   {
-    "id": "cheney-reservoir",
-    "name": "Cheney Reservoir (Cheney State Park)",
-    "lat": 37.735,
-    "lon": -97.81,
-    "distanceM": 1492,
-    "shoreKind": "water",
-    "proposedLat": 37.72313,
-    "proposedLon": -97.80214,
-    "review": "approved"
-  },
-  {
     "id": "dauphin-island",
     "name": "Dauphin Island Public Beach",
     "lat": 30.247,
@@ -1208,6 +1744,36 @@
     "shoreKind": "coastline",
     "proposedLat": 30.24391,
     "proposedLon": -88.11262
+  },
+  {
+    "id": "st-andrews-pcb",
+    "name": "St. Andrews State Park (Panama City Beach)",
+    "lat": 30.13,
+    "lon": -85.738,
+    "distanceM": 275,
+    "shoreKind": "coastline",
+    "proposedLat": 30.12813,
+    "proposedLon": -85.73987
+  },
+  {
+    "id": "jacksonville-beach",
+    "name": "Jacksonville Beach",
+    "lat": 30.287,
+    "lon": -81.39,
+    "distanceM": 283,
+    "shoreKind": "coastline",
+    "proposedLat": 30.28749,
+    "proposedLon": -81.38711
+  },
+  {
+    "id": "new-smyrna-beach",
+    "name": "New Smyrna Beach",
+    "lat": 29.032,
+    "lon": -80.898,
+    "distanceM": 569,
+    "shoreKind": "river",
+    "proposedLat": 29.03137,
+    "proposedLon": -80.9038
   },
   {
     "id": "juno-beach",
@@ -1228,6 +1794,16 @@
     "shoreKind": "coastline",
     "proposedLat": 35.9611,
     "proposedLon": -75.64064
+  },
+  {
+    "id": "freeman-park",
+    "name": "Freeman Park (Carolina Beach)",
+    "lat": 34.07,
+    "lon": -77.883,
+    "distanceM": 182,
+    "shoreKind": "coastline",
+    "proposedLat": 34.07047,
+    "proposedLon": -77.88488
   },
   {
     "id": "rehoboth-beach",
@@ -1260,6 +1836,36 @@
     "proposedLon": -74.57624
   },
   {
+    "id": "north-wildwood",
+    "name": "North Wildwood Beach",
+    "lat": 38.999,
+    "lon": -74.8,
+    "distanceM": 686,
+    "shoreKind": "coastline",
+    "proposedLat": 38.99447,
+    "proposedLon": -74.79462
+  },
+  {
+    "id": "cape-may-cove",
+    "name": "Cape May Cove Beach",
+    "lat": 38.932,
+    "lon": -74.923,
+    "distanceM": 309,
+    "shoreKind": "coastline",
+    "proposedLat": 38.92925,
+    "proposedLon": -74.9225
+  },
+  {
+    "id": "manasquan",
+    "name": "Manasquan Beach",
+    "lat": 40.11,
+    "lon": -74.035,
+    "distanceM": 210,
+    "shoreKind": "coastline",
+    "proposedLat": 40.11097,
+    "proposedLon": -74.03712
+  },
+  {
     "id": "rockaway-beach",
     "name": "Rockaway Beach (Beach 90th)",
     "lat": 40.585,
@@ -1278,6 +1884,36 @@
     "shoreKind": "water",
     "proposedLat": 43.36263,
     "proposedLon": -77.94695
+  },
+  {
+    "id": "hammonasset",
+    "name": "Hammonasset Beach State Park",
+    "lat": 41.26,
+    "lon": -72.553,
+    "distanceM": 309,
+    "shoreKind": "coastline",
+    "proposedLat": 41.25808,
+    "proposedLon": -72.55567
+  },
+  {
+    "id": "silver-sands-milford",
+    "name": "Silver Sands State Park (Milford)",
+    "lat": 41.201,
+    "lon": -73.075,
+    "distanceM": 471,
+    "shoreKind": "coastline",
+    "proposedLat": 41.19714,
+    "proposedLon": -73.07271
+  },
+  {
+    "id": "brenton-point",
+    "name": "Brenton Point (Newport)",
+    "lat": 41.451,
+    "lon": -71.36,
+    "distanceM": 196,
+    "shoreKind": "coastline",
+    "proposedLat": 41.45096,
+    "proposedLon": -71.35766
   },
   {
     "id": "port-huron-lakeside",
@@ -1300,6 +1936,16 @@
     "proposedLon": -87.81524
   },
   {
+    "id": "neshotah-beach",
+    "name": "Neshotah Beach (Two Rivers)",
+    "lat": 44.15,
+    "lon": -87.56,
+    "distanceM": 231,
+    "shoreKind": "river",
+    "proposedLat": 44.15049,
+    "proposedLon": -87.56281
+  },
+  {
     "id": "indiana-dunes-west-beach",
     "name": "Indiana Dunes West Beach",
     "lat": 41.623,
@@ -1308,6 +1954,26 @@
     "shoreKind": "water",
     "proposedLat": 41.62624,
     "proposedLon": -87.21083
+  },
+  {
+    "id": "woodbine-beach",
+    "name": "Woodbine Beach (Toronto)",
+    "lat": 43.663,
+    "lon": -79.302,
+    "distanceM": 154,
+    "shoreKind": "water",
+    "proposedLat": 43.66384,
+    "proposedLon": -79.30352
+  },
+  {
+    "id": "argentina-cuesta-del-viento",
+    "name": "Dique Cuesta del Viento (Rodeo)",
+    "lat": -30.185,
+    "lon": -69.07,
+    "distanceM": 600,
+    "shoreKind": "water",
+    "proposedLat": -30.17983,
+    "proposedLon": -69.06825
   },
   {
     "id": "uruguay-playa-malvin",
@@ -1380,6 +2046,26 @@
     "proposedLon": 0.87496
   },
   {
+    "id": "france-berck",
+    "name": "Berck-sur-Mer",
+    "lat": 50.404,
+    "lon": 1.56,
+    "distanceM": 244,
+    "shoreKind": "coastline",
+    "proposedLat": 50.4045,
+    "proposedLon": 1.55664
+  },
+  {
+    "id": "france-saint-malo-sillon",
+    "name": "Plage du Sillon (Saint-Malo)",
+    "lat": 48.656,
+    "lon": -2.005,
+    "distanceM": 181,
+    "shoreKind": "coastline",
+    "proposedLat": 48.6574,
+    "proposedLon": -2.00625
+  },
+  {
     "id": "france-chatelaillon",
     "name": "Chatelaillon-Plage",
     "lat": 46.07,
@@ -1400,6 +2086,16 @@
     "proposedLon": 4.13789
   },
   {
+    "id": "italy-capo-feto",
+    "name": "Capo Feto (Mazara del Vallo)",
+    "lat": 37.662,
+    "lon": 12.528,
+    "distanceM": 243,
+    "shoreKind": "coastline",
+    "proposedLat": 37.65982,
+    "proposedLon": 12.52787
+  },
+  {
     "id": "greece-epanomi",
     "name": "Epanomi (Potamos)",
     "lat": 40.378,
@@ -1408,6 +2104,16 @@
     "shoreKind": "coastline",
     "proposedLat": 40.38093,
     "proposedLon": 22.91865
+  },
+  {
+    "id": "greece-kos-psalidi",
+    "name": "Psalidi (Kos)",
+    "lat": 36.883,
+    "lon": 27.317,
+    "distanceM": 287,
+    "shoreKind": "coastline",
+    "proposedLat": 36.88548,
+    "proposedLon": 27.31787
   },
   {
     "id": "sweden-lomma",
@@ -1430,6 +2136,16 @@
     "proposedLon": -3.04282
   },
   {
+    "id": "ireland-inch",
+    "name": "Inch Strand",
+    "lat": 52.137,
+    "lon": -9.98,
+    "distanceM": 176,
+    "shoreKind": "coastline",
+    "proposedLat": 52.13792,
+    "proposedLon": -9.97792
+  },
+  {
     "id": "senegal-ngor-virage",
     "name": "Virage (Dakar)",
     "lat": 14.757,
@@ -1440,6 +2156,26 @@
     "proposedLon": -17.48781
   },
   {
+    "id": "za-witsand",
+    "name": "Witsand (Breede River)",
+    "lat": -34.395,
+    "lon": 20.855,
+    "distanceM": 257,
+    "shoreKind": "coastline",
+    "proposedLat": -34.39713,
+    "proposedLon": 20.85609
+  },
+  {
+    "id": "za-gqeberha-hobie",
+    "name": "Hobie Beach (Gqeberha)",
+    "lat": -33.984,
+    "lon": 25.665,
+    "distanceM": 172,
+    "shoreKind": "coastline",
+    "proposedLat": -33.98261,
+    "proposedLon": 25.66581
+  },
+  {
     "id": "mozambique-vilanculos",
     "name": "Vilanculos",
     "lat": -21.995,
@@ -1448,28 +2184,6 @@
     "shoreKind": "coastline",
     "proposedLat": -21.99486,
     "proposedLon": 35.32503
-  },
-  {
-    "id": "rodrigues-mourouk",
-    "name": "Mourouk (Rodrigues)",
-    "lat": -19.757,
-    "lon": 63.47,
-    "distanceM": 1703,
-    "shoreKind": "coastline",
-    "proposedLat": -19.74183,
-    "proposedLon": 63.46791,
-    "review": "approved"
-  },
-  {
-    "id": "au-hobart-seven-mile-beach",
-    "name": "Seven Mile Beach (Hobart)",
-    "lat": -42.86,
-    "lon": 147.53,
-    "distanceM": 1185,
-    "shoreKind": "coastline",
-    "proposedLat": -42.85163,
-    "proposedLon": 147.52102,
-    "review": "approved"
   },
   {
     "id": "au-jurien-bay",
@@ -1502,6 +2216,36 @@
     "proposedLon": 174.79936
   },
   {
+    "id": "salton-sea-north-shore",
+    "name": "Salton Sea (State Rec Area)",
+    "lat": 33.508,
+    "lon": -115.919,
+    "distanceM": 252,
+    "shoreKind": "water",
+    "proposedLat": 33.50599,
+    "proposedLon": -115.92026
+  },
+  {
+    "id": "lake-del-valle",
+    "name": "Lake Del Valle",
+    "lat": 37.584,
+    "lon": -121.703,
+    "distanceM": 185,
+    "shoreKind": "water",
+    "proposedLat": 37.58288,
+    "proposedLon": -121.70454
+  },
+  {
+    "id": "bolsa-chica",
+    "name": "Bolsa Chica State Beach",
+    "lat": 33.695,
+    "lon": -118.045,
+    "distanceM": 244,
+    "shoreKind": "water",
+    "proposedLat": 33.69661,
+    "proposedLon": -118.04321
+  },
+  {
     "id": "seaside-or",
     "name": "Seaside (Oregon)",
     "lat": 45.993,
@@ -1510,6 +2254,36 @@
     "shoreKind": "coastline",
     "proposedLat": 45.99359,
     "proposedLon": -123.93286
+  },
+  {
+    "id": "agate-beach",
+    "name": "Agate Beach (Newport)",
+    "lat": 44.665,
+    "lon": -124.059,
+    "distanceM": 266,
+    "shoreKind": "coastline",
+    "proposedLat": 44.66511,
+    "proposedLon": -124.06236
+  },
+  {
+    "id": "lincoln-city",
+    "name": "Lincoln City (D River)",
+    "lat": 44.964,
+    "lon": -124.017,
+    "distanceM": 165,
+    "shoreKind": "water",
+    "proposedLat": 44.96544,
+    "proposedLon": -124.01647
+  },
+  {
+    "id": "bandon-south-jetty",
+    "name": "Bandon (South Jetty)",
+    "lat": 43.115,
+    "lon": -124.428,
+    "distanceM": 475,
+    "shoreKind": "coastline",
+    "proposedLat": 43.11819,
+    "proposedLon": -124.43187
   },
   {
     "id": "viento-state-park",
@@ -1522,6 +2296,16 @@
     "proposedLon": -121.67012
   },
   {
+    "id": "anaehoomalu-bay",
+    "name": "Anaeho'omalu Bay (A-Bay)",
+    "lat": 19.915,
+    "lon": -155.889,
+    "distanceM": 158,
+    "shoreKind": "coastline",
+    "proposedLat": 19.91463,
+    "proposedLon": -155.88754
+  },
+  {
     "id": "malaekahana",
     "name": "Malaekahana Beach",
     "lat": 21.672,
@@ -1530,6 +2314,16 @@
     "shoreKind": "coastline",
     "proposedLat": 21.67337,
     "proposedLon": -157.93313
+  },
+  {
+    "id": "magic-reservoir",
+    "name": "Magic Reservoir",
+    "lat": 43.3,
+    "lon": -114.38,
+    "distanceM": 260,
+    "shoreKind": "water",
+    "proposedLat": 43.30232,
+    "proposedLon": -114.37961
   },
   {
     "id": "canyon-ferry-silos",
@@ -1562,6 +2356,46 @@
     "proposedLon": -111.42588
   },
   {
+    "id": "lake-pueblo",
+    "name": "Lake Pueblo",
+    "lat": 38.27,
+    "lon": -104.73,
+    "distanceM": 408,
+    "shoreKind": "water",
+    "proposedLat": 38.27107,
+    "proposedLon": -104.72554
+  },
+  {
+    "id": "union-reservoir",
+    "name": "Union Reservoir (Longmont)",
+    "lat": 40.176,
+    "lon": -105.041,
+    "distanceM": 432,
+    "shoreKind": "water",
+    "proposedLat": 40.17368,
+    "proposedLon": -105.04508
+  },
+  {
+    "id": "centennial-beach",
+    "name": "Centennial Beach (Boundary Bay)",
+    "lat": 49.017,
+    "lon": -123.044,
+    "distanceM": 313,
+    "shoreKind": "coastline",
+    "proposedLat": 49.01845,
+    "proposedLon": -123.04033
+  },
+  {
+    "id": "goose-spit",
+    "name": "Goose Spit (Comox)",
+    "lat": 49.664,
+    "lon": -124.9,
+    "distanceM": 158,
+    "shoreKind": "coastline",
+    "proposedLat": 49.66476,
+    "proposedLon": -124.90185
+  },
+  {
     "id": "cox-bay",
     "name": "Cox Bay (Tofino)",
     "lat": 49.1,
@@ -1592,6 +2426,37 @@
     "proposedLon": -113.3858
   },
   {
+    "id": "fontainebleau-sp",
+    "name": "Fontainebleau State Park (Mandeville)",
+    "lat": 30.336,
+    "lon": -90.038,
+    "distanceM": 650,
+    "shoreKind": "water",
+    "proposedLat": 30.33405,
+    "proposedLon": -90.04437
+  },
+  {
+    "id": "st-george-island-sp",
+    "name": "St. George Island State Park",
+    "lat": 29.707,
+    "lon": -84.77,
+    "distanceM": 239,
+    "shoreKind": "coastline",
+    "proposedLat": 29.70563,
+    "proposedLon": -84.76809
+  },
+  {
+    "id": "thailand-jomtien",
+    "name": "Jomtien Beach (Pattaya)",
+    "lat": 12.88,
+    "lon": 100.867,
+    "distanceM": 1266,
+    "shoreKind": "coastline",
+    "proposedLat": 12.88728,
+    "proposedLon": 100.87596,
+    "review": "approved"
+  },
+  {
     "id": "vietnam-hon-rom",
     "name": "Hon Rom (Mui Ne)",
     "lat": 10.956,
@@ -1602,6 +2467,16 @@
     "proposedLon": 108.31777
   },
   {
+    "id": "vietnam-my-hoa-lagoon",
+    "name": "My Hoa Lagoon (Phan Rang)",
+    "lat": 11.669,
+    "lon": 109.167,
+    "distanceM": 901,
+    "shoreKind": "coastline",
+    "proposedLat": 11.66411,
+    "proposedLon": 109.17359
+  },
+  {
     "id": "korea-busan-dadaepo",
     "name": "Dadaepo Beach (Busan)",
     "lat": 35.047,
@@ -1610,17 +2485,6 @@
     "shoreKind": "coastline",
     "proposedLat": 35.04517,
     "proposedLon": 128.96388
-  },
-  {
-    "id": "sri-lanka-mannar",
-    "name": "Mannar (Keeri Beach)",
-    "lat": 8.98,
-    "lon": 79.86,
-    "distanceM": 1225,
-    "shoreKind": "coastline",
-    "proposedLat": 8.98739,
-    "proposedLon": 79.86825,
-    "review": "approved"
   },
   {
     "id": "kenya-malindi",
@@ -1673,6 +2537,17 @@
     "proposedLon": -41.73293
   },
   {
+    "id": "uruguay-laguna-jose-ignacio",
+    "name": "Laguna Jose Ignacio",
+    "lat": -34.82,
+    "lon": -54.67,
+    "distanceM": 1129,
+    "shoreKind": "water",
+    "proposedLat": -34.82839,
+    "proposedLon": -54.67695,
+    "review": "rejected"
+  },
+  {
     "id": "argentina-dique-ullum",
     "name": "Dique de Ullum",
     "lat": -31.49,
@@ -1703,6 +2578,36 @@
     "proposedLon": -75.02843
   },
   {
+    "id": "ecuador-santa-marianita",
+    "name": "Santa Marianita (Manta)",
+    "lat": -0.94,
+    "lon": -80.7,
+    "distanceM": 900,
+    "shoreKind": "coastline",
+    "proposedLat": -0.94807,
+    "proposedLon": -80.69942
+  },
+  {
+    "id": "au-safety-beach",
+    "name": "Safety Beach (Dromana)",
+    "lat": -38.315,
+    "lon": 144.995,
+    "distanceM": 391,
+    "shoreKind": "coastline",
+    "proposedLat": -38.31337,
+    "proposedLon": 144.99103
+  },
+  {
+    "id": "au-yorkeys-knob",
+    "name": "Yorkeys Knob",
+    "lat": -16.807,
+    "lon": 145.72,
+    "distanceM": 510,
+    "shoreKind": "coastline",
+    "proposedLat": -16.80296,
+    "proposedLon": 145.71774
+  },
+  {
     "id": "au-port-douglas-four-mile",
     "name": "Four Mile Beach (Port Douglas)",
     "lat": -16.48,
@@ -1711,5 +2616,15 @@
     "shoreKind": "coastline",
     "proposedLat": -16.48117,
     "proposedLon": 145.46811
+  },
+  {
+    "id": "au-stockton-beach",
+    "name": "Stockton Beach (Newcastle)",
+    "lat": -32.905,
+    "lon": 151.795,
+    "distanceM": 611,
+    "shoreKind": "coastline",
+    "proposedLat": -32.90388,
+    "proposedLon": 151.7886
   }
 ]

@@ -306,3 +306,6 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   08:00 -> 05:00 between runs and dedup keyed on the exact start. Forecast dedup (src/lib/alerts.ts,
   shared by app, push server and ntfy) now skips a window starting within 6 h of one already
   notified for that spot.
+- Loop 30: shore check run 2: 540/720 measured (178 Overpass failures; run 3 dispatched). Moved 3
+  more spots > 1 km from shore (djerba, montenegro-velika-plaza, thailand-jomtien); rejected the
+  lagoon spots dakhla-speed-spot, dakhla-lagoon and uruguay-laguna-jose-ignacio.
