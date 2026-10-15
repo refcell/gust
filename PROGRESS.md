@@ -239,3 +239,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 12: iOS share-sheet calendar export; offline sector inference script + manual workflow.
 - Loop 13: +33 gap-region spots (12 new countries).
 - Loop 14: sectors for 7 spots from the first inference run; resumable inference.
+- Loop 15: second inference run (31/40 Overpass failures from the runner); 7 more reviewed sectors applied.
