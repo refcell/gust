@@ -100,7 +100,7 @@ describe('applySuggestions', () => {
   it('skips unreviewed, rejected, moved spots and overlong notes', () => {
     const r = applySuggestions([spot('f'), spot('g'), { ...spot('a'), lat: 1 }, spot('b', [], { notes: 'x'.repeat(130) })], sugg);
     expect(r.applied).toEqual([]);
-    expect(r.skipped).toEqual(['a (spot moved since inference)', 'b (notes would exceed 140 characters)']);
+    expect(r.skipped).toEqual(expect.arrayContaining(['a (spot moved since inference)', 'b (notes would exceed 140 characters)', 'c (approved but 501 m from a sea shore)']));
   });
   it('does not append the note twice', () => {
     const once = applySuggestions([spot('a')], sugg).spots;

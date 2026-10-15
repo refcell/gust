@@ -162,10 +162,12 @@ or `{id, lat, lon, reason}` per spot.
    entries for the same position keep their review and edits.
 3. Review each against the map and notes: set `"review": "approved"` (edit the proposed point to the
    actual launch if needed) or `"rejected"`. Inland lakes, lagoons and river launches often need a
-   different point than the nearest shore.
+   different point than the nearest shore. Proposals 2-3 km away come from the edge of the 2 km
+   query box, so the proposed point may not be the true nearest shore; check it on the map.
 4. `... scripts/check-shore.ts --apply-positions` (no network) moves only approved spots whose
-   coordinates still match the proposal; sectors and notes are unchanged. Run the tests (dataset
-   dedupe) and commit all three files.
+   coordinates still match the proposal and skips moves that land within 1.5 km of another spot;
+   sectors and notes are unchanged. Run the tests (they fail on any pair of spots within 1.5 km not
+   on the known-close list in tests/spots.test.ts) and commit all three files.
 
 ## Approximate positions
 

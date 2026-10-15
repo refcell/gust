@@ -5,6 +5,7 @@
  * Pure except `checkAll`, whose I/O is injected (tests mock it).
  */
 import { nearestShorePoint, type ShoreFeature } from '../src/lib/coastline';
+import { distanceKm } from '../src/lib/geo';
 import { fetchSpotFeatures, politeFetch, samePlace, type CuratedSpot, type InferDeps } from './sector-suggest';
 
 /** Spots farther than this from any shore are listed as likely mispositioned, m. */
@@ -99,7 +100,7 @@ export function summarize(checks: readonly ShoreCheck[], total: number): string[
   for (const c of measured) kinds.set(c.shoreKind, (kinds.get(c.shoreKind) ?? 0) + 1);
   const lines = [
     `${checks.length}/${total} spots checked: ${measured.length} measured (${[...kinds].map(([k, n]) => `${k} ${n}`).join(', ') || 'none'}), ` +
-      `${noShore.length} no shore in range, ${failed.length - noShore.length} Overpass failures`,
+      `${noShore.length} no shore in range, ${failed.length - noShore.length} Overpass failure${failed.length - noShore.length === 1 ? '' : 's'}`,
     `${far.length} farther than ${FAR_FROM_SHORE_M} m from any shore:`,
     ...far.map((c) => `  ${c.id}: ${c.distanceM} m (${c.shoreKind}) nearest ${c.nearestLat},${c.nearestLon}`),
     `${noShore.length} with no shore in range:`,
@@ -130,6 +131,9 @@ export function proposePositions(spots: readonly CuratedSpot[], checks: readonly
   return out;
 }
 
+/** Spots closer than this are duplicates (scripts/merge-spots.mjs, src/lib/spots.ts mergeSpots). */
+export const DEDUPE_KM = 1.5;
+
 /** Move spots to approved proposals whose recorded coordinates still match (returns a new array). */
 export function applyPositions<T extends CuratedSpot>(spots: readonly T[], proposals: readonly PositionProposal[]): { spots: T[]; applied: string[]; skipped: string[] } {
   const byId = new Map(proposals.filter((p) => p.review === 'approved').map((p) => [p.id, p]));
@@ -144,6 +148,14 @@ export function applyPositions<T extends CuratedSpot>(spots: readonly T[], propo
     }
     if (!Number.isFinite(p.proposedLat) || !Number.isFinite(p.proposedLon) || Math.abs(p.proposedLat) > 90 || Math.abs(p.proposedLon) > 180) {
       skipped.push(`${spot.id} (invalid proposed coordinates)`);
+      return spot;
+    }
+    // Never move a spot within 1.5 km (the merge dedupe radius) of another spot it was not already
+    // that close to: that would create a near-duplicate.
+    const to = { lat: p.proposedLat, lon: p.proposedLon };
+    const clash = spots.find((o) => o.id !== spot.id && distanceKm(to, o) < DEDUPE_KM && distanceKm(spot, o) >= DEDUPE_KM);
+    if (clash) {
+      skipped.push(`${spot.id} (would be within ${DEDUPE_KM} km of ${clash.id})`);
       return spot;
     }
     applied.push(spot.id);
