@@ -56,6 +56,11 @@ for (const colorScheme of ['light', 'dark'] as const) {
         await expect(page.getByRole('heading', { level: 2, name })).toBeVisible();
         await audit(page, name);
       }
+      // Places search with spot matches on screen.
+      await page.locator('#place-q').fill('hood');
+      await page.locator('#place-q').press('Enter');
+      await expect(page.getByRole('list', { name: 'Matching spots' })).toBeVisible();
+      await audit(page, 'places search (spot matches)');
     });
   });
 }

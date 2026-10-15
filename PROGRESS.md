@@ -270,3 +270,6 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   `--only`/`--limit` values starting with `--` are rejected and cannot switch modes; workflow
   concurrency group; approved-but-ineligible sector suggestions are reported as skipped; README
   caveat for 2-3 km proposals.
+- Loop 23: Places search also finds curated spots by name (case/diacritic-insensitive, word-prefix
+  first) with a Favourite toggle (favouriting watches a spot anywhere) and Show for spots already in
+  the list; one shared toggleFavorite in App; axe audit covers the results.
