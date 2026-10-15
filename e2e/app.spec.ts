@@ -186,6 +186,30 @@ test.describe('calendar export', () => {
     expect(ics).toMatch(/DTSTART:\d{8}T180000Z/);
   });
 
+  test('installed iPhone app shares the .ics through the share sheet', async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'userAgent', { get: () => 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1' });
+      Object.defineProperty(navigator, 'standalone', { get: () => true });
+      const w = window as unknown as { __shared?: Promise<string> };
+      Object.defineProperty(navigator, 'canShare', { value: (d: { files?: File[] }) => !!d.files?.length });
+      Object.defineProperty(navigator, 'share', {
+        value: (d: { files: File[] }) => {
+          w.__shared = d.files[0].text().then((t) => `${d.files[0].name}|${d.files[0].type}|${t}`);
+          return Promise.resolve();
+        },
+      });
+    });
+    await page.goto('/gust/app/');
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    await page.getByRole('tab', { name: 'Alerts' }).click();
+    await page.getByRole('button', { name: 'Add good windows to calendar' }).click();
+    const shared = await page.waitForFunction(() => (window as unknown as { __shared?: Promise<string> }).__shared).then(() =>
+      page.evaluate(() => (window as unknown as { __shared: Promise<string> }).__shared),
+    );
+    expect(shared).toMatch(/^gust-windows\.ics\|text\/calendar[^|]*\|BEGIN:VCALENDAR/);
+    expect(shared).toContain('BEGIN:VEVENT');
+  });
+
   test('disables the button when there are no good windows', async ({ page }) => {
     // The mock's good runs last 8 hours; require 12.
     await page.addInitScript(() => localStorage.setItem('gust.settings', JSON.stringify({ minWindowHours: 12 })));

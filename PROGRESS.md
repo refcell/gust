@@ -179,6 +179,10 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   signed 32-bit). Open: installed-iPhone Blob -> Calendar handoff needs device acceptance.
 - Docs audit: README/data/server READMEs re-verified against code; scripts + workflows tables.
 
+- Calendar export in the installed iOS app prefers the share sheet with the .ics file (Web Share
+  Level 2) and falls back to opening the Blob URL (navigation if the popup is blocked). Browser tabs
+  keep the anchor download.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
