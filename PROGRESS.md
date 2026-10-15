@@ -255,3 +255,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   sumbawa-lakey, romania-vadu, antigua-nonsuch-bay, finland-yyteri); rejected >500 m entries,
   lagoon spots where the outer coast was picked (Emerald Sea, Filim, Kappalady), the Rewa spit, and
   Puerto Velero (sector would exclude its NE trades). 13 still fail.
+- Loop 19: fifth inference run: 6 more approved (kenya-lamu-shela, namibia-langstrand,
+  norway-solastranden, estonia-parnu, turkey-cesme-pirlanta, montenegro-ulcinj-kabanya);
+  bvi-trellis-bay rejected (inferred north-facing shore would make its E trades offshore). 6 spots
+  still fail Overpass; 25 curated spots remain [] in total.

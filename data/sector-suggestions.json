@@ -241,7 +241,19 @@
   },
   {
     "id": "kenya-lamu-shela",
-    "reason": "overpass-request-failed"
+    "name": "Shela Beach (Lamu)",
+    "lat": -2.298,
+    "lon": 40.915,
+    "normalDeg": 113,
+    "sectors": [
+      [
+        23,
+        203
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 23,
+    "review": "approved"
   },
   {
     "id": "argentina-dique-ullum",
@@ -345,7 +357,19 @@
   },
   {
     "id": "namibia-langstrand",
-    "reason": "overpass-request-failed"
+    "name": "Langstrand (Long Beach)",
+    "lat": -22.81446,
+    "lon": 14.54232,
+    "normalDeg": 277,
+    "sectors": [
+      [
+        187,
+        7
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "djerba-souk-el-guebli",
@@ -453,7 +477,19 @@
   },
   {
     "id": "norway-solastranden",
-    "reason": "overpass-request-failed"
+    "name": "Solastranden (Jaeren)",
+    "lat": 58.88483,
+    "lon": 5.60254,
+    "normalDeg": 251,
+    "sectors": [
+      [
+        161,
+        341
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "poland-rewa",
@@ -473,15 +509,51 @@
   },
   {
     "id": "estonia-parnu",
-    "reason": "overpass-request-failed"
+    "name": "Parnu Beach",
+    "lat": 58.37349,
+    "lon": 24.49612,
+    "normalDeg": 207,
+    "sectors": [
+      [
+        117,
+        297
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "turkey-cesme-pirlanta",
-    "reason": "overpass-request-failed"
+    "name": "Pirlanta Beach (Cesme)",
+    "lat": 38.28521,
+    "lon": 26.24921,
+    "normalDeg": 11,
+    "sectors": [
+      [
+        281,
+        101
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "montenegro-ulcinj-kabanya",
-    "reason": "overpass-request-failed"
+    "name": "Ka'banya (Velika Plaza, Ulcinj)",
+    "lat": 41.87386,
+    "lon": 19.3291,
+    "normalDeg": 189,
+    "sectors": [
+      [
+        99,
+        279
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "lithuania-svencele",
@@ -517,7 +589,19 @@
   },
   {
     "id": "bvi-trellis-bay",
-    "reason": "overpass-request-failed"
+    "name": "Trellis Bay (Beef Island, BVI)",
+    "lat": 18.44491,
+    "lon": -64.53094,
+    "normalDeg": 329,
+    "sectors": [
+      [
+        239,
+        59
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "rejected"
   },
   {
     "id": "guadeloupe-bois-jolan",
