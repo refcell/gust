@@ -261,3 +261,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   bvi-trellis-bay rejected (inferred north-facing shore would make its E trades offshore). 6 spots
   still fail Overpass; 25 curated spots remain [] in total.
 - Loop 20: shore check for all curated spots (distance to nearest OSM shore, resumable, review-gated position proposals); workflow check-shore.yml.
+- Loop 21: landing Lighthouse performance swung 76-100 (TBT 0-1150 ms) because Lighthouse's
+  full-page screenshot grows the viewport, the demo frame becomes 60% visible and the app iframe
+  boots mid-trace. Auto-boot now waits for a first scroll/wheel/touch/pointer/key event before
+  observing visibility; e2e covers a 3000 px viewport without engagement.
