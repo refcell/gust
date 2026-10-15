@@ -80,11 +80,13 @@ describe('suggestionFor', () => {
 
 describe('applySuggestions', () => {
   const sugg: Suggestion[] = [
-    { id: 'a', name: 'A', lat: 0, lon: 0, normalDeg: 90, sectors: [[0, 180]], shoreKind: 'sea', distanceM: 120 },
-    { id: 'b', name: 'B', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'lake', distanceM: 500 },
-    { id: 'c', name: 'C', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'sea', distanceM: 501 },
+    { id: 'a', name: 'A', lat: 0, lon: 0, normalDeg: 90, sectors: [[0, 180]], shoreKind: 'sea', distanceM: 120, review: 'approved' },
+    { id: 'b', name: 'B', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'lake', distanceM: 500, review: 'approved' },
+    { id: 'c', name: 'C', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'sea', distanceM: 501, review: 'approved' },
     { id: 'd', reason: 'nearest-shore-river' },
-    { id: 'e', name: 'E', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'sea', distanceM: 10 },
+    { id: 'e', name: 'E', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'sea', distanceM: 10, review: 'approved' },
+    { id: 'f', name: 'F', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'sea', distanceM: 10, review: 'rejected' },
+    { id: 'g', name: 'G', lat: 0, lon: 0, normalDeg: 0, sectors: [[270, 90]], shoreKind: 'sea', distanceM: 10 },
   ];
   it('applies only close sea/lake suggestions to still-unknown spots', () => {
     const spots = [spot('a'), spot('b', [], { notes: undefined }), spot('c'), spot('d'), spot('e', [[10, 20]]), spot('f')];
@@ -94,6 +96,11 @@ describe('applySuggestions', () => {
     expect(r.spots[1].notes).toBe(APPLY_NOTE.trim());
     expect(r.spots.slice(2)).toEqual(spots.slice(2));
     expect(spots[0].sectors).toEqual([]); // input untouched
+  });
+  it('skips unreviewed, rejected, moved spots and overlong notes', () => {
+    const r = applySuggestions([spot('f'), spot('g'), { ...spot('a'), lat: 1 }, spot('b', [], { notes: 'x'.repeat(130) })], sugg);
+    expect(r.applied).toEqual([]);
+    expect(r.skipped).toEqual(['a (spot moved since inference)', 'b (notes would exceed 140 characters)']);
   });
   it('does not append the note twice', () => {
     const once = applySuggestions([spot('a')], sugg).spots;

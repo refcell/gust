@@ -240,3 +240,11 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 13: +33 gap-region spots (12 new countries).
 - Loop 14: sectors for 7 spots from the first inference run; resumable inference.
 - Loop 15: second inference run (31/40 Overpass failures from the runner); 7 more reviewed sectors applied.
+- Loop 16: gpt-6.1-sol review of loops 11-14. Fixed: --apply only uses entries with
+  `review: approved` and coordinates matching the spot (rejections persisted in the file); resume
+  re-infers moved spots; Murrell Park reverted to [] (inferred shore was not the launch; notes say
+  S wind); Kappalady moved ~13 km to the lagoon south of Kalpitiya; calendar export no longer fails
+  when storage throws; share path checks both APIs and falls back on synchronous errors; note
+  annotation shortened to " OSM-inferred sectors." and a dataset test enforces notes <= 140 chars;
+  README/data README document the inference workflow. Share-sheet acceptance on a real iPhone stays
+  on the owner's device checklist.

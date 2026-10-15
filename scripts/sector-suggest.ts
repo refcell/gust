@@ -15,7 +15,9 @@ export const MIN_GAP_MS = 5_000;
 export const RETRY_BACKOFF_MS = [30_000, 60_000, 120_000];
 /** `--apply` only takes suggestions at most this far from the nearest shore, m. */
 export const APPLY_MAX_DISTANCE_M = 500;
-export const APPLY_NOTE = ' Sectors inferred from OSM coastline.';
+export const APPLY_NOTE = ' OSM-inferred sectors.';
+/** data/README: notes are at most 140 characters. */
+export const MAX_NOTES = 140;
 
 export interface CuratedSpot {
   id: string;
@@ -36,6 +38,8 @@ export interface KnownSuggestion {
   sectors: Sector[];
   shoreKind: 'sea' | 'lake';
   distanceM: number;
+  /** Human review decision; `--apply` only uses approved entries. */
+  review?: 'approved' | 'rejected';
 }
 
 export interface UnknownSuggestion {
@@ -46,6 +50,10 @@ export interface UnknownSuggestion {
 export type Suggestion = KnownSuggestion | UnknownSuggestion;
 
 export const isKnown = (s: Suggestion): s is KnownSuggestion => 'normalDeg' in s;
+
+/** The suggestion was computed for the spot's current coordinates (stale after a spot moves). */
+export const samePlace = (s: { lat: number; lon: number }, spot: { lat: number; lon: number }): boolean =>
+  Math.abs(s.lat - spot.lat) < 1e-6 && Math.abs(s.lon - spot.lon) < 1e-6;
 
 /** Curated spots whose rideable sectors are unknown (missing or empty). */
 export function selectUnknown<T extends CuratedSpot>(spots: readonly T[]): T[] {
@@ -77,20 +85,30 @@ export function applySuggestions<T extends CuratedSpot>(
   spots: readonly T[],
   suggestions: readonly Suggestion[],
   maxDistanceM = APPLY_MAX_DISTANCE_M,
-): { spots: T[]; applied: string[] } {
+): { spots: T[]; applied: string[]; skipped: string[] } {
   const byId = new Map<string, KnownSuggestion>();
   for (const s of suggestions) {
-    if (isKnown(s) && (s.shoreKind === 'sea' || s.shoreKind === 'lake') && s.distanceM <= maxDistanceM) byId.set(s.id, s);
+    if (isKnown(s) && s.review === 'approved' && (s.shoreKind === 'sea' || s.shoreKind === 'lake') && s.distanceM <= maxDistanceM) byId.set(s.id, s);
   }
   const applied: string[] = [];
+  const skipped: string[] = [];
   const out = spots.map((spot) => {
     const s = byId.get(spot.id);
     if (!s || selectUnknown([spot]).length === 0) return spot;
+    const prev = spot.notes ?? '';
+    const notes = prev.endsWith(APPLY_NOTE.trim()) ? prev : (prev + APPLY_NOTE).trim();
+    if (!samePlace(s, spot)) {
+      skipped.push(`${spot.id} (spot moved since inference)`);
+      return spot;
+    }
+    if (notes.length > MAX_NOTES) {
+      skipped.push(`${spot.id} (notes would exceed ${MAX_NOTES} characters)`);
+      return spot;
+    }
     applied.push(spot.id);
-    const notes = spot.notes ?? '';
-    return { ...spot, sectors: s.sectors.map((x) => [...x] as Sector), notes: notes.endsWith(APPLY_NOTE.trim()) ? notes : (notes + APPLY_NOTE).trim() };
+    return { ...spot, sectors: s.sectors.map((x) => [...x] as Sector), notes };
   });
-  return { spots: out, applied };
+  return { spots: out, applied, skipped };
 }
 
 /** Same one-entry-per-line layout as scripts/merge-spots.mjs. */

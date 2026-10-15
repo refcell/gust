@@ -5,14 +5,18 @@
  * Must be called from a user gesture (share and window.open require one).
  */
 export function saveFile(text: string, filename: string, type: string, opts: { iosStandalone: boolean }): 'download' | 'share' | 'open' {
-  if (opts.iosStandalone && typeof File === 'function' && navigator.canShare) {
-    const file = new File([text], filename, { type });
-    if (navigator.canShare({ files: [file] })) {
-      navigator.share({ files: [file], title: filename }).catch((e: unknown) => {
-        // The user closing the sheet is not an error; anything else falls back to the Blob URL.
-        if ((e as { name?: string })?.name !== 'AbortError') openBlob(text, type);
-      });
-      return 'share';
+  if (opts.iosStandalone && typeof File === 'function' && typeof navigator.canShare === 'function' && typeof navigator.share === 'function') {
+    try {
+      const file = new File([text], filename, { type });
+      if (navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: filename }).catch((e: unknown) => {
+          // The user closing the sheet is not an error; anything else falls back to the Blob URL.
+          if ((e as { name?: string })?.name !== 'AbortError') openBlob(text, type);
+        });
+        return 'share';
+      }
+    } catch {
+      /* synchronous share failure: fall through to the Blob URL */
     }
   }
   const url = URL.createObjectURL(new Blob([text], { type }));

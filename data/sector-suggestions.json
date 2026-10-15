@@ -12,7 +12,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 1
+    "distanceM": 1,
+    "review": "approved"
   },
   {
     "id": "sand-hollow-reservoir",
@@ -27,7 +28,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 345
+    "distanceM": 345,
+    "review": "approved"
   },
   {
     "id": "grapevine-lake-murrell-park",
@@ -42,7 +44,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 150
+    "distanceM": 150,
+    "review": "rejected"
   },
   {
     "id": "jfk-causeway",
@@ -57,7 +60,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 67
+    "distanceM": 67,
+    "review": "rejected"
   },
   {
     "id": "galveston-8-mile-road",
@@ -72,7 +76,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 29
+    "distanceM": 29,
+    "review": "approved"
   },
   {
     "id": "ben-t-davis-beach",
@@ -87,7 +92,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 22
+    "distanceM": 22,
+    "review": "approved"
   },
   {
     "id": "vietnam-my-hoa-lagoon",
@@ -102,7 +108,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 901
+    "distanceM": 901,
+    "review": "rejected"
   },
   {
     "id": "japan-hamanako-bentenjima",
@@ -117,7 +124,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 145
+    "distanceM": 145,
+    "review": "rejected"
   },
   {
     "id": "morocco-oualidia",
@@ -132,7 +140,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 10
+    "distanceM": 10,
+    "review": "rejected"
   },
   {
     "id": "cape-verde-boa-vista",
@@ -147,7 +156,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 56
+    "distanceM": 56,
+    "review": "approved"
   },
   {
     "id": "brazil-pedra-do-sal",
@@ -162,7 +172,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 731
+    "distanceM": 731,
+    "review": "rejected"
   },
   {
     "id": "brazil-salinopolis",
@@ -177,7 +188,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 948
+    "distanceM": 948,
+    "review": "rejected"
   },
   {
     "id": "uruguay-laguna-jose-ignacio",
@@ -192,7 +204,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 1129
+    "distanceM": 1129,
+    "review": "rejected"
   },
   {
     "id": "argentina-puerto-madryn",
@@ -207,7 +220,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 53
+    "distanceM": 53,
+    "review": "approved"
   },
   {
     "id": "sri-lanka-mannar",
@@ -242,7 +256,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 900
+    "distanceM": 900,
+    "review": "rejected"
   },
   {
     "id": "au-yorkeys-knob",
@@ -274,7 +289,7 @@
   },
   {
     "id": "sri-lanka-kappalady",
-    "reason": "overpass-request-failed"
+    "reason": "moved; re-infer"
   },
   {
     "id": "lombok-ekas",
@@ -337,7 +352,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "martinique-cap-chevalier",
@@ -356,7 +372,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "union-island-kite-beach",
@@ -371,7 +388,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "tobago-pigeon-point",
@@ -390,7 +408,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "costa-rica-lake-arenal",
@@ -405,7 +424,8 @@
       ]
     ],
     "shoreKind": "lake",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "austria-podersdorf",
@@ -428,7 +448,8 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "jamaica-burwood",
@@ -455,6 +476,7 @@
       ]
     ],
     "shoreKind": "sea",
-    "distanceM": 0
+    "distanceM": 0,
+    "review": "approved"
   }
 ]
