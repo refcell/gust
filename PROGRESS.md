@@ -248,3 +248,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   annotation shortened to " OSM-inferred sectors." and a dataset test enforces notes <= 140 chars;
   README/data README document the inference workflow. Share-sheet acceptance on a real iPhone stays
   on the owner's device checklist.
+- Loop 17: third inference run: 3 more approved (zanzibar-bwejuu, bulgaria-burgas, martinique-cap-chevalier), lithuania-svencele rejected (lagoon shore faced the wrong way). 28 spots keep failing Overpass from the runner; left [] (speed-only scoring).
