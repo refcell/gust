@@ -127,16 +127,19 @@ are welcome:
 
 ## Sector inference
 
-`data/sector-suggestions.json` is the review record from `scripts/infer-sectors.ts` (OSM coastline
-around each spot with `sectors: []`; run by the manual "Infer spot sectors" workflow, which saves
-progress per spot and resumes). Entries listed there are skipped on re-runs. Applied so far (loop
-14): sandpoint-city-beach, sand-hollow-reservoir, grapevine-lake-murrell-park,
-galveston-8-mile-road, ben-t-davis-beach, cape-verde-boa-vista, argentina-puerto-madryn; (loop 15)
-guadeloupe-bois-jolan, st-lucia-cas-en-bas, union-island-kite-beach, costa-rica-playa-copal,
-costa-rica-lake-arenal, belgium-oostende, latvia-vakarbulli.
-Reviewed and not applied: jfk-causeway (water on both sides), japan-hamanako-bentenjima,
-morocco-oualidia, kenya-lamu, vietnam-my-hoa-lagoon (lagoons / mixed shores), and entries more than
-500 m from the shore.
+`scripts/infer-sectors.ts` suggests sectors for spots with `sectors: []` from the OSM coastline
+around each spot, using the app's own inference (seaward normal ±90°, side-shore at most, narrower
+than the ±95° curation default above). `data/sector-suggestions.json` is the review record:
+
+1. Run the manual "Infer spot sectors" workflow (or the script locally). It starts from the
+   committed file, skips spots already inferred at their current coordinates, retries failed ones,
+   and saves after every spot. Download the `sector-suggestions` artifact over the committed file.
+2. Review each new entry against the map and the spot's notes; set `"review": "approved"` or
+   `"rejected"`. Lagoons, causeways and launches far from the inferred shore are usually rejected.
+3. `node --import ./scripts/ts-resolve.mjs scripts/infer-sectors.ts --apply` copies approved entries
+   (sea/lake, within 500 m, computed at the spot's current coordinates) and appends
+   " OSM-inferred sectors." to notes; it skips a spot if notes would pass 140 characters.
+4. Commit both files so the next run resumes from them.
 
 ## Approximate positions
 

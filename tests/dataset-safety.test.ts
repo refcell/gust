@@ -76,3 +76,10 @@ describe('dataset safety: offshore and side-off wind never scores good', () => {
     expect(wide).toEqual([]);
   });
 });
+
+describe('notes length', () => {
+  it('keeps every note within 140 characters (data/README)', () => {
+    const long = (data as { id: string; notes?: string }[]).filter((s) => (s.notes ?? '').length > 140).map((s) => s.id);
+    expect(long).toEqual([]);
+  });
+});

@@ -120,6 +120,7 @@ Scripts (run with `node scripts/<name>.mjs`):
 | `icons.mjs` | Regenerate the icon set from SVG (also `pnpm icons`). |
 | `merge-spots.mjs [--keep]` | Validate `data/new-*.json`, drop duplicates (same id or within 1.5 km) and append to `data/spots.json`. |
 | `check-spots.mjs [maxMeters]` | Flag curated coastal spots above `maxMeters` (default 25) using Open-Meteo elevation. |
+| `infer-sectors.ts [--apply]` | Run as `node --import ./scripts/ts-resolve.mjs scripts/infer-sectors.ts` (Node 22.15+). Without flags: one Overpass query per spot with `sectors: []`, writing `data/sector-suggestions.json` for review (saved per spot, resumes). `--apply`: copy entries marked `"review": "approved"` into `data/spots.json`. |
 | `snap-spots.mjs id ...` | Move the given spots to the nearest low-lying cell next to the sea. Expensive: 1–3 spots at a time. |
 | `lh-summary.mjs report.json ...` | Print a Markdown summary of Lighthouse JSON reports. |
 
@@ -145,6 +146,7 @@ Workflows (`.github/workflows/`):
 | Lighthouse (`lighthouse.yml`) | after a successful CI run on `main` | report-only mobile Lighthouse run against the live landing page and `app/?demo=1` |
 | Android APK (`android.yml`) | changes under `android/`, `v*` tags, manual | builds the signed TWA APK and publishes it to the `apk-latest` prerelease (or a tag release) |
 | Spot coordinate check (`spots-check.yml`) | weekly, manual | `check-spots.mjs 15`, report only |
+| Infer spot sectors (`infer-sectors.yml`) | manual | `infer-sectors.ts` from the runner's IP, uploads the suggestions artifact, never commits |
 
 ## Self-hosting the push backend
 

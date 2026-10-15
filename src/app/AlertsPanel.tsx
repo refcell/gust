@@ -66,8 +66,19 @@ export function AlertsPanel({ platform, settings, watched, loc, origins, wind }:
     // Recompute at click time so windows that ended since render are dropped.
     const wins = calendarWindows(watched.map((spot) => ({ spot, wind: wind[spot.id] })), settings, now);
     if (!wins.length) return;
-    const sequence = nextSequence(Number(localStorage.getItem('gust.icsSeq')), now);
-    localStorage.setItem('gust.icsSeq', String(sequence));
+    // Storage only improves SEQUENCE ordering across exports; it must never block the export.
+    let prev: number | null = null;
+    try {
+      prev = Number(localStorage.getItem('gust.icsSeq'));
+    } catch {
+      /* storage unavailable */
+    }
+    const sequence = nextSequence(prev, now);
+    try {
+      localStorage.setItem('gust.icsSeq', String(sequence));
+    } catch {
+      /* quota or denied: export anyway */
+    }
     saveFile(buildIcs(wins, { now, unit: settings.unit, sequence }), 'gust-windows.ics', 'text/calendar;charset=utf-8', { iosStandalone: platform.ios && platform.standalone });
   };
 
