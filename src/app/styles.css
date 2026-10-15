@@ -540,6 +540,28 @@ input[type='search'] {
 .caps li {
   margin-bottom: 8px;
 }
+.ntfy {
+  margin: 16px 0 0;
+}
+.ntfy summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 12px 0;
+}
+.ntfy-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 4px;
+}
+.ntfy-topic {
+  word-break: break-all;
+}
+.ntfy-manual {
+  width: 100%;
+  box-sizing: border-box;
+  font: 0.8rem ui-monospace, monospace;
+}
 
 .banner {
   border: 1px solid var(--line);

@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import type { Platform } from '../lib/platform';
-import type { Settings, Spot, SpotWind } from '../lib/types';
+import type { Place, Settings, Spot, SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { pushSpots } from '../lib/pushsync';
 import { buildIcs, calendarWindows, nextSequence } from '../lib/ics';
 import { saveFile } from './download';
+import { NtfySection } from './NtfySection';
 import { enableBackground, pushConfigured, requestAlerts, showLocalNotification, type BackgroundStatus } from './background';
 
 interface Props {
@@ -15,13 +16,15 @@ interface Props {
   loc: LatLon | null;
   /** Last location and saved places (which spots the push server watches). */
   origins: LatLon[];
+  /** Saved places (for the ntfy alert config). */
+  places: Place[];
   /** Latest wind per spot id (for the calendar export). */
   wind: Readonly<Record<string, SpotWind>>;
 }
 
 type Perm = NotificationPermission | 'unsupported';
 
-export function AlertsPanel({ platform, settings, watched, loc, origins, wind }: Props) {
+export function AlertsPanel({ platform, settings, watched, loc, origins, places, wind }: Props) {
   const [perm, setPerm] = useState<Perm>(() => ('Notification' in window ? Notification.permission : 'unsupported'));
   const [bg, setBg] = useState<BackgroundStatus | null>(null);
   const [busy, setBusy] = useState(false);
@@ -134,6 +137,7 @@ export function AlertsPanel({ platform, settings, watched, loc, origins, wind }:
           <strong>Location:</strong> background checks use the last location gust saw and your saved places. Phones do not give web apps location in the background.
         </li>
       </ul>
+      <NtfySection settings={settings} places={places} loc={loc} />
       <h3>Calendar</h3>
       <button class="btn ghost" onClick={exportCalendar} disabled={calWins.length === 0}>
         {calWins.length ? 'Add good windows to calendar' : 'No good windows in the next 48 h'}
