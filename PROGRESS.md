@@ -209,7 +209,8 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
    notification -> calendar export opens in Calendar with reminders; Android Chrome install + APK sideload. Everything else is verified in CI/live.
 2. Deploy push backend when credentials exist (server/README.md), then set repo variables.
 4. Verify approximate positions (data/README.md) against imagery/elevation.
-5. Verify lower-confidence spot coordinates against OSM coastline data (scripted check).
+5. Verify spot coordinates against OSM shore data: `scripts/check-shore.ts` + manual "Check spot
+   positions" workflow (loop 20); review data/position-proposals.json and apply approved moves.
 
 ## Log
 
@@ -259,3 +260,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   norway-solastranden, estonia-parnu, turkey-cesme-pirlanta, montenegro-ulcinj-kabanya);
   bvi-trellis-bay rejected (inferred north-facing shore would make its E trades offshore). 6 spots
   still fail Overpass; 25 curated spots remain [] in total.
+- Loop 20: shore check for all curated spots (distance to nearest OSM shore, resumable, review-gated position proposals); workflow check-shore.yml.
