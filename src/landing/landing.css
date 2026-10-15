@@ -59,8 +59,8 @@ main,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: calc(24px + env(safe-area-inset-top));
-  padding-bottom: 24px;
+  padding-top: calc(12px + env(safe-area-inset-top));
+  padding-bottom: 12px;
 }
 .nav nav {
   display: flex;
@@ -68,6 +68,8 @@ main,
   font-size: 0.95rem;
 }
 .nav nav a {
+  display: inline-block;
+  padding: 12px 0;
   color: var(--muted);
   text-decoration: none;
 }
@@ -119,6 +121,8 @@ h1 {
   color: #fff;
 }
 .secondary {
+  display: inline-block;
+  padding: 12px 0;
   color: var(--muted);
   font-size: 0.95rem;
 }
@@ -171,6 +175,7 @@ h1 {
   color: var(--muted);
   font-size: 0.85rem;
   margin-top: 12px;
+  text-wrap: balance;
 }
 h2 {
   font-size: 1.1rem;
