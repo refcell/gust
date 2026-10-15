@@ -183,6 +183,10 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   Level 2) and falls back to opening the Blob URL (navigation if the popup is blocked). Browser tabs
   keep the anchor download.
 
+- Gap spots (loop 13): +33 spots in 12 new countries (720 total, 87 countries), each moved onto the
+  OSM coastline via the OSM API (no Overpass/Open-Meteo). No sourced wind directions, so sectors are
+  [] (speed-only scoring) until the sector-inference workflow fills them. Dropped two doubtful
+  entries (philippines-bulalacao, norway-verket); low-confidence positions listed in data/README.
 - Accepted: forecast hour labels use the response's fixed offset, so for spots whose clocks change
   inside the 48 h window, labels after the change read 1 h off (instants, alerts and calendar times
   are exact). Rewriting labels per IANA zone would touch every string comparison; not worth it.
@@ -228,3 +232,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 11: docs audit, demo re-record (marine), review fixes (DST revert, marine expiry/timeout,
   monotonic SEQUENCE).
 - Loop 12: iOS share-sheet calendar export; offline sector inference script + manual workflow.
+- Loop 13: +33 gap-region spots (12 new countries).
