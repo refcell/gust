@@ -90,7 +90,7 @@ export function SettingsPanel({ settings, onChange }: { settings: Settings; onCh
         <legend>Forecast</legend>
         <label class="check">
           <input type="checkbox" checked={settings.forecastAlerts} onChange={(e) => onChange({ ...settings, forecastAlerts: (e.currentTarget as HTMLInputElement).checked })} />
-          Alert me about good windows in the next 24 h
+          Alert me about good windows in the next 24&nbsp;h
         </label>
         <label>
           Minimum window length (hours)

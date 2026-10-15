@@ -379,6 +379,8 @@ export function App() {
 
   /** Switch section; `focusSel` moves keyboard focus into the new panel once it renders. */
   const selectView = (v: View, focusSel?: string) => {
+    // A new tab starts at its top, not at the previous tab's scroll offset.
+    if (v !== view) window.scrollTo(0, 0);
     setView(v);
     if (focusSel) requestAnimationFrame(() => document.querySelector<HTMLElement>(focusSel)?.focus());
   };
@@ -390,6 +392,7 @@ export function App() {
     if (next === undefined) return;
     e.preventDefault();
     const v = TABS[next][0];
+    if (v !== view) window.scrollTo(0, 0);
     setView(v);
     document.getElementById(`tab-${v}`)?.focus();
   };

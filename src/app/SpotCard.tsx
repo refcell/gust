@@ -104,15 +104,19 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, mut
             <a href={`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lon}`} target="_blank" rel="noopener">
               Open in Maps
             </a>
-            {onFavorite && (
-              <button class="btn ghost small fav-btn" aria-pressed={!!favorite} onClick={() => onFavorite(!favorite)}>
-                <span aria-hidden="true">{favorite ? '★' : '☆'}</span> Favourite
-              </button>
-            )}
-            {onMute && (
-              <button class="btn ghost small" aria-pressed={!!muted} onClick={() => onMute(!muted)}>
-                {muted ? 'Unmute alerts' : 'Mute alerts'}
-              </button>
+            {(onFavorite || onMute) && (
+              <span class="actions-btns">
+                {onFavorite && (
+                  <button class="btn ghost small fav-btn" aria-pressed={!!favorite} onClick={() => onFavorite(!favorite)}>
+                    <span aria-hidden="true">{favorite ? '★' : '☆'}</span> Favourite
+                  </button>
+                )}
+                {onMute && (
+                  <button class="btn ghost small" aria-pressed={!!muted} onClick={() => onMute(!muted)}>
+                    {muted ? 'Unmute alerts' : 'Mute alerts'}
+                  </button>
+                )}
+              </span>
             )}
           </p>
         </div>
