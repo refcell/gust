@@ -265,7 +265,19 @@
   },
   {
     "id": "zanzibar-bwejuu",
-    "reason": "overpass-request-failed"
+    "name": "Bwejuu (Zanzibar)",
+    "lat": -6.23719,
+    "lon": 39.53466,
+    "normalDeg": 82,
+    "sectors": [
+      [
+        352,
+        172
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "madagascar-emerald-sea",
@@ -329,11 +341,35 @@
   },
   {
     "id": "lithuania-svencele",
-    "reason": "overpass-request-failed"
+    "name": "Svencele (Curonian Lagoon)",
+    "lat": 55.49374,
+    "lon": 21.24605,
+    "normalDeg": 161,
+    "sectors": [
+      [
+        71,
+        251
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 67,
+    "review": "rejected"
   },
   {
     "id": "bulgaria-burgas",
-    "reason": "overpass-request-failed"
+    "name": "Burgas North Beach",
+    "lat": 42.51559,
+    "lon": 27.4862,
+    "normalDeg": 99,
+    "sectors": [
+      [
+        9,
+        189
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "bvi-trellis-bay",
@@ -357,7 +393,19 @@
   },
   {
     "id": "martinique-cap-chevalier",
-    "reason": "overpass-request-failed"
+    "name": "Anse Michel (Cap Chevalier)",
+    "lat": 14.43799,
+    "lon": -60.82556,
+    "normalDeg": 104,
+    "sectors": [
+      [
+        14,
+        194
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "st-lucia-cas-en-bas",
