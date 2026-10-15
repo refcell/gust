@@ -273,3 +273,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 23: Places search also finds curated spots by name (case/diacritic-insensitive, word-prefix
   first) with a Favourite toggle (favouriting watches a spot anywhere) and Show for spots already in
   the list; one shared toggleFavorite in App; axe audit covers the results.
+- Loop 24: visual polish pass from 78 screenshots (scripts/ux-shots.mjs: 360/390/768 px, light and
+  dark, mocked network): map controls no longer overlap the sticky header, aligned fact lists and
+  card text, spot action buttons grouped, all tap targets >= 44 px, wrapping fixes, tab switches
+  scroll to top. Header is 8 px taller (44 px refresh button).
