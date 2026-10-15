@@ -75,7 +75,10 @@
     "id": "candlestick-point",
     "lat": 37.7125,
     "lon": -122.3795,
-    "reason": "overpass-request-failed"
+    "distanceM": 20,
+    "shoreKind": "coastline",
+    "nearestLat": 37.71241,
+    "nearestLon": -122.37931
   },
   {
     "id": "stinson-beach",
@@ -159,13 +162,19 @@
     "id": "gaviota",
     "lat": 34.4713,
     "lon": -120.228,
-    "reason": "overpass-request-failed"
+    "distanceM": 69,
+    "shoreKind": "coastline",
+    "nearestLat": 34.47071,
+    "nearestLon": -120.22824
   },
   {
     "id": "leadbetter-beach",
     "lat": 34.4022,
     "lon": -119.697,
-    "reason": "overpass-request-failed"
+    "distanceM": 19,
+    "shoreKind": "coastline",
+    "nearestLat": 34.40204,
+    "nearestLon": -119.69693
   },
   {
     "id": "ventura-surfers-point",
@@ -180,7 +189,10 @@
     "id": "leo-carrillo",
     "lat": 34.0446,
     "lon": -118.933,
-    "reason": "overpass-request-failed"
+    "distanceM": 43,
+    "shoreKind": "coastline",
+    "nearestLat": 34.04485,
+    "nearestLon": -118.93336
   },
   {
     "id": "cabrillo-beach",
@@ -222,7 +234,10 @@
     "id": "del-mar",
     "lat": 32.9753,
     "lon": -117.271,
-    "reason": "overpass-request-failed"
+    "distanceM": 47,
+    "shoreKind": "coastline",
+    "nearestLat": 32.97571,
+    "nearestLon": -117.27091
   },
   {
     "id": "mission-bay",
@@ -237,7 +252,10 @@
     "id": "silver-strand",
     "lat": 32.6373,
     "lon": -117.1425,
-    "reason": "overpass-request-failed"
+    "distanceM": 138,
+    "shoreKind": "coastline",
+    "nearestLat": 32.63695,
+    "nearestLon": -117.14109
   },
   {
     "id": "kings-beach-tahoe",
@@ -252,13 +270,19 @@
     "id": "hood-river-event-site",
     "lat": 45.7112,
     "lon": -121.5137,
-    "reason": "overpass-request-failed"
+    "distanceM": 225,
+    "shoreKind": "water",
+    "nearestLat": 45.71203,
+    "nearestLon": -121.51106
   },
   {
     "id": "hood-river-hook",
     "lat": 45.7145,
     "lon": -121.5265,
-    "reason": "overpass-request-failed"
+    "distanceM": 49,
+    "shoreKind": "water",
+    "nearestLat": 45.71406,
+    "nearestLon": -121.52658
   },
   {
     "id": "hood-river-sandbar",
@@ -336,7 +360,10 @@
     "id": "dougs-beach",
     "lat": 45.6764,
     "lon": -121.2814,
-    "reason": "overpass-request-failed"
+    "distanceM": 240,
+    "shoreKind": "water",
+    "nearestLat": 45.67824,
+    "nearestLon": -121.28301
   },
   {
     "id": "stevenson",
@@ -348,13 +375,19 @@
     "id": "roosevelt",
     "lat": 45.7352,
     "lon": -120.216,
-    "reason": "overpass-request-failed"
+    "distanceM": 3,
+    "shoreKind": "water",
+    "nearestLat": 45.73518,
+    "nearestLon": -120.21598
   },
   {
     "id": "jetty-island",
     "lat": 48.0063,
     "lon": -122.2353,
-    "reason": "overpass-request-failed"
+    "distanceM": 270,
+    "shoreKind": "coastline",
+    "nearestLat": 48.00597,
+    "nearestLon": -122.23171
   },
   {
     "id": "golden-gardens",
@@ -405,13 +438,19 @@
     "id": "sprecks",
     "lat": 20.9077,
     "lon": -156.4039,
-    "reason": "overpass-request-failed"
+    "distanceM": 467,
+    "shoreKind": "coastline",
+    "nearestLat": 20.91112,
+    "nearestLon": -156.4065
   },
   {
     "id": "kailua",
     "lat": 21.3975,
     "lon": -157.7266,
-    "reason": "overpass-request-failed"
+    "distanceM": 46,
+    "shoreKind": "river",
+    "nearestLat": 21.3972,
+    "nearestLon": -157.7263
   },
   {
     "id": "waimanalo",
@@ -435,13 +474,19 @@
     "id": "diamond-head",
     "lat": 21.2545,
     "lon": -157.8072,
-    "reason": "overpass-request-failed"
+    "distanceM": 37,
+    "shoreKind": "coastline",
+    "nearestLat": 21.25484,
+    "nearestLon": -157.80718
   },
   {
     "id": "hanalei",
     "lat": 22.2127,
     "lon": -159.4965,
-    "reason": "overpass-request-failed"
+    "distanceM": 92,
+    "shoreKind": "coastline",
+    "nearestLat": 22.21255,
+    "nearestLon": -159.49738
   },
   {
     "id": "anini",
@@ -465,7 +510,10 @@
     "id": "spi-kite-beach",
     "lat": 26.1445,
     "lon": -97.1785,
-    "reason": "overpass-request-failed"
+    "distanceM": 24,
+    "shoreKind": "water",
+    "nearestLat": 26.14447,
+    "nearestLon": -97.17874
   },
   {
     "id": "spi-gulf-side",
@@ -534,7 +582,10 @@
     "id": "galveston-east-beach",
     "lat": 29.3285,
     "lon": -94.737,
-    "reason": "overpass-request-failed"
+    "distanceM": 292,
+    "shoreKind": "coastline",
+    "nearestLat": 29.32642,
+    "nearestLon": -94.73517
   },
   {
     "id": "surfside-beach",
@@ -555,7 +606,10 @@
     "id": "canadian-hole",
     "lat": 35.297,
     "lon": -75.515,
-    "reason": "overpass-request-failed"
+    "distanceM": 42,
+    "shoreKind": "coastline",
+    "nearestLat": 35.29699,
+    "nearestLon": -75.51453
   },
   {
     "id": "kite-point",
@@ -633,7 +687,10 @@
     "id": "ocracoke",
     "lat": 35.1065,
     "lon": -75.9725,
-    "reason": "overpass-request-failed"
+    "distanceM": 935,
+    "shoreKind": "river",
+    "nearestLat": 35.1148,
+    "nearestLon": -75.97408
   },
   {
     "id": "wrightsville-beach",
@@ -657,13 +714,19 @@
     "id": "hobie-island",
     "lat": 25.7495,
     "lon": -80.1796,
-    "reason": "overpass-request-failed"
+    "distanceM": 311,
+    "shoreKind": "coastline",
+    "nearestLat": 25.74676,
+    "nearestLon": -80.17895
   },
   {
     "id": "crandon-park",
     "lat": 25.723,
     "lon": -80.1535,
-    "reason": "overpass-request-failed"
+    "distanceM": 98,
+    "shoreKind": "coastline",
+    "nearestLat": 25.72314,
+    "nearestLon": -80.15447
   },
   {
     "id": "matheson-hammock",
@@ -747,7 +810,10 @@
     "id": "daytona-beach",
     "lat": 29.22,
     "lon": -81.005,
-    "reason": "overpass-request-failed"
+    "distanceM": 150,
+    "shoreKind": "coastline",
+    "nearestLat": 29.22033,
+    "nearestLon": -81.00351
   },
   {
     "id": "skyway-beach",
@@ -798,7 +864,10 @@
     "id": "fort-myers-beach",
     "lat": 26.452,
     "lon": -81.949,
-    "reason": "overpass-request-failed"
+    "distanceM": 104,
+    "shoreKind": "water",
+    "nearestLat": 26.45219,
+    "nearestLon": -81.95002
   },
   {
     "id": "sanibel-causeway",
@@ -912,13 +981,19 @@
     "id": "kalmus-beach",
     "lat": 41.633,
     "lon": -70.2865,
-    "reason": "overpass-request-failed"
+    "distanceM": 254,
+    "shoreKind": "coastline",
+    "nearestLat": 41.63471,
+    "nearestLon": -70.28853
   },
   {
     "id": "west-dennis-beach",
     "lat": 41.652,
     "lon": -70.168,
-    "reason": "overpass-request-failed"
+    "distanceM": 20,
+    "shoreKind": "coastline",
+    "nearestLat": 41.65183,
+    "nearestLon": -70.16791
   },
   {
     "id": "chapoquoit",
@@ -966,7 +1041,10 @@
     "id": "plum-island",
     "lat": 42.773,
     "lon": -70.808,
-    "reason": "overpass-request-failed"
+    "distanceM": 74,
+    "shoreKind": "river",
+    "nearestLat": 42.77234,
+    "nearestLon": -70.80812
   },
   {
     "id": "revere-beach",
@@ -1029,7 +1107,10 @@
     "id": "fogland",
     "lat": 41.5645,
     "lon": -71.213,
-    "reason": "overpass-request-failed"
+    "distanceM": 237,
+    "shoreKind": "coastline",
+    "nearestLat": 41.56459,
+    "nearestLon": -71.21016
   },
   {
     "id": "sherwood-island",
@@ -1062,7 +1143,10 @@
     "id": "long-beach-ny",
     "lat": 40.5835,
     "lon": -73.659,
-    "reason": "overpass-request-failed"
+    "distanceM": 112,
+    "shoreKind": "coastline",
+    "nearestLat": 40.58251,
+    "nearestLon": -73.6592
   },
   {
     "id": "plumb-beach",
@@ -1074,7 +1158,10 @@
     "id": "fort-tilden",
     "lat": 40.559,
     "lon": -73.885,
-    "reason": "overpass-request-failed"
+    "distanceM": 142,
+    "shoreKind": "coastline",
+    "nearestLat": 40.56019,
+    "nearestLon": -73.88559
   },
   {
     "id": "tiana-beach",
@@ -1215,7 +1302,10 @@
     "id": "holland-sp",
     "lat": 42.773,
     "lon": -86.213,
-    "reason": "overpass-request-failed"
+    "distanceM": 19,
+    "shoreKind": "water",
+    "nearestLat": 42.77303,
+    "nearestLon": -86.21278
   },
   {
     "id": "muskegon-pere-marquette",
@@ -1407,7 +1497,10 @@
     "id": "utah-lake",
     "lat": 40.144,
     "lon": -111.801,
-    "reason": "overpass-request-failed"
+    "distanceM": 113,
+    "shoreKind": "water",
+    "nearestLat": 40.143,
+    "nearestLon": -111.80072
   },
   {
     "id": "bear-lake-rendezvous",
@@ -1444,9 +1537,9 @@
   },
   {
     "id": "lake-mead-boulder-beach",
-    "lat": 36.036,
-    "lon": -114.803,
-    "distanceM": 1621,
+    "lat": 36.0477,
+    "lon": -114.79227,
+    "distanceM": 0,
     "shoreKind": "water",
     "nearestLat": 36.0477,
     "nearestLon": -114.79227
@@ -1473,7 +1566,10 @@
     "id": "dillon-reservoir",
     "lat": 39.608,
     "lon": -106.05,
-    "reason": "overpass-request-failed"
+    "distanceM": 128,
+    "shoreKind": "water",
+    "nearestLat": 39.6083,
+    "nearestLon": -106.04856
   },
   {
     "id": "grand-isle",
@@ -1497,7 +1593,10 @@
     "id": "lake-pontchartrain",
     "lat": 30.033,
     "lon": -90.075,
-    "reason": "overpass-request-failed"
+    "distanceM": 133,
+    "shoreKind": "water",
+    "nearestLat": 30.03183,
+    "nearestLon": -90.07527
   },
   {
     "id": "turnagain-arm-hope",
@@ -1536,7 +1635,10 @@
     "id": "jericho-beach",
     "lat": 49.2725,
     "lon": -123.202,
-    "reason": "overpass-request-failed"
+    "distanceM": 360,
+    "shoreKind": "coastline",
+    "nearestLat": 49.27465,
+    "nearestLon": -123.1983
   },
   {
     "id": "kelowna-rotary",
@@ -1689,19 +1791,25 @@
     "id": "cabarete-kite-beach",
     "lat": 19.762,
     "lon": -70.428,
-    "reason": "overpass-request-failed"
+    "distanceM": 426,
+    "shoreKind": "coastline",
+    "nearestLat": 19.76549,
+    "nearestLon": -70.42634
   },
   {
     "id": "cabarete-bozo-beach",
     "lat": 19.7585,
     "lon": -70.41,
-    "reason": "overpass-request-failed"
+    "distanceM": 651,
+    "shoreKind": "coastline",
+    "nearestLat": 19.75584,
+    "nearestLon": -70.41553
   },
   {
     "id": "buen-hombre",
     "lat": 19.866,
     "lon": -71.47,
-    "reason": "overpass-request-failed"
+    "reason": "no-shore-within-range"
   },
   {
     "id": "aruba-hadicurari",
@@ -1786,12 +1894,12 @@
   },
   {
     "id": "el-yaque",
-    "lat": 10.946,
-    "lon": -63.943,
-    "distanceM": 1886,
+    "lat": 10.904,
+    "lon": -63.957,
+    "distanceM": 487,
     "shoreKind": "water",
-    "nearestLat": 10.93059,
-    "nearestLon": -63.95017
+    "nearestLat": 10.90557,
+    "nearestLon": -63.95285
   },
   {
     "id": "cabo-de-la-vela",
@@ -1804,24 +1912,27 @@
   },
   {
     "id": "salinas-del-rey",
-    "lat": 10.787,
-    "lon": -75.2,
-    "distanceM": 2480,
-    "shoreKind": "coastline",
-    "nearestLat": 10.79915,
-    "nearestLon": -75.21901
+    "lat": 10.79915,
+    "lon": -75.21901,
+    "reason": "overpass-request-failed"
   },
   {
     "id": "cumbuco",
     "lat": -3.6245,
     "lon": -38.728,
-    "reason": "overpass-request-failed"
+    "distanceM": 45,
+    "shoreKind": "coastline",
+    "nearestLat": -3.62489,
+    "nearestLon": -38.72811
   },
   {
     "id": "cumbuco-cauipe",
     "lat": -3.652,
     "lon": -38.754,
-    "reason": "overpass-request-failed"
+    "distanceM": 665,
+    "shoreKind": "island",
+    "nearestLat": -3.64617,
+    "nearestLon": -38.75268
   },
   {
     "id": "taiba",
@@ -1860,7 +1971,10 @@
     "id": "jericoacoara",
     "lat": -2.7905,
     "lon": -40.5135,
-    "reason": "overpass-request-failed"
+    "distanceM": 111,
+    "shoreKind": "coastline",
+    "nearestLat": -2.78954,
+    "nearestLon": -40.51376
   },
   {
     "id": "barra-grande-pi",
@@ -1908,7 +2022,10 @@
     "id": "buzios-rasa",
     "lat": -22.733,
     "lon": -41.957,
-    "reason": "overpass-request-failed"
+    "distanceM": 19,
+    "shoreKind": "coastline",
+    "nearestLat": -22.73286,
+    "nearestLon": -41.95709
   },
   {
     "id": "chile-matanzas",
@@ -1962,7 +2079,10 @@
     "id": "palmones",
     "lat": 36.173,
     "lon": -5.438,
-    "reason": "overpass-request-failed"
+    "distanceM": 214,
+    "shoreKind": "river",
+    "nearestLat": 36.17489,
+    "nearestLon": -5.4376
   },
   {
     "id": "el-palmar",
@@ -2073,7 +2193,10 @@
     "id": "lagoa-de-obidos",
     "lat": 39.407,
     "lon": -9.215,
-    "reason": "overpass-request-failed"
+    "distanceM": 81,
+    "shoreKind": "water",
+    "nearestLat": 39.40772,
+    "nearestLon": -9.21491
   },
   {
     "id": "lagoa-de-albufeira",
@@ -2172,13 +2295,19 @@
     "id": "almanarre",
     "lat": 43.0545,
     "lon": 6.132,
-    "reason": "overpass-request-failed"
+    "distanceM": 78,
+    "shoreKind": "coastline",
+    "nearestLat": 43.05452,
+    "nearestLon": 6.13296
   },
   {
     "id": "hyeres-bergerie",
     "lat": 43.06,
     "lon": 6.158,
-    "reason": "overpass-request-failed"
+    "distanceM": 651,
+    "shoreKind": "coastline",
+    "nearestLat": 43.06048,
+    "nearestLon": 6.15003
   },
   {
     "id": "la-torche",
@@ -2220,7 +2349,10 @@
     "id": "punta-trettu",
     "lat": 39.042,
     "lon": 8.472,
-    "reason": "overpass-request-failed"
+    "distanceM": 628,
+    "shoreKind": "coastline",
+    "nearestLat": 39.04279,
+    "nearestLon": 8.46481
   },
   {
     "id": "lo-stagnone",
@@ -2280,7 +2412,10 @@
     "id": "brouwersdam",
     "lat": 51.762,
     "lon": 3.85,
-    "reason": "overpass-request-failed"
+    "distanceM": 377,
+    "shoreKind": "coastline",
+    "nearestLat": 51.76434,
+    "nearestLon": 3.84604
   },
   {
     "id": "wijk-aan-zee",
@@ -2340,7 +2475,10 @@
     "id": "st-peter-ording",
     "lat": 54.3,
     "lon": 8.595,
-    "reason": "overpass-request-failed"
+    "distanceM": 581,
+    "shoreKind": "coastline",
+    "nearestLat": 54.30284,
+    "nearestLon": 8.6025
   },
   {
     "id": "fehmarn-gold",
@@ -2382,7 +2520,10 @@
     "id": "ruegen-suhrendorf",
     "lat": 54.62,
     "lon": 13.21,
-    "reason": "overpass-request-failed"
+    "distanceM": 891,
+    "shoreKind": "coastline",
+    "nearestLat": 54.6225,
+    "nearestLon": 13.22313
   },
   {
     "id": "norderney",
@@ -2424,7 +2565,10 @@
     "id": "bork-havn",
     "lat": 55.846,
     "lon": 8.28,
-    "reason": "overpass-request-failed"
+    "distanceM": 239,
+    "shoreKind": "coastline",
+    "nearestLat": 55.84667,
+    "nearestLon": 8.27637
   },
   {
     "id": "romo",
@@ -2439,7 +2583,10 @@
     "id": "fano",
     "lat": 55.42,
     "lon": 8.38,
-    "reason": "overpass-request-failed"
+    "distanceM": 591,
+    "shoreKind": "coastline",
+    "nearestLat": 55.41718,
+    "nearestLon": 8.37207
   },
   {
     "id": "chalupy",
@@ -2565,7 +2712,10 @@
     "id": "dollymount",
     "lat": 53.367,
     "lon": -6.152,
-    "reason": "overpass-request-failed"
+    "distanceM": 251,
+    "shoreKind": "coastline",
+    "nearestLat": 53.36551,
+    "nearestLon": -6.14917
   },
   {
     "id": "rosslare",
@@ -2682,13 +2832,16 @@
     "id": "croatia-neretva",
     "lat": 43.03,
     "lon": 17.42,
-    "reason": "overpass-request-failed"
+    "distanceM": 172,
+    "shoreKind": "coastline",
+    "nearestLat": 43.03084,
+    "nearestLon": 17.42177
   },
   {
     "id": "montenegro-velika-plaza",
-    "lat": 41.87,
-    "lon": 19.3,
-    "distanceM": 1857,
+    "lat": 41.88363,
+    "lon": 19.31291,
+    "distanceM": 0,
     "shoreKind": "coastline",
     "nearestLat": 41.88363,
     "nearestLon": 19.31291
@@ -2739,7 +2892,10 @@
     "id": "norway-lista",
     "lat": 58.1,
     "lon": 6.57,
-    "reason": "overpass-request-failed"
+    "distanceM": 335,
+    "shoreKind": "coastline",
+    "nearestLat": 58.1015,
+    "nearestLon": 6.57494
   },
   {
     "id": "bloubergstrand",
@@ -2754,7 +2910,10 @@
     "id": "big-bay",
     "lat": -33.792,
     "lon": 18.455,
-    "reason": "overpass-request-failed"
+    "distanceM": 60,
+    "shoreKind": "coastline",
+    "nearestLat": -33.79167,
+    "nearestLon": 18.45552
   },
   {
     "id": "sunset-beach-ct",
@@ -2769,7 +2928,10 @@
     "id": "langebaan",
     "lat": -33.1,
     "lon": 18.035,
-    "reason": "overpass-request-failed"
+    "distanceM": 417,
+    "shoreKind": "water",
+    "nearestLat": -33.10054,
+    "nearestLon": 18.03057
   },
   {
     "id": "strand-za",
@@ -2854,12 +3016,12 @@
   },
   {
     "id": "el-gouna",
-    "lat": 27.43,
-    "lon": 33.68,
-    "distanceM": 1107,
+    "lat": 27.42375,
+    "lon": 33.67129,
+    "distanceM": 7,
     "shoreKind": "coastline",
     "nearestLat": 27.42375,
-    "nearestLon": 33.67129
+    "nearestLon": 33.67136
   },
   {
     "id": "soma-bay",
@@ -2925,7 +3087,10 @@
     "id": "cape-verde-sal-kite-beach",
     "lat": 16.614,
     "lon": -22.898,
-    "reason": "overpass-request-failed"
+    "distanceM": 74,
+    "shoreKind": "coastline",
+    "nearestLat": 16.61424,
+    "nearestLon": -22.89736
   },
   {
     "id": "cape-verde-ponta-preta",
@@ -2938,9 +3103,9 @@
   },
   {
     "id": "djerba",
-    "lat": 33.81,
-    "lon": 11.03,
-    "distanceM": 1937,
+    "lat": 33.80377,
+    "lon": 11.04955,
+    "distanceM": 0,
     "shoreKind": "coastline",
     "nearestLat": 33.80377,
     "nearestLon": 11.04955
@@ -3003,7 +3168,10 @@
     "id": "mui-ne",
     "lat": 10.953,
     "lon": 108.245,
-    "reason": "overpass-request-failed"
+    "distanceM": 76,
+    "shoreKind": "coastline",
+    "nearestLat": 10.95233,
+    "nearestLon": 108.24486
   },
   {
     "id": "phan-rang",
@@ -3027,7 +3195,10 @@
     "id": "pagudpud",
     "lat": 18.567,
     "lon": 120.79,
-    "reason": "overpass-request-failed"
+    "distanceM": 340,
+    "shoreKind": "coastline",
+    "nearestLat": 18.56817,
+    "nearestLon": 120.78702
   },
   {
     "id": "kalpitiya",
@@ -3069,7 +3240,10 @@
     "id": "bali-sanur",
     "lat": -8.685,
     "lon": 115.266,
-    "reason": "overpass-request-failed"
+    "distanceM": 130,
+    "shoreKind": "coastline",
+    "nearestLat": -8.68433,
+    "nearestLon": 115.26503
   },
   {
     "id": "india-rameswaram",
@@ -3111,7 +3285,10 @@
     "id": "china-haikou",
     "lat": 20.035,
     "lon": 110.25,
-    "reason": "overpass-request-failed"
+    "distanceM": 451,
+    "shoreKind": "coastline",
+    "nearestLat": 20.03116,
+    "nearestLon": 110.24862
   },
   {
     "id": "japan-tsujido",
@@ -3160,9 +3337,9 @@
   },
   {
     "id": "taiwan-penghu",
-    "lat": 23.565,
-    "lon": 119.62,
-    "distanceM": 1632,
+    "lat": 23.57868,
+    "lon": 119.62574,
+    "distanceM": 0,
     "shoreKind": "coastline",
     "nearestLat": 23.57868,
     "nearestLon": 119.62574
@@ -3207,7 +3384,10 @@
     "id": "lancelin",
     "lat": -31.018,
     "lon": 115.327,
-    "reason": "overpass-request-failed"
+    "distanceM": 246,
+    "shoreKind": "coastline",
+    "nearestLat": -31.01775,
+    "nearestLon": 115.32957
   },
   {
     "id": "geraldton-coronation",
@@ -3294,7 +3474,10 @@
     "id": "sydney-brighton-le-sands",
     "lat": -33.96,
     "lon": 151.156,
-    "reason": "overpass-request-failed"
+    "distanceM": 152,
+    "shoreKind": "coastline",
+    "nearestLat": -33.96042,
+    "nearestLon": 151.15757
   },
   {
     "id": "sydney-long-reef",
@@ -3309,7 +3492,10 @@
     "id": "lake-illawarra",
     "lat": -34.52,
     "lon": 150.85,
-    "reason": "overpass-request-failed"
+    "distanceM": 1364,
+    "shoreKind": "island",
+    "nearestLat": -34.52902,
+    "nearestLon": 150.86007
   },
   {
     "id": "brisbane-shorncliffe",
@@ -3396,7 +3582,10 @@
     "id": "nz-raglan",
     "lat": -37.8,
     "lon": 174.87,
-    "reason": "overpass-request-failed"
+    "distanceM": 218,
+    "shoreKind": "coastline",
+    "nearestLat": -37.80156,
+    "nearestLon": 174.8685
   },
   {
     "id": "nz-new-brighton",
@@ -3436,24 +3625,27 @@
   },
   {
     "id": "new-caledonia-poe",
-    "lat": -21.6,
-    "lon": 165.4,
-    "distanceM": 1454,
-    "shoreKind": "coastline",
-    "nearestLat": -21.61297,
-    "nearestLon": 165.39827
+    "lat": -21.61297,
+    "lon": 165.39827,
+    "reason": "overpass-request-failed"
   },
   {
     "id": "cook-islands-muri",
     "lat": -21.255,
     "lon": -159.727,
-    "reason": "overpass-request-failed"
+    "distanceM": 56,
+    "shoreKind": "coastline",
+    "nearestLat": -21.25536,
+    "nearestLon": -159.72737
   },
   {
     "id": "oleander-point",
     "lat": 27.7395,
     "lon": -97.3725,
-    "reason": "overpass-request-failed"
+    "distanceM": 420,
+    "shoreKind": "coastline",
+    "nearestLat": 27.74217,
+    "nearestLon": -97.36949
   },
   {
     "id": "port-oconnor",
@@ -3495,22 +3687,25 @@
     "id": "lake-hefner",
     "lat": 35.578,
     "lon": -97.585,
-    "reason": "overpass-request-failed"
+    "distanceM": 198,
+    "shoreKind": "water",
+    "nearestLat": 35.57884,
+    "nearestLon": -97.58307
   },
   {
     "id": "cheney-reservoir",
-    "lat": 37.735,
-    "lon": -97.81,
-    "distanceM": 1492,
-    "shoreKind": "water",
-    "nearestLat": 37.72313,
-    "nearestLon": -97.80214
+    "lat": 37.72313,
+    "lon": -97.80214,
+    "reason": "overpass-request-failed"
   },
   {
     "id": "lake-mcconaughy",
     "lat": 41.225,
     "lon": -101.66,
-    "reason": "overpass-request-failed"
+    "distanceM": 153,
+    "shoreKind": "water",
+    "nearestLat": 41.22412,
+    "nearestLon": -101.66141
   },
   {
     "id": "gulf-shores-public-beach",
@@ -3693,7 +3888,10 @@
     "id": "haulover-beach",
     "lat": 25.905,
     "lon": -80.121,
-    "reason": "overpass-request-failed"
+    "distanceM": 40,
+    "shoreKind": "coastline",
+    "nearestLat": 25.90506,
+    "nearestLon": -80.1214
   },
   {
     "id": "curry-hammock",
@@ -3825,7 +4023,10 @@
     "id": "smith-point",
     "lat": 40.733,
     "lon": -72.862,
-    "reason": "overpass-request-failed"
+    "distanceM": 11,
+    "shoreKind": "coastline",
+    "nearestLat": 40.73309,
+    "nearestLon": -72.86205
   },
   {
     "id": "hamlin-beach",
@@ -3849,7 +4050,10 @@
     "id": "sylvan-beach",
     "lat": 43.196,
     "lon": -75.733,
-    "reason": "overpass-request-failed"
+    "distanceM": 110,
+    "shoreKind": "water",
+    "nearestLat": 43.1959,
+    "nearestLon": -75.73166
   },
   {
     "id": "hammonasset",
@@ -4035,7 +4239,10 @@
     "id": "chile-puclaro",
     "lat": -29.998,
     "lon": -70.835,
-    "reason": "overpass-request-failed"
+    "distanceM": 211,
+    "shoreKind": "water",
+    "nearestLat": -29.99617,
+    "nearestLon": -70.83557
   },
   {
     "id": "chile-llico",
@@ -4083,7 +4290,10 @@
     "id": "venezuela-adicora",
     "lat": 11.942,
     "lon": -69.801,
-    "reason": "overpass-request-failed"
+    "distanceM": 51,
+    "shoreKind": "coastline",
+    "nearestLat": 11.94195,
+    "nearestLon": -69.80146
   },
   {
     "id": "brazil-icarai-de-amontada",
@@ -4113,13 +4323,19 @@
     "id": "brazil-galinhos",
     "lat": -5.088,
     "lon": -36.275,
-    "reason": "overpass-request-failed"
+    "distanceM": 87,
+    "shoreKind": "coastline",
+    "nearestLat": -5.08874,
+    "nearestLon": -36.27524
   },
   {
     "id": "guadeloupe-saint-francois",
     "lat": 16.251,
     "lon": -61.272,
-    "reason": "overpass-request-failed"
+    "distanceM": 88,
+    "shoreKind": "coastline",
+    "nearestLat": 16.25021,
+    "nearestLon": -61.27203
   },
   {
     "id": "martinique-pointe-faula",
@@ -4134,13 +4350,19 @@
     "id": "st-martin-orient-bay",
     "lat": 18.086,
     "lon": -63.021,
-    "reason": "overpass-request-failed"
+    "distanceM": 212,
+    "shoreKind": "coastline",
+    "nearestLat": 18.08734,
+    "nearestLon": -63.01958
   },
   {
     "id": "dominican-las-terrenas",
     "lat": 19.317,
     "lon": -69.525,
-    "reason": "overpass-request-failed"
+    "distanceM": 772,
+    "shoreKind": "coastline",
+    "nearestLat": 19.32392,
+    "nearestLon": -69.52465
   },
   {
     "id": "panama-punta-chame",
@@ -4245,7 +4467,10 @@
     "id": "greece-lefkada-agios-ioannis",
     "lat": 38.842,
     "lon": 20.705,
-    "reason": "overpass-request-failed"
+    "distanceM": 592,
+    "shoreKind": "coastline",
+    "nearestLat": 38.84599,
+    "nearestLon": 20.70952
   },
   {
     "id": "greece-kos-psalidi",
@@ -4372,18 +4597,18 @@
   },
   {
     "id": "rodrigues-mourouk",
-    "lat": -19.757,
-    "lon": 63.47,
-    "distanceM": 1703,
-    "shoreKind": "coastline",
-    "nearestLat": -19.74183,
-    "nearestLon": 63.46791
+    "lat": -19.74183,
+    "lon": 63.46791,
+    "reason": "overpass-request-failed"
   },
   {
     "id": "vietnam-vung-tau",
     "lat": 10.346,
     "lon": 107.096,
-    "reason": "overpass-request-failed"
+    "distanceM": 216,
+    "shoreKind": "coastline",
+    "nearestLat": 10.34487,
+    "nearestLon": 107.09761
   },
   {
     "id": "malaysia-cherating",
@@ -4398,7 +4623,10 @@
     "id": "china-qingdao-shilaoren",
     "lat": 36.098,
     "lon": 120.47,
-    "reason": "overpass-request-failed"
+    "distanceM": 487,
+    "shoreKind": "coastline",
+    "nearestLat": 36.09388,
+    "nearestLon": 120.47183
   },
   {
     "id": "taiwan-hsinchu-nanliao",
@@ -4420,9 +4648,9 @@
   },
   {
     "id": "au-hobart-seven-mile-beach",
-    "lat": -42.86,
-    "lon": 147.53,
-    "distanceM": 1185,
+    "lat": -42.85163,
+    "lon": 147.52102,
+    "distanceM": 1,
     "shoreKind": "coastline",
     "nearestLat": -42.85163,
     "nearestLon": 147.52102
@@ -4524,13 +4752,19 @@
     "id": "oneill-forebay-medeiros",
     "lat": 37.06,
     "lon": -121.07,
-    "reason": "overpass-request-failed"
+    "distanceM": 423,
+    "shoreKind": "water",
+    "nearestLat": 37.05812,
+    "nearestLon": -121.07414
   },
   {
     "id": "oxnard-shores",
     "lat": 34.208,
     "lon": -119.253,
-    "reason": "overpass-request-failed"
+    "distanceM": 168,
+    "shoreKind": "coastline",
+    "nearestLat": 34.20742,
+    "nearestLon": -119.25469
   },
   {
     "id": "bolsa-chica",
@@ -4674,7 +4908,10 @@
     "id": "kaunakakai",
     "lat": 21.083,
     "lon": -157.024,
-    "reason": "overpass-request-failed"
+    "distanceM": 191,
+    "shoreKind": "coastline",
+    "nearestLat": 21.08425,
+    "nearestLon": -157.02526
   },
   {
     "id": "kealia-beach",
@@ -4689,7 +4926,10 @@
     "id": "kenai-north-beach",
     "lat": 60.55,
     "lon": -151.27,
-    "reason": "overpass-request-failed"
+    "distanceM": 2,
+    "shoreKind": "coastline",
+    "nearestLat": 60.55002,
+    "nearestLon": -151.26998
   },
   {
     "id": "kincaid-beach",
@@ -4701,7 +4941,10 @@
     "id": "lake-pleasant",
     "lat": 33.853,
     "lon": -112.272,
-    "reason": "overpass-request-failed"
+    "distanceM": 422,
+    "shoreKind": "island",
+    "nearestLat": 33.85084,
+    "nearestLon": -112.27575
   },
   {
     "id": "lake-havasu-windsor",
@@ -4731,7 +4974,10 @@
     "id": "lake-cascade",
     "lat": 44.55,
     "lon": -116.07,
-    "reason": "overpass-request-failed"
+    "distanceM": 371,
+    "shoreKind": "water",
+    "nearestLat": 44.55043,
+    "nearestLon": -116.06536
   },
   {
     "id": "magic-reservoir",
@@ -4827,7 +5073,10 @@
     "id": "crescent-beach-bc",
     "lat": 49.051,
     "lon": -122.885,
-    "reason": "overpass-request-failed"
+    "distanceM": 16,
+    "shoreKind": "coastline",
+    "nearestLat": 49.05095,
+    "nearestLon": -122.8852
   },
   {
     "id": "island-view-beach",
@@ -4902,7 +5151,10 @@
     "id": "frankfort-beach",
     "lat": 44.6325,
     "lon": -86.245,
-    "reason": "overpass-request-failed"
+    "distanceM": 108,
+    "shoreKind": "water",
+    "nearestLat": 44.63217,
+    "nearestLon": -86.24628
   },
   {
     "id": "marquette-mccartys-cove",
@@ -4977,7 +5229,10 @@
     "id": "jfk-causeway",
     "lat": 27.636,
     "lon": -97.24,
-    "reason": "overpass-request-failed"
+    "distanceM": 67,
+    "shoreKind": "island",
+    "nearestLat": 27.63567,
+    "nearestLon": -97.24057
   },
   {
     "id": "galveston-8-mile-road",
@@ -4989,7 +5244,10 @@
     "id": "quintana-beach",
     "lat": 28.926,
     "lon": -95.307,
-    "reason": "overpass-request-failed"
+    "distanceM": 414,
+    "shoreKind": "coastline",
+    "nearestLat": 28.9291,
+    "nearestLon": -95.30935
   },
   {
     "id": "fontainebleau-sp",
@@ -5040,7 +5298,10 @@
     "id": "coquina-beach",
     "lat": 27.453,
     "lon": -82.695,
-    "reason": "overpass-request-failed"
+    "distanceM": 41,
+    "shoreKind": "coastline",
+    "nearestLat": 27.45312,
+    "nearestLon": -82.69461
   },
   {
     "id": "ben-t-davis-beach",
@@ -5061,13 +5322,16 @@
     "id": "satellite-beach",
     "lat": 28.174,
     "lon": -80.593,
-    "reason": "overpass-request-failed"
+    "distanceM": 434,
+    "shoreKind": "coastline",
+    "nearestLat": 28.17485,
+    "nearestLon": -80.58868
   },
   {
     "id": "thailand-jomtien",
-    "lat": 12.88,
-    "lon": 100.867,
-    "distanceM": 1266,
+    "lat": 12.88728,
+    "lon": 100.87596,
+    "distanceM": 0,
     "shoreKind": "coastline",
     "nearestLat": 12.88728,
     "nearestLon": 100.87596
@@ -5128,9 +5392,9 @@
   },
   {
     "id": "sri-lanka-mannar",
-    "lat": 8.98,
-    "lon": 79.86,
-    "distanceM": 1225,
+    "lat": 8.98739,
+    "lon": 79.86825,
+    "distanceM": 1,
     "shoreKind": "coastline",
     "nearestLat": 8.98739,
     "nearestLon": 79.86825
@@ -5139,13 +5403,19 @@
     "id": "morocco-tarfaya",
     "lat": 27.938,
     "lon": -12.92,
-    "reason": "overpass-request-failed"
+    "distanceM": 1063,
+    "shoreKind": "coastline",
+    "nearestLat": 27.94599,
+    "nearestLon": -12.92592
   },
   {
     "id": "morocco-oualidia",
     "lat": 32.735,
     "lon": -9.04,
-    "reason": "overpass-request-failed"
+    "distanceM": 10,
+    "shoreKind": "coastline",
+    "nearestLat": 32.73492,
+    "nearestLon": -9.03998
   },
   {
     "id": "kenya-malindi",
@@ -5160,7 +5430,10 @@
     "id": "kenya-lamu-shela",
     "lat": -2.298,
     "lon": 40.915,
-    "reason": "overpass-request-failed"
+    "distanceM": 23,
+    "shoreKind": "coastline",
+    "nearestLat": -2.29808,
+    "nearestLon": 40.91519
   },
   {
     "id": "cape-verde-boa-vista",
@@ -5343,7 +5616,10 @@
     "id": "nz-paraparaumu",
     "lat": -40.888,
     "lon": 174.985,
-    "reason": "overpass-request-failed"
+    "distanceM": 369,
+    "shoreKind": "coastline",
+    "nearestLat": -40.88676,
+    "nearestLon": 174.98093
   },
   {
     "id": "higgins-beach",
@@ -5358,13 +5634,19 @@
     "id": "drakes-island-wells",
     "lat": 43.32163,
     "lon": -70.55328,
-    "reason": "overpass-request-failed"
+    "distanceM": 18,
+    "shoreKind": "coastline",
+    "nearestLat": 43.32173,
+    "nearestLon": -70.55345
   },
   {
     "id": "lewes-beach",
     "lat": 38.78198,
     "lon": -75.12792,
-    "reason": "overpass-request-failed"
+    "distanceM": 50,
+    "shoreKind": "coastline",
+    "nearestLat": 38.78243,
+    "nearestLon": -75.12787
   },
   {
     "id": "ocean-view-willoughby",
@@ -5388,13 +5670,19 @@
     "id": "cupsogue-beach",
     "lat": 40.76842,
     "lon": -72.74075,
-    "reason": "overpass-request-failed"
+    "distanceM": 92,
+    "shoreKind": "coastline",
+    "nearestLat": 40.76764,
+    "nearestLon": -72.74039
   },
   {
     "id": "grandview-beach-hampton",
     "lat": 37.06829,
     "lon": -76.2804,
-    "reason": "overpass-request-failed"
+    "distanceM": 7,
+    "shoreKind": "coastline",
+    "nearestLat": 37.06831,
+    "nearestLon": -76.28048
   },
   {
     "id": "burlington-beach",
@@ -5472,7 +5760,10 @@
     "id": "barbados-long-beach",
     "lat": 13.05926,
     "lon": -59.49937,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 13.05926,
+    "nearestLon": -59.49937
   },
   {
     "id": "cuba-varadero-kawama",
@@ -5487,7 +5778,10 @@
     "id": "israel-bat-galim",
     "lat": 32.83525,
     "lon": 34.97825,
-    "reason": "overpass-request-failed"
+    "distanceM": 6,
+    "shoreKind": "coastline",
+    "nearestLat": 32.8353,
+    "nearestLon": 34.97825
   },
   {
     "id": "uae-hudayriyat",
@@ -5556,7 +5850,10 @@
     "id": "pagudpud-blue-lagoon",
     "lat": 18.62337,
     "lon": 120.85868,
-    "reason": "overpass-request-failed"
+    "distanceM": 16,
+    "shoreKind": "coastline",
+    "nearestLat": 18.62343,
+    "nearestLon": 120.85882
   },
   {
     "id": "goa-arambol",
@@ -5607,13 +5904,19 @@
     "id": "schinias",
     "lat": 38.13961,
     "lon": 24.02785,
-    "reason": "overpass-request-failed"
+    "distanceM": 10,
+    "shoreKind": "coastline",
+    "nearestLat": 38.13953,
+    "nearestLon": 24.0279
   },
   {
     "id": "kos-tigaki",
     "lat": 36.89038,
     "lon": 27.17886,
-    "reason": "overpass-request-failed"
+    "distanceM": 114,
+    "shoreKind": "coastline",
+    "nearestLat": 36.89137,
+    "nearestLon": 27.1792
   },
   {
     "id": "crete-kouremenos",
@@ -5637,13 +5940,19 @@
     "id": "kalogria",
     "lat": 38.13565,
     "lon": 21.36938,
-    "reason": "overpass-request-failed"
+    "distanceM": 89,
+    "shoreKind": "coastline",
+    "nearestLat": 38.13571,
+    "nearestLon": 21.36836
   },
   {
     "id": "lanzarote-matagorda",
     "lat": 28.92825,
     "lon": -13.62531,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 28.92825,
+    "nearestLon": -13.62531
   },
   {
     "id": "gran-canaria-arinaga",
@@ -5658,7 +5967,10 @@
     "id": "gran-canaria-bahia-feliz",
     "lat": 27.78155,
     "lon": -15.51744,
-    "reason": "overpass-request-failed"
+    "distanceM": 1,
+    "shoreKind": "coastline",
+    "nearestLat": 27.78155,
+    "nearestLon": -15.51744
   },
   {
     "id": "fuerteventura-costa-calma",
@@ -5706,7 +6018,10 @@
     "id": "oman-filim",
     "lat": 20.60819,
     "lon": 58.1859,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 20.60819,
+    "nearestLon": 58.1859
   },
   {
     "id": "sri-lanka-kappalady",
@@ -5739,7 +6054,10 @@
     "id": "bali-mertasari",
     "lat": -8.71301,
     "lon": 115.25083,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": -8.71301,
+    "nearestLon": 115.25083
   },
   {
     "id": "sumbawa-lakey",
@@ -5859,7 +6177,10 @@
     "id": "tobago-pigeon-point",
     "lat": 11.16729,
     "lon": -60.84131,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 11.16729,
+    "nearestLon": -60.84131
   },
   {
     "id": "costa-rica-playa-copal",
@@ -5892,7 +6213,10 @@
     "id": "romania-vadu",
     "lat": 44.44983,
     "lon": 28.78972,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 44.44983,
+    "nearestLon": 28.78972
   },
   {
     "id": "belgium-oostende",
