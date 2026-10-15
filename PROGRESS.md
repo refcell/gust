@@ -309,3 +309,6 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 30: shore check run 2: 540/720 measured (178 Overpass failures; run 3 dispatched). Moved 3
   more spots > 1 km from shore (djerba, montenegro-velika-plaza, thailand-jomtien); rejected the
   lagoon spots dakhla-speed-spot, dakhla-lagoon and uruguay-laguna-jose-ignacio.
+- Loop 31: shore check run 3: 648/720 measured (69 Overpass failures left). Moved morocco-tarfaya
+  onto the beach; rejected lake-illawarra (nearest shore was a lake island). 14 spots moved in
+  total by the shore check; remaining proposals (150 m-1 km) stay unreviewed by design.
