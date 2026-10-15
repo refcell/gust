@@ -300,3 +300,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   curated S-facing sectors). Rejected skyway-beach (causeway) and ilha-do-guajiru (lagoon). The
   other 158 proposals (150 m-1 km) stay unreviewed.
 - Loop 27: ntfy background alerts via scheduled Actions (no account); live-verified with a test topic.
+- Loop 29: ntfy workflow verified on GitHub with throwaway secrets (secrets masked in logs; run 1
+  published 3 alerts and saved state to actions/cache; run 2 restored it), then the secrets were
+  deleted. Found: run 2 re-alerted the same Maui session because the forecast window start shifted
+  08:00 -> 05:00 between runs and dedup keyed on the exact start. Forecast dedup (src/lib/alerts.ts,
+  shared by app, push server and ntfy) now skips a window starting within 6 h of one already
+  notified for that spot.
