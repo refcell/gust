@@ -183,6 +183,14 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   Level 2) and falls back to opening the Blob URL (navigation if the popup is blocked). Browser tabs
   keep the anchor download.
 
+- Offline sector inference (loop 12): `scripts/infer-sectors.ts` (run with
+  `node --import ./scripts/ts-resolve.mjs`, a ~15-line extension resolver, no bundling) reuses the
+  app's Overpass query/parse and `inferShoreDetailed` (coastline.ts; `inferShore` unchanged). It
+  writes `data/sector-suggestions.json` for review; `--apply` only fills spots still `[]` from
+  sea/lake suggestions <= 500 m from shore. Runs on GitHub's runner via the manual
+  `infer-sectors.yml` workflow (artifact, never commits). Lagoons mapped as OSM coastline come out
+  as "sea": suggestions are reviewed by hand before applying.
+
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
@@ -216,3 +224,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Docs audit: README, data/README, server/README checked against code (features, limits, scripts, workflows, spot ids).
 - Loop 11: docs audit, demo re-record (marine), review fixes (DST revert, marine expiry/timeout,
   monotonic SEQUENCE).
+- Loop 12: iOS share-sheet calendar export; offline sector inference script + manual workflow.
