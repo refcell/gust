@@ -125,6 +125,17 @@ are welcome:
 - **Inland lakes and reservoirs** (UT, CO, NV, MN): wind sectors are generalised.
   Water levels and shorelines change with the season.
 
+## Sector inference
+
+`data/sector-suggestions.json` is the review record from `scripts/infer-sectors.ts` (OSM coastline
+around each spot with `sectors: []`; run by the manual "Infer spot sectors" workflow, which saves
+progress per spot and resumes). Entries listed there are skipped on re-runs. Applied so far (loop
+14): sandpoint-city-beach, sand-hollow-reservoir, grapevine-lake-murrell-park,
+galveston-8-mile-road, ben-t-davis-beach, cape-verde-boa-vista, argentina-puerto-madryn.
+Reviewed and not applied: jfk-causeway (water on both sides), japan-hamanako-bentenjima,
+morocco-oualidia, kenya-lamu, vietnam-my-hoa-lagoon (lagoons / mixed shores), and entries more than
+500 m from the shore.
+
 ## Approximate positions
 
 Some positions come from a town or kite-school location rather than the waterline and may be a

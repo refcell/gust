@@ -152,3 +152,12 @@ describe('inferAll', () => {
     expect(bad).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('mergeResults', () => {
+  it('lets new results replace old ones but never downgrades an inference to unknown', async () => {
+    const { mergeResults } = await import('../scripts/sector-suggest');
+    const known = { id: 'a', name: 'A', lat: 0, lon: 0, normalDeg: 90, sectors: [[0, 180]] as [number, number][], shoreKind: 'sea' as const, distanceM: 10 };
+    const out = mergeResults([known, { id: 'b', reason: 'overpass-request-failed' }], [{ id: 'a', reason: 'overpass-request-failed' }, { ...known, id: 'b' }, { id: 'c', reason: 'x' }]);
+    expect(out.map((s) => ('normalDeg' in s ? `${s.id}:known` : `${s.id}:unknown`))).toEqual(['a:known', 'b:known', 'c:unknown']);
+  });
+});

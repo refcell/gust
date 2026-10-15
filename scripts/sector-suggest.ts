@@ -94,6 +94,16 @@ export function applySuggestions<T extends CuratedSpot>(
 }
 
 /** Same one-entry-per-line layout as scripts/merge-spots.mjs. */
+/** Merge new results over earlier ones by id (a later unknown never replaces an earlier inference). */
+export function mergeResults(prev: readonly Suggestion[], next: readonly Suggestion[]): Suggestion[] {
+  const byId = new Map(prev.map((p) => [p.id, p]));
+  for (const n of next) {
+    const p = byId.get(n.id);
+    if (!p || isKnown(n) || !isKnown(p)) byId.set(n.id, n);
+  }
+  return [...byId.values()];
+}
+
 export function formatSpots(spots: readonly unknown[]): string {
   return '[\n' + spots.map((s) => '  ' + JSON.stringify(s)).join(',\n') + '\n]\n';
 }
@@ -136,6 +146,8 @@ const noStorage: KV = { getItem: () => null, setItem: () => undefined };
 export interface InferDeps extends PoliteDeps {
   backoffMs?: readonly number[];
   log?: (msg: string) => void;
+  /** Called after each spot with the results so far (lets the CLI save progress incrementally). */
+  onResult?: (results: readonly Suggestion[]) => void;
 }
 
 /**
@@ -171,6 +183,7 @@ export async function inferAll(spots: readonly CuratedSpot[], d: InferDeps): Pro
     const s = suggestionFor(spot, features);
     d.log?.(isKnown(s) ? `${s.id}: ${s.shoreKind} faces ${s.normalDeg}° at ${s.distanceM} m -> ${JSON.stringify(s.sectors)}` : `${s.id}: unknown (${s.reason})`);
     out.push(s);
+    d.onResult?.(out);
   }
   return out;
 }

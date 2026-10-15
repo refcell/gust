@@ -187,6 +187,11 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   OSM coastline via the OSM API (no Overpass/Open-Meteo). No sourced wind directions, so sectors are
   [] (speed-only scoring) until the sector-inference workflow fills them. Dropped two doubtful
   entries (philippines-bulalacao, norway-verket); low-confidence positions listed in data/README.
+- Sector inference first run (loop 14): Overpass answered 500/504 for most requests and the job
+  hit its 30 min limit after 18 of 21 spots without saving. The script now saves after every spot
+  and resumes (mergeResults never downgrades an inference); job limit 150 min. From that run's log,
+  7 suggestions were reviewed and applied; lagoons/causeways and >500 m entries were rejected (list
+  in data/README "Sector inference").
 - Accepted: forecast hour labels use the response's fixed offset, so for spots whose clocks change
   inside the 48 h window, labels after the change read 1 h off (instants, alerts and calendar times
   are exact). Rewriting labels per IANA zone would touch every string comparison; not worth it.
@@ -233,3 +238,4 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   monotonic SEQUENCE).
 - Loop 12: iOS share-sheet calendar export; offline sector inference script + manual workflow.
 - Loop 13: +33 gap-region spots (12 new countries).
+- Loop 14: sectors for 7 spots from the first inference run; resumable inference.
