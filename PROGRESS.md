@@ -183,6 +183,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   Level 2) and falls back to opening the Blob URL (navigation if the popup is blocked). Browser tabs
   keep the anchor download.
 
+- Accepted: forecast hour labels use the response's fixed offset, so for spots whose clocks change
+  inside the 48 h window, labels after the change read 1 h off (instants, alerts and calendar times
+  are exact). Rewriting labels per IANA zone would touch every string comparison; not worth it.
 - Offline sector inference (loop 12): `scripts/infer-sectors.ts` (run with
   `node --import ./scripts/ts-resolve.mjs`, a ~15-line extension resolver, no bundling) reuses the
   app's Overpass query/parse and `inferShoreDetailed` (coastline.ts; `inferShore` unchanged). It
