@@ -208,5 +208,253 @@
     ],
     "shoreKind": "sea",
     "distanceM": 53
+  },
+  {
+    "id": "sri-lanka-mannar",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "kenya-lamu-shela",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "argentina-dique-ullum",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "colombia-puerto-velero",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "venezuela-isla-coche",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "ecuador-santa-marianita",
+    "name": "Santa Marianita (Manta)",
+    "lat": -0.94,
+    "lon": -80.7,
+    "normalDeg": 7,
+    "sectors": [
+      [
+        277,
+        97
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 900
+  },
+  {
+    "id": "au-yorkeys-knob",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "zanzibar-bwejuu",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "madagascar-emerald-sea",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "namibia-langstrand",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "djerba-souk-el-guebli",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "djerba-la-seguia",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "oman-filim",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "sri-lanka-kappalady",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "lombok-ekas",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "lombok-kuta",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "bali-mertasari",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "sumbawa-lakey",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "norway-solastranden",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "poland-rewa",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "estonia-parnu",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "turkey-cesme-pirlanta",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "montenegro-ulcinj-kabanya",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "lithuania-svencele",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "bulgaria-burgas",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "bvi-trellis-bay",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "guadeloupe-bois-jolan",
+    "name": "Bois Jolan (Sainte-Anne)",
+    "lat": 16.23549,
+    "lon": -61.35362,
+    "normalDeg": 146,
+    "sectors": [
+      [
+        56,
+        236
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0
+  },
+  {
+    "id": "martinique-cap-chevalier",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "st-lucia-cas-en-bas",
+    "name": "Cas-en-Bas",
+    "lat": 14.08869,
+    "lon": -60.92823,
+    "normalDeg": 96,
+    "sectors": [
+      [
+        6,
+        186
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0
+  },
+  {
+    "id": "union-island-kite-beach",
+    "name": "Kite Beach (Clifton, Union Island)",
+    "lat": 12.5984,
+    "lon": -61.41208,
+    "normalDeg": 86,
+    "sectors": [
+      [
+        356,
+        176
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0
+  },
+  {
+    "id": "tobago-pigeon-point",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "costa-rica-playa-copal",
+    "name": "Playa Copal (Bahia Salinas)",
+    "lat": 11.02955,
+    "lon": -85.70546,
+    "normalDeg": 28,
+    "sectors": [
+      [
+        298,
+        118
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0
+  },
+  {
+    "id": "costa-rica-lake-arenal",
+    "name": "Lake Arenal (Tilaran)",
+    "lat": 10.54232,
+    "lon": -84.96944,
+    "normalDeg": 133,
+    "sectors": [
+      [
+        43,
+        223
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 0
+  },
+  {
+    "id": "austria-podersdorf",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "romania-vadu",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "belgium-oostende",
+    "name": "Oostende Oosteroever",
+    "lat": 51.24631,
+    "lon": 2.94975,
+    "normalDeg": 324,
+    "sectors": [
+      [
+        234,
+        54
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0
+  },
+  {
+    "id": "jamaica-burwood",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "antigua-nonsuch-bay",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "finland-yyteri",
+    "reason": "overpass-request-failed"
+  },
+  {
+    "id": "latvia-vakarbulli",
+    "name": "Vakarbulli (Riga)",
+    "lat": 57.013,
+    "lon": 23.94258,
+    "normalDeg": 323,
+    "sectors": [
+      [
+        233,
+        53
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0
   }
 ]
