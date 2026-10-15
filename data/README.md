@@ -141,6 +141,32 @@ than the ±95° curation default above). `data/sector-suggestions.json` is the r
    " OSM-inferred sectors." to notes; it skips a spot if notes would pass 140 characters.
 4. Commit both files so the next run resumes from them.
 
+## Shore check
+
+`scripts/check-shore.ts` measures every curated spot's distance to the nearest OSM shore (coastline,
+lake, lake island, river polygon or unclosed water way, as `src/lib/coastline` classifies them; lake
+polygons under 0.5 km² are ignored) with the sector-inference Overpass query, i.e. a ~2 km box
+around the spot. Beyond 2 km the distance is an upper bound (a nearer shore outside the box is not
+fetched). `data/shore-check.json` holds `{id, lat, lon, distanceM, shoreKind, nearestLat, nearestLon}`
+or `{id, lat, lon, reason}` per spot.
+
+1. Run the manual "Check spot positions" workflow (inputs `limit`, `only`), or locally:
+   `node --import ./scripts/ts-resolve.mjs scripts/check-shore.ts [--only id,id] [--limit N]`.
+   It saves after every spot and resumes from the committed file (spots checked at their current
+   coordinates are skipped; failed requests are retried). ~720 spots at >= 5 s plus the query each
+   take ~2-3 h; if Overpass is slow the 330 min step limit cuts the run short: commit the
+   `shore-check` artifact and dispatch again. The log ends with spots > 300 m from any shore and
+   spots with no shore in range.
+2. `... scripts/check-shore.ts --propose` (no network) writes `data/position-proposals.json`: spots
+   150-3000 m from the shore, with the nearest shore point as `proposedLat`/`proposedLon`. Earlier
+   entries for the same position keep their review and edits.
+3. Review each against the map and notes: set `"review": "approved"` (edit the proposed point to the
+   actual launch if needed) or `"rejected"`. Inland lakes, lagoons and river launches often need a
+   different point than the nearest shore.
+4. `... scripts/check-shore.ts --apply-positions` (no network) moves only approved spots whose
+   coordinates still match the proposal; sectors and notes are unchanged. Run the tests (dataset
+   dedupe) and commit all three files.
+
 ## Approximate positions
 
 Some positions come from a town or kite-school location rather than the waterline and may be a
