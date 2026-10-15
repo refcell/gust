@@ -225,7 +225,19 @@
   },
   {
     "id": "sri-lanka-mannar",
-    "reason": "overpass-request-failed"
+    "name": "Mannar (Keeri Beach)",
+    "lat": 8.98,
+    "lon": 79.86,
+    "normalDeg": 228,
+    "sectors": [
+      [
+        138,
+        318
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 1225,
+    "review": "rejected"
   },
   {
     "id": "kenya-lamu-shela",
@@ -233,11 +245,35 @@
   },
   {
     "id": "argentina-dique-ullum",
-    "reason": "overpass-request-failed"
+    "name": "Dique de Ullum",
+    "lat": -31.49,
+    "lon": -68.68,
+    "normalDeg": 313,
+    "sectors": [
+      [
+        223,
+        43
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 675,
+    "review": "rejected"
   },
   {
     "id": "colombia-puerto-velero",
-    "reason": "overpass-request-failed"
+    "name": "Puerto Velero",
+    "lat": 10.94,
+    "lon": -75.03,
+    "normalDeg": 271,
+    "sectors": [
+      [
+        181,
+        1
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 172,
+    "review": "rejected"
   },
   {
     "id": "venezuela-isla-coche",
@@ -261,7 +297,19 @@
   },
   {
     "id": "au-yorkeys-knob",
-    "reason": "overpass-request-failed"
+    "name": "Yorkeys Knob",
+    "lat": -16.807,
+    "lon": 145.72,
+    "normalDeg": 311,
+    "sectors": [
+      [
+        221,
+        41
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 510,
+    "review": "rejected"
   },
   {
     "id": "zanzibar-bwejuu",
@@ -281,7 +329,19 @@
   },
   {
     "id": "madagascar-emerald-sea",
-    "reason": "overpass-request-failed"
+    "name": "Emerald Sea (Mer d'Emeraude, Diego Suarez)",
+    "lat": -12.17206,
+    "lon": 49.37696,
+    "normalDeg": 354,
+    "sectors": [
+      [
+        264,
+        84
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "rejected"
   },
   {
     "id": "namibia-langstrand",
@@ -289,19 +349,67 @@
   },
   {
     "id": "djerba-souk-el-guebli",
-    "reason": "overpass-request-failed"
+    "name": "Souk el Guebli (Djerba)",
+    "lat": 33.72248,
+    "lon": 10.95254,
+    "normalDeg": 105,
+    "sectors": [
+      [
+        15,
+        195
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "djerba-la-seguia",
-    "reason": "overpass-request-failed"
+    "name": "La Seguia (Djerba)",
+    "lat": 33.7865,
+    "lon": 11.05826,
+    "normalDeg": 89,
+    "sectors": [
+      [
+        359,
+        179
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "oman-filim",
-    "reason": "overpass-request-failed"
+    "name": "Filim Lagoon (Barr al Hikman)",
+    "lat": 20.60819,
+    "lon": 58.1859,
+    "normalDeg": 215,
+    "sectors": [
+      [
+        125,
+        305
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "rejected"
   },
   {
     "id": "sri-lanka-kappalady",
-    "reason": "moved; re-infer"
+    "name": "Kappalady Lagoon (Kalpitiya)",
+    "lat": 8.1321,
+    "lon": 79.7047,
+    "normalDeg": 269,
+    "sectors": [
+      [
+        179,
+        359
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 35,
+    "review": "rejected"
   },
   {
     "id": "lombok-ekas",
@@ -313,11 +421,35 @@
   },
   {
     "id": "bali-mertasari",
-    "reason": "overpass-request-failed"
+    "name": "Mertasari (South Sanur, Bali)",
+    "lat": -8.71301,
+    "lon": 115.25083,
+    "normalDeg": 92,
+    "sectors": [
+      [
+        2,
+        182
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "sumbawa-lakey",
-    "reason": "overpass-request-failed"
+    "name": "Lakey Beach (Hu'u, Sumbawa)",
+    "lat": -8.80741,
+    "lon": 118.38254,
+    "normalDeg": 229,
+    "sectors": [
+      [
+        139,
+        319
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 1,
+    "review": "approved"
   },
   {
     "id": "norway-solastranden",
@@ -325,7 +457,19 @@
   },
   {
     "id": "poland-rewa",
-    "reason": "overpass-request-failed"
+    "name": "Rewa (Cypel Rewski)",
+    "lat": 54.63899,
+    "lon": 18.51548,
+    "normalDeg": 96,
+    "sectors": [
+      [
+        6,
+        186
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "rejected"
   },
   {
     "id": "estonia-parnu",
@@ -481,7 +625,19 @@
   },
   {
     "id": "romania-vadu",
-    "reason": "overpass-request-failed"
+    "name": "Vadu Beach",
+    "lat": 44.44983,
+    "lon": 28.78972,
+    "normalDeg": 129,
+    "sectors": [
+      [
+        39,
+        219
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "belgium-oostende",
@@ -505,11 +661,35 @@
   },
   {
     "id": "antigua-nonsuch-bay",
-    "reason": "overpass-request-failed"
+    "name": "Nonsuch Bay (Antigua)",
+    "lat": 17.07122,
+    "lon": -61.70455,
+    "normalDeg": 38,
+    "sectors": [
+      [
+        308,
+        128
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "finland-yyteri",
-    "reason": "overpass-request-failed"
+    "name": "Yyteri (Pori)",
+    "lat": 61.56369,
+    "lon": 21.52161,
+    "normalDeg": 250,
+    "sectors": [
+      [
+        160,
+        340
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "latvia-vakarbulli",
