@@ -502,6 +502,11 @@ input[type='search'] {
   padding: 8px 0;
   gap: 8px;
 }
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
 .row-btn {
   width: 100%;
   background: none;

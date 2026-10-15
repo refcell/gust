@@ -107,6 +107,35 @@ test.describe('app', () => {
     await expect(fav.locator('li.spot .spot-wind strong')).toBeVisible();
   });
 
+  test('places search finds curated spots by name; favouriting watches them outside the radius', async ({ page }) => {
+    // Geocoding is down: spot matches still show.
+    await page.route('https://geocoding-api.open-meteo.com/**', (route) => route.fulfill({ status: 500, body: '' }));
+    await page.goto('/gust/app/');
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    await page.getByRole('tab', { name: 'Places' }).click();
+    await page.locator('#place-q').fill('hood');
+    await page.getByRole('button', { name: 'Search', exact: true }).click();
+    const list = page.getByRole('list', { name: 'Matching spots' });
+    await expect(list).toContainText('Hood River Event Site');
+    await expect(list).toContainText('The Hook (Hood River)');
+    await expect(list).toContainText('OR, US');
+    await expect(page.getByText('Search failed. Check your connection.')).toBeVisible();
+    await expect(page.getByText(/appear in your list once you favourite them/)).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Show Hood River Event Site' })).toHaveCount(0);
+    const fav = page.getByRole('button', { name: 'Favourite Hood River Event Site' });
+    await expect(fav).toHaveAttribute('aria-pressed', 'false');
+    await fav.click();
+    await expect(fav).toHaveAttribute('aria-pressed', 'true');
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('gust.favSpots') ?? '[]').map((s: { id: string }) => s.id))).toEqual(['hood-river-event-site']);
+    await page.getByRole('button', { name: 'Show Hood River Event Site' }).click();
+    await expect(page.getByRole('tab', { name: 'Spots' })).toHaveAttribute('aria-selected', 'true');
+    const favs = page.getByRole('region', { name: 'Favourites' });
+    const item = favs.locator('li.spot', { hasText: 'Hood River Event Site' });
+    await expect(item.getByRole('img', { name: 'Favourite' })).toBeVisible();
+    await expect(item.locator('.spot-head')).toBeFocused();
+    await expect(item).toBeInViewport();
+  });
+
   test('alerts panel explains platform support', async ({ page }) => {
     await page.goto('/gust/app/');
     await page.getByRole('tab', { name: 'Alerts' }).click();

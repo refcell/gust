@@ -361,6 +361,14 @@ export function App() {
     setPlaces(p);
     savePlaces(p);
   };
+  /** (Un)favourite a spot: settings plus the stored snapshot that keeps it watched anywhere. */
+  const toggleFavorite = (spot: Spot, f: boolean) => {
+    const rest = (settings.favorites ?? []).filter((id) => id !== spot.id);
+    const snaps = toggleFavoriteSnapshot(loadFavSpots(), spot, f);
+    saveFavSpots(snaps);
+    setFavSpots(snaps);
+    updateSettings({ ...settings, favorites: f ? [...rest, spot.id] : rest });
+  };
 
   // Oldest sample among watched spots, if any is stale (e.g. served from the offline cache).
   const staleAt = (() => {
@@ -392,12 +400,18 @@ export function App() {
     for (const g of groups) for (const n of g.items) if (!seen.has(n.spot.id)) seen.set(n.spot.id, n);
     return [...seen.values()];
   }, [groups]);
+  const listedIds = useMemo(() => new Set(mapItems.map((n) => n.spot.id)), [mapItems]);
   const mapOrigin: LatLon | null = loc ?? places[0] ?? null;
   const mapFitExtra = useMemo(() => (groups[0]?.fallback ? groups[0].items.map((n) => ({ lat: n.spot.lat, lon: n.spot.lon })) : []), [groups]);
   const openFromMap = (id: string) => {
     setOpenId(id);
     setScrollTo(id);
     setSpotsMode('list');
+  };
+  /** "Show" from the Places search: switch to the Spots list and scroll to the spot. */
+  const showSpot = (id: string) => {
+    openFromMap(id);
+    setView('spots');
   };
 
   const sortItems = (items: NearbySpot[]) =>
@@ -542,13 +556,7 @@ export function App() {
                         updateSettings({ ...settings, muted: m ? [...rest, n.spot.id] : rest });
                       }}
                       favorite={settings.favorites?.includes(n.spot.id)}
-                      onFavorite={(f) => {
-                        const rest = (settings.favorites ?? []).filter((id) => id !== n.spot.id);
-                        const snaps = toggleFavoriteSnapshot(loadFavSpots(), n.spot, f);
-                        saveFavSpots(snaps);
-                        setFavSpots(snaps);
-                        updateSettings({ ...settings, favorites: f ? [...rest, n.spot.id] : rest });
-                      }}
+                      onFavorite={(f) => toggleFavorite(n.spot, f)}
                     />
                   ))}
                 </ul>
@@ -556,7 +564,18 @@ export function App() {
             ))}
           </>
         )}
-        {view === 'places' && <PlacesPanel places={places} onChange={updatePlaces} loc={loc} />}
+        {view === 'places' && (
+          <PlacesPanel
+            places={places}
+            onChange={updatePlaces}
+            loc={loc}
+            spots={curated}
+            favorites={settings.favorites ?? []}
+            onFavorite={toggleFavorite}
+            listedIds={listedIds}
+            onShow={showSpot}
+          />
+        )}
         {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} wind={wind} />}
         {view === 'settings' && <SettingsPanel settings={settings} onChange={updateSettings} />}
         </div>
