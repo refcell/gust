@@ -20,7 +20,7 @@ jobs:
           node-version: 24
       - run: node --import ./scripts/ts-resolve.mjs scripts/infer-sectors.ts | tee report.txt
         shell: bash
-        timeout-minutes: 30
+        timeout-minutes: 150  # Overpass often answers 500/504; progress is saved per spot
       - if: always()
         run: |
           echo '### Sector suggestions' >> "$GITHUB_STEP_SUMMARY"

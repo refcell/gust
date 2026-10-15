@@ -1,0 +1,212 @@
+[
+  {
+    "id": "sandpoint-city-beach",
+    "name": "City Beach (Sandpoint)",
+    "lat": 48.272,
+    "lon": -116.542,
+    "normalDeg": 212,
+    "sectors": [
+      [
+        122,
+        302
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 1
+  },
+  {
+    "id": "sand-hollow-reservoir",
+    "name": "Sand Hollow Reservoir",
+    "lat": 37.115,
+    "lon": -113.383,
+    "normalDeg": 134,
+    "sectors": [
+      [
+        44,
+        224
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 345
+  },
+  {
+    "id": "grapevine-lake-murrell-park",
+    "name": "Grapevine Lake (Murrell Park)",
+    "lat": 32.987,
+    "lon": -97.118,
+    "normalDeg": 355,
+    "sectors": [
+      [
+        265,
+        85
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 150
+  },
+  {
+    "id": "jfk-causeway",
+    "name": "JFK Causeway (Laguna Madre, Corpus Christi)",
+    "lat": 27.636,
+    "lon": -97.24,
+    "normalDeg": 56,
+    "sectors": [
+      [
+        326,
+        146
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 67
+  },
+  {
+    "id": "galveston-8-mile-road",
+    "name": "8 Mile Road (Galveston West Bay)",
+    "lat": 29.245,
+    "lon": -94.929,
+    "normalDeg": 9,
+    "sectors": [
+      [
+        279,
+        99
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 29
+  },
+  {
+    "id": "ben-t-davis-beach",
+    "name": "Ben T. Davis Beach (Tampa)",
+    "lat": 27.9705,
+    "lon": -82.5785,
+    "normalDeg": 213,
+    "sectors": [
+      [
+        123,
+        303
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 22
+  },
+  {
+    "id": "vietnam-my-hoa-lagoon",
+    "name": "My Hoa Lagoon (Phan Rang)",
+    "lat": 11.669,
+    "lon": 109.167,
+    "normalDeg": 127,
+    "sectors": [
+      [
+        37,
+        217
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 901
+  },
+  {
+    "id": "japan-hamanako-bentenjima",
+    "name": "Bentenjima (Lake Hamana)",
+    "lat": 34.688,
+    "lon": 137.6,
+    "normalDeg": 329,
+    "sectors": [
+      [
+        239,
+        59
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 145
+  },
+  {
+    "id": "morocco-oualidia",
+    "name": "Oualidia Lagoon",
+    "lat": 32.735,
+    "lon": -9.04,
+    "normalDeg": 170,
+    "sectors": [
+      [
+        80,
+        260
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 10
+  },
+  {
+    "id": "cape-verde-boa-vista",
+    "name": "Praia de Estoril (Sal Rei, Boa Vista)",
+    "lat": 16.169,
+    "lon": -22.915,
+    "normalDeg": 248,
+    "sectors": [
+      [
+        158,
+        338
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 56
+  },
+  {
+    "id": "brazil-pedra-do-sal",
+    "name": "Pedra do Sal (Parnaiba)",
+    "lat": -2.815,
+    "lon": -41.73,
+    "normalDeg": 328,
+    "sectors": [
+      [
+        238,
+        58
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 731
+  },
+  {
+    "id": "brazil-salinopolis",
+    "name": "Praia do Atalaia (Salinopolis)",
+    "lat": -0.605,
+    "lon": -47.3,
+    "normalDeg": 17,
+    "sectors": [
+      [
+        287,
+        107
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 948
+  },
+  {
+    "id": "uruguay-laguna-jose-ignacio",
+    "name": "Laguna Jose Ignacio",
+    "lat": -34.82,
+    "lon": -54.67,
+    "normalDeg": 202,
+    "sectors": [
+      [
+        112,
+        292
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 1129
+  },
+  {
+    "id": "argentina-puerto-madryn",
+    "name": "Puerto Madryn (city beach)",
+    "lat": -42.77,
+    "lon": -65.03,
+    "normalDeg": 57,
+    "sectors": [
+      [
+        327,
+        147
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 53
+  }
+]
