@@ -192,6 +192,10 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   and resumes (mergeResults never downgrades an inference); job limit 150 min. From that run's log,
   7 suggestions were reviewed and applied; lagoons/causeways and >500 m entries were rejected (list
   in data/README "Sector inference").
+- Accepted (loop 26): app Lighthouse performance varies 77-100 between runs with no code change
+  (TBT 40-730 ms, LCP 1.3-3.7 s; the 77 followed a data-only commit). CPU profiles at 4x throttle
+  (mocked wind, mocked and live Overpass) show ~40 ms of app work, so this is shared-runner noise
+  plus live-API latency in demo mode; not chased further.
 - Accepted: forecast hour labels use the response's fixed offset, so for spots whose clocks change
   inside the 48 h window, labels after the change read 1 h off (instants, alerts and calendar times
   are exact). Rewriting labels per IANA zone would touch every string comparison; not worth it.
