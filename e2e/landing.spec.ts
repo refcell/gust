@@ -20,6 +20,17 @@ test('the live demo boots when scrolled into view', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Start live demo' })).toBeHidden();
 });
 
+test('a tall viewport alone does not boot the demo (no engagement)', async ({ page }) => {
+  // Lighthouse grows the viewport for its full-page screenshot; that must not start the app.
+  await page.setViewportSize({ width: 400, height: 3000 });
+  await mockNetwork(page);
+  await page.goto('/gust/');
+  await page.waitForTimeout(500);
+  await expect(page.locator('iframe[title^="gust app"]')).toHaveCount(0);
+  await page.keyboard.press('Shift');
+  await expect(page.frameLocator('iframe[title^="gust app"]').getByText(/Updated \d/)).toBeVisible();
+});
+
 test('Start live demo boots the app on demand', async ({ page }) => {
   // Short viewport: the frame can never be 60% visible, so only the button starts it.
   await page.setViewportSize({ width: 400, height: 300 });

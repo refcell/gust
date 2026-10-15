@@ -100,6 +100,13 @@ if (phone && startBtn) {
   startBtn.addEventListener('click', () => start(true));
   if ('IntersectionObserver' in window) {
     io = new IntersectionObserver((entries) => entries.some((e) => e.intersectionRatio >= 0.6) && start(false), { threshold: 0.6 });
-    io.observe(phone);
+    // Auto-boot only after the visitor engages (scroll, wheel, touch, pointer, key): a viewport
+    // resize alone (e.g. Lighthouse's full-page screenshot) must not boot the app mid-audit.
+    const engage = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'] as const;
+    const onEngage = () => {
+      for (const t of engage) removeEventListener(t, onEngage);
+      io?.observe(phone);
+    };
+    for (const t of engage) addEventListener(t, onEngage, { passive: true });
   }
 }
