@@ -32,7 +32,7 @@ The app has four tabs: Spots, Places, Alerts, Settings.
 
 - **First run.** With no location and no saved place, the Spots tab shows a Welcome card: Share location, Enable alerts, or add a place.
 - **List and map.** Spots show as a list or on a map (the toggle is remembered). The map uses OpenStreetMap raster tiles, loads on demand, and groups nearby markers into clusters coloured by the best rating in the group. Tap a cluster to zoom in.
-- **Favourites and mute.** Open a spot to mark it as a favourite or mute it. Favourites are listed first and stay watched outside the search radius. Muted spots never notify and are not sent to the push server.
+- **Favourites and mute.** Open a spot to mark it as a favourite or mute it. Favourites are listed first and stay watched outside the search radius. The Places search also finds curated spots by name, so you can favourite a spot anywhere (for example before a trip). Muted spots never notify and are not sent to the push server.
 - **Spot details.** Expanding a spot shows the 48-hour chart and, for coastal spots, marine conditions (see Data sources).
 - **Offline.** The service worker caches the app shell, the last wind data and map tiles, so the app opens offline after the first load. Wind older than 90 minutes is marked as cached and is never used for alerts. If the wind service fails, the app retries after a minute.
 - **Accessibility.** The tab bar is an ARIA tablist (arrow keys, Home, End). Spot cards are buttons with `aria-expanded`, map markers are buttons with full labels, and the chart has a table alternative. An axe check in the e2e suite fails on serious or critical WCAG 2.1 A/AA issues in light and dark themes.
