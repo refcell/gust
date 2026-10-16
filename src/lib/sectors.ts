@@ -43,7 +43,20 @@ export function compass(deg: number): string {
   return POINTS[Math.round(normDeg(deg) / 22.5) % 16];
 }
 
-/** Human-readable list of sectors, e.g. "W–NW, E". */
+export const ANY_DIRECTION = 'Any direction';
+
+/** Human-readable sector, e.g. "W–NW"; explicit degrees when a wide sector's ends share a label. */
+function describeSector([a, b]: Sector): string {
+  const from = compass(a);
+  const to = compass(b);
+  if (from !== to) return `${from}–${to}`;
+  // Same label: either a narrow sector (e.g. [90, 90]) or a wide one whose ends round alike (e.g. [10, 350]).
+  if (normDeg(b - a) < 22.5) return from;
+  return `${Math.round(normDeg(a))}° to ${Math.round(normDeg(b))}° clockwise`;
+}
+
+/** Human-readable list of sectors, e.g. "W–NW, E"; "Any direction" when any sector spans the full circle. */
 export function describeSectors(sectors: readonly Sector[]): string {
-  return sectors.map(([a, b]) => (compass(a) === compass(b) ? compass(a) : `${compass(a)}–${compass(b)}`)).join(', ');
+  if (sectors.some(([a, b]) => Math.abs(b - a) >= 360)) return ANY_DIRECTION;
+  return sectors.map(describeSector).join(', ');
 }

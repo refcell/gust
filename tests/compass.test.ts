@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isFullCircle, polarToXY, sectorArcPath, sectorSpan } from '../src/lib/compass';
+import { arrowClass, arrowTransform, compassLabel, compassSectorPaths, isFullCircle, polarToXY, sectorArcPath, sectorSpan } from '../src/lib/compass';
 
 describe('compass geometry', () => {
   it('maps bearings with 0° = north, clockwise', () => {
@@ -38,5 +38,39 @@ describe('compass geometry', () => {
 
   it('returns an empty path for an empty span', () => {
     expect(sectorArcPath(45, 45, 10)).toBe('');
+  });
+});
+
+describe('compass rendering helpers', () => {
+  it('rotates the downwind arrow by the wind direction', () => {
+    expect(arrowTransform(0)).toBe('rotate(0)');
+    expect(arrowTransform(90)).toBe('rotate(90)');
+    expect(arrowTransform(89.6)).toBe('rotate(90)');
+  });
+
+  it('hides the arrow for missing or non-finite wind', () => {
+    expect(arrowTransform(undefined)).toBeNull();
+    expect(arrowTransform(NaN)).toBeNull();
+    expect(arrowTransform(Infinity)).toBeNull();
+  });
+
+  it('colours the arrow by rating', () => {
+    expect(arrowClass('good')).toBe('compass-arrow b-good');
+    expect(arrowClass('offshore')).toBe('compass-arrow b-offshore');
+    expect(arrowClass(undefined)).toBe('compass-arrow b-none');
+  });
+
+  it('draws one path per non-empty sector', () => {
+    expect(compassSectorPaths([[225, 315], [45, 90], [300, 30]], 40)).toHaveLength(3);
+    expect(compassSectorPaths([[90, 90]], 40)).toHaveLength(0);
+    expect(compassSectorPaths([], 40)).toHaveLength(0);
+  });
+
+  it('labels the compass with the same wording as the Rideable from row', () => {
+    expect(compassLabel([[225, 315], [45, 90]], 270)).toBe('Wind from W (270°); rideable from SW–NW, NE–E');
+    expect(compassLabel([[300, 40]])).toBe('Rideable from WNW–NE');
+    expect(compassLabel([[10, 350]], 0)).toBe('Wind from N (0°); rideable from 10° to 350° clockwise');
+    expect(compassLabel([[0, 360]])).toBe('Rideable from any direction');
+    expect(compassLabel([], NaN)).toBe('Rideable directions unknown');
   });
 });
