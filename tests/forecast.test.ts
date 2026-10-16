@@ -92,6 +92,21 @@ describe('computeAlerts', () => {
     const later = computeAlerts([{ spot, wind: wind(8, evening) }], a.next, DEFAULT_SETTINGS, { now });
     expect(later.alerts.map((x) => x.kind)).toEqual(['forecast']);
   });
+  it('never reports a run that is already under way as a future window', () => {
+    const hourly = ['09:00', '10:00', '11:00', '12:00'].map((h) => W(`2026-06-01T${h}`, 20));
+    const w: SpotWind = { current: W('2026-06-01T09:15', 20), hourly, utcOffsetSeconds: 0, fetchedAt: now, observedAt: now };
+    const r = computeAlerts([{ spot, wind: w }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now: now + 15 * 60_000 });
+    expect(r.alerts.filter((a) => a.kind === 'forecast')).toHaveLength(0);
+  });
+  it('tracks drift across successive forecast updates', () => {
+    const at = (a: string, b: string) => [W('2026-06-01T09:00', 8), W(a, 20), W(b, 21), W('2026-06-01T22:00', 8)];
+    let st = computeAlerts([{ spot, wind: wind(8, at('2026-06-01T14:00', '2026-06-01T15:00')) }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now });
+    expect(st.alerts).toHaveLength(1);
+    st = computeAlerts([{ spot, wind: wind(8, at('2026-06-01T13:00', '2026-06-01T14:00')) }], st.next, DEFAULT_SETTINGS, { now });
+    expect(st.alerts).toHaveLength(0);
+    st = computeAlerts([{ spot, wind: wind(8, at('2026-06-01T12:00', '2026-06-01T13:00')) }], st.next, DEFAULT_SETTINGS, { now });
+    expect(st.alerts).toHaveLength(0);
+  });
   it('treats older start-only keys as the same session within 3 h', () => {
     const hourly = [W('2026-06-01T09:00', 8), W('2026-06-01T14:00', 20), W('2026-06-01T15:00', 21), W('2026-06-01T16:00', 8)];
     const legacy = { ratings: {}, notifiedWindows: { [`${spot.id}@2026-06-01T12:00`]: now } };

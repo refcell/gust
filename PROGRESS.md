@@ -318,3 +318,13 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   fall back to a 3 h start band. Rollback/check/ntfy treat keys opaquely, so no state migration.
   (Kimi K3 review of loops 23-31 timed out at 30 min; re-dispatched to gpt-6.1-sol with a
   narrower brief.)
+- Loop 33: gpt-6.1-sol review of loops 23-32. Must-fix: a multi-day good run re-alerted after the
+  48 h prune, because goodWindows scanned from the :15 "current" time and reported the ongoing run
+  as starting next hour. Fixed by scanning from the top of the current hour (ongoing runs are
+  skipped; "now" alerts cover them) and pruning at 72 h. Skipped overlapping windows are now
+  recorded with the original notify time, so gradual drift (14-15, 13-14, 12-13) never re-alerts.
+  Both regressions have tests that fail on the old code. Landing: engagement listeners are removed
+  on every boot path, a focused Start button hands focus to the demo iframe, and the desktop
+  Install fallback scrolls instantly under prefers-reduced-motion. Decision: notification tags keep
+  the `/end` suffix (local and server notifications for a shifted window may not replace each
+  other; acceptable, they are deduped at source).
