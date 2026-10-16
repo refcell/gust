@@ -373,3 +373,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   different spot (Valdelagrana 7 km off, the Le Barcarès lagoon launch) were not applied.
   gpt-6.1-sol compass review: arcs only 1.4:1 contrast (must-fix), [10,350] announced "from N",
   [0,360] text said "from N"; a worker is fixing these.
+- Loop 42: compass review fixes merged (worker 36c8327). Sector wedges have a 1.5 px var(--good)
+  outline (about 5.4:1 light, 8.4:1 dark, computed from the CSS colours) and the arrow sits on a
+  card-coloured halo. describeSectors now says "Any direction" for spans >= 360 and uses degrees
+  when a wide sector's endpoints share a compass label ("10° to 350° clockwise"); the text row and the
+  compass aria-label share it. Compass logic lives in pure helpers with unit tests (no DOM test
+  env; decision: no new test dependency). 302 unit / 102 e2e tests pass; screenshots checked in light and dark.
