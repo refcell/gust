@@ -20,6 +20,19 @@ test.describe('app', () => {
     await expect(page.getByText('cached wind')).toHaveCount(0);
   });
 
+  test('stale data reads the forecast from the wall clock and says so', async ({ page }) => {
+    // The browser clock runs 4 h ahead of the (mocked, real-time) forecast, so the data is stale.
+    await page.clock.setFixedTime(Date.now() + 4 * 3600_000);
+    await page.goto('/gust/app/');
+    await expect(page.getByText('cached wind')).toBeVisible();
+    const card = page.locator('li.spot', { hasText: 'Crissy Field' });
+    await expect(card.locator('.spot-stale')).toHaveText(/^Cached · as of (Today|Tomorrow|\w{3}) \d\d:\d\d$/);
+    await card.getByRole('button', { name: /Crissy Field/ }).click();
+    await expect(card.getByRole('img', { name: /^Cached forecast wind from / })).toBeVisible();
+    await expect(card.locator('figcaption')).toHaveText(/^Forecast from .+ \(cached\), shown from /);
+    await expect(card.locator('figcaption')).not.toContainText('Next 48 h');
+  });
+
   test('expands a spot to show hourly forecast', async ({ page }) => {
     await page.goto('/gust/app/');
     const head = page.getByRole('button', { name: /Crissy Field/ });
