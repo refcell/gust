@@ -336,3 +336,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   tobago-pigeon-point (E-facing Bon Accord lagoon side, 340-160). Decision: the other 21 `[]` spots
   stay speed-only (x0.85) until a source states their orientation; guessing would risk false
   "offshore = 0" scores.
+- Loop 35: shore check run 4: 691/720 measured, 26 Overpass failures. No new spot > 1 km except
+  gizzeria (nearest mapped shore was an islet); hand-set to Hang Loose Beach 38.9352, 16.1917
+  from a web source, about 1.1 km from the old point. Decision: stop re-dispatching the shore check;
+  the remaining failures are diminishing returns (re-run manually after future dataset edits).
