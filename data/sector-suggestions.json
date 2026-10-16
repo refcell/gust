@@ -441,7 +441,19 @@
   },
   {
     "id": "lombok-kuta",
-    "reason": "overpass-request-failed"
+    "name": "Kuta (Lombok)",
+    "lat": -8.90786,
+    "lon": 116.31069,
+    "normalDeg": 188,
+    "sectors": [
+      [
+        98,
+        278
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "bali-mertasari",
@@ -669,7 +681,19 @@
   },
   {
     "id": "tobago-pigeon-point",
-    "reason": "overpass-request-failed"
+    "name": "Pigeon Point (Tobago)",
+    "lat": 11.16729,
+    "lon": -60.84131,
+    "normalDeg": 265,
+    "sectors": [
+      [
+        175,
+        355
+      ]
+    ],
+    "shoreKind": "sea",
+    "distanceM": 0,
+    "review": "rejected"
   },
   {
     "id": "costa-rica-playa-copal",
@@ -705,7 +729,19 @@
   },
   {
     "id": "austria-podersdorf",
-    "reason": "overpass-request-failed"
+    "name": "Podersdorf am See (Neusiedl)",
+    "lat": 47.85594,
+    "lon": 16.82621,
+    "normalDeg": 294,
+    "sectors": [
+      [
+        204,
+        24
+      ]
+    ],
+    "shoreKind": "lake",
+    "distanceM": 0,
+    "review": "approved"
   },
   {
     "id": "romania-vadu",
