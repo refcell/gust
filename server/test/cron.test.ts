@@ -145,7 +145,7 @@ describe('runCron', () => {
       {
         title: 'Good window ahead: Spot B',
         body: 'Today 15:00 for 4h, avg 20 kn',
-        tag: 'fc-b@2025-06-01T15:00',
+        tag: 'fc-b@2025-06-01T15:00/2025-06-01T18:00',
         url: 'https://refcell.github.io/gust/app/?spot=b',
       },
     ]);
@@ -160,7 +160,7 @@ describe('runCron', () => {
     // Subscriber 1 state updated.
     const st = JSON.parse(env.SUBS.map.get('state:' + id1)!) as AlertState;
     expect(st.ratings).toEqual({ a: 'good', b: 'poor' });
-    expect(Object.keys(st.notifiedWindows)).toEqual(['b@2025-06-01T15:00']);
+    expect(Object.keys(st.notifiedWindows)).toEqual(['b@2025-06-01T15:00/2025-06-01T18:00']);
 
     // Next run: nothing new, and no KV writes.
     const writes = env.SUBS.writes;
@@ -211,10 +211,10 @@ describe('runCron', () => {
     // Run 2: "now" does not repeat; the pending forecast alert goes out instead.
     const m2 = mockFetch([r]);
     const report2 = await runCron(env, NOW + 30 * 60_000, m2.fetch);
-    expect(m2.pushes.map((p) => JSON.parse(p.payload).tag)).toEqual(['fc-b@2025-06-01T15:00']);
+    expect(m2.pushes.map((p) => JSON.parse(p.payload).tag)).toEqual(['fc-b@2025-06-01T15:00/2025-06-01T18:00']);
     expect(report2).toMatchObject({ alerts: 1, sent: 1 });
     const st2 = JSON.parse(env.SUBS.map.get('state:' + id)!) as AlertState;
-    expect(Object.keys(st2.notifiedWindows)).toEqual(['b@2025-06-01T15:00']);
+    expect(Object.keys(st2.notifiedWindows)).toEqual(['b@2025-06-01T15:00/2025-06-01T18:00']);
 
     // Run 3: nothing left to send.
     const m3 = mockFetch([r]);

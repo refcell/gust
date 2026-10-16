@@ -8,7 +8,7 @@ import { isStale, localIsoToEpoch } from './time';
 export interface AlertState {
   /** Last rating per spot id. */
   ratings: Record<string, Rating>;
-  /** Forecast windows already notified, keyed `${spotId}@${start}`. */
+  /** Forecast windows already notified, keyed `${spotId}@${start}/${end}` (older state: `${spotId}@${start}`). */
   notifiedWindows: Record<string, number>;
 }
 
@@ -22,15 +22,25 @@ export interface Alert {
   kind: 'now' | 'forecast';
 }
 
-/** Windows for one spot starting closer than this are treated as the same session. */
-export const SAME_WINDOW_MS = 6 * 3600_000;
+/** For keys from older state (no end recorded): starts closer than this are the same session. */
+export const SAME_START_MS = 3 * 3600_000;
 
-function nearNotified(notified: Record<string, number>, spotId: string, startMs: number, utcOffsetSeconds: number): boolean {
+/**
+ * True when a window for this spot that was already notified overlaps [startMs, endMs]. Forecast
+ * updates shift window edges between checks; an overlapping window is the same session, while a
+ * separate session later the same day (no overlap) still alerts.
+ */
+function nearNotified(notified: Record<string, number>, spotId: string, startMs: number, endMs: number, utcOffsetSeconds: number): boolean {
   const prefix = `${spotId}@`;
   for (const k of Object.keys(notified)) {
     if (!k.startsWith(prefix)) continue;
-    const t = localIsoToEpoch(k.slice(prefix.length), utcOffsetSeconds);
-    if (Number.isFinite(t) && Math.abs(t - startMs) < SAME_WINDOW_MS) return true;
+    const [s0, e0] = k.slice(prefix.length).split('/');
+    const a = localIsoToEpoch(s0, utcOffsetSeconds);
+    if (!Number.isFinite(a)) continue;
+    if (e0) {
+      const b = localIsoToEpoch(e0, utcOffsetSeconds);
+      if (Number.isFinite(b) && startMs <= b && a <= endMs) return true;
+    } else if (Math.abs(a - startMs) < SAME_START_MS) return true;
   }
   return false;
 }
@@ -80,11 +90,9 @@ export function computeAlerts(
         if (w.start <= nowLocal) continue; // already happening; covered by "now"
         const startMs = localIsoToEpoch(w.start, wind.utcOffsetSeconds);
         if (!(startMs > now && startMs - now <= horizon)) continue;
-        const key = `${spot.id}@${w.start}`;
+        const key = `${spot.id}@${w.start}/${w.end}`;
         if (notified[key]) continue;
-        // Forecast updates shift window starts by an hour or two between checks; a window starting
-        // within SAME_WINDOW_MS of one already notified for this spot is the same session.
-        if (nearNotified(notified, spot.id, startMs, wind.utcOffsetSeconds)) continue;
+        if (nearNotified(notified, spot.id, startMs, localIsoToEpoch(w.end, wind.utcOffsetSeconds), wind.utcOffsetSeconds)) continue;
         notified[key] = now;
         alerts.push({
           tag: `fc-${key}`,
