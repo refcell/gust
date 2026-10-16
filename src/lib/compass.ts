@@ -1,4 +1,5 @@
-import { normDeg, type Sector } from './sectors';
+import type { Rating } from './score';
+import { ANY_DIRECTION, compass, describeSectors, normDeg, type Sector } from './sectors';
 
 export interface Point {
   x: number;
@@ -38,4 +39,29 @@ export function sectorArcPath(from: number, to: number, r: number, cx = 0, cy = 
   const a = polarToXY(from, r, cx, cy);
   const b = polarToXY(to, r, cx, cy);
   return `M${r4(cx)} ${r4(cy)}L${a.x} ${a.y}A${r} ${r} 0 ${span > 180 ? 1 : 0} 1 ${b.x} ${b.y}Z`;
+}
+
+/** Accessible label for the compass: current wind (if known) plus the rideable sectors, worded like the "Rideable from" row. */
+export function compassLabel(sectors: readonly Sector[], dirDeg?: number): string {
+  const wind = dirDeg !== undefined && Number.isFinite(dirDeg) ? `Wind from ${compass(dirDeg)} (${Math.round(normDeg(dirDeg))}°); ` : '';
+  if (sectors.length === 0) return `${wind}rideable directions unknown`.replace(/^r/, 'R');
+  const desc = describeSectors(sectors);
+  return `${wind}rideable from ${desc === ANY_DIRECTION ? 'any direction' : desc}`.replace(/^r/, 'R');
+}
+
+/**
+ * SVG transform for the wind arrow, which is drawn pointing south (downwind of a north wind) and rotated by the
+ * direction the wind comes from. Null when the direction is missing or not finite.
+ */
+export function arrowTransform(dirDeg?: number): string | null {
+  return dirDeg !== undefined && Number.isFinite(dirDeg) ? `rotate(${Math.round(dirDeg)})` : null;
+}
+
+export function arrowClass(rating?: Rating): string {
+  return `compass-arrow b-${rating ?? 'none'}`;
+}
+
+/** Wedge paths for the rideable sectors (empty spans dropped). */
+export function compassSectorPaths(sectors: readonly Sector[], r: number): string[] {
+  return sectors.map(([a, b]) => sectorArcPath(a, b, r)).filter((d) => d !== '');
 }
