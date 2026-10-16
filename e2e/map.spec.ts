@@ -70,6 +70,9 @@ test.describe('map view', () => {
     else {
       await page.getByRole('button', { name: 'Map', exact: true }).focus();
       await page.keyboard.press('Tab');
+      // The map surface itself is focusable (keyboard panning), then its markers.
+      await expect(page.getByRole('region', { name: 'Map of nearby spots' })).toBeFocused();
+      await page.keyboard.press('Tab');
       await expect(first).toBeFocused();
       await page.keyboard.press('Tab');
       await expect(page.locator('button.map-marker').nth(1)).toBeFocused();
@@ -98,5 +101,34 @@ test.describe('map view', () => {
     const after = await page.locator(`button.map-marker[aria-label="${await marker.getAttribute('aria-label')}"]`).boundingBox();
     expect(after && before && Math.round(after.x - before.x)).toBe(60);
     await expect(page.getByRole('button', { name: 'Open details' })).toHaveCount(0);
+  });
+
+  test('arrow keys pan and +/- zoom the focused map', async ({ page }) => {
+    await page.goto('/gust/app/');
+    await page.getByRole('button', { name: 'Map', exact: true }).click();
+    const map = page.getByRole('region', { name: 'Map of nearby spots' });
+    const dot = map.getByRole('img', { name: 'Your location' });
+    await expect(dot).toBeVisible();
+    const before = (await dot.boundingBox())!;
+    await map.focus();
+    await expect(map).toBeFocused();
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowDown');
+    await expect(async () => {
+      const after = (await dot.boundingBox())!;
+      // The view moved right and down, so content shifts left and up.
+      expect(after.x).toBeLessThan(before.x - 20);
+      expect(after.y).toBeLessThan(before.y - 20);
+    }).toPass();
+    await expect(map).toBeFocused();
+    const radius = page.locator('.map-radius');
+    const r0 = (await radius.boundingBox())!.width;
+    await page.keyboard.press('-');
+    await expect(async () => expect((await radius.boundingBox())!.width).toBeLessThan(r0 * 0.75)).toPass();
+    // Markers still work with the keyboard after panning.
+    const marker = map.locator('button.map-marker').first();
+    await marker.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(marker).toBeFocused();
   });
 });
