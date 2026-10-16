@@ -340,3 +340,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   gizzeria (nearest mapped shore was an islet); hand-set to Hang Loose Beach 38.9352, 16.1917
   from a web source, about 1.1 km from the old point. Decision: stop re-dispatching the shore check;
   the remaining failures are diminishing returns (re-run manually after future dataset edits).
+- Loop 36: Europe depth. Two workers (worktrees) drafted 43 northern and 38 southern European
+  candidates (DE, NL, BE, DK, PL, UK, IE, FR, PT, ES, IT, GR, TR, CY, MT, BG, RO); merged with
+  scripts/merge-spots.mjs (0 duplicates). Dataset: 801 spots, 88 countries. el-cotillo and
+  karpathos-afiartis set to `[]` (their usual wind is side-off; rating it offshore would make them
+  never good). Positions are from memory and marked approximate; the shore check is re-dispatched
+  to measure the new spots before any position review.
