@@ -332,3 +332,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   lombok-kuta (S-facing, 98-278) and austria-podersdorf (W-facing lake shore, 204-24); rejected
   tobago-pigeon-point (inferred W-facing, but riding is on the E-facing Bon Accord lagoon side).
   lombok-ekas, jamaica-burwood and isla-coche still unresolved; 23 curated spots keep `[]`.
+  Hand-set sectors where the notes state the shore facing: jamaica-burwood (N-facing, 270-90) and
+  tobago-pigeon-point (E-facing Bon Accord lagoon side, 340-160). Decision: the other 21 `[]` spots
+  stay speed-only (x0.85) until a source states their orientation; guessing would risk false
+  "offshore = 0" scores.
