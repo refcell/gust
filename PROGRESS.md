@@ -400,3 +400,11 @@ audit merged (see Log).
     and the chart caption says it is cached; expired windows are hidden.
   - Map is keyboard-focusable: arrows pan (Shift = more), +/- zoom, focus ring.
   317 unit / 44 server / 111 e2e tests pass.
+- Loop 45: audit findings 4 and 6 merged (worker 295904a). Each Open-Meteo batch has a 15 s
+  deadline (also bounds the push server and ntfy runs); fetchSpotWind reports failedIds; the app
+  keeps previous samples for failed spots, shows "N spots failed, retrying" and re-fetches only
+  those on the minute timer; runCheck skips failed spots. OSM augmentation queries one origin per
+  0.5° tile/radius bucket across the location and saved places, nearest first, within the 6/day
+  cap. README retry/OSM wording updated. All 8 audit findings are now fixed. 324 unit / 44 server /
+  114 e2e tests pass.
+
