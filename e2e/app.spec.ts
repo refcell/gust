@@ -242,6 +242,28 @@ test.describe('app', () => {
     await expect(page.getByRole('heading', { name: 'On this device' })).toBeVisible();
   });
 
+  test('adds OpenStreetMap spots around saved places, not only the current location', async ({ page }) => {
+    const place = { id: 'p1', name: 'Faraway Bay', lat: -46.6, lon: 168.3 };
+    await page.addInitScript((p) => localStorage.setItem('gust.places', JSON.stringify([p])), place);
+    const queries: string[] = [];
+    const overpass = (route: import('@playwright/test').Route) => {
+      const body = decodeURIComponent(route.request().postData() ?? '');
+      queries.push(body);
+      const near = /around:\d+,-46\.5/.test(body);
+      const elements = near ? [{ type: 'node', id: 4242, lat: -46.61, lon: 168.31, tags: { sport: 'kitesurfing', name: 'Gust OSM Test Spot' } }] : [];
+      return route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify({ elements }) });
+    };
+    await page.route('https://overpass-api.de/**', overpass);
+    await page.goto('/gust/app/');
+    await expect(page.getByRole('heading', { name: 'Near you' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Near Faraway Bay' })).toBeVisible();
+    await expect(page.getByText('Gust OSM Test Spot')).toBeVisible();
+    // The current location's tile is queried before the saved place's.
+    const kite = queries.filter((q) => q.includes('kitesurfing'));
+    expect(kite[0]).toMatch(/around:\d+,38/);
+    expect(kite.some((q) => /around:\d+,-46\.5/.test(q))).toBe(true);
+  });
+
   test('alerts panel builds the ntfy alert config and a private topic', async ({ page }) => {
     await page.addInitScript(() => {
       localStorage.setItem('gust.places', JSON.stringify([{ id: 'p1', name: 'Hood River', lat: 45.7, lon: -121.5 }]));

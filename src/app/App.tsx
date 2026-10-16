@@ -8,7 +8,7 @@ import { Welcome } from './Welcome';
 import { runCheck, K, notificationOptions } from '../lib/check';
 import { spotsOn, type Alert } from '../lib/alerts';
 import { kvGet } from '../lib/kv';
-import { fetchWind, splitFresh } from '../lib/openmeteo';
+import { fetchSpotWind, splitFresh } from '../lib/openmeteo';
 import { createCoalescer } from '../lib/coalesce';
 import { nearbySpots, nearestSpots, type NearbySpot } from '../lib/spots';
 import { scoreWind } from '../lib/score';
@@ -16,7 +16,7 @@ import { loadFavSpots, loadLastLocation, loadPlaces, loadSettings, saveFavSpots,
 import { DEFAULT_SETTINGS, type Place, type Settings, type Spot, type SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { detectPlatform } from '../lib/platform';
-import { augmentWithOsm } from './osm';
+import { augmentAround } from './osm';
 import { persistBackground, pushConfigured, requestAlerts, showLocalNotification, syncPush } from './background';
 import { nextRevision, syncKey } from '../lib/pushsync';
 import { isStale } from '../lib/time';
@@ -77,6 +77,8 @@ export function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fetchedAt, setFetchedAt] = useState<number>(0);
+  // Spots whose last wind request failed (their previous samples are kept); retried each minute.
+  const [failedIds, setFailedIds] = useState<string[]>([]);
   const [view, setView] = useState<View>('spots');
   const [openId, setOpenId] = useState<string | null>(params.get('spot'));
   const [online, setOnline] = useState(navigator.onLine);
@@ -153,11 +155,14 @@ export function App() {
     if (next) saveFavSpots(next);
   }, [allSpots, settings.favorites, demo]);
 
-  // Augment with OpenStreetMap spots around the current location.
+  // Augment with OpenStreetMap spots around the current location and the saved places.
+  const osmKey = [loc, ...places].map((p) => (p ? `${p.lat.toFixed(3)},${p.lon.toFixed(3)}` : '')).join('|');
   useEffect(() => {
-    if (!loc || !curated || demo) return;
+    if (!curated || demo) return;
+    const origins: LatLon[] = loc ? [loc, ...places] : places;
+    if (origins.length === 0) return;
     let cancelled = false;
-    augmentWithOsm(loc, settings.radiusKm, curated)
+    augmentAround(origins, settings.radiusKm, curated)
       .then((extra) => {
         if (!cancelled) setOsm(extra);
       })
@@ -165,7 +170,7 @@ export function App() {
     return () => {
       cancelled = true;
     };
-  }, [loc?.lat, loc?.lon, settings.radiusKm, curated, demo]);
+  }, [osmKey, settings.radiusKm, curated, demo]);
 
   const groups: Group[] = useMemo(() => {
     if (!allSpots) return [];
@@ -200,11 +205,15 @@ export function App() {
   // Latest state for the refresh runner (it is created once; see `refresh` below).
   const windRef = useRef(wind);
   windRef.current = wind;
+  const failedRef = useRef(failedIds);
+  failedRef.current = failedIds;
   const doRefresh = async (force: boolean) => {
-    if (watched.length === 0 && shownOnly.length === 0) return;
+    const all = [...watched, ...shownOnly];
+    if (all.length === 0) return;
     // Reuse samples fetched in the last 10 minutes (scoring-only changes: wind window, units,
-    // mute, favourites); fetch only missing or older ones. `force` (Refresh button) refetches all.
-    const { fresh, missing } = force ? { fresh: {}, missing: [...watched, ...shownOnly] } : splitFresh([...watched, ...shownOnly], windRef.current);
+    // mute, favourites); fetch only missing or older ones plus spots whose last request failed.
+    // `force` (Refresh button) refetches all.
+    const { fresh, missing } = force ? { fresh: {} as Record<string, SpotWind>, missing: all } : splitFresh(all, windRef.current, Date.now(), undefined, failedRef.current);
     const fetching = missing.length > 0;
     if (fetching) setLoading(true);
     setError(null);
@@ -215,15 +224,17 @@ export function App() {
       const extraSpots = [...(demo ? watched : []), ...shownOnly].filter((s) => !fresh[s.id]);
       // Alert state is committed per alert, only once its notification was shown (see runCheck).
       const deliver = granted ? (a: Alert) => showLocalNotification(a.title, notificationOptions(a)) : undefined;
-      const [{ wind: w }, extra] = await Promise.all([
-        checked.length ? runCheck({ spots: checked, settings, deliver, cached: fresh }) : Promise.resolve({ wind: {} as Record<string, SpotWind> }),
-        extraSpots.length ? fetchWind(extraSpots) : Promise.resolve([]),
+      const [check, extra] = await Promise.all([
+        checked.length ? runCheck({ spots: checked, settings, deliver, cached: fresh }) : Promise.resolve({ wind: {} as Record<string, SpotWind>, failedIds: [] as string[] }),
+        fetchSpotWind(extraSpots),
       ]);
-      for (const s of [...watched, ...shownOnly]) if (fresh[s.id] && !w[s.id]) w[s.id] = fresh[s.id];
-      extra.forEach((x, i) => {
-        if (x) w[extraSpots[i].id] = x;
-      });
-      if (Object.keys(w).length === 0) throw new Error('no data');
+      const w: Record<string, SpotWind> = { ...check.wind, ...extra.wind };
+      for (const s of all) if (fresh[s.id] && !w[s.id]) w[s.id] = fresh[s.id];
+      const failed = [...new Set([...check.failedIds, ...extra.failedIds])];
+      setFailedIds(failed);
+      // Nothing usable, or every request failed: an error, not an update.
+      if (Object.keys(w).length === 0 || (fetching && failed.length >= missing.length)) throw new Error('no data');
+      // Failed spots keep their previous samples.
       setWind((prev) => ({ ...prev, ...w }));
       if (fetching) setFetchedAt(Date.now());
     } catch {
@@ -245,11 +256,12 @@ export function App() {
   }, [watchKey, settings, refresh]);
 
   // After a failed fetch (rate limit, flaky network), retry once a minute while online.
+  // Partial failures retry only the failed spots (fresh samples of the others are reused).
   useEffect(() => {
-    if (!error || !online || loading) return;
+    if ((!error && failedIds.length === 0) || !online || loading) return;
     const t = setTimeout(() => refresh(), 65_000);
     return () => clearTimeout(t);
-  }, [error, online, loading, refresh]);
+  }, [error, failedIds, online, loading, refresh]);
 
   // Keep the background copies of the settings and watched spots in sync, on their own (not on the
   // wind fetch), so muting takes effect even while the fetch is failing: IndexedDB for the service
@@ -358,6 +370,7 @@ export function App() {
     setBannerDismissed(true);
   };
   const iosNeedsInstall = platform.ios && !platform.standalone;
+  const partialNote = !error && failedIds.length ? ` · ${failedIds.length} ${failedIds.length === 1 ? 'spot' : 'spots'} failed, retrying` : '';
   const showWelcome = !demo && !loc && places.length === 0;
   const showBanner = !showWelcome && !demo && !bannerDismissed && notifPerm === 'default' && watched.length > 0 && !iosNeedsInstall;
 
@@ -443,7 +456,7 @@ export function App() {
           </a>
         </h1>
         <span class="status" aria-live="polite">
-          {loading ? 'Updating…' : fetchedAt ? `Updated ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
+          {loading ? 'Updating…' : fetchedAt ? `Updated ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}${partialNote}` : ''}
           {!online && ' · offline'}
         </span>
         <button class="icon-btn" onClick={() => refresh(true)} disabled={loading || watched.length + shownOnly.length === 0} aria-label="Refresh wind">

@@ -11,8 +11,9 @@ vi.mock('../src/lib/kv', () => ({
   },
 }));
 vi.mock('../src/lib/openmeteo', () => ({
-  fetchWind: async () => {
-    throw new Error('no network in tests');
+  fetchSpotWind: async (spots: unknown[]) => {
+    if (spots.length) throw new Error('no network in tests');
+    return { wind: {}, failedIds: [] };
   },
 }));
 
