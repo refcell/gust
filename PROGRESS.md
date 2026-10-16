@@ -363,3 +363,6 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   are unknown. Geometry in src/lib/compass.ts with 7 unit tests; e2e asserts the labelled image.
   Lead fix: `.compass-arrow` overrode the `.b-<rating>` colour (same specificity, later in the
   file), so the arrow was always grey; the muted rule now applies only to `.b-none`.
+- Loop 40: shore check run 6: 772/801 measured, 26 failures. Moved spain-malaga-misericordia onto the
+  beach (1.2 km); rejected elephant-butte (reservoir, nearest mapped water a river). Demo and posters
+  re-recorded with the compass.

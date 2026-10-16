@@ -3016,6 +3016,17 @@
     "proposedLon": -112.27575
   },
   {
+    "id": "elephant-butte",
+    "name": "Elephant Butte Lake",
+    "lat": 33.188,
+    "lon": -107.225,
+    "distanceM": 1240,
+    "shoreKind": "river",
+    "proposedLat": 33.17716,
+    "proposedLon": -107.22804,
+    "review": "rejected"
+  },
+  {
     "id": "lake-cascade",
     "name": "Lake Cascade",
     "lat": 44.55,
@@ -3407,6 +3418,26 @@
     "proposedLon": 174.98093
   },
   {
+    "id": "kalifornien-schoenberg",
+    "name": "Kalifornien (Schönberger Strand)",
+    "lat": 54.417,
+    "lon": 10.395,
+    "distanceM": 586,
+    "shoreKind": "island",
+    "proposedLat": 54.41879,
+    "proposedLon": 10.38649
+  },
+  {
+    "id": "warnemuende",
+    "name": "Warnemünde",
+    "lat": 54.182,
+    "lon": 12.07,
+    "distanceM": 305,
+    "shoreKind": "coastline",
+    "proposedLat": 54.17941,
+    "proposedLon": 12.07154
+  },
+  {
     "id": "rerik-salzhaff",
     "name": "Rerik (Salzhaff)",
     "lat": 54.103,
@@ -3427,6 +3458,16 @@
     "proposedLon": 6.65426
   },
   {
+    "id": "amrum-kniepsand",
+    "name": "Kniepsand (Amrum)",
+    "lat": 54.64,
+    "lon": 8.33,
+    "distanceM": 193,
+    "shoreKind": "coastline",
+    "proposedLat": 54.63891,
+    "proposedLon": 8.32767
+  },
+  {
     "id": "ijmuiden-kennemerstrand",
     "name": "IJmuiden (Kennemerstrand)",
     "lat": 52.456,
@@ -3435,6 +3476,26 @@
     "shoreKind": "coastline",
     "proposedLat": 52.45552,
     "proposedLon": 4.55554
+  },
+  {
+    "id": "hoek-van-holland",
+    "name": "Hoek van Holland",
+    "lat": 51.985,
+    "lon": 4.115,
+    "distanceM": 846,
+    "shoreKind": "coastline",
+    "proposedLat": 51.99082,
+    "proposedLon": 4.10707
+  },
+  {
+    "id": "kijkduin-zandmotor",
+    "name": "Zandmotor (Kijkduin)",
+    "lat": 52.05,
+    "lon": 4.195,
+    "distanceM": 158,
+    "shoreKind": "island",
+    "proposedLat": 52.04977,
+    "proposedLon": 4.19727
   },
   {
     "id": "cadzand",
@@ -3447,6 +3508,16 @@
     "proposedLon": 3.3875
   },
   {
+    "id": "de-panne",
+    "name": "De Panne",
+    "lat": 51.105,
+    "lon": 2.58,
+    "distanceM": 364,
+    "shoreKind": "coastline",
+    "proposedLat": 51.10214,
+    "proposedLon": 2.58252
+  },
+  {
     "id": "lokken",
     "name": "Løkken",
     "lat": 57.37,
@@ -3455,6 +3526,46 @@
     "shoreKind": "coastline",
     "proposedLat": 57.37057,
     "proposedLon": 9.70203
+  },
+  {
+    "id": "agger",
+    "name": "Agger Tange",
+    "lat": 56.77,
+    "lon": 8.225,
+    "distanceM": 161,
+    "shoreKind": "coastline",
+    "proposedLat": 56.77076,
+    "proposedLon": 8.22725
+  },
+  {
+    "id": "debki",
+    "name": "Dębki",
+    "lat": 54.831,
+    "lon": 18.07,
+    "distanceM": 308,
+    "shoreKind": "coastline",
+    "proposedLat": 54.83377,
+    "proposedLon": 18.0698
+  },
+  {
+    "id": "uk-aberavon",
+    "name": "Aberavon Beach",
+    "lat": 51.585,
+    "lon": -3.82,
+    "distanceM": 728,
+    "shoreKind": "coastline",
+    "proposedLat": 51.58921,
+    "proposedLon": -3.81196
+  },
+  {
+    "id": "uk-brean",
+    "name": "Brean",
+    "lat": 51.29,
+    "lon": -3.01,
+    "distanceM": 395,
+    "shoreKind": "coastline",
+    "proposedLat": 51.29058,
+    "proposedLon": -3.0156
   },
   {
     "id": "uk-benone",
@@ -3517,6 +3628,17 @@
     "proposedLon": -6.22556
   },
   {
+    "id": "spain-malaga-misericordia",
+    "name": "Playa de la Misericordia (Málaga)",
+    "lat": 36.7,
+    "lon": -4.45,
+    "distanceM": 1211,
+    "shoreKind": "coastline",
+    "proposedLat": 36.69487,
+    "proposedLon": -4.43803,
+    "review": "approved"
+  },
+  {
     "id": "spain-castelldefels",
     "name": "Castelldefels",
     "lat": 41.268,
@@ -3527,15 +3649,24 @@
     "proposedLon": 1.98498
   },
   {
-    "id": "italy-cagliari-poetto",
-    "name": "Poetto (Cagliari)",
-    "lat": 39.2085,
-    "lon": 9.2,
-    "distanceM": 1569,
+    "id": "spain-fuerteventura-el-cotillo",
+    "name": "El Cotillo Lagoons (Fuerteventura)",
+    "lat": 28.703,
+    "lon": -14.008,
+    "distanceM": 668,
     "shoreKind": "coastline",
-    "proposedLat": 39.2211,
-    "proposedLon": 9.19186,
-    "review": "approved"
+    "proposedLat": 28.70452,
+    "proposedLon": -14.01462
+  },
+  {
+    "id": "france-sete-lido",
+    "name": "Lido de Sète (Villeroy)",
+    "lat": 43.385,
+    "lon": 3.64,
+    "distanceM": 265,
+    "shoreKind": "coastline",
+    "proposedLat": 43.3833,
+    "proposedLon": 3.64229
   },
   {
     "id": "italy-putzu-idu",
@@ -3556,6 +3687,36 @@
     "shoreKind": "coastline",
     "proposedLat": 40.29458,
     "proposedLon": 17.77614
+  },
+  {
+    "id": "greece-corfu-halikounas",
+    "name": "Halikounas (Corfu)",
+    "lat": 39.467,
+    "lon": 19.868,
+    "distanceM": 172,
+    "shoreKind": "coastline",
+    "proposedLat": 39.46721,
+    "proposedLon": 19.86602
+  },
+  {
+    "id": "turkey-kilyos",
+    "name": "Kilyos (Istanbul)",
+    "lat": 41.25,
+    "lon": 29.025,
+    "distanceM": 535,
+    "shoreKind": "coastline",
+    "proposedLat": 41.2452,
+    "proposedLon": 29.02494
+  },
+  {
+    "id": "cyprus-ladys-mile",
+    "name": "Lady's Mile (Limassol)",
+    "lat": 34.635,
+    "lon": 33.0035,
+    "distanceM": 460,
+    "shoreKind": "coastline",
+    "proposedLat": 34.63418,
+    "proposedLon": 33.00842
   },
   {
     "id": "bulgaria-kranevo",

@@ -1122,7 +1122,10 @@
     "id": "narragansett",
     "lat": 41.4335,
     "lon": -71.457,
-    "reason": "overpass-request-failed"
+    "distanceM": 52,
+    "shoreKind": "coastline",
+    "nearestLat": 41.4333,
+    "nearestLon": -71.45644
   },
   {
     "id": "misquamicut",
@@ -1959,7 +1962,10 @@
     "id": "salinas-del-rey",
     "lat": 10.79915,
     "lon": -75.21901,
-    "reason": "overpass-request-failed"
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 10.79915,
+    "nearestLon": -75.21901
   },
   {
     "id": "cumbuco",
@@ -5091,7 +5097,10 @@
     "id": "elephant-butte",
     "lat": 33.188,
     "lon": -107.225,
-    "reason": "overpass-request-failed"
+    "distanceM": 1240,
+    "shoreKind": "river",
+    "nearestLat": 33.17716,
+    "nearestLon": -107.22804
   },
   {
     "id": "cochiti-lake",
@@ -5376,7 +5385,10 @@
     "id": "galveston-8-mile-road",
     "lat": 29.245,
     "lon": -94.929,
-    "reason": "overpass-request-failed"
+    "distanceM": 29,
+    "shoreKind": "coastline",
+    "nearestLat": 29.24474,
+    "nearestLon": -94.92905
   },
   {
     "id": "quintana-beach",
@@ -5445,7 +5457,10 @@
     "id": "ben-t-davis-beach",
     "lat": 27.9705,
     "lon": -82.5785,
-    "reason": "overpass-request-failed"
+    "distanceM": 22,
+    "shoreKind": "coastline",
+    "nearestLat": 27.97033,
+    "nearestLon": -82.57862
   },
   {
     "id": "fernandina-main-beach",
@@ -6441,22 +6456,25 @@
     "id": "rantum-sylt",
     "lat": 54.85,
     "lon": 8.287,
-    "reason": "overpass-request-failed"
+    "distanceM": 84,
+    "shoreKind": "coastline",
+    "nearestLat": 54.85006,
+    "nearestLon": 8.2857
   },
   {
     "id": "fehmarn-altenteil",
-    "lat": 54.522,
-    "lon": 11.065,
-    "distanceM": 1033,
-    "shoreKind": "coastline",
-    "nearestLat": 54.52833,
-    "nearestLon": 11.0533
+    "lat": 54.5288,
+    "lon": 11.0936,
+    "reason": "overpass-request-failed"
   },
   {
     "id": "kalifornien-schoenberg",
     "lat": 54.417,
     "lon": 10.395,
-    "reason": "overpass-request-failed"
+    "distanceM": 586,
+    "shoreKind": "island",
+    "nearestLat": 54.41879,
+    "nearestLon": 10.38649
   },
   {
     "id": "dahme",
@@ -6471,7 +6489,10 @@
     "id": "warnemuende",
     "lat": 54.182,
     "lon": 12.07,
-    "reason": "overpass-request-failed"
+    "distanceM": 305,
+    "shoreKind": "coastline",
+    "nearestLat": 54.17941,
+    "nearestLon": 12.07154
   },
   {
     "id": "rerik-salzhaff",
@@ -6495,7 +6516,10 @@
     "id": "amrum-kniepsand",
     "lat": 54.64,
     "lon": 8.33,
-    "reason": "overpass-request-failed"
+    "distanceM": 193,
+    "shoreKind": "coastline",
+    "nearestLat": 54.63891,
+    "nearestLon": 8.32767
   },
   {
     "id": "ijmuiden-kennemerstrand",
@@ -6510,13 +6534,19 @@
     "id": "hoek-van-holland",
     "lat": 51.985,
     "lon": 4.115,
-    "reason": "overpass-request-failed"
+    "distanceM": 846,
+    "shoreKind": "coastline",
+    "nearestLat": 51.99082,
+    "nearestLon": 4.10707
   },
   {
     "id": "kijkduin-zandmotor",
     "lat": 52.05,
     "lon": 4.195,
-    "reason": "overpass-request-failed"
+    "distanceM": 158,
+    "shoreKind": "island",
+    "nearestLat": 52.04977,
+    "nearestLon": 4.19727
   },
   {
     "id": "domburg",
@@ -6561,7 +6591,10 @@
     "id": "de-panne",
     "lat": 51.105,
     "lon": 2.58,
-    "reason": "overpass-request-failed"
+    "distanceM": 364,
+    "shoreKind": "coastline",
+    "nearestLat": 51.10214,
+    "nearestLon": 2.58252
   },
   {
     "id": "lokken",
@@ -6576,7 +6609,10 @@
     "id": "agger",
     "lat": 56.77,
     "lon": 8.225,
-    "reason": "overpass-request-failed"
+    "distanceM": 161,
+    "shoreKind": "coastline",
+    "nearestLat": 56.77076,
+    "nearestLon": 8.22725
   },
   {
     "id": "sondervig",
@@ -6609,7 +6645,10 @@
     "id": "debki",
     "lat": 54.831,
     "lon": 18.07,
-    "reason": "overpass-request-failed"
+    "distanceM": 308,
+    "shoreKind": "coastline",
+    "nearestLat": 54.83377,
+    "nearestLon": 18.0698
   },
   {
     "id": "sweden-skrea",
@@ -6621,7 +6660,10 @@
     "id": "sweden-tylosand",
     "lat": 56.647,
     "lon": 12.725,
-    "reason": "overpass-request-failed"
+    "distanceM": 62,
+    "shoreKind": "coastline",
+    "nearestLat": 56.64647,
+    "nearestLon": 12.72532
   },
   {
     "id": "sweden-ribersborg",
@@ -6654,13 +6696,19 @@
     "id": "uk-aberavon",
     "lat": 51.585,
     "lon": -3.82,
-    "reason": "overpass-request-failed"
+    "distanceM": 728,
+    "shoreKind": "coastline",
+    "nearestLat": 51.58921,
+    "nearestLon": -3.81196
   },
   {
     "id": "uk-brean",
     "lat": 51.29,
     "lon": -3.01,
-    "reason": "overpass-request-failed"
+    "distanceM": 395,
+    "shoreKind": "coastline",
+    "nearestLat": 51.29058,
+    "nearestLon": -3.0156
   },
   {
     "id": "uk-st-andrews-west-sands",
@@ -6768,7 +6816,10 @@
     "id": "portugal-alvor",
     "lat": 37.1215,
     "lon": -8.605,
-    "reason": "overpass-request-failed"
+    "distanceM": 114,
+    "shoreKind": "coastline",
+    "nearestLat": 37.12252,
+    "nearestLon": -8.60505
   },
   {
     "id": "portugal-fuseta",
@@ -6816,7 +6867,10 @@
     "id": "spain-zahara-de-los-atunes",
     "lat": 36.133,
     "lon": -5.848,
-    "reason": "overpass-request-failed"
+    "distanceM": 62,
+    "shoreKind": "coastline",
+    "nearestLat": 36.13333,
+    "nearestLon": -5.84744
   },
   {
     "id": "spain-valdelagrana",
@@ -6829,18 +6883,21 @@
   },
   {
     "id": "spain-cabo-de-gata",
-    "lat": 36.787,
-    "lon": -2.251,
-    "distanceM": 105,
+    "lat": 36.772,
+    "lon": -2.238,
+    "distanceM": 1,
     "shoreKind": "coastline",
-    "nearestLat": 36.78635,
-    "nearestLon": -2.25186
+    "nearestLat": 36.772,
+    "nearestLon": -2.23799
   },
   {
     "id": "spain-malaga-misericordia",
     "lat": 36.7,
     "lon": -4.45,
-    "reason": "overpass-request-failed"
+    "distanceM": 1211,
+    "shoreKind": "coastline",
+    "nearestLat": 36.69487,
+    "nearestLon": -4.43803
   },
   {
     "id": "spain-santa-pola-pinet",
@@ -6888,7 +6945,10 @@
     "id": "spain-fuerteventura-el-cotillo",
     "lat": 28.703,
     "lon": -14.008,
-    "reason": "overpass-request-failed"
+    "distanceM": 668,
+    "shoreKind": "coastline",
+    "nearestLat": 28.70452,
+    "nearestLon": -14.01462
   },
   {
     "id": "spain-somo",
@@ -6904,8 +6964,8 @@
   },
   {
     "id": "france-plage-napoleon",
-    "lat": 43.366,
-    "lon": 4.878,
+    "lat": 43.3524,
+    "lon": 4.8797,
     "reason": "overpass-request-failed"
   },
   {
@@ -6918,13 +6978,16 @@
     "id": "france-sete-lido",
     "lat": 43.385,
     "lon": 3.64,
-    "reason": "overpass-request-failed"
+    "distanceM": 265,
+    "shoreKind": "coastline",
+    "nearestLat": 43.3833,
+    "nearestLon": 3.64229
   },
   {
     "id": "italy-cagliari-poetto",
-    "lat": 39.2085,
-    "lon": 9.2,
-    "distanceM": 1569,
+    "lat": 39.2211,
+    "lon": 9.19186,
+    "distanceM": 0,
     "shoreKind": "coastline",
     "nearestLat": 39.2211,
     "nearestLon": 9.19186
@@ -6964,21 +7027,30 @@
   },
   {
     "id": "italy-giannella",
-    "lat": 42.46,
-    "lon": 11.165,
-    "reason": "overpass-request-failed"
+    "lat": 42.4681,
+    "lon": 11.1858,
+    "distanceM": 0,
+    "shoreKind": "coastline",
+    "nearestLat": 42.4681,
+    "nearestLon": 11.18579
   },
   {
     "id": "greece-corfu-halikounas",
-    "lat": 39.452,
-    "lon": 19.892,
-    "reason": "overpass-request-failed"
+    "lat": 39.467,
+    "lon": 19.868,
+    "distanceM": 172,
+    "shoreKind": "coastline",
+    "nearestLat": 39.46721,
+    "nearestLon": 19.86602
   },
   {
     "id": "greece-karpathos-afiartis",
     "lat": 35.438,
     "lon": 27.155,
-    "reason": "overpass-request-failed"
+    "distanceM": 69,
+    "shoreKind": "coastline",
+    "nearestLat": 35.43807,
+    "nearestLon": 27.15576
   },
   {
     "id": "greece-heraklion-ammoudara",
@@ -7002,13 +7074,19 @@
     "id": "turkey-kilyos",
     "lat": 41.25,
     "lon": 29.025,
-    "reason": "overpass-request-failed"
+    "distanceM": 535,
+    "shoreKind": "coastline",
+    "nearestLat": 41.2452,
+    "nearestLon": 29.02494
   },
   {
     "id": "cyprus-ladys-mile",
-    "lat": 34.62,
-    "lon": 33.005,
-    "reason": "overpass-request-failed"
+    "lat": 34.635,
+    "lon": 33.0035,
+    "distanceM": 460,
+    "shoreKind": "coastline",
+    "nearestLat": 34.63418,
+    "nearestLon": 33.00842
   },
   {
     "id": "malta-mellieha",
@@ -7036,8 +7114,11 @@
   },
   {
     "id": "romania-mamaia-nord",
-    "lat": 44.27,
-    "lon": 28.627,
-    "reason": "overpass-request-failed"
+    "lat": 44.298,
+    "lon": 28.625,
+    "distanceM": 117,
+    "shoreKind": "coastline",
+    "nearestLat": 44.29778,
+    "nearestLon": 28.62643
   }
 ]
