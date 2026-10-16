@@ -357,3 +357,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   smaller ones fall inside one wind-grid cell.
 - Loop 38: shore check run 5 (new European spots): 745/801 measured, 53 Overpass failures. Moved
   italy-cagliari-poetto onto the beach (1.6 km); rejected wickiup-reservoir (reservoir drawdown).
+- Loop 39: direction compass on expanded spot cards (worker commit 3fc221c): an 80 px inline SVG
+  with the rideable sectors as arcs and the current wind arrow coloured by rating; role="img"
+  with a full aria-label ("Wind from W (270°); rideable from W to NNW"), dashed ring when sectors
+  are unknown. Geometry in src/lib/compass.ts with 7 unit tests; e2e asserts the labelled image.
+  Lead fix: `.compass-arrow` overrode the `.b-<rating>` colour (same specificity, later in the
+  file), so the arrow was always grey; the muted rule now applies only to `.b-none`.
