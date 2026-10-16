@@ -1,4 +1,4 @@
-import { computeAlerts, EMPTY_ALERT_STATE, type Alert, type AlertState } from './alerts';
+import { computeAlerts, EMPTY_ALERT_STATE, rollback, type Alert, type AlertState } from './alerts';
 import { kvGet, kvSet } from './kv';
 import { fetchWind } from './openmeteo';
 import { DEFAULT_SETTINGS, type Settings, type Spot, type SpotWind } from './types';
@@ -13,16 +13,26 @@ export const K = {
 } as const;
 
 export interface CheckResult {
+  /** Alerts that were delivered (shown); undelivered ones are rolled back and retry next check. */
   alerts: Alert[];
   wind: Record<string, SpotWind>;
 }
 
 /**
+ * Shows one alert. Resolves true (or void) when it was shown; false or a rejection means it was not
+ * delivered, and its state change is rolled back so it alerts again on the next check.
+ */
+export type Deliver = (a: Alert) => Promise<boolean | void>;
+
+/**
  * Background-safe check: fetch wind for the watched spots (minus `cached` ones), compute alerts,
- * persist state.
+ * deliver them through `deliver`, then persist state for the delivered ones only (like the push
+ * server's rollback in server/src/cron.ts). Without `deliver` (notifications cannot be shown) no
+ * alerts are returned and forecast windows are not marked notified, so they still alert once the
+ * user enables notifications.
  * Used by the service worker (periodic sync / push) and by the page.
  */
-export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; alertOnFirst?: boolean; deliver?: boolean; cached?: Record<string, SpotWind> } = {}): Promise<CheckResult> {
+export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; alertOnFirst?: boolean; deliver?: Deliver; cached?: Record<string, SpotWind> } = {}): Promise<CheckResult> {
   const settings = opts.settings ?? (await kvGet<Settings>(K.settings)) ?? DEFAULT_SETTINGS;
   const spots = opts.spots ?? (await kvGet<Spot[]>(K.watch)) ?? [];
   if (spots.length === 0) return { alerts: [], wind: {} };
@@ -46,11 +56,20 @@ export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; aler
   }
   const prev = (await kvGet<AlertState>(K.alertState)) ?? EMPTY_ALERT_STATE;
   const computed = computeAlerts(entries, prev, settings, { alertOnFirst: opts.alertOnFirst });
-  // When notifications cannot be shown, do not mark forecast windows as notified,
-  // so they still alert once the user enables notifications.
-  const deliver = opts.deliver ?? true;
-  const next = deliver ? computed.next : { ...computed.next, notifiedWindows: prev.notifiedWindows };
-  const alerts = deliver ? computed.alerts : [];
+  const alerts: Alert[] = [];
+  let next: AlertState;
+  if (!opts.deliver) next = { ...computed.next, notifiedWindows: prev.notifiedWindows };
+  else {
+    const undelivered: Alert[] = [];
+    for (const a of computed.alerts) {
+      const ok = await opts.deliver(a).then(
+        (r) => r !== false,
+        () => false,
+      );
+      (ok ? alerts : undelivered).push(a);
+    }
+    next = undelivered.length ? rollback(prev, computed.next, undelivered) : computed.next;
+  }
   await kvSet(K.alertState, next);
   const lastWind = { ...((await kvGet<Record<string, SpotWind>>(K.lastWind)) ?? {}), ...wind };
   await kvSet(K.lastWind, lastWind);

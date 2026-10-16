@@ -82,6 +82,92 @@ test.describe('app', () => {
     await expect(page.getByText('Crissy Field')).toBeVisible();
   });
 
+  test('demo mode neither reads nor writes the user state', async ({ page }) => {
+    // Seed a user state on a same-origin page that does not run the app.
+    await page.goto('/gust/manifest.webmanifest');
+    await page.evaluate(async () => {
+      localStorage.setItem('gust.settings', JSON.stringify({ unit: 'mph', favorites: ['kanaha'], muted: ['crissy-field'] }));
+      localStorage.setItem('gust.places', JSON.stringify([{ id: 'p1', name: 'Maui', lat: 20.9, lon: -156.43 }]));
+      localStorage.setItem('gust.favSpots', JSON.stringify([{ id: 'kanaha', name: 'Kanaha', lat: 20.9, lon: -156.43, sectors: [[0, 90]] }]));
+      localStorage.setItem('gust.lastLocation', JSON.stringify({ lat: 20.9, lon: -156.43, at: 1 }));
+      const db = await new Promise<IDBDatabase>((resolve, reject) => {
+        const req = indexedDB.open('gust', 1);
+        req.onupgradeneeded = () => req.result.createObjectStore('kv');
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction('kv', 'readwrite');
+        const kv = tx.objectStore('kv');
+        kv.put({ ratings: { kanaha: 'light' }, notifiedWindows: { 'kanaha@2025-01-01T10:00/2025-01-01T12:00': 1 } }, 'alertState');
+        kv.put([{ id: 'kanaha', name: 'Kanaha', lat: 20.9, lon: -156.43, sectors: [[0, 90]] }], 'watchSpots');
+        kv.put({ unit: 'mph' }, 'settings');
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+      db.close();
+    });
+    const snapshot = () =>
+      page.evaluate(async () => {
+        const ls: Record<string, string | null> = {};
+        for (let i = 0; i < localStorage.length; i++) ls[localStorage.key(i)!] = localStorage.getItem(localStorage.key(i)!);
+        const db = await new Promise<IDBDatabase>((resolve, reject) => {
+          const req = indexedDB.open('gust', 1);
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        const kv: Record<string, unknown> = {};
+        await new Promise<void>((resolve, reject) => {
+          const req = db.transaction('kv').objectStore('kv').openCursor();
+          req.onsuccess = () => {
+            const c = req.result;
+            if (!c) return resolve();
+            kv[String(c.key)] = c.value;
+            c.continue();
+          };
+          req.onerror = () => reject(req.error);
+        });
+        db.close();
+        return { ls, kv };
+      });
+    const before = await snapshot();
+    await page.addInitScript(() => {
+      const w = window as unknown as { __permRequests: number };
+      w.__permRequests = 0;
+      if ('Notification' in window)
+        Notification.requestPermission = async () => {
+          w.__permRequests++;
+          return 'denied';
+        };
+    });
+
+    await page.goto('/gust/app/?demo=1');
+    await expect(page.getByText('Demo mode')).toBeVisible();
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    // Default settings and no saved places or favourites from storage.
+    // 22 kn in the mocks (the seeded mph setting would show 25).
+    await expect(page.locator('.spot-wind strong').first()).toHaveText('22');
+    await expect(page.getByRole('heading', { name: /Maui/ })).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: 'Favourites' })).toHaveCount(0);
+    // Interact: favourite, mute, change units, open the alerts tab. None of it is persisted.
+    await page.getByRole('button', { name: /Crissy Field/ }).click();
+    await page.getByRole('button', { name: 'Favourite', exact: true }).click();
+    await page.getByRole('button', { name: 'Mute alerts' }).click();
+    await page.getByRole('tab', { name: 'Alerts' }).click();
+    await expect(page.getByText('Alerts are off in the demo.')).toBeVisible();
+    await page.getByRole('tab', { name: 'Settings' }).click();
+    await page.getByText('m/s', { exact: true }).click();
+    await page.getByRole('tab', { name: 'Spots' }).click();
+    await page.getByRole('button', { name: 'Map' }).click();
+    await page.getByRole('button', { name: 'List' }).click();
+    await page.getByRole('button', { name: 'Refresh wind' }).click();
+    await expect(page.getByText(/Updated \d/)).toBeVisible();
+    // Past the background-sync debounce (1.5 s).
+    await page.waitForTimeout(2000);
+    expect(await snapshot()).toEqual(before);
+    expect(await page.evaluate(() => (window as unknown as { __permRequests: number }).__permRequests)).toBe(0);
+  });
+
   test('favourite a spot: listed first with a star, persisted', async ({ page }) => {
     await page.goto('/gust/app/');
     await expect(page.getByText(/Updated \d/)).toBeVisible();
