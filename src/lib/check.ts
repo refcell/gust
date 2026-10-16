@@ -9,7 +9,6 @@ export const K = {
   watch: 'watchSpots',
   alertState: 'alertState',
   lastWind: 'lastWind',
-  lastCheck: 'lastCheck',
 } as const;
 
 export interface CheckResult {
@@ -71,7 +70,6 @@ export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; aler
   await kvSet(K.alertState, next);
   const lastWind = { ...((await kvGet<Record<string, SpotWind>>(K.lastWind)) ?? {}), ...wind };
   await kvSet(K.lastWind, lastWind);
-  await kvSet(K.lastCheck, Date.now());
   return { alerts, wind, failedIds };
 }
 

@@ -416,4 +416,7 @@ audit merged (see Log).
   demo still runs under the shared service worker (the landing page registers it at /gust/ anyway);
   CacheStorage then holds only public data (app shell, SF wind, tiles), so this is accepted.
   329 unit / 44 server tests pass.
+- Loop 47: dead-code cleanup from the audit: removed the unused AlertsPanel onSettings prop, the
+  write-only K.lastCheck key and the unused isGood(). Decision: keep createLatestSender (a 3-line
+  wrapper whose tests are the main coverage of createRevisionedSender's latest-wins path).
 

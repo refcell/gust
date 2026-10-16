@@ -606,7 +606,7 @@ export function App() {
             <p class="muted">Alerts are off in the demo. Open the app to get notified when a spot near you turns good.</p>
           </section>
         )}
-        {view === 'alerts' && !demo && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} places={places} wind={wind} />}
+        {view === 'alerts' && !demo && <AlertsPanel platform={platform} settings={settings} watched={watched} loc={loc} origins={origins} places={places} wind={wind} />}
         {view === 'settings' && <SettingsPanel settings={settings} onChange={updateSettings} />}
         </div>
       </main>
