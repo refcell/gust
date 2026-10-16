@@ -85,12 +85,17 @@ describe('computeAlerts', () => {
     const at = (start: string, end: string) => [W('2026-06-01T09:00', 8), W(start, 20), W(end, 21), W('2026-06-01T22:00', 8)];
     const a = computeAlerts([{ spot, wind: wind(8, at('2026-06-01T14:00', '2026-06-01T15:00')) }], EMPTY_ALERT_STATE, DEFAULT_SETTINGS, { now });
     expect(a.alerts).toHaveLength(1);
-    const shifted = computeAlerts([{ spot, wind: wind(8, at('2026-06-01T11:00', '2026-06-01T12:00')) }], a.next, DEFAULT_SETTINGS, { now });
+    const shifted = computeAlerts([{ spot, wind: wind(8, at('2026-06-01T13:00', '2026-06-01T14:00')) }], a.next, DEFAULT_SETTINGS, { now });
     expect(shifted.alerts).toHaveLength(0);
-    // A separate session (7 h after the first window) still alerts.
-    const evening = [W('2026-06-01T09:00', 8), W('2026-06-01T21:00', 20), W('2026-06-01T22:00', 21), W('2026-06-01T23:00', 8)];
+    // A separate session later the same day (no overlap, starting 3 h after the first) still alerts.
+    const evening = [W('2026-06-01T09:00', 8), W('2026-06-01T17:00', 20), W('2026-06-01T18:00', 21), W('2026-06-01T19:00', 8)];
     const later = computeAlerts([{ spot, wind: wind(8, evening) }], a.next, DEFAULT_SETTINGS, { now });
     expect(later.alerts.map((x) => x.kind)).toEqual(['forecast']);
+  });
+  it('treats older start-only keys as the same session within 3 h', () => {
+    const hourly = [W('2026-06-01T09:00', 8), W('2026-06-01T14:00', 20), W('2026-06-01T15:00', 21), W('2026-06-01T16:00', 8)];
+    const legacy = { ratings: {}, notifiedWindows: { [`${spot.id}@2026-06-01T12:00`]: now } };
+    expect(computeAlerts([{ spot, wind: wind(8, hourly) }], legacy, DEFAULT_SETTINGS, { now }).alerts).toHaveLength(0);
   });
   it('skips forecast windows beyond the horizon or when disabled', () => {
     const hourly = [W('2026-06-03T14:00', 20), W('2026-06-03T15:00', 21)];

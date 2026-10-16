@@ -193,10 +193,10 @@ describe('runNtfyAlerts', () => {
     const m = mockFetch();
     const r = await runNtfyAlerts({ config: config(), state: null, allSpots: [A, B], topic: 'tpc', now: NOW, fetchImpl: m.fetchImpl });
     expect(m.weather).toHaveLength(1); // batched
-    expect(r.alerts.map((a) => a.tag)).toEqual(['fc-b@2025-06-01T15:00']);
+    expect(r.alerts.map((a) => a.tag)).toEqual(['fc-b@2025-06-01T15:00/2025-06-01T18:00']);
     expect(m.posts.map((p) => p.url)).toEqual(['https://ntfy.sh/tpc']);
     expect(r.state?.alerts.ratings).toMatchObject({ a: 'good', b: 'poor' });
-    expect(r.state?.alerts.notifiedWindows).toHaveProperty('b@2025-06-01T15:00');
+    expect(r.state?.alerts.notifiedWindows).toHaveProperty('b@2025-06-01T15:00/2025-06-01T18:00');
   });
 
   it('alerts when a spot turns good, then dedups on the next run', async () => {
@@ -216,13 +216,13 @@ describe('runNtfyAlerts', () => {
     const m = mockFetch((n) => (n === 1 ? 200 : 500));
     const prev = firstState({ a: 'poor', b: 'poor' });
     const r = await runNtfyAlerts({ config: config(), state: prev, allSpots: [A, B], topic: 'tpc', now: NOW, fetchImpl: m.fetchImpl, log: () => undefined });
-    expect(r.alerts.map((a) => a.tag)).toEqual(['now-a', 'fc-b@2025-06-01T15:00']);
+    expect(r.alerts.map((a) => a.tag)).toEqual(['now-a', 'fc-b@2025-06-01T15:00/2025-06-01T18:00']);
     expect(r.sent).toBe(1);
     expect(r.failed).toBe(1);
     expect(r.state?.alerts.ratings.a).toBe('good'); // delivered
-    expect(r.state?.alerts.notifiedWindows).not.toHaveProperty('b@2025-06-01T15:00'); // rolled back
+    expect(r.state?.alerts.notifiedWindows).not.toHaveProperty('b@2025-06-01T15:00/2025-06-01T18:00'); // rolled back
     const retry = await runNtfyAlerts({ config: config(), state: r.state, allSpots: [A, B], topic: 'tpc', now: NOW + 900_000, fetchImpl: mockFetch().fetchImpl });
-    expect(retry.alerts.map((a) => a.tag)).toEqual(['fc-b@2025-06-01T15:00']);
+    expect(retry.alerts.map((a) => a.tag)).toEqual(['fc-b@2025-06-01T15:00/2025-06-01T18:00']);
   });
 
   it('rolls back a "now" alert when the request throws', async () => {

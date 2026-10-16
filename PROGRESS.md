@@ -312,3 +312,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 31: shore check run 3: 648/720 measured (69 Overpass failures left). Moved morocco-tarfaya
   onto the beach; rejected lake-illawarra (nearest shore was a lake island). 14 spots moved in
   total by the shore check; remaining proposals (150 m-1 km) stay unreviewed by design.
+- Loop 32: refined the loop 29 dedup. A fixed 6 h start band could swallow a separate afternoon
+  session (e.g. 10-12 then 15-18). Keys are now `${spot}@${start}/${end}` and a forecast window is
+  "already notified" only if it overlaps a notified window for that spot; legacy start-only keys
+  fall back to a 3 h start band. Rollback/check/ntfy treat keys opaquely, so no state migration.
+  (Kimi K3 review of loops 23-31 timed out at 30 min; re-dispatched to gpt-6.1-sol with a
+  narrower brief.)
