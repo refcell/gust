@@ -6,13 +6,14 @@ import { AlertsPanel } from './AlertsPanel';
 import { PlacesPanel } from './PlacesPanel';
 import { Welcome } from './Welcome';
 import { runCheck, K, notificationOptions } from '../lib/check';
+import { spotsOn, type Alert } from '../lib/alerts';
 import { kvGet } from '../lib/kv';
 import { fetchWind, splitFresh } from '../lib/openmeteo';
 import { createCoalescer } from '../lib/coalesce';
 import { nearbySpots, nearestSpots, type NearbySpot } from '../lib/spots';
 import { scoreWind } from '../lib/score';
 import { loadFavSpots, loadLastLocation, loadPlaces, loadSettings, saveFavSpots, saveLastLocation, savePlaces, saveSettings } from '../lib/settings';
-import type { Place, Settings, Spot, SpotWind } from '../lib/types';
+import { DEFAULT_SETTINGS, type Place, type Settings, type Spot, type SpotWind } from '../lib/types';
 import type { LatLon } from '../lib/geo';
 import { detectPlatform } from '../lib/platform';
 import { augmentWithOsm } from './osm';
@@ -55,8 +56,11 @@ export function App() {
   const demo = params.has('demo');
   const platform = useMemo(() => detectPlatform(), []);
 
-  const [settings, setSettings] = useState<Settings>(loadSettings);
-  const [places, setPlaces] = useState<Place[]>(loadPlaces);
+  // Demo mode (the landing page iframe) is isolated from the user's state: it reads nothing
+  // user-specific from storage and writes nothing (settings, places, favourites, alert state,
+  // background watch lists, last location), and never asks for or shows notifications.
+  const [settings, setSettings] = useState<Settings>(() => (demo ? DEFAULT_SETTINGS : loadSettings()));
+  const [places, setPlaces] = useState<Place[]>(() => (demo ? [] : loadPlaces()));
   const [loc, setLoc] = useState<Loc | null>(() => {
     if (demo) return DEMO;
     const last = loadLastLocation();
@@ -66,7 +70,9 @@ export function App() {
   const [curated, setCurated] = useState<Spot[] | null>(null);
   const [osm, setOsm] = useState<Spot[]>([]);
   // Snapshots of favourited spots: favourites stay watched when they drop out of the OSM data.
-  const [favSpots, setFavSpots] = useState<Spot[]>(loadFavSpots);
+  const [favSpots, setFavSpots] = useState<Spot[]>(() => (demo ? [] : loadFavSpots()));
+  // Stored favourite snapshots; in demo mode the in-memory list stands in for storage.
+  const readFavSpots = () => (demo ? favSpots : loadFavSpots());
   const [wind, setWind] = useState<Record<string, SpotWind>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -75,7 +81,7 @@ export function App() {
   const [openId, setOpenId] = useState<string | null>(params.get('spot'));
   const [online, setOnline] = useState(navigator.onLine);
   const [notifPerm, setNotifPerm] = useState<NotificationPermission | 'unsupported'>(() => ('Notification' in window ? Notification.permission : 'unsupported'));
-  const [spotsMode, setSpotsModeState] = useState<SpotsMode>(() => (localStorage.getItem(MODE_KEY) === 'map' ? 'map' : 'list'));
+  const [spotsMode, setSpotsModeState] = useState<SpotsMode>(() => (!demo && localStorage.getItem(MODE_KEY) === 'map' ? 'map' : 'list'));
   const [MapView, setMapView] = useState<typeof import('./SpotMap').default | null>(null);
   const [mapError, setMapError] = useState(false);
   const [scrollTo, setScrollTo] = useState<string | null>(null);
@@ -108,14 +114,14 @@ export function App() {
     navigator.geolocation.getCurrentPosition(
       (p) => {
         const l: Loc = { lat: p.coords.latitude, lon: p.coords.longitude, at: Date.now(), source: 'gps' };
-        saveLastLocation(l);
+        if (!demo) saveLastLocation(l);
         setLoc(l);
         setLocStatus('ok');
       },
       (e) => setLocStatus(e.code === e.PERMISSION_DENIED ? 'denied' : 'error'),
       { enableHighAccuracy: false, timeout: 15_000, maximumAge: 5 * 60_000 },
     );
-  }, []);
+  }, [demo]);
 
   // Refresh GPS automatically when permission was already granted (no prompt).
   useEffect(() => {
@@ -135,17 +141,17 @@ export function App() {
   const allSpots = useMemo(
     // Snapshots are read from storage (kept current by the effect below); `favSpots` only bumps
     // the memo when a favourite is toggled.
-    () => (curated ? withFavoriteSnapshots([...curated, ...osm], settings.favorites, loadFavSpots()) : null),
+    () => (curated ? withFavoriteSnapshots([...curated, ...osm], settings.favorites, readFavSpots()) : null),
     [curated, osm, settings.favorites, favSpots],
   );
 
   // Keep stored favourite snapshots current: add missing ones and refresh changed ones while the
   // spot is loaded (storage only; `allSpots` reads storage when the dataset changes).
   useEffect(() => {
-    if (!allSpots) return;
+    if (!allSpots || demo) return;
     const next = backfillFavoriteSnapshots(loadFavSpots(), allSpots, settings.favorites);
     if (next) saveFavSpots(next);
-  }, [allSpots, settings.favorites]);
+  }, [allSpots, settings.favorites, demo]);
 
   // Augment with OpenStreetMap spots around the current location.
   useEffect(() => {
@@ -203,23 +209,26 @@ export function App() {
     if (fetching) setLoading(true);
     setError(null);
     try {
-      const granted = 'Notification' in window && Notification.permission === 'granted';
-      const extraSpots = shownOnly.filter((s) => !fresh[s.id]);
-      const [{ alerts, wind: w }, extra] = await Promise.all([
-        runCheck({ spots: watched, settings, deliver: granted, cached: fresh }),
+      const granted = !demo && 'Notification' in window && Notification.permission === 'granted';
+      // Demo mode only shows wind: every spot is fetched directly, nothing is checked or persisted.
+      const checked = demo ? [] : watched;
+      const extraSpots = [...(demo ? watched : []), ...shownOnly].filter((s) => !fresh[s.id]);
+      // Alert state is committed per alert, only once its notification was shown (see runCheck).
+      const deliver = granted ? (a: Alert) => showLocalNotification(a.title, notificationOptions(a)) : undefined;
+      const [{ wind: w }, extra] = await Promise.all([
+        checked.length ? runCheck({ spots: checked, settings, deliver, cached: fresh }) : Promise.resolve({ wind: {} as Record<string, SpotWind> }),
         extraSpots.length ? fetchWind(extraSpots) : Promise.resolve([]),
       ]);
-      for (const s of shownOnly) if (fresh[s.id]) w[s.id] = fresh[s.id];
+      for (const s of [...watched, ...shownOnly]) if (fresh[s.id] && !w[s.id]) w[s.id] = fresh[s.id];
       extra.forEach((x, i) => {
         if (x) w[extraSpots[i].id] = x;
       });
       if (Object.keys(w).length === 0) throw new Error('no data');
       setWind((prev) => ({ ...prev, ...w }));
       if (fetching) setFetchedAt(Date.now());
-      for (const a of alerts) await showLocalNotification(a.title, notificationOptions(a));
     } catch {
       setError(navigator.onLine ? 'Could not reach the wind service. Retrying in a minute.' : 'Offline — showing the last wind data.');
-      const last = await kvGet<Record<string, SpotWind>>(K.lastWind).catch(() => undefined);
+      const last = demo ? undefined : await kvGet<Record<string, SpotWind>>(K.lastWind).catch(() => undefined);
       if (last) setWind((prev) => ({ ...last, ...prev }));
     } finally {
       if (fetching) setLoading(false);
@@ -252,7 +261,7 @@ export function App() {
   const origins: LatLon[] = useMemo(() => (loc ? [loc, ...places] : places), [loc, places]);
   const originsRef = useRef(origins);
   originsRef.current = origins;
-  const bgKey = curated ? syncKey(settings, watched) : '';
+  const bgKey = curated && !demo ? syncKey(settings, watched) : '';
   useEffect(() => {
     if (!bgKey) return;
     const intent = { rev: nextRevision(), settings, watched, loc: locRef.current, origins: originsRef.current };
@@ -277,7 +286,7 @@ export function App() {
 
   const setSpotsMode = (m: SpotsMode) => {
     setSpotsModeState(m);
-    localStorage.setItem(MODE_KEY, m);
+    if (!demo) localStorage.setItem(MODE_KEY, m);
   };
 
   // The map is a separate chunk, loaded only when the map view is first shown.
@@ -323,17 +332,16 @@ export function App() {
   }, [refresh]);
 
   const enableAlerts = async () => {
+    if (demo) return;
     const r = await requestAlerts({ settings, watched, loc, origins });
     setNotifPerm(r.perm);
     if (r.perm !== 'granted') return;
-    // Confirm right away, listing spots that are already on.
-    const on = watched
-      .map((spot) => ({ spot, w: wind[spot.id] }))
-      .filter(({ spot, w }) => w && scoreWind(w.current, spot.sectors, settings).rating === 'good');
+    // Confirm right away, listing spots that are already on (and would alert: not muted or stale).
+    const on = spotsOn(watched, wind, settings);
     const body = on.length
       ? on
           .slice(0, 3)
-          .map(({ spot, w }) => `${spot.name} ${formatSpeed(w!.current.speedKn, settings.unit)}`)
+          .map(({ spot, w }) => `${spot.name} ${formatSpeed(w.current.speedKn, settings.unit)}`)
           .join(' · ')
       : watched.length
         ? `Watching ${watched.length} spots. You will get a notification when one turns good.`
@@ -355,17 +363,17 @@ export function App() {
 
   const updateSettings = (s: Settings) => {
     setSettings(s);
-    saveSettings(s);
+    if (!demo) saveSettings(s);
   };
   const updatePlaces = (p: Place[]) => {
     setPlaces(p);
-    savePlaces(p);
+    if (!demo) savePlaces(p);
   };
   /** (Un)favourite a spot: settings plus the stored snapshot that keeps it watched anywhere. */
   const toggleFavorite = (spot: Spot, f: boolean) => {
     const rest = (settings.favorites ?? []).filter((id) => id !== spot.id);
-    const snaps = toggleFavoriteSnapshot(loadFavSpots(), spot, f);
-    saveFavSpots(snaps);
+    const snaps = toggleFavoriteSnapshot(readFavSpots(), spot, f);
+    if (!demo) saveFavSpots(snaps);
     setFavSpots(snaps);
     updateSettings({ ...settings, favorites: f ? [...rest, spot.id] : rest });
   };
@@ -579,7 +587,13 @@ export function App() {
             onShow={showSpot}
           />
         )}
-        {view === 'alerts' && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} places={places} wind={wind} />}
+        {view === 'alerts' && demo && (
+          <section class="panel" aria-label="Alerts">
+            <h2>Alerts</h2>
+            <p class="muted">Alerts are off in the demo. Open the app to get notified when a spot near you turns good.</p>
+          </section>
+        )}
+        {view === 'alerts' && !demo && <AlertsPanel platform={platform} settings={settings} onSettings={updateSettings} watched={watched} loc={loc} origins={origins} places={places} wind={wind} />}
         {view === 'settings' && <SettingsPanel settings={settings} onChange={updateSettings} />}
         </div>
       </main>

@@ -22,6 +22,27 @@ export interface Alert {
   kind: 'now' | 'forecast';
 }
 
+/**
+ * Whether a spot's sample may alert at all: not muted and not stale (e.g. offline-cached data).
+ * Shared by computeAlerts and anything that lists spots as "on" for alerting purposes.
+ */
+export function alertEligible(spot: Pick<Spot, 'id'>, wind: { observedAt: number }, settings: Pick<Settings, 'muted'>, now = Date.now()): boolean {
+  return !(settings.muted ?? []).includes(spot.id) && !isStale(wind, now);
+}
+
+/**
+ * Watched spots scoring good now that would alert (same eligibility as computeAlerts: not muted,
+ * not stale), e.g. for the enable-alerts confirmation.
+ */
+export function spotsOn(watched: Spot[], wind: Readonly<Record<string, SpotWind>>, settings: Settings, now = Date.now()): { spot: Spot; w: SpotWind }[] {
+  const out: { spot: Spot; w: SpotWind }[] = [];
+  for (const spot of watched) {
+    const w = wind[spot.id];
+    if (w && alertEligible(spot, w, settings, now) && scoreWind(w.current, spot.sectors, settings).rating === 'good') out.push({ spot, w });
+  }
+  return out;
+}
+
 /** For keys from older state (no end recorded): starts closer than this are the same session. */
 export const SAME_START_MS = 3 * 3600_000;
 
@@ -66,11 +87,10 @@ export function computeAlerts(
   // last over two days; an ongoing window is never re-alerted anyway, see below).
   for (const [k, t] of Object.entries(prev.notifiedWindows)) if (now - t < 72 * 3600_000) notified[k] = t;
 
-  const muted = new Set(settings.muted ?? []);
   for (const { spot, wind } of entries) {
-    if (muted.has(spot.id)) continue;
-    // Never alert from stale (e.g. offline-cached) data, and do not let it overwrite state.
-    if (isStale(wind, now)) continue;
+    // Muted spots never alert; never alert from stale (e.g. offline-cached) data, and do not let it
+    // overwrite state.
+    if (!alertEligible(spot, wind, settings, now)) continue;
     const sc = scoreWind(wind.current, spot.sectors, settings);
     const before = prev.ratings[spot.id];
     if (sc.rating === 'good' && before !== 'good' && (before !== undefined || opts.alertOnFirst)) {
@@ -116,4 +136,24 @@ export function computeAlerts(
     }
   }
   return { alerts, next: { ratings, notifiedWindows: notified } };
+}
+
+/**
+ * Undo the state changes of `undelivered` alerts only: their spots keep the previous rating ("now")
+ * and their forecast windows are not marked notified, so they alert again on the next check.
+ * Everything else in `next` is kept.
+ */
+export function rollback(prev: AlertState, next: AlertState, undelivered: Alert[]): AlertState {
+  const ratings = { ...next.ratings };
+  const notifiedWindows = { ...next.notifiedWindows };
+  for (const a of undelivered) {
+    if (a.kind === 'now') {
+      if (prev.ratings[a.spotId] === undefined) delete ratings[a.spotId];
+      else ratings[a.spotId] = prev.ratings[a.spotId];
+    } else if (a.tag.startsWith('fc-')) {
+      // Forecast alert tags are `fc-${windowKey}` (see computeAlerts).
+      delete notifiedWindows[a.tag.slice(3)];
+    }
+  }
+  return { ratings, notifiedWindows };
 }
