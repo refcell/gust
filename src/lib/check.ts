@@ -84,3 +84,28 @@ export function notificationOptions(a: Alert): NotificationOptions {
     data: { url: __BASE__ + 'app/?spot=' + encodeURIComponent(a.spotId) },
   };
 }
+
+/**
+ * Handle a "check" push in the service worker. iOS revokes push permission when a push shows no
+ * notification, so whatever happens (no alerts, every alert failing, the check itself throwing)
+ * at least one notification is shown.
+ */
+export async function checkPush(
+  run: (deliver: Deliver) => Promise<{ alerts: Alert[] }>,
+  show: (a: Alert) => Promise<boolean | void>,
+  fallback: (body: string) => Promise<void>,
+): Promise<void> {
+  let delivered = 0;
+  const deliver: Deliver = async (a) => {
+    const ok = (await show(a)) !== false;
+    if (ok) delivered += 1;
+    return ok;
+  };
+  let failed = false;
+  try {
+    await run(deliver);
+  } catch {
+    failed = true;
+  }
+  if (delivered === 0) await fallback(failed ? 'Could not check the wind. Open gust to refresh.' : 'Wind checked — nothing new.');
+}

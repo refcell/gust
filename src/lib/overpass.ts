@@ -267,11 +267,13 @@ function readJson<T>(s: KV, key: string): T | undefined {
   }
 }
 
-function writeJson(s: KV, key: string, value: unknown): void {
+function writeJson(s: KV, key: string, value: unknown): boolean {
   try {
     s.setItem(KEY_PREFIX + key, JSON.stringify(value));
+    return true;
   } catch {
     // Quota exceeded or storage disabled: run uncached.
+    return false;
   }
 }
 
@@ -296,11 +298,26 @@ interface Budget {
 
 const dayOf = (t: number) => new Date(t).toISOString().slice(0, 10);
 
+/**
+ * Budget kept in memory for a storage whose writes throw (quota exceeded, storage disabled), so
+ * the cap still holds. A storage that accepts writes (even one that forgets them on purpose, as
+ * the offline scripts use to bypass the device budget) is not shadowed.
+ */
+const memBudget = new WeakMap<object, Budget>();
+
 function readBudget(d: Resolved): Budget {
-  const b = readJson<Budget>(d.storage, 'budget');
   const today = dayOf(d.now());
-  if (!b || b.day !== today) return { day: today, n: 0, backoffUntil: b?.backoffUntil };
+  const stored = readJson<Budget>(d.storage, 'budget');
+  const mem = memBudget.get(d.storage as object);
+  let b = stored && stored.day === today ? stored : undefined;
+  if (mem && mem.day === today && (!b || mem.n > b.n)) b = { ...mem, backoffUntil: Math.max(mem.backoffUntil ?? 0, b?.backoffUntil ?? 0) || undefined };
+  if (!b) return { day: today, n: 0, backoffUntil: stored?.backoffUntil ?? mem?.backoffUntil };
   return b;
+}
+
+function writeBudget(d: Resolved, b: Budget): void {
+  if (writeJson(d.storage, 'budget', b)) memBudget.delete(d.storage as object);
+  else memBudget.set(d.storage as object, { ...b });
 }
 
 /** True when the device may make another Overpass request right now. */
@@ -323,7 +340,7 @@ export async function overpassPost(query: string, deps?: OverpassDeps): Promise<
     if (!canCall(deps)) return null;
     const b = readBudget(d);
     b.n += 1;
-    writeJson(d.storage, 'budget', b);
+    writeBudget(d, b);
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timer = ctrl ? setTimeout(() => ctrl.abort(), deps?.timeoutMs ?? FETCH_TIMEOUT_MS) : null;
     try {
@@ -345,7 +362,7 @@ export async function overpassPost(query: string, deps?: OverpassDeps): Promise<
   }
   const nb = readBudget(d);
   nb.backoffUntil = d.now() + BACKOFF_MS;
-  writeJson(d.storage, 'budget', nb);
+  writeBudget(d, nb);
   return null;
 }
 

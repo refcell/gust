@@ -110,9 +110,17 @@ export function osmOrigins<T extends LatLon>(origins: readonly T[], radiusKm: nu
  * OSM spots around every origin (see osmOrigins), queried one tile at a time so the cache and the
  * daily budget apply in order, merged and deduped (by id and by distance). Never throws.
  */
-export async function augmentAround(origins: readonly LatLon[], radiusKm: number, curated: Spot[], deps?: OverpassDeps): Promise<Spot[]> {
+export async function augmentAround(
+  origins: readonly LatLon[],
+  radiusKm: number,
+  curated: Spot[],
+  deps?: OverpassDeps,
+  shouldStop: () => boolean = () => false,
+): Promise<Spot[]> {
   let out: Spot[] = [];
   for (const o of osmOrigins(origins, radiusKm)) {
+    // Stop spending the daily budget on origins that are no longer wanted.
+    if (shouldStop()) break;
     const extra = await augmentWithOsm(o, radiusKm, curated, deps);
     const ids = new Set(out.map((s) => s.id));
     out = mergeSpots(out, extra.filter((s) => !ids.has(s.id)), DEDUPE_KM);

@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 import type { Alert } from '../lib/alerts';
-import { notificationOptions, runCheck } from '../lib/check';
+import { checkPush, notificationOptions, runCheck } from '../lib/check';
 import { FETCHED_HEADER, isTileFresh } from '../lib/tilecache';
 
 declare const self: ServiceWorkerGlobalScope;
@@ -151,9 +151,12 @@ self.addEventListener('push', (event) => {
         });
         return;
       }
-      const { alerts } = await runCheck({ deliver: showAlert });
-      // iOS requires every push to show a notification.
-      if (alerts.length === 0) await self.registration.showNotification('gust', { body: 'Wind checked — nothing new.', tag: 'gust-check' });
+      // iOS requires every push to show a notification, even when the check fails.
+      await checkPush(
+        (deliver) => runCheck({ deliver }),
+        showAlert,
+        (body) => self.registration.showNotification('gust', { body, tag: 'gust-check' }),
+      );
     })(),
   );
 });

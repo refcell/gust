@@ -407,4 +407,26 @@ describe('osmOrigins / augmentAround (current location + saved places)', () => {
     expect(spots.map((s) => s.id)).toEqual(['osm-node-1', 'osm-node-2', 'osm-node-3']);
     expect(fetch.mock.calls.length).toBeLessThanOrEqual(MAX_CALLS_PER_DAY);
   });
+
+  it('keeps the daily cap when storage writes fail', async () => {
+    const readOnly: KV = { getItem: () => null, setItem: () => {
+      throw new Error('quota');
+    } };
+    const fetch = vi.fn(async () => json({ elements: [] }));
+    const deps = { fetch: fetch as unknown as typeof globalThis.fetch, storage: readOnly, now: () => T0 };
+    const many = Array.from({ length: 9 }, (_, i) => ({ lat: 10 + i * 2, lon: 10 }));
+    await augmentAround(many, 50, [], deps);
+    expect(fetch.mock.calls.length).toBeLessThanOrEqual(MAX_CALLS_PER_DAY);
+  });
+
+  it('stops querying further origins once cancelled', async () => {
+    const fetch = vi.fn(async () => json({ elements: [] }));
+    const deps = { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 };
+    let stop = false;
+    const p = augmentAround([here, far, near], 50, [], deps, () => stop);
+    stop = true;
+    await p;
+    expect(fetch.mock.calls.length).toBeLessThanOrEqual(2);
+  });
 });
+

@@ -407,4 +407,13 @@ audit merged (see Log).
   0.5° tile/radius bucket across the location and saved places, nearest first, within the 6/day
   cap. README retry/OSM wording updated. All 8 audit findings are now fixed. 324 unit / 44 server /
   114 e2e tests pass.
+- Loop 46: gpt-6.1-sol review of loops 44-45. Fixed: (must) an unparseable Open-Meteo location
+  is now reported in failedIds so it gets the minute retry; (must) the SW "check" push goes through
+  checkPush, which always shows a notification, including when runCheck throws (iOS revokes push
+  otherwise); (should) the Overpass budget is shadowed in memory when storage writes throw, so the
+  6/day cap holds with quota-denied storage (the scripts' deliberate no-op storage still bypasses
+  it); (should) augmentAround stops before each origin once the effect is cancelled. Decision: the
+  demo still runs under the shared service worker (the landing page registers it at /gust/ anyway);
+  CacheStorage then holds only public data (app shell, SF wind, tiles), so this is accepted.
+  329 unit / 44 server tests pass.
 
