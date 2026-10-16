@@ -1,7 +1,7 @@
 # Spot dataset
 
 `spots.json` is the curated list of kiteboarding spots bundled with gust. It has
-720 spots worldwide, 320 of them in the US, across 87 countries. The app merges these with OpenStreetMap
+801 spots worldwide, 320 of them in the US, across 88 countries. The app merges these with OpenStreetMap
 `sport=kitesurfing` results at runtime.
 
 ## Schema
@@ -153,7 +153,7 @@ or `{id, lat, lon, reason}` per spot.
 1. Run the manual "Check spot positions" workflow (inputs `limit`, `only`), or locally:
    `node --import ./scripts/ts-resolve.mjs scripts/check-shore.ts [--only id,id] [--limit N]`.
    It saves after every spot and resumes from the committed file (spots checked at their current
-   coordinates are skipped; failed requests are retried). ~720 spots at >= 5 s plus the query each
+   coordinates are skipped; failed requests are retried). ~800 spots at >= 5 s plus the query each
    take ~2-3 h; if Overpass is slow the 330 min step limit cuts the run short: commit the
    `shore-check` artifact and dispatch again. The log ends with spots > 300 m from any shore and
    spots with no shore in range.
