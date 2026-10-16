@@ -1,4 +1,5 @@
 import { Arrow } from './Arrow';
+import { Compass } from './Compass';
 import { Marine } from './Marine';
 import { goodWindows, relativeDay } from '../lib/forecast';
 import { RATING_LABEL, scoreWind, type Rating } from '../lib/score';
@@ -81,24 +82,27 @@ export function SpotCard({ spot, distanceKm, wind, settings, open, onToggle, mut
           )}
           {wind && <Hourly wind={wind} spot={spot} settings={settings} />}
           <Marine spot={spot} unit={settings.unit} />
-          <dl class="facts small">
-            <dt>Rideable from</dt>
-            <dd>{spot.sectors?.length ? describeSectors(spot.sectors) : 'Unknown — scored on speed only'}</dd>
-            {spot.water && (
-              <>
-                <dt>Water</dt>
-                <dd>{spot.water}</dd>
-              </>
-            )}
-            {spot.level && (
-              <>
-                <dt>Level</dt>
-                <dd>{spot.level}</dd>
-              </>
-            )}
-            <dt>Source</dt>
-            <dd>{spot.source === 'osm' ? 'OpenStreetMap' : 'gust curated list'}</dd>
-          </dl>
+          <div class="facts-row">
+            <Compass sectors={spot.sectors ?? []} dirDeg={wind?.current.dirDeg} rating={sc?.rating} />
+            <dl class="facts small">
+              <dt>Rideable from</dt>
+              <dd>{spot.sectors?.length ? describeSectors(spot.sectors) : 'Unknown — scored on speed only'}</dd>
+              {spot.water && (
+                <>
+                  <dt>Water</dt>
+                  <dd>{spot.water}</dd>
+                </>
+              )}
+              {spot.level && (
+                <>
+                  <dt>Level</dt>
+                  <dd>{spot.level}</dd>
+                </>
+              )}
+              <dt>Source</dt>
+              <dd>{spot.source === 'osm' ? 'OpenStreetMap' : 'gust curated list'}</dd>
+            </dl>
+          </div>
           {spot.notes && <p class="small">{spot.notes}</p>}
           <p class="small actions">
             <a href={`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lon}`} target="_blank" rel="noopener">

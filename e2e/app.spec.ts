@@ -27,6 +27,7 @@ test.describe('app', () => {
     await expect(head).toHaveAttribute('aria-expanded', 'true');
     await expect(page.getByRole('img', { name: 'Wind for the next 48 hours' })).toBeVisible();
     await expect(page.getByText('Rideable from')).toBeVisible();
+    await expect(page.locator('.spot-detail').getByRole('img', { name: /Wind from/ })).toBeVisible();
   });
 
   test('expanded spot shows waves, water temperature and tide (fetched lazily)', async ({ page }) => {
