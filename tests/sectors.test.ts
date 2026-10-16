@@ -52,4 +52,14 @@ describe('sectors', () => {
     expect(compass(-45)).toBe('NW');
     expect(describeSectors([[225, 315], [90, 90]])).toBe('SW–NW, E');
   });
+
+  it('describes normal, wrap-around, multiple, wide and full-circle sectors', () => {
+    expect(describeSectors([[270, 315]])).toBe('W–NW');
+    expect(describeSectors([[300, 40]])).toBe('WNW–NE');
+    expect(describeSectors([[225, 315], [45, 90]])).toBe('SW–NW, NE–E');
+    expect(describeSectors([[10, 350]])).toBe('10° to 350° clockwise');
+    expect(describeSectors([[0, 360]])).toBe('Any direction');
+    expect(describeSectors([[90, 135], [0, 360]])).toBe('Any direction');
+    expect(describeSectors([])).toBe('');
+  });
 });
