@@ -366,3 +366,10 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Loop 40: shore check run 6: 772/801 measured, 26 failures. Moved spain-malaga-misericordia onto the
   beach (1.2 km); rejected elephant-butte (reservoir, nearest mapped water a river). Demo and posters
   re-recorded with the compass.
+- Loop 41: web-checked the remaining 55 new European spots. Moved 5 by more than 1.4 km
+  (kalifornien-schoenberg, uk-aberavon, france-saintes-maries to Plage Est, greece-preveza-monolithi,
+  greece-karpathos-afiartis to Chicken Bay). Sectors kept where the notes justify them (Belgian/Dutch
+  NW-facing beaches ride SW side-shore; Alvor/Fuseta W-SW side-on). Web points that were clearly a
+  different spot (Valdelagrana 7 km off, the Le Barcarès lagoon launch) were not applied.
+  gpt-6.1-sol compass review: arcs only 1.4:1 contrast (must-fix), [10,350] announced "from N",
+  [0,360] text said "from N"; a worker is fixing these.
