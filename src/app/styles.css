@@ -342,6 +342,50 @@ main {
 .facts dd {
   margin: 0;
 }
+.facts-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 12px 0;
+}
+.facts-row .facts {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.compass {
+  flex: none;
+  color: var(--fg);
+}
+.compass-sector {
+  fill: var(--good);
+  fill-opacity: 0.22;
+}
+.compass-ring,
+.compass-tick {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+.compass-ring.unknown {
+  stroke-dasharray: 4 4;
+  opacity: 0.6;
+}
+.compass-n {
+  fill: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.compass-arrow {
+  color: var(--muted);
+}
+.compass-arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .hourly {
   margin: 12px 0 0;
 }
