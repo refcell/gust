@@ -350,3 +350,8 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   N/NNW-facing, sectors 250-70) and cyprus-ladys-mile (~1.7 km); set rerik-salzhaff to 160-340
   (W/SW-facing launch). jurata, uk-benone, italy-punta-prosciutto were within 0.7 km with matching
   facings. Decision: the remaining approximate positions wait for the shore-check run.
+  Second batch (20 more least-certain ids): moved romania-mamaia-nord (~3 km), greece-corfu-halikounas
+  (~2.6 km), spain-cabo-de-gata (~2 km), italy-giannella (~1.7 km), france-plage-napoleon (~1.5 km);
+  borkum-nordstrand sectors 240-60 (N/NNW-facing). Kept lagoon spots (lagoa-santo-andre, tourlida)
+  as they were, because the web points were ocean/causeway positions. Decision: only moves > ~1.4 km are applied;
+  smaller ones fall inside one wind-grid cell.
