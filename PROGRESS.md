@@ -355,3 +355,5 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   borkum-nordstrand sectors 240-60 (N/NNW-facing). Kept lagoon spots (lagoa-santo-andre, tourlida)
   as they were, because the web points were ocean/causeway positions. Decision: only moves > ~1.4 km are applied;
   smaller ones fall inside one wind-grid cell.
+- Loop 38: shore check run 5 (new European spots): 745/801 measured, 53 Overpass failures. Moved
+  italy-cagliari-poetto onto the beach (1.6 km); rejected wickiup-reservoir (reservoir drawdown).
