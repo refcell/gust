@@ -162,7 +162,7 @@ export function App() {
     const origins: LatLon[] = loc ? [loc, ...places] : places;
     if (origins.length === 0) return;
     let cancelled = false;
-    augmentAround(origins, settings.radiusKm, curated)
+    augmentAround(origins, settings.radiusKm, curated, undefined, () => cancelled)
       .then((extra) => {
         if (!cancelled) setOsm(extra);
       })

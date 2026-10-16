@@ -89,3 +89,13 @@ describe('fetchWindBatches', () => {
     expect(r.missing.map((s) => s.id)).toEqual(['b']);
   });
 });
+
+describe('invalid samples', () => {
+  it('reports an unparseable location as failed so it is retried', async () => {
+    const bad = { utc_offset_seconds: 0, current: {}, hourly: {} };
+    const fetchImpl = vi.fn(async () => new Response(JSON.stringify([loc(), bad]), { status: 200 }));
+    const r = await fetchSpotWind([spot(1), spot(2)], { fetchImpl: fetchImpl as unknown as typeof fetch });
+    expect(Object.keys(r.wind)).toEqual(['s1']);
+    expect(r.failedIds).toEqual(['s2']);
+  });
+});

@@ -108,3 +108,36 @@ describe('runCheck delivery (service-worker caller)', () => {
     expect(Object.keys(state().notifiedWindows)).toHaveLength(1);
   });
 });
+
+describe('checkPush (service worker "check" push)', () => {
+  const alert: Alert = { tag: 'now-a', title: 'A is on', body: '', spotId: 'a', kind: 'now' };
+  it('shows a fallback when the check throws, and when nothing was delivered', async () => {
+    const { checkPush } = await import('../src/lib/check');
+    const shown: string[] = [];
+    const fallback = async (b: string) => void shown.push(b);
+    await checkPush(async () => {
+      throw new Error('idb');
+    }, async () => true, fallback);
+    expect(shown).toEqual(['Could not check the wind. Open gust to refresh.']);
+    shown.length = 0;
+    await checkPush(async () => ({ alerts: [] }), async () => true, fallback);
+    expect(shown).toEqual(['Wind checked — nothing new.']);
+    shown.length = 0;
+    await checkPush(async (deliver) => {
+      await deliver(alert).catch(() => false);
+      return { alerts: [] };
+    }, async () => {
+      throw new Error('denied');
+    }, fallback);
+    expect(shown).toHaveLength(1);
+  });
+  it('shows no fallback once an alert was delivered', async () => {
+    const { checkPush } = await import('../src/lib/check');
+    const shown: string[] = [];
+    await checkPush(async (deliver) => {
+      await deliver(alert);
+      return { alerts: [alert] };
+    }, async () => true, async (b) => void shown.push(b));
+    expect(shown).toEqual([]);
+  });
+});

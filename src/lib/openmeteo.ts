@@ -120,8 +120,10 @@ export async function fetchWindBatches(points: readonly LatLon[], opts: FetchWin
       );
       const now = Date.now();
       for (let j = 0; j < chunk.length; j++) {
-        if (arr[j]) winds.push(parseLocation(arr[j], now));
+        const w = arr[j] ? parseLocation(arr[j], now) : null;
+        if (w) winds.push(w);
         else {
+          // Missing or unparseable location: report it so the caller retries just this spot.
           winds.push(null);
           failed.push(i + j);
         }
