@@ -328,3 +328,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   Install fallback scrolls instantly under prefers-reduced-motion. Decision: notification tags keep
   the `/end` suffix (local and server notifications for a shifted window may not replace each
   other; acceptable, they are deduped at source).
+- Loop 34: sector inference retry (run 38821518180) got 3 of the 6 Overpass failures. Applied
+  lombok-kuta (S-facing, 98-278) and austria-podersdorf (W-facing lake shore, 204-24); rejected
+  tobago-pigeon-point (inferred W-facing, but riding is on the E-facing Bon Accord lagoon side).
+  lombok-ekas, jamaica-burwood and isla-coche still unresolved; 23 curated spots keep `[]`.
