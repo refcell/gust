@@ -60,6 +60,15 @@ describe('dataset safety: offshore and side-off wind never scores good', () => {
     expect(rate('diamond-head', 45)).not.toBe('good');
     expect(rate('cape-verde-ponta-preta', 45)).not.toBe('good');
     expect(rate('rio-vista', 300)).not.toBe('good');
+    expect(rate('spain-fuerteventura-el-cotillo', 45)).not.toBe('good');
+    expect(rate('greece-karpathos-afiartis', 315)).not.toBe('good');
+  });
+
+  it('never hides a documented side-off direction behind unknown sectors', () => {
+    // Unknown sectors score on speed only, so a spot whose notes name an offshore or side-off
+    // wind must carry sectors that exclude it instead.
+    const hidden = spots.filter((s) => !s.sectors.length && /offshore|side-off|cross-off/i.test(s.notes ?? '')).map((s) => s.id);
+    expect(hidden).toEqual([]);
   });
 
   it('only documented any-direction spots use [0, 360]', () => {
@@ -68,11 +77,11 @@ describe('dataset safety: offshore and side-off wind never scores good', () => {
     for (const id of ANY_DIRECTION) expect(spot(id).notes).toMatch(/^Any direction/);
   });
 
-  it('no other spot has a total rideable width over 220°', () => {
+  it('no other spot has a total rideable width over 200° (side-shore ±90° plus 10° tolerance)', () => {
     const wide = spots
       .filter((s) => !ANY_DIRECTION.includes(s.id))
       .map((s) => ({ id: s.id, w: s.sectors.reduce((a, x) => a + width(x), 0) }))
-      .filter((x) => x.w > 220);
+      .filter((x) => x.w > 200);
     expect(wide).toEqual([]);
   });
 });

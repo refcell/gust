@@ -55,8 +55,9 @@ How sectors were derived:
 1. Find the seaward normal of the beach: the compass bearing pointing straight out
    to sea from the launch.
 2. Wind from that bearing is onshore. Side-shore is that bearing ±90°.
-3. The default rideable sector is roughly normal ±95°, which keeps everything
-   between side-shore and side-shore through onshore.
+3. The default rideable sector is normal ±90°: side-shore to side-shore through onshore.
+   Up to 10° more on a side is tolerated for curved beaches and approximate normals; beyond
+   that the wind is side-off.
 4. Narrow it using local knowledge: channelled winds (rivers, straits, lakes in
    valleys), known seasonal directions, and directions known to be dangerous or
    blocked. Examples:
@@ -69,9 +70,11 @@ How sectors were derived:
    (Hadicurari), Bonaire (Atlantis) and Cape Verde (Ponta Preta). gust stays
    conservative here. The sector covers only the side-shore directions, and the notes
    say that the usual trade-wind direction gets rated offshore.
-6. Hard limit: no rideable direction may be more than about 100° from the seaward
-   normal. `tests/dataset-safety.test.ts` checks the known side-off cases and fails if any spot
-   other than a documented `[0, 360]` entry has more than 220° of rideable sector in total.
+6. Hard limit: no rideable direction may be more than 100° from the seaward normal.
+   `tests/dataset-safety.test.ts` checks the known side-off cases, fails if any spot other
+   than a documented `[0, 360]` entry has more than 200° of rideable sector in total, and
+   fails if a spot with `[]` (scored on speed only) has notes naming an offshore or side-off
+   wind: a known unsafe direction needs sectors that exclude it.
 
 ## Sources
 
