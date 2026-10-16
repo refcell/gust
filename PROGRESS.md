@@ -346,3 +346,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   karpathos-afiartis set to `[]` (their usual wind is side-off; rating it offshore would make them
   never good). Positions are from memory and marked approximate; the shore check is re-dispatched
   to measure the new spots before any position review.
+- Loop 37: web spot-check of 6 least-certain new European spots. Moved fehmarn-altenteil (~2 km;
+  N/NNW-facing, sectors 250-70) and cyprus-ladys-mile (~1.7 km); set rerik-salzhaff to 160-340
+  (W/SW-facing launch). jurata, uk-benone, italy-punta-prosciutto were within 0.7 km with matching
+  facings. Decision: the remaining approximate positions wait for the shore-check run.
