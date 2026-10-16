@@ -419,4 +419,10 @@ audit merged (see Log).
 - Loop 47: dead-code cleanup from the audit: removed the unused AlertsPanel onSettings prop, the
   write-only K.lastCheck key and the unused isGood(). Decision: keep createLatestSender (a 3-line
   wrapper whose tests are the main coverage of createRevisionedSender's latest-wins path).
+- Loop 48: sectors for 11 of the 21 remaining `[]` spots from web-sourced beach facings (normal ±90°):
+  pedra-do-sal, salinopolis, santa-marianita, yorkeys-knob, trellis-bay, mannar (Keeri, S-facing),
+  svencele, bentenjima, plus puerto-velero (bay side), isla-coche (La Punta) and lombok-ekas, whose
+  usual trade blows side-off: per data/README rule 5 they keep side-shore directions only and the
+  notes say the usual wind is rated offshore. 10 `[]` spots remain, all lagoons, reservoirs or
+  causeways where the facing varies (speed-only by design).
 
