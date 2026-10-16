@@ -93,10 +93,6 @@ export function scoreWind(w: Pick<WindSample, 'speedKn' | 'gustKn' | 'dirDeg'>, 
   return { score: Math.round(100 * speed * dirFactor), rating, direction, reason };
 }
 
-export function isGood(r: Rating): boolean {
-  return r === 'good';
-}
-
 export const RATING_LABEL: Record<Rating, string> = {
   good: 'Good',
   ok: 'OK',

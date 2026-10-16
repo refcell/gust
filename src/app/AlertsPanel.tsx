@@ -11,7 +11,6 @@ import { enableBackground, pushConfigured, requestAlerts, showLocalNotification,
 interface Props {
   platform: Platform;
   settings: Settings;
-  onSettings: (s: Settings) => void;
   watched: Spot[];
   loc: LatLon | null;
   /** Last location and saved places (which spots the push server watches). */
