@@ -1,4 +1,5 @@
 /// <reference lib="webworker" />
+import type { Alert } from '../lib/alerts';
 import { notificationOptions, runCheck } from '../lib/check';
 import { FETCHED_HEADER, isTileFresh } from '../lib/tilecache';
 
@@ -119,9 +120,11 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
+/** Show one alert; state for it is committed only when this resolves (see runCheck). */
+const showAlert = (a: Alert) => self.registration.showNotification(a.title, notificationOptions(a));
+
 async function backgroundCheck(): Promise<void> {
-  const { alerts } = await runCheck();
-  for (const a of alerts) await self.registration.showNotification(a.title, notificationOptions(a));
+  await runCheck({ deliver: showAlert });
 }
 
 // Android / Chromium: Periodic Background Sync.
@@ -148,10 +151,9 @@ self.addEventListener('push', (event) => {
         });
         return;
       }
-      const { alerts } = await runCheck();
+      const { alerts } = await runCheck({ deliver: showAlert });
       // iOS requires every push to show a notification.
       if (alerts.length === 0) await self.registration.showNotification('gust', { body: 'Wind checked — nothing new.', tag: 'gust-check' });
-      for (const a of alerts) await self.registration.showNotification(a.title, notificationOptions(a));
     })(),
   );
 });
