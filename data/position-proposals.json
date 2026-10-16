@@ -140,6 +140,16 @@
     "proposedLon": -156.43178
   },
   {
+    "id": "kite-beach-maui",
+    "name": "Kite Beach (Lower Kanaha)",
+    "lat": 20.8983,
+    "lon": -156.4382,
+    "distanceM": 341,
+    "shoreKind": "coastline",
+    "proposedLat": 20.9005,
+    "proposedLon": -156.44048
+  },
+  {
     "id": "sprecks",
     "name": "Spreckelsville (Sprecks)",
     "lat": 20.9077,
@@ -220,6 +230,16 @@
     "proposedLon": -95.28692
   },
   {
+    "id": "matagorda-beach",
+    "name": "Matagorda Beach",
+    "lat": 28.597,
+    "lon": -95.9785,
+    "distanceM": 166,
+    "shoreKind": "river",
+    "proposedLat": 28.5979,
+    "proposedLon": -95.97986
+  },
+  {
     "id": "avon-oceanside",
     "name": "Avon (Ocean)",
     "lat": 35.3506,
@@ -278,6 +298,16 @@
     "shoreKind": "coastline",
     "proposedLat": 27.25355,
     "proposedLon": -80.21649
+  },
+  {
+    "id": "vilano-beach",
+    "name": "Vilano Beach (St Augustine)",
+    "lat": 29.9165,
+    "lon": -81.293,
+    "distanceM": 345,
+    "shoreKind": "coastline",
+    "proposedLat": 29.91779,
+    "proposedLon": -81.28975
   },
   {
     "id": "skyway-beach",
@@ -379,6 +409,16 @@
     "shoreKind": "coastline",
     "proposedLat": 41.63471,
     "proposedLon": -70.28853
+  },
+  {
+    "id": "skaket-beach",
+    "name": "Skaket Beach (Orleans)",
+    "lat": 41.8045,
+    "lon": -70.0005,
+    "distanceM": 280,
+    "shoreKind": "coastline",
+    "proposedLat": 41.80647,
+    "proposedLon": -70.0026
   },
   {
     "id": "sandy-neck",
@@ -681,6 +721,16 @@
     "proposedLon": -112.0613
   },
   {
+    "id": "washoe-lake",
+    "name": "Washoe Lake",
+    "lat": 39.244,
+    "lon": -119.78,
+    "distanceM": 907,
+    "shoreKind": "water",
+    "proposedLat": 39.24489,
+    "proposedLon": -119.76954
+  },
+  {
     "id": "chatfield-reservoir",
     "name": "Chatfield Reservoir",
     "lat": 39.551,
@@ -779,6 +829,16 @@
     "shoreKind": "coastline",
     "proposedLat": 23.68224,
     "proposedLon": -109.69573
+  },
+  {
+    "id": "holbox",
+    "name": "Isla Holbox",
+    "lat": 21.526,
+    "lon": -87.376,
+    "distanceM": 163,
+    "shoreKind": "coastline",
+    "proposedLat": 21.52723,
+    "proposedLon": -87.37686
   },
   {
     "id": "isla-blanca",
@@ -952,6 +1012,16 @@
     "review": "rejected"
   },
   {
+    "id": "prea",
+    "name": "Prea",
+    "lat": -2.813,
+    "lon": -40.424,
+    "distanceM": 192,
+    "shoreKind": "coastline",
+    "proposedLat": -2.81131,
+    "proposedLon": -40.42368
+  },
+  {
     "id": "barra-grande-pi",
     "name": "Barra Grande (Piaui)",
     "lat": -2.906,
@@ -990,6 +1060,16 @@
     "shoreKind": "coastline",
     "proposedLat": 36.06722,
     "proposedLon": -5.69477
+  },
+  {
+    "id": "tarifa-los-lances",
+    "name": "Los Lances (Tarifa)",
+    "lat": 36.032,
+    "lon": -5.636,
+    "distanceM": 583,
+    "shoreKind": "coastline",
+    "proposedLat": 36.03508,
+    "proposedLon": -5.63076
   },
   {
     "id": "tarifa-balneario",
@@ -1062,6 +1142,16 @@
     "proposedLon": 3.1113
   },
   {
+    "id": "trabucador",
+    "name": "El Trabucador (Delta de l'Ebre)",
+    "lat": 40.645,
+    "lon": 0.748,
+    "distanceM": 897,
+    "shoreKind": "coastline",
+    "proposedLat": 40.63886,
+    "proposedLon": 0.75488
+  },
+  {
     "id": "mar-menor",
     "name": "Mar Menor (La Manga)",
     "lat": 37.655,
@@ -1090,6 +1180,16 @@
     "shoreKind": "coastline",
     "proposedLat": 37.11304,
     "proposedLon": -8.65344
+  },
+  {
+    "id": "leucate-coussoules",
+    "name": "Leucate Les Coussoules",
+    "lat": 42.923,
+    "lon": 3.048,
+    "distanceM": 478,
+    "shoreKind": "coastline",
+    "proposedLat": 42.92701,
+    "proposedLon": 3.05011
   },
   {
     "id": "leucate-lagoon",
@@ -1172,6 +1272,26 @@
     "proposedLon": 12.475
   },
   {
+    "id": "navene-malcesine",
+    "name": "Navene (Malcesine)",
+    "lat": 45.79,
+    "lon": 10.83,
+    "distanceM": 188,
+    "shoreKind": "water",
+    "proposedLat": 45.79156,
+    "proposedLon": 10.82907
+  },
+  {
+    "id": "colico",
+    "name": "Colico (Lake Como)",
+    "lat": 46.135,
+    "lon": 9.37,
+    "distanceM": 244,
+    "shoreKind": "water",
+    "proposedLat": 46.13719,
+    "proposedLon": 9.37015
+  },
+  {
     "id": "silvaplana",
     "name": "Silvaplana",
     "lat": 46.45,
@@ -1190,6 +1310,16 @@
     "shoreKind": "coastline",
     "proposedLat": 51.76434,
     "proposedLon": 3.84604
+  },
+  {
+    "id": "wijk-aan-zee",
+    "name": "Wijk aan Zee",
+    "lat": 52.492,
+    "lon": 4.593,
+    "distanceM": 646,
+    "shoreKind": "coastline",
+    "proposedLat": 52.49397,
+    "proposedLon": 4.58404
   },
   {
     "id": "zandvoort",
@@ -1372,6 +1502,16 @@
     "proposedLon": 0.63412
   },
   {
+    "id": "exmouth-uk",
+    "name": "Exmouth",
+    "lat": 50.615,
+    "lon": -3.402,
+    "distanceM": 398,
+    "shoreKind": "coastline",
+    "proposedLat": 50.61142,
+    "proposedLon": -3.40219
+  },
+  {
     "id": "west-kirby",
     "name": "West Kirby",
     "lat": 53.373,
@@ -1520,6 +1660,16 @@
     "shoreKind": "coastline",
     "proposedLat": 34.7774,
     "proposedLon": 33.49194
+  },
+  {
+    "id": "sweden-skanor",
+    "name": "Skanor-Falsterbo",
+    "lat": 55.405,
+    "lon": 12.845,
+    "distanceM": 744,
+    "shoreKind": "island",
+    "proposedLat": 55.40407,
+    "proposedLon": 12.83335
   },
   {
     "id": "norway-lista",
@@ -2485,6 +2635,16 @@
     "proposedLon": 27.31787
   },
   {
+    "id": "sweden-apelviken",
+    "name": "Apelviken (Varberg)",
+    "lat": 57.087,
+    "lon": 12.244,
+    "distanceM": 268,
+    "shoreKind": "coastline",
+    "proposedLat": 57.08888,
+    "proposedLon": 12.24122
+  },
+  {
     "id": "sweden-lomma",
     "name": "Lomma",
     "lat": 55.672,
@@ -2543,6 +2703,16 @@
     "shoreKind": "coastline",
     "proposedLat": -33.98261,
     "proposedLon": 25.66581
+  },
+  {
+    "id": "mozambique-bilene",
+    "name": "Bilene Lagoon",
+    "lat": -25.295,
+    "lon": 33.245,
+    "distanceM": 540,
+    "shoreKind": "water",
+    "proposedLat": -25.29027,
+    "proposedLon": 33.24379
   },
   {
     "id": "mozambique-vilanculos",
@@ -2705,6 +2875,16 @@
     "proposedLon": -121.67012
   },
   {
+    "id": "the-dalles-riverfront",
+    "name": "The Dalles Riverfront Park",
+    "lat": 45.614,
+    "lon": -121.204,
+    "distanceM": 515,
+    "shoreKind": "water",
+    "proposedLat": 45.61565,
+    "proposedLon": -121.19782
+  },
+  {
     "id": "anaehoomalu-bay",
     "name": "Anaeho'omalu Bay (A-Bay)",
     "lat": 19.915,
@@ -2845,6 +3025,16 @@
     "proposedLon": -125.87377
   },
   {
+    "id": "manistee-fifth-avenue",
+    "name": "Fifth Avenue Beach (Manistee)",
+    "lat": 44.253,
+    "lon": -86.343,
+    "distanceM": 182,
+    "shoreKind": "water",
+    "proposedLat": 44.25175,
+    "proposedLon": -86.34153
+  },
+  {
     "id": "marquette-mccartys-cove",
     "name": "McCarty's Cove (Marquette)",
     "lat": 46.5605,
@@ -2863,6 +3053,16 @@
     "shoreKind": "water",
     "proposedLat": 37.11715,
     "proposedLon": -113.3858
+  },
+  {
+    "id": "boca-chica-beach",
+    "name": "Boca Chica Beach",
+    "lat": 25.997,
+    "lon": -97.152,
+    "distanceM": 153,
+    "shoreKind": "coastline",
+    "proposedLat": 25.99707,
+    "proposedLon": -97.15048
   },
   {
     "id": "quintana-beach",
@@ -2935,17 +3135,6 @@
     "proposedLon": 128.96388
   },
   {
-    "id": "morocco-tarfaya",
-    "name": "Tarfaya",
-    "lat": 27.938,
-    "lon": -12.92,
-    "distanceM": 1063,
-    "shoreKind": "coastline",
-    "proposedLat": 27.94599,
-    "proposedLon": -12.92592,
-    "review": "approved"
-  },
-  {
     "id": "kenya-malindi",
     "name": "Malindi (Silversands)",
     "lat": -3.235,
@@ -2996,6 +3185,26 @@
     "proposedLon": -41.73293
   },
   {
+    "id": "brazil-salinopolis",
+    "name": "Praia do Atalaia (Salinopolis)",
+    "lat": -0.605,
+    "lon": -47.3,
+    "distanceM": 948,
+    "shoreKind": "coastline",
+    "proposedLat": -0.59686,
+    "proposedLon": -47.2975
+  },
+  {
+    "id": "peru-lobitos",
+    "name": "Lobitos",
+    "lat": -4.452,
+    "lon": -81.282,
+    "distanceM": 157,
+    "shoreKind": "coastline",
+    "proposedLat": -4.45296,
+    "proposedLon": -81.28097
+  },
+  {
     "id": "uruguay-laguna-jose-ignacio",
     "name": "Laguna Jose Ignacio",
     "lat": -34.82,
@@ -3035,6 +3244,16 @@
     "shoreKind": "coastline",
     "proposedLat": 10.93998,
     "proposedLon": -75.02843
+  },
+  {
+    "id": "venezuela-isla-coche",
+    "name": "Playa La Punta (Isla de Coche)",
+    "lat": 10.795,
+    "lon": -63.955,
+    "distanceM": 939,
+    "shoreKind": "coastline",
+    "proposedLat": 10.80288,
+    "proposedLon": -63.95192
   },
   {
     "id": "ecuador-santa-marianita",
