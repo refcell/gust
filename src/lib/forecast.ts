@@ -55,3 +55,10 @@ export function relativeDay(iso: string, nowIso: string): string {
   if (diff === 1) return `Tomorrow ${hm}`;
   return `${d.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' })} ${hm}`;
 }
+
+/** Up to `n` hourly samples starting at the hour containing `nowIso` (empty if all are in the past). */
+export function hoursFrom<T extends { time: string }>(hourly: readonly T[], nowIso: string, n = 48): T[] {
+  const nowHour = nowIso.slice(0, 13);
+  const start = hourly.findIndex((h) => h.time.slice(0, 13) >= nowHour);
+  return start < 0 ? [] : hourly.slice(start, start + n);
+}

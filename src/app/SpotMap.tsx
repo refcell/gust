@@ -26,6 +26,8 @@ export interface SpotMapProps {
 /** Short visible rating text, so the marker does not rely on colour alone. */
 const SHORT: Record<Rating, string> = { good: 'G', ok: 'OK', light: 'L', strong: 'S', offshore: 'X', poor: '–' };
 const DRAG_PX = 6;
+/** Arrow key -> pan direction (the view centre moves this way). */
+const KEY_PAN: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
 
 interface View {
   c: Pt;
@@ -152,12 +154,32 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
       }
       if (pointers.size === 0) start = null;
     };
+    // Keyboard pan / zoom while the map surface itself has focus (marker buttons keep their keys).
+    const onKey = (e: KeyboardEvent) => {
+      if (e.target !== el || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === '+' || e.key === '=') zoomBy(1);
+      else if (e.key === '-' || e.key === '_') zoomBy(-1);
+      else {
+        const dir = KEY_PAN[e.key];
+        const v = viewRef.current;
+        if (!dir) return;
+        e.preventDefault();
+        if (!v) return;
+        const { w, h } = sizeRef.current;
+        const step = (Math.max(40, Math.min(w, h) / 4) * (e.shiftKey ? 3 : 1)) / worldSize(v.z);
+        setView({ c: normalize({ x: v.c.x + dir[0] * step, y: v.c.y + dir[1] * step }), z: v.z });
+        return;
+      }
+      e.preventDefault();
+    };
+    el.addEventListener('keydown', onKey);
     el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('pointerdown', onDown);
     el.addEventListener('pointermove', onMove);
     el.addEventListener('pointerup', onUp);
     el.addEventListener('pointercancel', onUp);
     return () => {
+      el.removeEventListener('keydown', onKey);
       el.removeEventListener('wheel', onWheel);
       el.removeEventListener('pointerdown', onDown);
       el.removeEventListener('pointermove', onMove);
@@ -233,9 +255,9 @@ export default function SpotMap({ items, wind, settings, user, origin, radiusKm,
 
   return (
     <div class="map-wrap">
-      <div class="map" ref={surfaceRef} role="region" aria-label="Map of nearby spots" aria-describedby="map-help">
+      <div class="map" ref={surfaceRef} role="region" tabIndex={0} aria-label="Map of nearby spots" aria-describedby="map-help">
         <p id="map-help" class="sr-only">
-          Drag to pan, pinch or scroll to zoom. Use Tab to move between spot markers.
+          Drag to pan, pinch or scroll to zoom. With the map focused, use the arrow keys to pan (Shift for bigger steps) and plus or minus to zoom. Use Tab to move between spot markers.
         </p>
         {view && (
           <>
