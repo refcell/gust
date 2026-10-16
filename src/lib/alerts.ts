@@ -26,11 +26,12 @@ export interface Alert {
 export const SAME_START_MS = 3 * 3600_000;
 
 /**
- * True when a window for this spot that was already notified overlaps [startMs, endMs]. Forecast
+ * When a window for this spot that was already notified overlaps [startMs, endMs], return the time
+ * it was notified (else 0). Forecast
  * updates shift window edges between checks; an overlapping window is the same session, while a
  * separate session later the same day (no overlap) still alerts.
  */
-function nearNotified(notified: Record<string, number>, spotId: string, startMs: number, endMs: number, utcOffsetSeconds: number): boolean {
+function nearNotified(notified: Record<string, number>, spotId: string, startMs: number, endMs: number, utcOffsetSeconds: number): number {
   const prefix = `${spotId}@`;
   for (const k of Object.keys(notified)) {
     if (!k.startsWith(prefix)) continue;
@@ -39,10 +40,10 @@ function nearNotified(notified: Record<string, number>, spotId: string, startMs:
     if (!Number.isFinite(a)) continue;
     if (e0) {
       const b = localIsoToEpoch(e0, utcOffsetSeconds);
-      if (Number.isFinite(b) && startMs <= b && a <= endMs) return true;
-    } else if (Math.abs(a - startMs) < SAME_START_MS) return true;
+      if (Number.isFinite(b) && startMs <= b && a <= endMs) return notified[k];
+    } else if (Math.abs(a - startMs) < SAME_START_MS) return notified[k];
   }
-  return false;
+  return 0;
 }
 
 /**
@@ -61,8 +62,9 @@ export function computeAlerts(
   const alerts: Alert[] = [];
   const ratings: Record<string, Rating> = { ...prev.ratings };
   const notified: Record<string, number> = {};
-  // Forget windows older than two days.
-  for (const [k, t] of Object.entries(prev.notifiedWindows)) if (now - t < 48 * 3600_000) notified[k] = t;
+  // Forget windows notified more than three days ago (alerts look 24 h ahead and windows rarely
+  // last over two days; an ongoing window is never re-alerted anyway, see below).
+  for (const [k, t] of Object.entries(prev.notifiedWindows)) if (now - t < 72 * 3600_000) notified[k] = t;
 
   const muted = new Set(settings.muted ?? []);
   for (const { spot, wind } of entries) {
@@ -85,14 +87,22 @@ export function computeAlerts(
 
     if (settings.forecastAlerts) {
       const nowLocal = wind.current.time;
-      const wins = goodWindows(wind.hourly, spot.sectors, settings, nowLocal);
+      // Scan from the start of the current hour, so a run that is already under way starts at or
+      // before now (and is skipped) instead of looking like a new window starting next hour.
+      const wins = goodWindows(wind.hourly, spot.sectors, settings, nowLocal.slice(0, 13) + ':00');
       for (const w of wins) {
         if (w.start <= nowLocal) continue; // already happening; covered by "now"
         const startMs = localIsoToEpoch(w.start, wind.utcOffsetSeconds);
         if (!(startMs > now && startMs - now <= horizon)) continue;
         const key = `${spot.id}@${w.start}/${w.end}`;
         if (notified[key]) continue;
-        if (nearNotified(notified, spot.id, startMs, localIsoToEpoch(w.end, wind.utcOffsetSeconds), wind.utcOffsetSeconds)) continue;
+        const seen = nearNotified(notified, spot.id, startMs, localIsoToEpoch(w.end, wind.utcOffsetSeconds), wind.utcOffsetSeconds);
+        if (seen) {
+          // Same session, shifted by a forecast update: track the new edges (keeping the original
+          // notify time) so gradual drift over several checks still matches.
+          notified[key] = seen;
+          continue;
+        }
         notified[key] = now;
         alerts.push({
           tag: `fc-${key}`,

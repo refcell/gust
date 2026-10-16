@@ -64,7 +64,8 @@ btn.addEventListener('click', async () => {
   }
   // Desktop without an install prompt: point at the QR code.
   note.textContent = 'gust is built for your phone. Scan the code below, or install from your browser’s address bar.';
-  document.getElementById('qr-section')?.scrollIntoView({ behavior: 'smooth' });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('qr-section')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
 });
 
 // Desktop: show a QR code for the phone.
@@ -85,9 +86,17 @@ const phone = document.querySelector<HTMLElement>('.demo .phone');
 const startBtn = document.getElementById('demo-start') as HTMLButtonElement | null;
 if (phone && startBtn) {
   let io: IntersectionObserver | null = null;
+  const engage = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'] as const;
+  const onEngage = () => {
+    for (const t of engage) removeEventListener(t, onEngage);
+    io?.observe(phone);
+  };
   const start = (focus: boolean) => {
     io?.disconnect();
+    for (const t of engage) removeEventListener(t, onEngage);
     if (phone.querySelector('iframe')) return;
+    // Hiding a focused Start button would drop keyboard focus to <body>: hand it to the demo.
+    focus ||= document.activeElement === startBtn;
     const frame = document.createElement('iframe');
     frame.src = '/gust/app/?demo=1';
     frame.title = 'gust app, live demo with a fixed location';
@@ -102,11 +111,6 @@ if (phone && startBtn) {
     io = new IntersectionObserver((entries) => entries.some((e) => e.intersectionRatio >= 0.6) && start(false), { threshold: 0.6 });
     // Auto-boot only after the visitor engages (scroll, wheel, touch, pointer, key): a viewport
     // resize alone (e.g. Lighthouse's full-page screenshot) must not boot the app mid-audit.
-    const engage = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'] as const;
-    const onEngage = () => {
-      for (const t of engage) removeEventListener(t, onEngage);
-      io?.observe(phone);
-    };
     for (const t of engage) addEventListener(t, onEngage, { passive: true });
   }
 }
