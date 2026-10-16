@@ -1,4 +1,7 @@
-import { computeAlerts, EMPTY_ALERT_STATE, type Alert, type AlertState } from '../../src/lib/alerts';
+import { computeAlerts, EMPTY_ALERT_STATE, rollback, type Alert } from '../../src/lib/alerts';
+
+// Shared with the in-app checks (src/lib/check.ts); re-exported for existing callers.
+export { rollback };
 import { fetchWind } from '../../src/lib/openmeteo';
 import type { Spot, SpotWind } from '../../src/lib/types';
 import type { Env } from './env';
@@ -168,23 +171,4 @@ export async function runCron(env: Env, now = Date.now(), fetchImpl: typeof fetc
     if (!stored || JSON.stringify(persisted) !== JSON.stringify(stored)) await putState(env.SUBS, id, persisted);
   }
   return report;
-}
-
-/**
- * Undo the state changes of `undelivered` alerts only: their spots keep the previous rating ("now")
- * and their forecast windows are not marked notified. Everything else in `next` is kept.
- */
-export function rollback(prev: AlertState, next: AlertState, undelivered: Alert[]): AlertState {
-  const ratings = { ...next.ratings };
-  const notifiedWindows = { ...next.notifiedWindows };
-  for (const a of undelivered) {
-    if (a.kind === 'now') {
-      if (prev.ratings[a.spotId] === undefined) delete ratings[a.spotId];
-      else ratings[a.spotId] = prev.ratings[a.spotId];
-    } else if (a.tag.startsWith('fc-')) {
-      // Forecast alert tags are `fc-${windowKey}` (see computeAlerts).
-      delete notifiedWindows[a.tag.slice(3)];
-    }
-  }
-  return { ratings, notifiedWindows };
 }
