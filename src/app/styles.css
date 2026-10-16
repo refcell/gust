@@ -357,9 +357,13 @@ main {
   flex: none;
   color: var(--fg);
 }
+/* The outline (incl. radial edges) carries the >= 3:1 boundary contrast; the fill is just a tint. */
 .compass-sector {
   fill: var(--good);
   fill-opacity: 0.22;
+  stroke: var(--good);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
 }
 .compass-ring,
 .compass-tick {
@@ -385,6 +389,11 @@ main {
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+/* Card-coloured halo so the arrow keeps its contrast over the green sector tint and outline. */
+.compass-arrow path.compass-arrow-halo {
+  stroke: var(--card);
+  stroke-width: 8;
 }
 .hourly {
   margin: 12px 0 0;

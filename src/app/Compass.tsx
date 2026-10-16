@@ -1,26 +1,19 @@
-import { polarToXY, sectorArcPath, isFullCircle } from '../lib/compass';
+import { arrowClass, arrowTransform, compassLabel, compassSectorPaths, polarToXY } from '../lib/compass';
 import type { Rating } from '../lib/score';
-import { compass, type Sector } from '../lib/sectors';
+import type { Sector } from '../lib/sectors';
 
 const R = 40;
 const TICKS = [0, 90, 180, 270];
-
-function describe(sectors: readonly Sector[]): string {
-  if (sectors.length === 0) return 'rideable directions unknown';
-  if (sectors.some(isFullCircle)) return 'rideable from any direction';
-  return `rideable from ${sectors.map(([a, b]) => (compass(a) === compass(b) ? compass(a) : `${compass(a)} to ${compass(b)}`)).join(' and ')}`;
-}
+const ARROW = 'M0 -30V28M-8 18L0 29L8 18';
 
 /** Compass rose with the spot's rideable sectors and an arrow for where the wind blows to. */
 export function Compass({ sectors, dirDeg, rating }: { sectors: readonly Sector[]; dirDeg?: number; rating?: Rating }) {
-  const hasWind = dirDeg !== undefined && Number.isFinite(dirDeg);
-  const wind = hasWind ? `Wind from ${compass(dirDeg)} (${Math.round(dirDeg)}°); ` : '';
-  const label = wind + describe(sectors);
+  const transform = arrowTransform(dirDeg);
   return (
-    <svg class="compass" viewBox="-50 -50 100 100" width="80" height="80" role="img" aria-label={label.charAt(0).toUpperCase() + label.slice(1)}>
+    <svg class="compass" viewBox="-50 -50 100 100" width="80" height="80" role="img" aria-label={compassLabel(sectors, dirDeg)}>
       <g aria-hidden="true">
-        {sectors.map(([a, b]) => (
-          <path key={`${a}-${b}`} class="compass-sector" d={sectorArcPath(a, b, R)} />
+        {compassSectorPaths(sectors, R).map((d, i) => (
+          <path key={i} class="compass-sector" d={d} />
         ))}
         <circle class={sectors.length ? 'compass-ring' : 'compass-ring unknown'} r={R} />
         {TICKS.map((t) => {
@@ -31,9 +24,10 @@ export function Compass({ sectors, dirDeg, rating }: { sectors: readonly Sector[
         <text class="compass-n" x="0" y="-27" text-anchor="middle" dominant-baseline="middle">
           N
         </text>
-        {hasWind && (
-          <g class={`compass-arrow b-${rating ?? 'none'}`} transform={`rotate(${Math.round(dirDeg)})`}>
-            <path d="M0 -30V28M-8 18L0 29L8 18" />
+        {transform && (
+          <g class={arrowClass(rating)} transform={transform}>
+            <path class="compass-arrow-halo" d={ARROW} />
+            <path d={ARROW} />
           </g>
         )}
       </g>
