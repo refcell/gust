@@ -18,7 +18,7 @@ import {
   tileFor,
   type KV,
 } from '../src/lib/overpass';
-import { augmentWithOsm, shoreCacheKey, SHORE_CACHE_VERSION } from '../src/app/osm';
+import { augmentAround, augmentWithOsm, osmOrigins, shoreCacheKey, SHORE_CACHE_VERSION } from '../src/app/osm';
 import type { Spot } from '../src/lib/types';
 
 function memStore(): KV & { data: Map<string, string> } {
@@ -370,5 +370,41 @@ describe('augmentWithOsm', () => {
     const fetch = vi.fn(async (_url: string, init?: RequestInit) => (String(init?.body).includes('coastline') ? json({}, 504) : json(kite)));
     const spots = await augmentWithOsm(TARIFA, 50, curated, { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 });
     expect(spots.map((s) => s.sectorSource)).toEqual(['unknown', 'unknown']);
+  });
+});
+
+describe('osmOrigins / augmentAround (current location + saved places)', () => {
+  const here = { lat: 36.0, lon: -5.6 };
+  const sameTile = { lat: 36.1, lon: -5.55 };
+  const far = { lat: 20.9, lon: -156.43 };
+  const near = { lat: 37.0, lon: -6.0 };
+
+  it('keeps one origin per tile, nearest-first from the current location', () => {
+    expect(osmOrigins([here, far, sameTile, near], 50)).toEqual([here, near, far]);
+    expect(osmOrigins([], 50)).toEqual([]);
+    // Without a location the first saved place is the reference.
+    expect(osmOrigins([far, near, here], 50)).toEqual([far, near, here]);
+  });
+
+  it('queries each tile in order within the daily budget and merges deduped results', async () => {
+    const at = (id: number, lat: number, lon: number) => ({ type: 'node', id, lat, lon, tags: { sport: 'kitesurfing', name: `k${id}` } });
+    const kiteBodies: Record<string, unknown> = {
+      [tileFor(here, 50).center.lat.toFixed(1)]: { elements: [at(1, 36.05, -5.65), at(2, 36.3, -5.4)] },
+      [tileFor(near, 50).center.lat.toFixed(1)]: { elements: [at(2, 36.3, -5.4), at(3, 36.9, -6.1), at(4, 36.8995, -6.1005)] },
+    };
+    const queried: string[] = [];
+    const fetch = vi.fn(async (_url: string, init?: RequestInit) => {
+      const body = decodeURIComponent(String(init?.body));
+      if (body.includes('coastline')) return json({ elements: [] });
+      const lat = /around:\d+,(-?[\d.]+)/.exec(body)![1];
+      queried.push(lat);
+      return json(kiteBodies[Number(lat).toFixed(1)] ?? { elements: [] });
+    });
+    const deps = { fetch: fetch as unknown as typeof globalThis.fetch, storage: memStore(), now: () => T0 };
+    const spots = await augmentAround([here, far, near], 50, [], deps);
+    // Nearest tiles first; the far place's tile is still within the cap here (3 kite + 2 shore calls).
+    expect(queried.map(Number)).toEqual([36, 37, 21]);
+    expect(spots.map((s) => s.id)).toEqual(['osm-node-1', 'osm-node-2', 'osm-node-3']);
+    expect(fetch.mock.calls.length).toBeLessThanOrEqual(MAX_CALLS_PER_DAY);
   });
 });

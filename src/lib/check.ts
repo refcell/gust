@@ -1,6 +1,6 @@
 import { computeAlerts, EMPTY_ALERT_STATE, rollback, type Alert, type AlertState } from './alerts';
 import { kvGet, kvSet } from './kv';
-import { fetchWind } from './openmeteo';
+import { fetchSpotWind } from './openmeteo';
 import { DEFAULT_SETTINGS, type Settings, type Spot, type SpotWind } from './types';
 
 /** Keys persisted in IndexedDB so the service worker can run checks in the background. */
@@ -16,6 +16,8 @@ export interface CheckResult {
   /** Alerts that were delivered (shown); undelivered ones are rolled back and retry next check. */
   alerts: Alert[];
   wind: Record<string, SpotWind>;
+  /** Spots whose wind request failed: skipped this check (no alert, state unchanged); retry them. */
+  failedIds: string[];
 }
 
 /**
@@ -35,20 +37,16 @@ export type Deliver = (a: Alert) => Promise<boolean | void>;
 export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; alertOnFirst?: boolean; deliver?: Deliver; cached?: Record<string, SpotWind> } = {}): Promise<CheckResult> {
   const settings = opts.settings ?? (await kvGet<Settings>(K.settings)) ?? DEFAULT_SETTINGS;
   const spots = opts.spots ?? (await kvGet<Spot[]>(K.watch)) ?? [];
-  if (spots.length === 0) return { alerts: [], wind: {} };
+  if (spots.length === 0) return { alerts: [], wind: {}, failedIds: [] };
   // Reuse samples the caller already has (fresh ones); fetch only the rest.
   const cached = opts.cached ?? {};
   const missing = spots.filter((s) => !cached[s.id]);
-  const winds = missing.length ? await fetchWind(missing) : [];
-  const fetched = new Map<string, SpotWind>();
-  missing.forEach((s, i) => {
-    const w = winds[i];
-    if (w) fetched.set(s.id, w);
-  });
+  // Failed spots are simply skipped: no entry, so no alert and their alert state is left alone.
+  const { wind: fetched, failedIds } = await fetchSpotWind(missing);
   const entries: { spot: Spot; wind: SpotWind }[] = [];
   const wind: Record<string, SpotWind> = {};
   for (const spot of spots) {
-    const w = cached[spot.id] ?? fetched.get(spot.id);
+    const w = cached[spot.id] ?? fetched[spot.id];
     if (w) {
       entries.push({ spot, wind: w });
       wind[spot.id] = w;
@@ -74,7 +72,7 @@ export async function runCheck(opts: { spots?: Spot[]; settings?: Settings; aler
   const lastWind = { ...((await kvGet<Record<string, SpotWind>>(K.lastWind)) ?? {}), ...wind };
   await kvSet(K.lastWind, lastWind);
   await kvSet(K.lastCheck, Date.now());
-  return { alerts, wind };
+  return { alerts, wind, failedIds };
 }
 
 export function notificationOptions(a: Alert): NotificationOptions {

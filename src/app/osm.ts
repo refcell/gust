@@ -85,3 +85,37 @@ export async function augmentWithOsm(center: LatLon, radiusKm: number, curated: 
     return [];
   }
 }
+
+/**
+ * Distinct Overpass tiles to query for `origins` (current location first, then saved places):
+ * one origin per tile + radius bucket, ordered nearest-first from the first origin so the daily
+ * request budget goes to the most relevant places.
+ */
+export function osmOrigins<T extends LatLon>(origins: readonly T[], radiusKm: number): T[] {
+  if (origins.length === 0) return [];
+  const ref = origins[0];
+  const sorted = origins.map((o, i) => ({ o, i, d: distanceKm(ref, o) })).sort((a, b) => a.d - b.d || a.i - b.i);
+  const seen = new Set<string>();
+  const out: T[] = [];
+  for (const { o } of sorted) {
+    const key = tileFor(o, radiusKm).key;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(o);
+  }
+  return out;
+}
+
+/**
+ * OSM spots around every origin (see osmOrigins), queried one tile at a time so the cache and the
+ * daily budget apply in order, merged and deduped (by id and by distance). Never throws.
+ */
+export async function augmentAround(origins: readonly LatLon[], radiusKm: number, curated: Spot[], deps?: OverpassDeps): Promise<Spot[]> {
+  let out: Spot[] = [];
+  for (const o of osmOrigins(origins, radiusKm)) {
+    const extra = await augmentWithOsm(o, radiusKm, curated, deps);
+    const ids = new Set(out.map((s) => s.id));
+    out = mergeSpots(out, extra.filter((s) => !ids.has(s.id)), DEDUPE_KM);
+  }
+  return out;
+}

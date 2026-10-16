@@ -63,23 +63,95 @@ export function parseLocation(loc: OMLocation, fetchedAt = Date.now()): SpotWind
   };
 }
 
-/** Fetch wind for many points (batched). Result array aligns with `points`; entries are null on failure. */
-export async function fetchWind(points: readonly LatLon[], fetchImpl: typeof fetch = fetch): Promise<(SpotWind | null)[]> {
-  const out: (SpotWind | null)[] = [];
+/** Deadline per batch request (fetch + body), so a stalled request cannot hang a refresh. */
+export const WIND_TIMEOUT_MS = 15_000;
+
+export interface FetchWindOptions {
+  fetchImpl?: typeof fetch;
+  /** Per-batch deadline in ms (default WIND_TIMEOUT_MS). */
+  timeoutMs?: number;
+}
+
+export interface WindBatchResult {
+  /** Aligned with the input points; null where the request failed or the data was invalid. */
+  winds: (SpotWind | null)[];
+  /** Indexes of points whose batch request failed (network, timeout, HTTP error, bad body). */
+  failed: number[];
+}
+
+function deadline(ms: number): { signal: AbortSignal; clear: () => void } {
+  if (typeof AbortSignal.timeout === 'function') return { signal: AbortSignal.timeout(ms), clear: () => undefined };
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(new DOMException('timeout', 'TimeoutError')), ms);
+  return { signal: ctrl.signal, clear: () => clearTimeout(t) };
+}
+
+/** Rejects once `signal` aborts, even when the fetch implementation ignores the signal. */
+function untilAbort<T>(p: Promise<T>, signal: AbortSignal): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const onAbort = () => reject(signal.reason ?? new Error('aborted'));
+    if (signal.aborted) return onAbort();
+    signal.addEventListener('abort', onAbort, { once: true });
+    p.then(resolve, reject).finally(() => signal.removeEventListener('abort', onAbort));
+  });
+}
+
+/**
+ * Fetch wind for many points (batched), each batch bounded by a deadline. Failed batches are
+ * reported in `failed` instead of disappearing silently.
+ */
+export async function fetchWindBatches(points: readonly LatLon[], opts: FetchWindOptions = {}): Promise<WindBatchResult> {
+  const fetchImpl = opts.fetchImpl ?? fetch;
+  const timeoutMs = opts.timeoutMs ?? WIND_TIMEOUT_MS;
+  const winds: (SpotWind | null)[] = [];
+  const failed: number[] = [];
   for (let i = 0; i < points.length; i += BATCH) {
     const chunk = points.slice(i, i + BATCH);
+    const d = deadline(timeoutMs);
     try {
-      const res = await fetchImpl(forecastUrl(chunk));
-      if (!res.ok) throw new Error(`open-meteo ${res.status}`);
-      const json = (await res.json()) as OMLocation | OMLocation[];
-      const arr = Array.isArray(json) ? json : [json];
+      const arr = await untilAbort(
+        (async () => {
+          const res = await fetchImpl(forecastUrl(chunk), { signal: d.signal });
+          if (!res.ok) throw new Error(`open-meteo ${res.status}`);
+          const json = (await res.json()) as OMLocation | OMLocation[];
+          return Array.isArray(json) ? json : [json];
+        })(),
+        d.signal,
+      );
       const now = Date.now();
-      for (let j = 0; j < chunk.length; j++) out.push(arr[j] ? parseLocation(arr[j], now) : null);
+      for (let j = 0; j < chunk.length; j++) {
+        if (arr[j]) winds.push(parseLocation(arr[j], now));
+        else {
+          winds.push(null);
+          failed.push(i + j);
+        }
+      }
     } catch {
-      for (let j = 0; j < chunk.length; j++) out.push(null);
+      for (let j = 0; j < chunk.length; j++) {
+        winds.push(null);
+        failed.push(i + j);
+      }
+    } finally {
+      d.clear();
     }
   }
-  return out;
+  return { winds, failed };
+}
+
+/** Fetch wind for many points (batched). Result array aligns with `points`; entries are null on failure. */
+export async function fetchWind(points: readonly LatLon[], fetchImpl: typeof fetch = fetch, timeoutMs = WIND_TIMEOUT_MS): Promise<(SpotWind | null)[]> {
+  return (await fetchWindBatches(points, { fetchImpl, timeoutMs })).winds;
+}
+
+/** Wind by spot id; `failedIds` lists spots whose request failed (keep their previous samples, retry them). */
+export async function fetchSpotWind(spots: readonly (LatLon & { id: string })[], opts: FetchWindOptions = {}): Promise<{ wind: Record<string, SpotWind>; failedIds: string[] }> {
+  const wind: Record<string, SpotWind> = {};
+  if (spots.length === 0) return { wind, failedIds: [] };
+  const { winds, failed } = await fetchWindBatches(spots, opts);
+  winds.forEach((w, i) => {
+    if (w) wind[spots[i].id] = w;
+  });
+  return { wind, failedIds: failed.map((i) => spots[i].id) };
 }
 
 /** Samples fetched less than this long ago are reused instead of refetched. */
@@ -87,15 +159,17 @@ export const FRESH_MS = 10 * 60_000;
 
 /**
  * Which spots need a network fetch: those without a sample fetched within `maxAgeMs`. `fresh`
- * holds the reusable samples by spot id (e.g. after a scoring-only settings change).
+ * holds the reusable samples by spot id (e.g. after a scoring-only settings change). Spots in
+ * `retry` (whose last request failed) are always fetched again.
  */
-export function splitFresh<S extends { id: string }>(spots: readonly S[], wind: Readonly<Record<string, SpotWind | undefined>>, now = Date.now(), maxAgeMs = FRESH_MS): { fresh: Record<string, SpotWind>; missing: S[] } {
+export function splitFresh<S extends { id: string }>(spots: readonly S[], wind: Readonly<Record<string, SpotWind | undefined>>, now = Date.now(), maxAgeMs = FRESH_MS, retry: readonly string[] = []): { fresh: Record<string, SpotWind>; missing: S[] } {
+  const again = new Set(retry);
   const fresh: Record<string, SpotWind> = {};
   const missing: S[] = [];
   for (const s of spots) {
     const w = wind[s.id];
     const age = w ? now - w.fetchedAt : Infinity;
-    if (w && age >= 0 && age < maxAgeMs) fresh[s.id] = w;
+    if (w && age >= 0 && age < maxAgeMs && !again.has(s.id)) fresh[s.id] = w;
     else missing.push(s);
   }
   return { fresh, missing };
