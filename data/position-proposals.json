@@ -80,6 +80,16 @@
     "proposedLon": -121.5072
   },
   {
+    "id": "rufus",
+    "name": "Rufus",
+    "lat": 45.6938,
+    "lon": -120.7384,
+    "distanceM": 395,
+    "shoreKind": "water",
+    "proposedLat": 45.697,
+    "proposedLon": -120.74062
+  },
+  {
     "id": "manzanita",
     "name": "Manzanita",
     "lat": 45.716,
@@ -100,6 +110,17 @@
     "proposedLon": -124.40576
   },
   {
+    "id": "wickiup-reservoir",
+    "name": "Wickiup Reservoir",
+    "lat": 43.6815,
+    "lon": -121.7255,
+    "distanceM": 1166,
+    "shoreKind": "water",
+    "proposedLat": 43.69082,
+    "proposedLon": -121.71888,
+    "review": "rejected"
+  },
+  {
     "id": "dougs-beach",
     "name": "Doug's Beach",
     "lat": 45.6764,
@@ -118,6 +139,16 @@
     "shoreKind": "coastline",
     "proposedLat": 48.00597,
     "proposedLon": -122.23171
+  },
+  {
+    "id": "long-beach-wa",
+    "name": "Long Beach Peninsula",
+    "lat": 46.3518,
+    "lon": -124.0595,
+    "distanceM": 503,
+    "shoreKind": "coastline",
+    "proposedLat": 46.3521,
+    "proposedLon": -124.06604
   },
   {
     "id": "westport-wa",
@@ -631,6 +662,16 @@
     "proposedLon": -92.09377
   },
   {
+    "id": "lake-pepin-lake-city",
+    "name": "Lake Pepin (Lake City)",
+    "lat": 44.447,
+    "lon": -92.268,
+    "distanceM": 396,
+    "shoreKind": "water",
+    "proposedLat": 44.44801,
+    "proposedLon": -92.26322
+  },
+  {
     "id": "white-bear-lake",
     "name": "White Bear Lake",
     "lat": 45.076,
@@ -789,6 +830,16 @@
     "shoreKind": "river",
     "proposedLat": 44.5229,
     "proposedLon": -80.01682
+  },
+  {
+    "id": "grand-bend",
+    "name": "Grand Bend",
+    "lat": 43.316,
+    "lon": -81.758,
+    "distanceM": 363,
+    "shoreKind": "water",
+    "proposedLat": 43.31835,
+    "proposedLon": -81.76111
   },
   {
     "id": "sandbanks",
@@ -1172,6 +1223,16 @@
     "proposedLon": -9.19634
   },
   {
+    "id": "costa-nova",
+    "name": "Costa Nova / Barra (Aveiro)",
+    "lat": 40.628,
+    "lon": -8.755,
+    "distanceM": 242,
+    "shoreKind": "coastline",
+    "proposedLat": 40.62804,
+    "proposedLon": -8.75214
+  },
+  {
     "id": "lagos-meia-praia",
     "name": "Meia Praia (Lagos)",
     "lat": 37.115,
@@ -1360,6 +1421,16 @@
     "shoreKind": "coastline",
     "proposedLat": 51.9134,
     "proposedLon": 4.05226
+  },
+  {
+    "id": "sylt-westerland",
+    "name": "Sylt (Westerland)",
+    "lat": 54.907,
+    "lon": 8.3,
+    "distanceM": 244,
+    "shoreKind": "coastline",
+    "proposedLat": 54.90793,
+    "proposedLon": 8.29654
   },
   {
     "id": "st-peter-ording",
@@ -1812,6 +1883,16 @@
     "shoreKind": "coastline",
     "proposedLat": -19.98483,
     "proposedLon": 57.62947
+  },
+  {
+    "id": "madagascar-sakalava",
+    "name": "Sakalava Bay",
+    "lat": -12.27,
+    "lon": 49.4,
+    "distanceM": 355,
+    "shoreKind": "coastline",
+    "proposedLat": -12.27293,
+    "proposedLon": 49.39872
   },
   {
     "id": "walvis-bay",
@@ -2665,6 +2746,16 @@
     "proposedLon": -3.04282
   },
   {
+    "id": "uk-longniddry",
+    "name": "Longniddry Bents",
+    "lat": 55.979,
+    "lon": -2.89,
+    "distanceM": 681,
+    "shoreKind": "coastline",
+    "proposedLat": 55.98269,
+    "proposedLon": -2.89873
+  },
+  {
     "id": "ireland-inch",
     "name": "Inch Strand",
     "lat": 52.137,
@@ -3314,5 +3405,166 @@
     "shoreKind": "coastline",
     "proposedLat": -40.88676,
     "proposedLon": 174.98093
+  },
+  {
+    "id": "rerik-salzhaff",
+    "name": "Rerik (Salzhaff)",
+    "lat": 54.103,
+    "lon": 11.62,
+    "distanceM": 359,
+    "shoreKind": "coastline",
+    "proposedLat": 54.10129,
+    "proposedLon": 11.61534
+  },
+  {
+    "id": "borkum-nordstrand",
+    "name": "Borkum Nordstrand",
+    "lat": 53.595,
+    "lon": 6.66,
+    "distanceM": 380,
+    "shoreKind": "coastline",
+    "proposedLat": 53.59512,
+    "proposedLon": 6.65426
+  },
+  {
+    "id": "ijmuiden-kennemerstrand",
+    "name": "IJmuiden (Kennemerstrand)",
+    "lat": 52.456,
+    "lon": 4.558,
+    "distanceM": 175,
+    "shoreKind": "coastline",
+    "proposedLat": 52.45552,
+    "proposedLon": 4.55554
+  },
+  {
+    "id": "cadzand",
+    "name": "Cadzand-Bad",
+    "lat": 51.375,
+    "lon": 3.385,
+    "distanceM": 227,
+    "shoreKind": "island",
+    "proposedLat": 51.37368,
+    "proposedLon": 3.3875
+  },
+  {
+    "id": "lokken",
+    "name": "Løkken",
+    "lat": 57.37,
+    "lon": 9.705,
+    "distanceM": 190,
+    "shoreKind": "coastline",
+    "proposedLat": 57.37057,
+    "proposedLon": 9.70203
+  },
+  {
+    "id": "uk-benone",
+    "name": "Benone Strand",
+    "lat": 55.165,
+    "lon": -6.88,
+    "distanceM": 506,
+    "shoreKind": "coastline",
+    "proposedLat": 55.16935,
+    "proposedLon": -6.87772
+  },
+  {
+    "id": "ireland-rossnowlagh",
+    "name": "Rossnowlagh",
+    "lat": 54.56,
+    "lon": -8.21,
+    "distanceM": 307,
+    "shoreKind": "coastline",
+    "proposedLat": 54.55937,
+    "proposedLon": -8.21464
+  },
+  {
+    "id": "france-ouistreham",
+    "name": "Ouistreham (Riva-Bella)",
+    "lat": 49.29,
+    "lon": -0.26,
+    "distanceM": 221,
+    "shoreKind": "coastline",
+    "proposedLat": 49.29198,
+    "proposedLon": -0.26019
+  },
+  {
+    "id": "portugal-praia-de-faro",
+    "name": "Praia de Faro",
+    "lat": 37.007,
+    "lon": -7.985,
+    "distanceM": 240,
+    "shoreKind": "coastline",
+    "proposedLat": 37.00847,
+    "proposedLon": -7.98303
+  },
+  {
+    "id": "portugal-figueira-cabedelo",
+    "name": "Cabedelo (Figueira da Foz)",
+    "lat": 40.136,
+    "lon": -8.865,
+    "distanceM": 165,
+    "shoreKind": "coastline",
+    "proposedLat": 40.136,
+    "proposedLon": -8.86306
+  },
+  {
+    "id": "spain-valdelagrana",
+    "name": "Valdelagrana (El Puerto de Santa María)",
+    "lat": 36.572,
+    "lon": -6.229,
+    "distanceM": 324,
+    "shoreKind": "coastline",
+    "proposedLat": 36.57292,
+    "proposedLon": -6.22556
+  },
+  {
+    "id": "spain-castelldefels",
+    "name": "Castelldefels",
+    "lat": 41.268,
+    "lon": 1.985,
+    "distanceM": 462,
+    "shoreKind": "coastline",
+    "proposedLat": 41.26385,
+    "proposedLon": 1.98498
+  },
+  {
+    "id": "italy-cagliari-poetto",
+    "name": "Poetto (Cagliari)",
+    "lat": 39.2085,
+    "lon": 9.2,
+    "distanceM": 1569,
+    "shoreKind": "coastline",
+    "proposedLat": 39.2211,
+    "proposedLon": 9.19186,
+    "review": "approved"
+  },
+  {
+    "id": "italy-putzu-idu",
+    "name": "Putzu Idu (Sinis)",
+    "lat": 40.036,
+    "lon": 8.405,
+    "distanceM": 475,
+    "shoreKind": "coastline",
+    "proposedLat": 40.03222,
+    "proposedLon": 8.40241
+  },
+  {
+    "id": "italy-punta-prosciutto",
+    "name": "Punta Prosciutto (Porto Cesareo)",
+    "lat": 40.288,
+    "lon": 17.775,
+    "distanceM": 739,
+    "shoreKind": "coastline",
+    "proposedLat": 40.29458,
+    "proposedLon": 17.77614
+  },
+  {
+    "id": "bulgaria-kranevo",
+    "name": "Kranevo",
+    "lat": 43.34,
+    "lon": 28.065,
+    "distanceM": 343,
+    "shoreKind": "coastline",
+    "proposedLat": 43.33892,
+    "proposedLon": 28.06896
   }
 ]
