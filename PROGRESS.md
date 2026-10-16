@@ -389,3 +389,14 @@ audit merged (see Log).
   a GitHub account, shore-check/ntfy scripts and workflows listed, landing count ~800, stale
   PROGRESS status lines fixed. Workers in flight: demo isolation + delivery-acked local alerts +
   eligible confirmations; wall-clock stale cards + keyboard map panning.
+- Loop 44: audit blockers 2-3, 5, 7-8 merged (workers 9482764, c511d61):
+  - Demo (`?demo=1`, the landing iframe) uses default settings, reads/writes no user state, never
+    requests permission, notifies, syncs or registers background work; the Alerts tab says alerts
+    are off in the demo. e2e seeds localStorage + IndexedDB and asserts both are unchanged.
+  - Local alerts are acknowledged only after delivery: runCheck takes deliver(); failed alerts are
+    rolled back with the server's rollback (moved to src/lib/alerts.ts, shared). App and SW use it.
+  - Enable-alerts confirmation uses the shared alertEligible predicate (not muted, not stale).
+  - Stale cards compute now/next-good from the wall clock (forecastClock), show "Cached · as of",
+    and the chart caption says it is cached; expired windows are hidden.
+  - Map is keyboard-focusable: arrows pan (Shift = more), +/- zoom, focus ring.
+  317 unit / 44 server / 111 e2e tests pass.
