@@ -7,9 +7,8 @@ live at https://refcell.github.io/gust/ and verified with `scripts/verify-live.m
 Chromium installability via CDP, SW active, offline reload). Landing page with install flows (BIP,
 iOS sheet, in-app browser detection, desktop QR). OSM Overpass augmentation + coastline sector
 inference merged. Push backend (`server/`, Cloudflare Worker) merged and tested, not deployed (no
-credentials). Android APK workflow merged; first run failed on minSdk (fixed to 24), re-running.
-Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the dataset side-off audit
-(worker lane in flight).
+credentials). Android APK workflow merged (minSdk 24). Advisor reviews done each milestone; the dataset side-off
+audit merged (see Log).
 
 ## Decisions
 
@@ -21,8 +20,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 - Service worker is hand-written (`src/sw/sw.ts`), built as a classic IIFE script by a small Vite
   plugin that injects the emitted asset list for precaching. No Workbox (bundle size, control).
 - Spots JSON is fetched as a hashed static asset rather than bundled into JS.
-- Sectors `[0,360]` mean "any direction" (causeways/sandbars). A few flat-water spots ridden
-  side-off include that edge in their sectors; notes flag it. Revisit if a strict rule is wanted.
+- Sectors `[0,360]` mean "any direction" (causeways/sandbars). Spots usually ridden side-off keep
+  only their side-shore directions, and the notes say the usual wind is rated offshore (MISSION's
+  safety rule; enforced by tests/dataset-safety.test.ts, which also caps width at 200°).
 - Scoring: outside every rideable sector by > 15° = offshore -> score 0, never good. Within 15° =
   marginal, capped at "OK". Unknown sectors score on speed only with a 0.85 factor.
 - e2e tests block service workers (`serviceWorkers: 'block'`) so network mocks apply.
@@ -193,7 +193,7 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   7 suggestions were reviewed and applied; lagoons/causeways and >500 m entries were rejected (list
   in data/README "Sector inference").
 - No-account background push (loop 27): scheduled GitHub Actions workflow `ntfy-alerts.yml`
-  (every 15 min) scores the spots from the GUST_ALERTS_CONFIG repo variable (copied from the app's
+  (every 15 min) scores the spots from the GUST_ALERTS_CONFIG repo secret (copied from the app's
   Alerts panel) with the server's alert logic (3 + summary, quiet hours, rollback on failed publish)
   and publishes to the ntfy.sh topic in the NTFY_TOPIC secret; the free ntfy app delivers real push
   on iOS and Android. State persists via actions/cache. Unconfigured: exits 0. Verified live with a
@@ -218,9 +218,9 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
 ## Next
 
 1. Physical-device acceptance (owner): iPhone Safari install -> location -> Enable alerts -> test
-   notification -> calendar export opens in Calendar with reminders; Android Chrome install + APK sideload. Everything else is verified in CI/live.
+   notification -> calendar export opens in Calendar with reminders; Android Chrome install + APK sideload. The rest is covered by CI and the live smoke test, which does not exercise notification delivery.
 2. Owner: enable ntfy background alerts (README "Background alerts with ntfy"): install ntfy,
-   generate a topic in Alerts, set secret NTFY_TOPIC and variable GUST_ALERTS_CONFIG. Deploy the
+   generate a topic in Alerts, set secrets NTFY_TOPIC and GUST_ALERTS_CONFIG. Deploy the
    push backend when credentials exist (server/README.md).
 4. Verify approximate positions (data/README.md) against imagery/elevation.
 5. Verify spot coordinates against OSM shore data: `scripts/check-shore.ts` + manual "Check spot
@@ -379,3 +379,13 @@ Advisor review (gpt-6.1-sol) done; its must-fix items addressed except the datas
   when a wide sector's endpoints share a compass label ("10° to 350° clockwise"); the text row and the
   compass aria-label share it. Compass logic lives in pure helpers with unit tests (no DOM test
   env; decision: no new test dependency). 302 unit / 102 e2e tests pass; screenshots checked in light and dark.
+- Loop 43: gpt-6.1-sol drift audit (8 findings + stale docs). Lead lane: safety blocker fixed:
+  el-cotillo and karpathos-afiartis had `[]` although their notes name a side-off wind, so that
+  wind scored Good on speed (the loop 36 decision was wrong). They are back to side-shore-only
+  sectors with notes saying the usual wind is rated offshore. New dataset test: no `[]` spot may
+  name an offshore/side-off wind. Width cap tightened 220° -> 200° (lo-stagnone, oostvoorne,
+  wulfener-hals trimmed); data/README guidance now ±90° + 10° tolerance. Docs: batched requests,
+  Web Push needs both VITE_PUSH_API and VITE_VAPID_PUBLIC_KEY, ntfy needs secrets (not variables) and
+  a GitHub account, shore-check/ntfy scripts and workflows listed, landing count ~800, stale
+  PROGRESS status lines fixed. Workers in flight: demo isolation + delivery-acked local alerts +
+  eligible confirmations; wall-clock stale cards + keyboard map panning.

@@ -23,7 +23,7 @@ No App Store and no account. Settings and saved places stay on the device.
 ## How it works
 
 1. **Spots.** gust finds kite spots within your search radius (default 50 km) of your current location and of each saved place. It starts from a curated dataset of 801 spots (about 320 in the US, 88 countries) in [`data/spots.json`](data/spots.json), with depth across the US (CA, OR, WA, HI, TX, NC, FL, MA, the Great Lakes, and more), and adds spots tagged `sport=kitesurfing` on OpenStreetMap through the Overpass API.
-2. **Wind.** For every nearby spot it fetches current and hourly `wind_speed_10m`, `wind_gusts_10m` and `wind_direction_10m` from Open-Meteo in one batched request.
+2. **Wind.** For every nearby spot it fetches current and hourly `wind_speed_10m`, `wind_gusts_10m` and `wind_direction_10m` from Open-Meteo in batched requests (up to 50 spots per request).
 3. **Score.** Each spot has rideable direction sectors: the directions that blow onshore, side-onshore or side-shore at that beach. A reading is **Good** when speed is inside your window (default 15–30 kn), gusts are at or below your limit (default 35 kn), and the direction is inside a rideable sector. Wind more than 15° outside every rideable sector is **Offshore**, scores 0, and is never good. Within 15° is marginal and capped at **OK**. Spots with unknown sectors are scored on speed alone and labelled "direction unknown". The expanded spot card draws a small compass with the rideable sectors and the current wind arrow. Scoring lives in [`src/lib/score.ts`](src/lib/score.ts).
 4. **Forecast.** Runs of consecutive good hours (default 2 h or longer) in the hourly forecast become "good windows". Cards show "Good until 18:00" or "Next good: Tomorrow 11:00, 4h", and the detail view has a 48-hour chart.
 5. **Alerts.** When a watched spot crosses into Good, or a good window starts within the next 24 hours, gust shows a notification. Watched spots are the listed nearby spots plus your favourites.
@@ -53,13 +53,13 @@ Web apps get fewer background privileges than native apps. gust uses every path 
 
 - Notifications on iOS only work after installing to the Home Screen and are requested from a button tap, as WebKit requires.
 - Phones never give web apps location in the background. Background checks use the last location gust saw while open, plus your saved places. Save the places you ride.
-- The push server is optional and self-hosted (see below). The public build enables Web Push only when it is built with `VITE_PUSH_API` set. Without it, iPhone alerts happen when you open the app.
+- The push server is optional and self-hosted (see below). The public build enables Web Push only when it is built with both `VITE_PUSH_API` and `VITE_VAPID_PUBLIC_KEY` set. Without them, iPhone alerts happen when you open the app.
 - In-app checks run when the app opens, when it returns to the foreground, and every minute while it is visible, if the data is older than 10 minutes.
 - The push server watches at most 60 spots per device: favourites first, then the nearest. The Alerts tab says when background alerts cover fewer spots than the app does. It sends at most 3 notifications per device per run (with more alerts: 2 plus one summary of the rest) and none during quiet hours (22:00–06:00 in the device's time zone).
-- No-account background alerts: ntfy + a scheduled GitHub Actions workflow, works on iPhone and Android (see below).
+- Background alerts without paid hosting or an ntfy account (a GitHub account is needed): ntfy + a scheduled GitHub Actions workflow, works on iPhone and Android (see below).
 - No-account background fallback: Alerts → "Add good windows to calendar" exports the next 48 h of good windows at watched spots as an `.ics` file with a reminder 60 minutes before each window. Calendar reminders fire in the background on every platform. It is a forecast snapshot: re-export to refresh (events with the same spot and start time update in place where the calendar supports it).
 
-### Background alerts with ntfy (no account)
+### Background alerts with ntfy (no ntfy account)
 
 A scheduled GitHub Actions workflow (`.github/workflows/ntfy-alerts.yml`, every 15 minutes) runs `scripts/ntfy-alerts.ts`: it resolves the watched spots from a config like the app does (spots within the radius of each place plus favourites, muted ones dropped, at most 60, favourites first), fetches Open-Meteo, scores with the same `src/lib/alerts.ts` code, and publishes new alerts to an [ntfy](https://ntfy.sh) topic. Same rules as the push server: no alert for a spot that is already good on the first run, at most 3 notifications per run (with more alerts: 2 plus one summary), quiet hours 22:00–06:00 in the config's time zone (`quietHours`, `""` disables), and failed publishes are rolled back and retried on the next run.
 
@@ -68,7 +68,7 @@ A scheduled GitHub Actions workflow (`.github/workflows/ntfy-alerts.yml`, every 
 3. In the repository (`refcell/gust` for the owner, or your fork) go to Settings → Secrets and variables → Actions. Add two secrets: `NTFY_TOPIC` (the topic) and `GUST_ALERTS_CONFIG` (the config; a secret because job environment values appear in public run logs, and it holds your places). Optional: variable `NTFY_SERVER` for a self-hosted ntfy server. In a fork, enable workflows on the Actions tab.
 4. Run the "ntfy alerts" workflow once from the Actions tab (Run workflow) to check the setup.
 
-Without the secret or the variable the workflow exits successfully with a notice. Limits: GitHub can delay scheduled runs by several minutes (more at busy times), and disables schedules in public repositories after 60 days without activity. Dedup state (`.gust-ntfy/state.json`) is kept with `actions/cache` (restored by prefix, saved under a new key each run); if the cache is evicted (7 days unused), the next run behaves like a first run. Copy the config again after changing places, favourites or settings. Favourites that are only in OpenStreetMap (not `data/spots.json`) are skipped.
+Without either secret the workflow exits successfully with a notice. Limits: GitHub can delay scheduled runs by several minutes (more at busy times), and disables schedules in public repositories after 60 days without activity. Dedup state (`.gust-ntfy/state.json`) is kept with `actions/cache` (restored by prefix, saved under a new key each run); if the cache is evicted (7 days unused), the next run behaves like a first run. Copy the config again after changing places, favourites or settings. Favourites that are only in OpenStreetMap (not `data/spots.json`) are skipped.
 
 ## Data sources
 
@@ -134,6 +134,8 @@ Scripts (run with `node scripts/<name>.mjs`):
 | `merge-spots.mjs [--keep]` | Validate `data/new-*.json`, drop duplicates (same id or within 1.5 km) and append to `data/spots.json`. |
 | `check-spots.mjs [maxMeters]` | Flag curated coastal spots above `maxMeters` (default 25) using Open-Meteo elevation. |
 | `infer-sectors.ts [--apply]` | Run as `node --import ./scripts/ts-resolve.mjs scripts/infer-sectors.ts` (Node 22.15+). Without flags: one Overpass query per spot with `sectors: []`, writing `data/sector-suggestions.json` for review (saved per spot, resumes). `--apply`: copy entries marked `"review": "approved"` into `data/spots.json`. |
+| `check-shore.ts [--propose \| --apply-positions]` | Run with `--import ./scripts/ts-resolve.mjs` like `infer-sectors.ts`. Measures each spot's distance to the nearest mapped shore via Overpass into `data/shore-check.json` (resumes); `--propose` writes `data/position-proposals.json`; `--apply-positions` moves only entries marked `"review": "approved"` whose coordinates still match. |
+| `ntfy-alerts.ts` | The ntfy background-alert run used by `ntfy-alerts.yml` (reads `NTFY_TOPIC` and `GUST_ALERTS_CONFIG` from the environment). |
 | `snap-spots.mjs id ...` | Move the given spots to the nearest low-lying cell next to the sea. Expensive: 1–3 spots at a time. |
 | `lh-summary.mjs report.json ...` | Print a Markdown summary of Lighthouse JSON reports. |
 
@@ -160,6 +162,8 @@ Workflows (`.github/workflows/`):
 | Android APK (`android.yml`) | changes under `android/`, `v*` tags, manual | builds the signed TWA APK and publishes it to the `apk-latest` prerelease (or a tag release) |
 | Spot coordinate check (`spots-check.yml`) | weekly, manual | `check-spots.mjs 15`, report only |
 | Infer spot sectors (`infer-sectors.yml`) | manual | `infer-sectors.ts` from the runner's IP, uploads the suggestions artifact, never commits |
+| Check spot positions (`check-shore.yml`) | manual | `check-shore.ts` from the runner's IP, uploads `shore-check.json`, never commits |
+| ntfy alerts (`ntfy-alerts.yml`) | every 15 min, manual | `ntfy-alerts.ts`; exits with a notice unless the `NTFY_TOPIC` and `GUST_ALERTS_CONFIG` secrets are set |
 
 ## Self-hosting the push backend
 
