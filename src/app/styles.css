@@ -376,7 +376,7 @@ main {
   font-size: 13px;
   font-weight: 600;
 }
-.compass-arrow {
+.compass-arrow.b-none {
   color: var(--muted);
 }
 .compass-arrow path {
