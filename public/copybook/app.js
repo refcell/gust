@@ -18,6 +18,7 @@
   };
   const pct = (w) => `${((Number(w) || 0) * 100).toFixed(2)}%`;
   const ticker = (h) => h.ticker || "—";
+  const tickerTitle = (h) => (h.ticker ? "" : "No public ticker");
   const issuer = (h) => h.issuer || "";
   const managersLabel = (n) => `${n} manager${Number(n) === 1 ? "" : "s"}`;
   const shareClass = (h) => {
@@ -34,25 +35,32 @@
     menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
   }
 
-  function waitlistHref(email) {
-    const title = `Copy waitlist: ${email}`;
-    const body = [
-      "Copybook waitlist signup",
-      "",
-      `Email: ${email}`,
-      `When: ${new Date().toISOString()}`,
-      "",
-      "Do not include payment details.",
-    ].join("\n");
-    return `https://github.com/factordynamics/site/issues/new?labels=copybook-waitlist&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-  }
-
   $$("[data-waitlist]").forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const email = form.querySelector('input[type="email"]')?.value.trim();
       if (!email || !email.includes("@")) return;
-      window.location.href = waitlistHref(email);
+      const note = document.createElement("p");
+      note.className = "ok";
+      note.textContent = "You’re on the list. We’ll email you when Copy opens.";
+      form.replaceWith(note);
+      const payload = {
+        email,
+        source: "copybook",
+        _subject: "Copybook waitlist",
+        _captcha: "false",
+      };
+      fetch("https://formsubmit.co/ajax/[removed address]", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      }).catch(() => {});
+      try {
+        const key = "copybook-waitlist";
+        const prev = JSON.parse(localStorage.getItem(key) || "[]");
+        prev.push({ email, at: new Date().toISOString() });
+        localStorage.setItem(key, JSON.stringify(prev));
+      } catch (_) {}
     });
   });
 
@@ -96,39 +104,56 @@
         const hay = `${ticker(h)} ${issuer(h)} ${h.cusip || ""}`.toLowerCase();
         return hay.includes(query);
       }).slice(0, 3);
-      for (const h of nameHits) {
+      const tickerHit = nameHits[0];
+      if (tickerHit) {
         items.push({
-          href: `${BASE}copycat.html?q=${encodeURIComponent(ticker(h) === "—" ? issuer(h) : ticker(h))}`,
-          title: `${ticker(h)} · ${issuer(h)}`,
-          sub: `${money(h.total_value)} · ${managersLabel(h.num_investors)}`,
+          kind: "label",
+          title: "Name",
+        });
+        items.push({
+          href: `${BASE}copycat.html?q=${encodeURIComponent(ticker(tickerHit) === "—" ? issuer(tickerHit) : ticker(tickerHit))}`,
+          title: `${ticker(tickerHit)} · ${issuer(tickerHit)}`,
+          sub: `${money(tickerHit.total_value)} · ${managersLabel(tickerHit.num_investors)}`,
+        });
+        const slugs = tickerHit.held_by || [];
+        if (slugs.length) {
+          items.push({ kind: "label", title: "Managers who hold it" });
+          slugs.forEach((slug) => {
+            const m = managers.find((x) => x.slug === slug);
+            if (!m) return;
+            items.push({
+              href: `${BASE}managers/${m.slug}.html`,
+              title: m.manager,
+              sub: `Holds ${ticker(tickerHit)}`,
+            });
+          });
+        }
+      }
+      const already = new Set(items.map((it) => it.href).filter(Boolean));
+      const people = managers.filter((m) => `${m.manager} ${m.name} ${m.slug}`.toLowerCase().includes(query));
+      const extraPeople = people.filter((m) => !already.has(`${BASE}managers/${m.slug}.html`));
+      if (extraPeople.length) {
+        items.push({ kind: "label", title: "Managers" });
+        extraPeople.slice(0, 6).forEach((m) => {
+          items.push({
+            href: `${BASE}managers/${m.slug}.html`,
+            title: m.manager,
+            sub: `${m.name} · ${m.quarter}`,
+          });
         });
       }
-      const holders = managers.filter((m) => {
-        const hay = `${m.manager} ${m.name} ${m.slug}`.toLowerCase();
-        if (hay.includes(query)) return true;
-        return (m.top || []).some((h) => `${h.ticker || ""} ${h.issuer || ""}`.toLowerCase().includes(query));
-      });
-      for (const m of holders.slice(0, 6)) {
-        const held = (m.top || []).find((h) => `${h.ticker || ""} ${h.issuer || ""}`.toLowerCase().includes(query));
-        items.push({
-          href: `${BASE}managers/${m.slug}.html`,
-          title: m.manager,
-          sub: held && (held.ticker || held.issuer)
-            ? `Holds ${held.ticker || held.issuer}`
-            : `${m.name} · ${m.quarter}`,
-        });
-      }
-      if (!items.length) {
+      if (!items.filter((it) => it.href).length) {
         box.classList.add("open");
         box.innerHTML = `<div class="empty" style="padding:12px">No matches for “${q}”</div>`;
         return;
       }
       box.classList.add("open");
       box.innerHTML = items
-        .map(
-          (it, i) =>
-            `<a href="${it.href}" class="${i === 0 ? "active" : ""}"><div>${it.title}</div><div class="sub">${it.sub}</div></a>`
-        )
+        .map((it, i) => {
+          if (it.kind === "label") return `<div class="search-label">${it.title}</div>`;
+          const first = items.findIndex((x) => x.href) === i;
+          return `<a href="${it.href}" class="${first ? "active" : ""}"><div>${it.title}</div><div class="sub">${it.sub}</div></a>`;
+        })
         .join("");
     };
     input.addEventListener("input", () => render(input.value));
@@ -174,7 +199,7 @@
         .map((h) => {
           const cls = shareClass(h);
           return `<tr>
-            <td class="ticker">${ticker(h)}</td>
+            <td class="ticker" title="${tickerTitle(h)}">${ticker(h)}</td>
             <td>${issuer(h)}${cls ? ` <span class="pill">${cls}</span>` : ""}</td>
             <td class="num">${money(h.total_value)}</td>
             <td class="num">${pct(h.weight)}</td>
@@ -274,12 +299,14 @@
             return String(av).localeCompare(String(bv)) * sortDir;
           });
           const shown = list.slice(0, limit);
-          $("#copycat-meta").textContent = `Showing ${shown.length} of ${list.length} names · ${money(book.total_value)} as-filed · ${book.num_investors} managers`;
+          $("#copycat-meta").textContent = query
+            ? `Showing ${shown.length} of ${list.length} matching names`
+            : `Showing ${shown.length} of ${list.length} names · ${money(book.total_value)} as-filed · ${book.num_investors} managers`;
           const desktop = `<div class="table-wrap desktop-only"><table>${tableHead(cols)}<tbody>${shown
             .map((h) => {
               const cls = shareClass(h);
               return `<tr>
-                <td class="ticker">${ticker(h)}</td>
+                <td class="ticker" title="${tickerTitle(h)}">${ticker(h)}</td>
                 <td>${issuer(h)}${cls ? ` <span class="pill">${cls}</span>` : ""}</td>
                 <td class="num">${shares(h.total_shares)}</td>
                 <td class="num">${money(h.total_value)}</td>
@@ -356,7 +383,7 @@
             .map((h) => {
               const cls = shareClass(h);
               return `<tr>
-                <td class="ticker">${ticker(h)}</td>
+                <td class="ticker" title="${tickerTitle(h)}">${ticker(h)}</td>
                 <td>${issuer(h)}${cls ? ` <span class="pill">${cls}</span>` : ""}</td>
                 <td class="mono">${h.cusip || ""}</td>
                 <td class="num">${shares(h.shares)}</td>
