@@ -62,17 +62,20 @@
     .then((data) => {
       catalog = (data.managers || []).filter((m) => m.ok);
       window.__copycatNames = data.copycat_top || [];
+      const ready = () => {
+        initHeaderSearch(catalog);
+        if ($("#manager-grid")) renderManagers(catalog);
+        if ($("#home-copycat")) renderHomeCopycat(data.copycat_top || []);
+        if ($("#copycat-app")) initCopycat();
+        if ($("#holdings-app")) initHoldings();
+      };
       fetch(`${BASE}data/copycat.json`)
         .then((r) => r.json())
         .then((book) => {
           window.__copycatNames = book.holdings || data.copycat_top || [];
+          ready();
         })
-        .catch(() => {});
-      initHeaderSearch(catalog);
-      if ($("#manager-grid")) renderManagers(catalog);
-      if ($("#home-copycat")) renderHomeCopycat(data.copycat_top || []);
-      if ($("#copycat-app")) initCopycat();
-      if ($("#holdings-app")) initHoldings();
+        .catch(ready);
     })
     .catch(() => {});
 
