@@ -43,6 +43,7 @@
       const note = document.createElement("p");
       note.className = "ok";
       note.textContent = "You’re on the list. We’ll email you when Copy opens.";
+      form.parentElement?.querySelectorAll(".faint").forEach((el) => el.remove());
       form.replaceWith(note);
       const payload = {
         email,
