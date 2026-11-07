@@ -2,6 +2,9 @@ name: Copybook data
 
 # Pulls new SEC 13F-HR filings into public/copybook/data. Code lives in
 # factordynamics/site (copybook/ingest). Data only; pages are not touched.
+# Full per-quarter books (data/h/**) are paid data: they go to the Copy API's
+# private R2 bucket and are never committed here. The Actions cache keeps them
+# between runs so unchanged quarters are neither refetched nor re-uploaded.
 on:
   schedule:
     - cron: "23 */3 * * *"
@@ -14,6 +17,7 @@ concurrency:
 permissions:
   contents: write
   actions: write
+  id-token: write
 
 jobs:
   refresh:
@@ -29,13 +33,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            public/copybook/data/h
+            public/copybook/data/.h-manifest.json
+          key: copybook-h-${{ github.run_id }}
+          restore-keys: copybook-h-
       - name: Ingest 13F filings
         env:
           PYTHONPATH: _ingest/copybook
           COPYBOOK_WEB_DIR: public/copybook
           COPYBOOK_CUSIP_MAP: public/copybook/data/cusip_map.json
           COPYBOOK_HISTORY_QUARTERS: "8"
-          COPYBOOK_BULK_BUDGET_S: "6600"
+          COPYBOOK_BULK_BUDGET_S: "5400"
           COPYBOOK_BULK_REVERSE: "1"
           COPYBOOK_FIGI_BUDGET_S: "900"
           COPYBOOK_SEC_BUDGET_S: "900"
@@ -46,12 +57,27 @@ jobs:
           python _ingest/copybook/ingest/figi.py public/copybook/data || echo "::warning::ticker lookup failed"
           python _ingest/copybook/ingest/securities.py public/copybook/data || echo "::warning::securities failed"
           python _ingest/copybook/ingest/enrich.py || echo "::warning::enrich failed"
+      - name: Upload paid history to R2
+        env:
+          PYTHONPATH: _ingest/copybook
+          COPYBOOK_WEB_DIR: public/copybook
+        # Fails the job on any non-200, so history.json never points at a missing file.
+        run: python _ingest/copybook/ingest/upload_history.py
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: |
+            public/copybook/data/h
+            public/copybook/data/.h-manifest.json
+          key: copybook-h-${{ github.run_id }}
       - name: Commit and deploy
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # h/ is in R2 now (uploaded above); keep it out of Pages.
+          git rm -r -q --cached --ignore-unmatch public/copybook/data/h
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
           git commit -q -m "Refresh Copybook 13F data"
