@@ -1,8 +1,1 @@
-{
-  "cik": "0001410830",
-  "name": "Matrix Capital Management Company, LP",
-  "manager": "Matrix Capital Management Company, LP",
-  "slug": "matrix-capital-management-company-lp",
-  "ok": false,
-  "error": "Empty 13F information table for 0001172661-26-003407"
-}
+{"cik":"0001410830","name":"Matrix Capital Management Company, LP","manager":"Matrix Capital Management Company, LP","slug":"matrix-capital-management-company-lp","ok":true,"form":"13F-HR","accession":"0001172661-26-001967","filing_date":"2026-05-14","report_date":"2026-03-31","quarter":"2026Q1","sec_url":"https://www.sec.gov/Archives/edgar/data/1410830/000117266126001967/0001172661-26-001967-index.html","line_count":1,"position_count":1,"values_in_thousands":true,"total_value":46314000000.0,"history_quarters":["2026Q1","2025Q4","2025Q3","2025Q2","2025Q1","2024Q4","2024Q3"],"featured":false,"prev_quarter":"2025Q4","prev_report_date":"2025-12-31","prev_accession":"0001172661-26-000728","prev_total_value":57616042.0,"changes":{"new":0,"added":0,"trimmed":0,"exited":1,"unchanged":1},"holdings":[{"issuer":"AURA BIOSCIENCES INC","title":"COM","cusip":"05153U107","ticker":"AURA","value":46314000000.0,"shares":6922870.0,"put_call":null,"weight":1.0,"prev_shares":6922870.0,"prev_value":37729642.0,"change":"unchanged","display_name":"Aura Biosciences","sector":"Health Care"},{"issuer":"MAZE THERAPEUTICS INC","title":"COM","cusip":"578784100","ticker":"MAZE","value":0,"shares":0,"put_call":null,"weight":0.0,"prev_shares":480000.0,"prev_value":19886400.0,"change":"exited","display_name":"Maze Therapeutics","sector":"Health Care"}]}

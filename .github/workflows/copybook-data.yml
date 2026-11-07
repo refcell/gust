@@ -1,0 +1,65 @@
+name: Copybook data
+
+# Pulls new SEC 13F-HR filings into public/copybook/data. Code lives in
+# factordynamics/site (copybook/ingest). Data only; pages are not touched.
+on:
+  schedule:
+    - cron: "23 */3 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: copybook-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: factordynamics/site
+          path: _ingest
+          sparse-checkout: copybook
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ingest 13F filings
+        env:
+          PYTHONPATH: _ingest/copybook
+          COPYBOOK_WEB_DIR: public/copybook
+          COPYBOOK_CUSIP_MAP: public/copybook/data/cusip_map.json
+          COPYBOOK_HISTORY_QUARTERS: "8"
+          COPYBOOK_BULK_BUDGET_S: "6600"
+          COPYBOOK_BULK_REVERSE: "1"
+          COPYBOOK_FIGI_BUDGET_S: "900"
+          COPYBOOK_SEC_BUDGET_S: "900"
+        run: |
+          # Each step stands alone so one failure still publishes the rest.
+          python _ingest/copybook/ingest/build.py || echo "::warning::curated build failed"
+          python _ingest/copybook/ingest/bulk.py || echo "::warning::bulk ingest failed"
+          python _ingest/copybook/ingest/figi.py public/copybook/data || echo "::warning::ticker lookup failed"
+          python _ingest/copybook/ingest/securities.py public/copybook/data || echo "::warning::securities failed"
+          python _ingest/copybook/ingest/enrich.py || echo "::warning::enrich failed"
+      - name: Commit and deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/copybook/data
+          if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
+          git commit -q -m "Refresh Copybook 13F data"
+          for i in 1 2 3 4 5; do
+            if git pull -q --rebase -X theirs && git push -q; then
+              gh workflow run ci.yml --ref main
+              exit 0
+            fi
+            sleep 15
+          done
+          exit 1

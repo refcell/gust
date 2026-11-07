@@ -1,8 +1,1 @@
-{
-  "cik": "00000000AM",
-  "name": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
-  "manager": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
-  "slug": "oconnor-a-distinct-business-unit-of-ubs-asset-management",
-  "ok": false,
-  "error": "HTTP Error 404: Not Found"
-}
+{"cik":"0001132716","name":"OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT","manager":"OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT","slug":"oconnor-a-distinct-business-unit-of-ubs-asset-management","ok":true,"form":"13F-HR/A","accession":"0001132716-26-000017","filing_date":"2026-08-14","report_date":"2025-12-31","quarter":"2025Q4","sec_url":"https://www.sec.gov/Archives/edgar/data/1132716/000113271626000017/0001132716-26-000017-index.html","line_count":1,"position_count":1,"values_in_thousands":false,"total_value":380233880.0,"history_quarters":["2025Q4","2025Q3","2025Q2","2025Q1","2024Q4","2024Q3","2024Q2","2024Q1"],"featured":false,"prev_quarter":"2025Q3","prev_report_date":"2025-09-30","prev_accession":"0001132716-26-000016","prev_total_value":286454806.0,"changes":{"new":0,"added":1,"trimmed":0,"exited":1,"unchanged":0},"holdings":[{"issuer":"CHART INDS","title":"COM","cusip":"16115Q308","ticker":null,"value":380233880.0,"shares":1843737.0,"put_call":null,"weight":1.0,"prev_shares":1280039.0,"prev_value":256199806.0,"change":"added","display_name":"Chart Industries","sector":"Unclassified"},{"issuer":"ELECTRONIC","title":"COM","cusip":"285512109","ticker":null,"value":0,"shares":0,"put_call":null,"weight":0.0,"prev_shares":150000.0,"prev_value":30255000.0,"change":"exited","display_name":"Electronic Arts","sector":"Unclassified"}]}

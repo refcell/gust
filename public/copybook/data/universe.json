@@ -5,7 +5,7 @@
     "2026Q3"
   ],
   "curated_count": 199,
-  "filer_count": 9023,
+  "filer_count": 9024,
   "featured_count": 41,
   "curated": [
     {
@@ -241,12 +241,12 @@
       "filing_date": "2026-08-13"
     },
     {
-      "cik": "000000000y",
+      "cik": "0001315828",
       "name": "Board of Trustees of The Leland Stanford Junior Universit",
       "manager": "Board of Trustees of The Leland Stanford Junior Universit",
       "slug": "board-of-trustees-of-the-leland-stanford-junior-universit",
       "featured": false,
-      "filing_date": "1315828"
+      "filing_date": "2026-08-12"
     },
     {
       "cik": "0001386060",
@@ -465,12 +465,12 @@
       "filing_date": "2026-08-14"
     },
     {
-      "cik": "00000000rt",
+      "cik": "0001694217",
       "name": "DZ BANK AG Deutsche Zentral Genossenschafts Bank, Frankfu",
       "manager": "DZ BANK AG Deutsche Zentral Genossenschafts Bank, Frankfu",
       "slug": "dz-bank-ag-deutsche-zentral-genossenschafts-bank-frankfu",
       "featured": false,
-      "filing_date": "1694217"
+      "filing_date": "2026-08-14"
     },
     {
       "cik": "0001581811",
@@ -1065,12 +1065,12 @@
       "filing_date": "2026-08-14"
     },
     {
-      "cik": "00000000AM",
+      "cik": "0001132716",
       "name": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
       "manager": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
       "slug": "oconnor-a-distinct-business-unit-of-ubs-asset-management",
       "featured": false,
-      "filing_date": "1132716"
+      "filing_date": "2026-08-14"
     },
     {
       "cik": "0000947996",
@@ -1497,12 +1497,12 @@
       "filing_date": "2026-08-14"
     },
     {
-      "cik": "0000000AME",
+      "cik": "0000861177",
       "name": "UBS AM, a distinct business unit of UBS ASSET MANAGEMENT",
       "manager": "UBS AM, a distinct business unit of UBS ASSET MANAGEMENT",
       "slug": "ubs-am-a-distinct-business-unit-of-ubs-asset-management",
       "featured": false,
-      "filing_date": "861177"
+      "filing_date": "2026-08-13"
     },
     {
       "cik": "0001019231",
