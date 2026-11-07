@@ -209,7 +209,6 @@
   }
 
   function initCopycat() {
-    const root = $("#copycat-app");
     fetch(`${BASE}data/copycat.json`)
       .then((r) => r.json())
       .then((book) => {
