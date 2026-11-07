@@ -323,8 +323,7 @@
   }
 
   function initHoldings() {
-    const root = $("#holdings-app");
-    const slug = root.dataset.slug;
+    const slug = $("#holdings-app").dataset.slug;
     fetch(`${BASE}data/${slug}.json`)
       .then((r) => r.json())
       .then((m) => {
