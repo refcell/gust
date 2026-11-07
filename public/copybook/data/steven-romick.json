@@ -219,7 +219,7 @@
       "issuer": "JEFFERIES FINANCIAL GROUP IN",
       "title": "COM",
       "cusip": "47233W109",
-      "ticker": null,
+      "ticker": "JEF",
       "value": 135159165.0,
       "shares": 2704265.0,
       "put_call": null,

@@ -19,6 +19,7 @@
   const pct = (w) => `${((Number(w) || 0) * 100).toFixed(2)}%`;
   const ticker = (h) => h.ticker || "—";
   const issuer = (h) => h.issuer || "";
+  const managersLabel = (n) => `${n} manager${Number(n) === 1 ? "" : "s"}`;
   const shareClass = (h) => {
     const t = (h.title || "").toUpperCase();
     if (t.includes("CL A") || t.includes("CLASS A")) return "Class A";
@@ -60,6 +61,13 @@
     .then((r) => r.json())
     .then((data) => {
       catalog = (data.managers || []).filter((m) => m.ok);
+      window.__copycatNames = data.copycat_top || [];
+      fetch(`${BASE}data/copycat.json`)
+        .then((r) => r.json())
+        .then((book) => {
+          window.__copycatNames = book.holdings || data.copycat_top || [];
+        })
+        .catch(() => {});
       initHeaderSearch(catalog);
       if ($("#manager-grid")) renderManagers(catalog);
       if ($("#home-copycat")) renderHomeCopycat(data.copycat_top || []);
@@ -79,22 +87,44 @@
         box.innerHTML = "";
         return;
       }
-      const hits = managers
-        .filter((m) => {
-          const hay = `${m.manager} ${m.name} ${m.slug} ${(m.top || []).map((h) => `${h.ticker || ""} ${h.issuer || ""}`).join(" ")}`.toLowerCase();
-          return hay.includes(query);
-        })
-        .slice(0, 8);
-      if (!hits.length) {
+      const items = [];
+      const names = window.__copycatNames || [];
+      const nameHits = names.filter((h) => {
+        const hay = `${ticker(h)} ${issuer(h)} ${h.cusip || ""}`.toLowerCase();
+        return hay.includes(query);
+      }).slice(0, 3);
+      for (const h of nameHits) {
+        items.push({
+          href: `${BASE}copycat.html?q=${encodeURIComponent(ticker(h) === "—" ? issuer(h) : ticker(h))}`,
+          title: `${ticker(h)} · ${issuer(h)}`,
+          sub: `${money(h.total_value)} · ${managersLabel(h.num_investors)}`,
+        });
+      }
+      const holders = managers.filter((m) => {
+        const hay = `${m.manager} ${m.name} ${m.slug}`.toLowerCase();
+        if (hay.includes(query)) return true;
+        return (m.top || []).some((h) => `${h.ticker || ""} ${h.issuer || ""}`.toLowerCase().includes(query));
+      });
+      for (const m of holders.slice(0, 6)) {
+        const held = (m.top || []).find((h) => `${h.ticker || ""} ${h.issuer || ""}`.toLowerCase().includes(query));
+        items.push({
+          href: `${BASE}managers/${m.slug}.html`,
+          title: m.manager,
+          sub: held && (held.ticker || held.issuer)
+            ? `Holds ${held.ticker || held.issuer}`
+            : `${m.name} · ${m.quarter}`,
+        });
+      }
+      if (!items.length) {
         box.classList.add("open");
-        box.innerHTML = `<div class="empty" style="padding:12px">No managers for “${q}”</div>`;
+        box.innerHTML = `<div class="empty" style="padding:12px">No matches for “${q}”</div>`;
         return;
       }
       box.classList.add("open");
-      box.innerHTML = hits
+      box.innerHTML = items
         .map(
-          (m, i) =>
-            `<a href="${BASE}managers/${m.slug}.html" class="${i === 0 ? "active" : ""}"><div>${m.manager}</div><div class="sub">${m.name} · ${m.quarter}</div></a>`
+          (it, i) =>
+            `<a href="${it.href}" class="${i === 0 ? "active" : ""}"><div>${it.title}</div><div class="sub">${it.sub}</div></a>`
         )
         .join("");
     };
@@ -146,7 +176,7 @@
             <td class="num">${money(h.total_value)}</td>
             <td class="num">${pct(h.weight)}</td>
             <td class="num">${h.num_investors}</td>
-            <td>${chips(h.held_by_names, `${h.num_investors} managers`)}</td>
+            <td>${chips(h.held_by_names)}</td>
           </tr>`;
         })
         .join("")}</tbody></table></div>`;
@@ -172,6 +202,8 @@
       if (featured) {
         const pins = FEATURED.map((s) => managers.find((m) => m.slug === s)).filter(Boolean);
         featured.innerHTML = pins.map(managerCard).join("");
+        const featuredSlugs = new Set(FEATURED);
+        list = list.filter((m) => !featuredSlugs.has(m.slug));
       }
       grid.innerHTML = list.length
         ? list.map(managerCard).join("")
@@ -182,12 +214,12 @@
     run();
   }
 
-  function chips(names, extra) {
+  function chips(names) {
     const shown = (names || []).slice(0, 3);
     const more = Math.max(0, (names || []).length - shown.length);
     return `<div class="chips">${shown.map((n) => `<span class="chip">${n}</span>`).join("")}${
       more ? `<span class="chip">+${more}</span>` : ""
-    }${extra ? `<span class="chip">${extra}</span>` : ""}</div>`;
+    }</div>`;
   }
 
   function holdingCard(h, extra = "") {
@@ -196,7 +228,7 @@
     return `<article class="holding-card">
       <div class="row"><span class="ticker">${ticker(h)}</span><strong>${money(h.value ?? h.total_value)}</strong></div>
       <div>${issuer(h)}${cls ? ` · ${cls}` : ""}</div>
-      <div class="faint">${shares(h.shares ?? h.total_shares)} sh · ${pct(h.weight)}${h.num_investors ? ` · ${h.num_investors} managers` : ""}</div>
+      <div class="faint">${shares(h.shares ?? h.total_shares)} sh · ${pct(h.weight)}${h.num_investors ? ` · ${managersLabel(h.num_investors)}` : ""}</div>
       ${names.length ? chips(names) : ""}
       ${extra}
     </article>`;
@@ -250,7 +282,7 @@
                 <td class="num">${money(h.total_value)}</td>
                 <td class="num">${pct(h.weight)}</td>
                 <td class="num">${h.num_investors}</td>
-                <td>${chips(h.held_by_names, `${h.num_investors} managers`)}</td>
+                <td>${chips(h.held_by_names)}</td>
               </tr>`;
             })
             .join("")}</tbody></table></div>`;
@@ -271,6 +303,12 @@
           const more = $("#copycat-more");
           if (more) more.style.display = list.length > limit ? "inline-flex" : "none";
         };
+        const params = new URLSearchParams(location.search);
+        if (params.get("q")) {
+          q = params.get("q");
+          const input = $("#copycat-search");
+          if (input) input.value = q;
+        }
         $("#copycat-search")?.addEventListener("input", (e) => {
           q = e.target.value;
           limit = 50;

@@ -1199,7 +1199,7 @@
       "issuer": "LOUISIANA PAC CORP",
       "title": "COM",
       "cusip": "546347105",
-      "ticker": null,
+      "ticker": "LPX",
       "value": 22953224.0,
       "shares": 291803.0,
       "put_call": null,

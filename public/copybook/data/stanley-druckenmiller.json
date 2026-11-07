@@ -299,7 +299,7 @@
       "issuer": "D R Horton Inc",
       "title": "COM",
       "cusip": "23331A109",
-      "ticker": null,
+      "ticker": "DHI",
       "value": 48701000.0,
       "shares": 299000.0,
       "put_call": null,

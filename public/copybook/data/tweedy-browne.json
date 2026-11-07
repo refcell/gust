@@ -659,7 +659,7 @@
       "issuer": "LENNAR CORP - B SHS",
       "title": "COM",
       "cusip": "526057302",
-      "ticker": null,
+      "ticker": "LEN.B",
       "value": 2058703.0,
       "shares": 25737.0,
       "put_call": null,
