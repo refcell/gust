@@ -60,7 +60,9 @@
         const prev = JSON.parse(localStorage.getItem(key) || "[]");
         prev.push({ email, at: new Date().toISOString() });
         localStorage.setItem(key, JSON.stringify(prev));
-      } catch (_) {}
+      } catch (err) {
+        void err;
+      }
     });
   });
 
