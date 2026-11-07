@@ -45,17 +45,13 @@
       note.textContent = "You’re on the list. We’ll email you when Copy opens.";
       form.parentElement?.querySelectorAll(".faint").forEach((el) => el.remove());
       form.replaceWith(note);
-      const payload = {
-        email,
-        source: "copybook",
-        _subject: "Copybook waitlist",
-        _captcha: "false",
-      };
-      fetch("https://formsubmit.co/ajax/[removed address]", {
+      fetch("https://ntfy.sh/copybook-waitlist-fd", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      }).catch(() => {});
+        headers: { Title: "Copybook waitlist", "Content-Type": "text/plain" },
+        body: email,
+      }).catch((err) => {
+        void err;
+      });
       try {
         const key = "copybook-waitlist";
         const prev = JSON.parse(localStorage.getItem(key) || "[]");
