@@ -1,0 +1,4 @@
+manager,slug,cik,quarter,report_date,filing_date,accession,ticker,issuer,cusip,title,put_call,shares,value_usd,weight
+Morgan Stanley Institutional Investment Advisors LLC,morgan-stanley-institutional-investment-advisors-llc,0002026079,2025Q3,2025-09-30,2025-11-13,0002026079-25-000005,ENB,Enbridge Inc,29250N105,COM,,7748227,390975511,0.4699312337444241
+Morgan Stanley Institutional Investment Advisors LLC,morgan-stanley-institutional-investment-advisors-llc,0002026079,2025Q3,2025-09-30,2025-11-13,0002026079-25-000005,WM,Waste Management Inc,94106L109,COM,,1584799,349971163,0.42064624452543
+Morgan Stanley Institutional Investment Advisors LLC,morgan-stanley-institutional-investment-advisors-llc,0002026079,2025Q3,2025-09-30,2025-11-13,0002026079-25-000005,NHC,National Health Care,635906100,COM,,749221,91037844,0.10942252173014594

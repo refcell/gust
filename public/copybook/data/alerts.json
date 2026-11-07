@@ -1,6 +1,59 @@
 {
- "generated_at": "2026-11-07T21:49:30Z",
+ "generated_at": "2026-11-07T23:00:11Z",
  "new_filings": [],
- "recent": [],
+ "recent": [
+  {
+   "slug": "blackstone-inc",
+   "manager": "Blackstone Inc.",
+   "name": "Blackstone Inc.",
+   "quarter": "2026Q2",
+   "filing_date": "2026-08-14",
+   "report_date": "2026-06-30",
+   "accession": "0001193125-26-352211",
+   "previous_accession": "0001193125-26-419121",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1393818/000119312526352211/0001193125-26-352211-index.html",
+   "is_first_seen": false,
+   "detected_at": "2026-11-07T22:43:51Z"
+  },
+  {
+   "slug": "matthew-mclennan",
+   "manager": "Matthew McLennan",
+   "name": "First Eagle Investment Management LLC",
+   "quarter": "2026Q2",
+   "filing_date": "2026-08-05",
+   "report_date": "2026-06-30",
+   "accession": "0001325447-26-000020",
+   "previous_accession": "0001325447-26-000033",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1325447/000132544726000020/0001325447-26-000020-index.html",
+   "is_first_seen": false,
+   "detected_at": "2026-11-07T22:43:51Z"
+  },
+  {
+   "slug": "mizuho-securities-usa-llc",
+   "manager": "MIZUHO SECURITIES USA LLC",
+   "name": "MIZUHO SECURITIES USA LLC",
+   "quarter": "2026Q2",
+   "filing_date": "2026-07-24",
+   "report_date": "2026-06-30",
+   "accession": "0001062993-26-003820",
+   "previous_accession": "0001062993-26-003864",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/812291/000106299326003820/0001062993-26-003820-index.html",
+   "is_first_seen": false,
+   "detected_at": "2026-11-07T22:43:51Z"
+  },
+  {
+   "slug": "oconnor-a-distinct-business-unit-of-ubs-asset-management",
+   "manager": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
+   "name": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
+   "quarter": "2025Q4",
+   "filing_date": "2026-02-13",
+   "report_date": "2025-12-31",
+   "accession": "0001132716-26-000004",
+   "previous_accession": "0001132716-26-000017",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1132716/000113271626000004/0001132716-26-000004-index.html",
+   "is_first_seen": false,
+   "detected_at": "2026-11-07T22:43:51Z"
+  }
+ ],
  "email_status": null
 }

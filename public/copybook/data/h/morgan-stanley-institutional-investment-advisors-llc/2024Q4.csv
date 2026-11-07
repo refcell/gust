@@ -1,0 +1,4 @@
+manager,slug,cik,quarter,report_date,filing_date,accession,ticker,issuer,cusip,title,put_call,shares,value_usd,weight
+Morgan Stanley Institutional Investment Advisors LLC,morgan-stanley-institutional-investment-advisors-llc,0002026079,2024Q4,2024-12-31,2025-02-13,0002026079-25-000001,ENB,Enbridge Inc,29250N105,COM,,8279196,351286273,0.8042088938430113
+Morgan Stanley Institutional Investment Advisors LLC,morgan-stanley-institutional-investment-advisors-llc,0002026079,2024Q4,2024-12-31,2025-02-13,0002026079-25-000001,NHC,National Health Care,635906100,COM,,772110,83048152,0.19012431623146933
+Morgan Stanley Institutional Investment Advisors LLC,morgan-stanley-institutional-investment-advisors-llc,0002026079,2024Q4,2024-12-31,2025-02-13,0002026079-25-000001,,Southwestern Energy Company,845467109,COM,,24865,2475309,0.005666789925519379
