@@ -103,19 +103,24 @@ jobs:
           COPYBOOK_SEC_BUDGET_S: "900"
           COPYBOOK_EVENTS_BUDGET_S: "900"
         run: |
-          # Each step stands alone so one failure still publishes the rest.
+          # Required steps fail the run, so nothing is uploaded or published and the live data stays.
+          # Optional steps (external lookups that resume next run) only warn and keep their previous output.
           I=_ingest/copybook/ingest
-          python $I/build.py || echo "::warning::curated build failed"
+          python $I/build.py
           if [ "$SCOPE" = full ]; then
-            if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::SEC 13F data sets failed"; fi
-            python $I/bulk.py || echo "::warning::bulk ingest failed"
-            python $I/figi.py public/copybook/data || echo "::warning::ticker lookup failed"
-            python $I/securities.py public/copybook/data || echo "::warning::securities failed"
+            # optional: SEC 13F data sets (seeds the fb/ full books once per period; stocks.py falls back to f/)
+            if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::optional: SEC 13F data sets failed"; fi
+            # optional: all-filer shards (time-budgeted; picks up where it stopped next run)
+            python $I/bulk.py || echo "::warning::optional: bulk ingest failed"
+            # optional: OpenFIGI lookups for new CUSIPs (the cached map covers the rest)
+            python $I/figi.py public/copybook/data || echo "::warning::optional: ticker lookup failed"
+            python $I/securities.py public/copybook/data
           fi
-          python $I/enrich.py || echo "::warning::enrich failed"
-          python $I/events.py || echo "::warning::Form 4 / 13D/G events failed"
+          python $I/enrich.py
+          # optional: Form 4 / 13D/G events (the previous events files stay)
+          python $I/events.py || echo "::warning::optional: Form 4 / 13D/G events failed"
           if [ "$SCOPE" = full ]; then
-            python $I/stocks.py || echo "::warning::stock holder index failed"
+            python $I/stocks.py
           fi
       # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
       - name: Refuse to publish a build that lost tickers
