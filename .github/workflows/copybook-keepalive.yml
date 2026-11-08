@@ -1,0 +1,51 @@
+name: Copybook keepalive
+
+# GitHub's scheduler skips copybook-data.yml runs (none fired for 7 hours on Nov 8), and the
+# Copy API Worker can dispatch it only once it has a GitHub token. Until then this chain keeps
+# the data fresh with GITHUB_TOKEN alone: workflow_dispatch is the documented exception that a
+# GITHUB_TOKEN may trigger. One job loops for about 5 hours, starting a refresh every 20 minutes
+# (full when the last full run is 3 hours old, curated otherwise, nothing while a data run is
+# queued or running), then dispatches its successor. The concurrency group keeps one chain; the
+# cron restarts it if it dies. It ends itself once Worker-dispatched runs appear.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 */6 * * *"
+
+concurrency:
+  group: copybook-keepalive
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+
+jobs:
+  loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Dispatch Copybook refreshes every 20 minutes
+        run: |
+          runs() { gh run list --workflow copybook-data.yml -L 60 --json status,displayTitle,createdAt "$@"; }
+          age() { echo $(( $(date -u +%s) - $(date -u -d "$1" +%s) )); }
+          start=$SECONDS
+          while [ $((SECONDS - start)) -lt 18000 ]; do
+            since=$(date -u -d '-4 hours' +%FT%TZ)
+            worker=$(runs -q "[.[] | select(.createdAt > \"$since\") | select(.displayTitle | contains(\"copybook-api\") or contains(\"filing by \"))] | length")
+            if [ "${worker:-0}" != 0 ]; then echo "The Copy API Worker is dispatching refreshes; ending the chain."; exit 0; fi
+            busy=$(runs -q '[.[] | select(.status != "completed")] | length')
+            if [ "${busy:-0}" = 0 ]; then
+              last_full=$(runs -q '[.[] | select(.displayTitle | contains("(full)"))][0].createdAt // "1970-01-01T00:00:00Z"')
+              scope=curated
+              if [ "$(age "$last_full")" -ge 10800 ]; then scope=full; fi
+              echo "$(date -u +%T) dispatch $scope"
+              gh workflow run copybook-data.yml --ref main -f scope=$scope -f reason=keepalive || echo "::warning::dispatch failed"
+            else
+              echo "$(date -u +%T) a data run is queued or running; skip"
+            fi
+            sleep 1200
+          done
+          gh workflow run copybook-keepalive.yml --ref main
