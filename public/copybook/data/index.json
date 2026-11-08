@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-08T17:42:50Z",
+ "generated_at": "2026-11-08T17:56:04Z",
  "source": "SEC EDGAR 13F-HR, as filed",
  "disclaimer": "Holdings and values are taken from each filer's 13F information table. Values are quarter-end, reported about 45 days after quarter-end, and are not live prices. 13F omits shorts, many options, and filers under $100M AUM. Not investment advice.",
  "filed_count": 199,
@@ -20164,7 +20164,8 @@
      "shares": 1040571,
      "put_call": null,
      "weight": 0.123564,
-     "sector": "Unclassified"
+     "sector": "Unclassified",
+     "display_name": "Cyberark S"
     },
     {
      "issuer": "CHART INDS",
@@ -20187,7 +20188,8 @@
      "shares": 3311960,
      "put_call": null,
      "weight": 0.076645,
-     "sector": "Unclassified"
+     "sector": "Unclassified",
+     "display_name": "Comerica I"
     },
     {
      "issuer": "DAYFORCE I",
@@ -20198,7 +20200,7 @@
      "shares": 4096708,
      "put_call": null,
      "weight": 0.075425,
-     "display_name": "Dayforce",
+     "display_name": "Dayforce I",
      "sector": "Unclassified"
     },
     {
@@ -20210,7 +20212,8 @@
      "shares": 3716597,
      "put_call": null,
      "weight": 0.071366,
-     "sector": "Unclassified"
+     "sector": "Unclassified",
+     "display_name": "Avidity Bi"
     },
     {
      "issuer": "FRONTIER C",
@@ -20221,7 +20224,8 @@
      "shares": 6901367,
      "put_call": null,
      "weight": 0.069943,
-     "sector": "Unclassified"
+     "sector": "Unclassified",
+     "display_name": "Frontier C"
     },
     {
      "issuer": "AIR LEASE",
@@ -21189,7 +21193,6 @@
    "values_in_thousands": false,
    "total_value": 19465692772.0,
    "unit_fix": 1.0,
-   "status": "reported_by_other",
    "notice_accession": "0001172661-26-003777",
    "notice_filing_date": "2026-08-14",
    "notice_note": "Holdings of this reporting manager are now included in the report of its public parent company.",
@@ -21198,6 +21201,7 @@
     "name": "PERSHING SQUARE INC.",
     "slug": "pershing-square-inc"
    },
+   "status": "reported_by_other",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
