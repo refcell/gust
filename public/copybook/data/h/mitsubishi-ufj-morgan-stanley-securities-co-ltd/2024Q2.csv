@@ -1,6 +1,0 @@
-manager,slug,cik,quarter,report_date,filing_date,accession,ticker,issuer,cusip,title,put_call,shares,value_usd,weight
-"Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",mitsubishi-ufj-morgan-stanley-securities-co-ltd,0001545545,2024Q2,2024-06-30,2024-08-02,0001545545-24-000011,MU,MICRON TECHNOLOGY INC,595112103,COM,,23051,3031898,0.3843515484741668
-"Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",mitsubishi-ufj-morgan-stanley-securities-co-ltd,0001545545,2024Q2,2024-06-30,2024-08-02,0001545545-24-000011,JNJ,JOHNSON & JOHNSON,478160104,COM,,18300,2674728,0.3390733621471472
-"Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",mitsubishi-ufj-morgan-stanley-securities-co-ltd,0001545545,2024Q2,2024-06-30,2024-08-02,0001545545-24-000011,NVDA,NVIDIA CORPORATION,67066G104,COM,,7957,983008,0.12461522352087497
-"Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",mitsubishi-ufj-morgan-stanley-securities-co-ltd,0001545545,2024Q2,2024-06-30,2024-08-02,0001545545-24-000011,,SUPER MICRO COMPUTER INC,86800U104,COM,,742,607958,0.07707040233782848
-"Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",mitsubishi-ufj-morgan-stanley-securities-co-ltd,0001545545,2024Q2,2024-06-30,2024-08-02,0001545545-24-000011,VRT,VERTIV HOLDINGS CO,92537N108,COM CL A,,6824,590754,0.07488946351998252
