@@ -58,10 +58,12 @@ jobs:
           python _ingest/copybook/ingest/securities.py public/copybook/data || echo "::warning::securities failed"
           python _ingest/copybook/ingest/enrich.py || echo "::warning::enrich failed"
       - name: Upload paid history to R2
+        id: upload
+        continue-on-error: true
         env:
           PYTHONPATH: _ingest/copybook
           COPYBOOK_WEB_DIR: public/copybook
-        # Fails the job on any non-200, so history.json never points at a missing file.
+        # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - uses: actions/cache/save@v4
         if: always()
@@ -73,11 +75,14 @@ jobs:
       - name: Commit and deploy
         env:
           GH_TOKEN: ${{ github.token }}
+          UPLOADED: ${{ steps.upload.outcome }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # h/ is in R2 now (uploaded above); keep it out of Pages.
-          git rm -r -q --cached --ignore-unmatch public/copybook/data/h
+          # h/ leaves Pages only once every file is in R2; otherwise the Pages copy stays as the fallback.
+          if [ "$UPLOADED" = success ]; then
+            git rm -r -q --cached --ignore-unmatch public/copybook/data/h
+          fi
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
           git commit -q -m "Refresh Copybook 13F data"
@@ -88,4 +93,9 @@ jobs:
             fi
             sleep 15
           done
+          exit 1
+      - name: Fail if the R2 upload failed
+        if: steps.upload.outcome == 'failure'
+        run: |
+          echo "::error::Paid history upload to R2 failed; public data was published and h/ stays on Pages."
           exit 1
