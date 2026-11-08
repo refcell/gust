@@ -6,14 +6,38 @@ name: Copybook data
 # Full per-quarter books (data/h/**) are paid data: they go to the Copy API's
 # private R2 bucket and are never committed here. The Actions cache keeps them
 # between runs so unchanged quarters are neither refetched nor re-uploaded.
+# Scope: `full` (every filer, data sets, tickers) or `curated` (the curated funds and their
+# Form 4 / 13D/G events only, about 10-15 minutes). The Copy API Worker dispatches this on a
+# new curated filing (curated) and every 3 hours (full). Until its GitHub token exists, the
+# :08/:28/:48 cron runs a curated refresh; drop those three entries once the Worker triggers work.
 on:
   schedule:
-    - cron: "23 */3 * * *"
+    - cron: "23 */3 * * *"   # full backstop
+    - cron: "8,28,48 * * * *"  # interim curated refresh
   workflow_dispatch:
+    inputs:
+      scope:
+        description: "full or curated"
+        type: choice
+        options: [full, curated]
+        default: full
+      reason:
+        description: "Why this run was started (shown in the run name)"
+        required: false
+      accession:
+        description: "Filing that triggered it (logged only)"
+        required: false
 
+run-name: "Copybook data (${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}) ${{ inputs.reason }}"
+
+# One full and one curated run can be in flight; a curated run steps aside while a full
+# run is going (the full run refreshes the curated funds too), so neither cancels the other.
 concurrency:
-  group: copybook-data
+  group: copybook-data-${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}
   cancel-in-progress: false
+
+env:
+  SCOPE: ${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}
 
 permissions:
   contents: write
@@ -21,7 +45,26 @@ permissions:
   id-token: write
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.gate.outputs.skip }}
+    steps:
+      - name: Skip a curated run while a full run is going
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "scope=$SCOPE accession=${{ inputs.accession }}"
+          if [ "$SCOPE" = curated ]; then
+            busy=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow copybook-data.yml --status in_progress \
+              --json databaseId,displayTitle -q "[.[] | select(.databaseId != ${{ github.run_id }}) | select(.displayTitle | contains(\"(full)\"))] | length")
+            if [ "${busy:-0}" != 0 ]; then echo "A full run is in progress; it refreshes the curated funds too."; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
+          fi
+
   refresh:
+    needs: gate
+    if: needs.gate.outputs.skip != '1'
     runs-on: ubuntu-latest
     timeout-minutes: 170
     steps:
@@ -41,6 +84,13 @@ jobs:
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}
           restore-keys: copybook-h-
+      # Full 13F books for every filer (paid; never committed): only full runs need them.
+      - uses: actions/cache/restore@v4
+        if: env.SCOPE == 'full'
+        with:
+          path: public/copybook/data/fb
+          key: copybook-fb-${{ github.run_id }}
+          restore-keys: copybook-fb-
       - name: Ingest 13F filings
         env:
           PYTHONPATH: _ingest/copybook
@@ -54,13 +104,19 @@ jobs:
           COPYBOOK_EVENTS_BUDGET_S: "900"
         run: |
           # Each step stands alone so one failure still publishes the rest.
-          python _ingest/copybook/ingest/build.py || echo "::warning::curated build failed"
-          python _ingest/copybook/ingest/bulk.py || echo "::warning::bulk ingest failed"
-          python _ingest/copybook/ingest/figi.py public/copybook/data || echo "::warning::ticker lookup failed"
-          python _ingest/copybook/ingest/securities.py public/copybook/data || echo "::warning::securities failed"
-          python _ingest/copybook/ingest/enrich.py || echo "::warning::enrich failed"
-          python _ingest/copybook/ingest/events.py || echo "::warning::Form 4 / 13D/G events failed"
-          python _ingest/copybook/ingest/stocks.py || echo "::warning::stock holder index failed"
+          I=_ingest/copybook/ingest
+          python $I/build.py || echo "::warning::curated build failed"
+          if [ "$SCOPE" = full ]; then
+            if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::SEC 13F data sets failed"; fi
+            python $I/bulk.py || echo "::warning::bulk ingest failed"
+            python $I/figi.py public/copybook/data || echo "::warning::ticker lookup failed"
+            python $I/securities.py public/copybook/data || echo "::warning::securities failed"
+          fi
+          python $I/enrich.py || echo "::warning::enrich failed"
+          python $I/events.py || echo "::warning::Form 4 / 13D/G events failed"
+          if [ "$SCOPE" = full ]; then
+            python $I/stocks.py || echo "::warning::stock holder index failed"
+          fi
       - name: Upload paid history to R2
         id: upload
         continue-on-error: true
@@ -76,6 +132,11 @@ jobs:
             public/copybook/data/h
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}
+      - uses: actions/cache/save@v4
+        if: always() && env.SCOPE == 'full'
+        with:
+          path: public/copybook/data/fb
+          key: copybook-fb-${{ github.run_id }}
       - name: Commit and deploy
         env:
           GH_TOKEN: ${{ github.token }}
@@ -89,7 +150,7 @@ jobs:
           fi
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
-          git commit -q -m "Refresh Copybook 13F data"
+          git commit -q -m "Refresh Copybook 13F data ($SCOPE)"
           for i in 1 2 3 4 5; do
             if git pull -q --rebase -X theirs && git push -q; then
               gh workflow run ci.yml --ref main
