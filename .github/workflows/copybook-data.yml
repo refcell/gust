@@ -1,6 +1,7 @@
 name: Copybook data
 
-# Pulls new SEC 13F-HR filings into public/copybook/data. Code lives in
+# Pulls new SEC 13F-HR filings, plus Form 4 and Schedule 13D/G filings by the
+# curated managers, into public/copybook/data. Code lives in
 # factordynamics/site (copybook/ingest). Data only; pages are not touched.
 # Full per-quarter books (data/h/**) are paid data: they go to the Copy API's
 # private R2 bucket and are never committed here. The Actions cache keeps them
@@ -50,6 +51,7 @@ jobs:
           COPYBOOK_BULK_REVERSE: "1"
           COPYBOOK_FIGI_BUDGET_S: "900"
           COPYBOOK_SEC_BUDGET_S: "900"
+          COPYBOOK_EVENTS_BUDGET_S: "900"
         run: |
           # Each step stands alone so one failure still publishes the rest.
           python _ingest/copybook/ingest/build.py || echo "::warning::curated build failed"
@@ -57,6 +59,8 @@ jobs:
           python _ingest/copybook/ingest/figi.py public/copybook/data || echo "::warning::ticker lookup failed"
           python _ingest/copybook/ingest/securities.py public/copybook/data || echo "::warning::securities failed"
           python _ingest/copybook/ingest/enrich.py || echo "::warning::enrich failed"
+          python _ingest/copybook/ingest/events.py || echo "::warning::Form 4 / 13D/G events failed"
+          python _ingest/copybook/ingest/stocks.py || echo "::warning::stock holder index failed"
       - name: Upload paid history to R2
         id: upload
         continue-on-error: true

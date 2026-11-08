@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-08T13:39:20Z",
+ "generated_at": "2026-11-08T17:42:50Z",
  "source": "SEC EDGAR 13F-HR, as filed",
  "disclaimer": "Holdings and values are taken from each filer's 13F information table. Values are quarter-end, reported about 45 days after quarter-end, and are not live prices. 13F omits shorts, many options, and filers under $100M AUM. Not investment advice.",
  "filed_count": 199,
  "manager_count": 199,
- "copycat_total_value": 35413277898200.0,
+ "copycat_total_value": 35399393369339.0,
  "managers": [
   {
    "cik": "0001358706",
@@ -23,6 +23,7 @@
    "values_in_thousands": false,
    "total_value": 5479746142.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -33,6 +34,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -150,6 +153,7 @@
    "values_in_thousands": true,
    "total_value": 84226401000.0,
    "unit_fix": 1000.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -160,6 +164,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -277,6 +283,7 @@
    "values_in_thousands": false,
    "total_value": 7354589494.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -287,6 +294,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -404,6 +413,7 @@
    "values_in_thousands": false,
    "total_value": 71317440046.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -414,6 +424,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -531,6 +543,7 @@
    "values_in_thousands": false,
    "total_value": 229246445.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -541,6 +554,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -658,6 +673,7 @@
    "values_in_thousands": true,
    "total_value": 4292009000.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -668,6 +684,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -785,6 +803,7 @@
    "values_in_thousands": false,
    "total_value": 1530439080.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -795,6 +814,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -912,6 +933,7 @@
    "values_in_thousands": false,
    "total_value": 1268628007.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -922,6 +944,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1039,6 +1063,7 @@
    "values_in_thousands": false,
    "total_value": 272528863.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -1049,6 +1074,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1166,6 +1193,7 @@
    "values_in_thousands": false,
    "total_value": 123126284393.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -1176,6 +1204,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1293,6 +1323,7 @@
    "values_in_thousands": false,
    "total_value": 9479948365.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -1303,6 +1334,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1420,6 +1453,7 @@
    "values_in_thousands": false,
    "total_value": 496122143779.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -1430,6 +1464,713 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2021Q1",
+     "report_date": "2021-03-31",
+     "notice_accession": "0000950123-21-006980",
+     "notice_filing_date": "2021-05-17",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q4",
+     "report_date": "2020-12-31",
+     "notice_accession": "0000950123-21-002570",
+     "notice_filing_date": "2021-02-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q3",
+     "report_date": "2020-09-30",
+     "notice_accession": "0000950123-20-012111",
+     "notice_filing_date": "2020-11-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q2",
+     "report_date": "2020-06-30",
+     "notice_accession": "0000950123-20-008939",
+     "notice_filing_date": "2020-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q1",
+     "report_date": "2020-03-31",
+     "notice_accession": "0000950123-20-005280",
+     "notice_filing_date": "2020-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q4",
+     "report_date": "2019-12-31",
+     "notice_accession": "0000950123-20-002087",
+     "notice_filing_date": "2020-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q3",
+     "report_date": "2019-09-30",
+     "notice_accession": "0000950123-19-011129",
+     "notice_filing_date": "2019-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q2",
+     "report_date": "2019-06-30",
+     "notice_accession": "0000950123-19-008162",
+     "notice_filing_date": "2019-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q1",
+     "report_date": "2019-03-31",
+     "notice_accession": "0000950123-19-004606",
+     "notice_filing_date": "2019-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2018Q4",
+     "report_date": "2018-12-31",
+     "notice_accession": "0000950123-19-001828",
+     "notice_filing_date": "2019-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2018Q3",
+     "report_date": "2018-09-30",
+     "notice_accession": "0000950123-18-011412",
+     "notice_filing_date": "2018-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2018Q2",
+     "report_date": "2018-06-30",
+     "notice_accession": "0000950123-18-008253",
+     "notice_filing_date": "2018-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2018Q1",
+     "report_date": "2018-03-31",
+     "notice_accession": "0000950123-18-004882",
+     "notice_filing_date": "2018-05-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2017Q4",
+     "report_date": "2017-12-31",
+     "notice_accession": "0000950123-18-002157",
+     "notice_filing_date": "2018-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2017Q3",
+     "report_date": "2017-09-30",
+     "notice_accession": "0000903423-17-000669",
+     "notice_filing_date": "2017-11-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q2",
+     "report_date": "2017-06-30",
+     "notice_accession": "0000903423-17-000503",
+     "notice_filing_date": "2017-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q1",
+     "report_date": "2017-03-31",
+     "notice_accession": "0000903423-17-000325",
+     "notice_filing_date": "2017-05-11",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q4",
+     "report_date": "2016-12-31",
+     "notice_accession": "0000903423-17-000069",
+     "notice_filing_date": "2017-02-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q3",
+     "report_date": "2016-09-30",
+     "notice_accession": "0000903423-16-001355",
+     "notice_filing_date": "2016-11-10",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q2",
+     "report_date": "2016-06-30",
+     "notice_accession": "0000903423-16-001203",
+     "notice_filing_date": "2016-08-10",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q1",
+     "report_date": "2016-03-31",
+     "notice_accession": "0000903423-16-001025",
+     "notice_filing_date": "2016-05-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q4",
+     "report_date": "2015-12-31",
+     "notice_accession": "0000903423-16-000816",
+     "notice_filing_date": "2016-02-11",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q3",
+     "report_date": "2015-09-30",
+     "notice_accession": "0000903423-15-000650",
+     "notice_filing_date": "2015-11-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q2",
+     "report_date": "2015-06-30",
+     "notice_accession": "0000903423-15-000494",
+     "notice_filing_date": "2015-08-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q1",
+     "report_date": "2015-03-31",
+     "notice_accession": "0000903423-15-000315",
+     "notice_filing_date": "2015-05-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q4",
+     "report_date": "2014-12-31",
+     "notice_accession": "0000903423-15-000079",
+     "notice_filing_date": "2015-02-09",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q3",
+     "report_date": "2014-09-30",
+     "notice_accession": "0000903423-14-000597",
+     "notice_filing_date": "2014-11-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q2",
+     "report_date": "2014-06-30",
+     "notice_accession": "0000903423-14-000463",
+     "notice_filing_date": "2014-08-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q1",
+     "report_date": "2014-03-31",
+     "notice_accession": "0000903423-14-000301",
+     "notice_filing_date": "2014-05-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q4",
+     "report_date": "2013-12-31",
+     "notice_accession": "0000903423-14-000062",
+     "notice_filing_date": "2014-02-11",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q3",
+     "report_date": "2013-09-30",
+     "notice_accession": "0000903423-13-000621",
+     "notice_filing_date": "2013-11-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q2",
+     "report_date": "2013-06-30",
+     "notice_accession": "0001140361-13-032273",
+     "notice_filing_date": "2013-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001191672",
+      "name": "CREDIT AGRICOLE S A"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q1",
+     "report_date": "2013-03-31",
+     "notice_accession": "0000903423-13-000315",
+     "notice_filing_date": "2013-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q4",
+     "report_date": "2012-12-31",
+     "notice_accession": "0000903423-13-000080",
+     "notice_filing_date": "2013-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q3",
+     "report_date": "2012-09-30",
+     "notice_accession": "0000903423-12-000545",
+     "notice_filing_date": "2012-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q2",
+     "report_date": "2012-06-30",
+     "notice_accession": "0000903423-12-000404",
+     "notice_filing_date": "2012-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q1",
+     "report_date": "2012-03-31",
+     "notice_accession": "0000903423-12-000268",
+     "notice_filing_date": "2012-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q4",
+     "report_date": "2011-12-31",
+     "notice_accession": "0000903423-12-000082",
+     "notice_filing_date": "2012-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q3",
+     "report_date": "2011-09-30",
+     "notice_accession": "0000903423-11-000540",
+     "notice_filing_date": "2011-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q2",
+     "report_date": "2011-06-30",
+     "notice_accession": "0000903423-11-000393",
+     "notice_filing_date": "2011-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q1",
+     "report_date": "2011-03-31",
+     "notice_accession": "0000903423-11-000264",
+     "notice_filing_date": "2011-05-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q4",
+     "report_date": "2010-12-31",
+     "notice_accession": "0000903423-11-000069",
+     "notice_filing_date": "2011-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q3",
+     "report_date": "2010-09-30",
+     "notice_accession": "0000903423-10-000645",
+     "notice_filing_date": "2010-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q2",
+     "report_date": "2010-06-30",
+     "notice_accession": "0000903423-10-000468",
+     "notice_filing_date": "2010-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q1",
+     "report_date": "2010-03-31",
+     "notice_accession": "0000903423-10-000311",
+     "notice_filing_date": "2010-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q4",
+     "report_date": "2009-12-31",
+     "notice_accession": "0000903423-10-000058",
+     "notice_filing_date": "2010-02-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q3",
+     "report_date": "2009-09-30",
+     "notice_accession": "0001140361-09-025968",
+     "notice_filing_date": "2009-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q2",
+     "report_date": "2009-06-30",
+     "notice_accession": "0000903423-09-000813",
+     "notice_filing_date": "2009-09-24",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q1",
+     "report_date": "2009-03-31",
+     "notice_accession": "0000903423-09-000516",
+     "notice_filing_date": "2009-05-29",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q4",
+     "report_date": "2008-12-31",
+     "notice_accession": "0000903423-09-000107",
+     "notice_filing_date": "2009-02-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q3",
+     "report_date": "2008-09-30",
+     "notice_accession": "0000903423-08-000929",
+     "notice_filing_date": "2008-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q2",
+     "report_date": "2008-06-30",
+     "notice_accession": "0000903423-08-000679",
+     "notice_filing_date": "2008-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q1",
+     "report_date": "2008-03-31",
+     "notice_accession": "0000903423-08-000430",
+     "notice_filing_date": "2008-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q4",
+     "report_date": "2007-12-31",
+     "notice_accession": "0000903423-08-000150",
+     "notice_filing_date": "2008-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q3",
+     "report_date": "2007-09-30",
+     "notice_accession": "0000903423-07-001097",
+     "notice_filing_date": "2007-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q2",
+     "report_date": "2007-06-30",
+     "notice_accession": "0000903423-07-000775",
+     "notice_filing_date": "2007-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q1",
+     "report_date": "2007-03-31",
+     "notice_accession": "0000903423-07-000481",
+     "notice_filing_date": "2007-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q4",
+     "report_date": "2006-12-31",
+     "notice_accession": "0000903423-07-000159",
+     "notice_filing_date": "2007-02-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q3",
+     "report_date": "2006-09-30",
+     "notice_accession": "0000903423-06-001174",
+     "notice_filing_date": "2006-10-27",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q2",
+     "report_date": "2006-06-30",
+     "notice_accession": "0000903423-06-000879",
+     "notice_filing_date": "2006-07-26",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q1",
+     "report_date": "2006-03-31",
+     "notice_accession": "0000903423-06-000509",
+     "notice_filing_date": "2006-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q4",
+     "report_date": "2005-12-31",
+     "notice_accession": "0000903423-06-000133",
+     "notice_filing_date": "2006-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q3",
+     "report_date": "2005-09-30",
+     "notice_accession": "0000903423-05-000909",
+     "notice_filing_date": "2005-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q2",
+     "report_date": "2005-06-30",
+     "notice_accession": "0000903423-05-000578",
+     "notice_filing_date": "2005-08-08",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q1",
+     "report_date": "2005-03-31",
+     "notice_accession": "0000903423-05-000473",
+     "notice_filing_date": "2005-06-24",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1547,6 +2288,7 @@
    "values_in_thousands": false,
    "total_value": 8939295874.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -1557,6 +2299,19 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2008Q4",
+     "report_date": "2008-12-31",
+     "notice_accession": "0000918830-09-000020",
+     "notice_filing_date": "2009-02-17",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1674,6 +2429,7 @@
    "values_in_thousands": false,
    "total_value": 7725383349.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -1684,6 +2440,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -1801,6 +2559,7 @@
    "values_in_thousands": false,
    "total_value": 286847511937.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -1811,6 +2570,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -1928,6 +2689,7 @@
    "values_in_thousands": true,
    "total_value": 170229000.0,
    "unit_fix": 1.0,
+   "status": "inactive",
    "history_quarters": [
     "2022Q2",
     "2022Q1",
@@ -1938,6 +2700,8 @@
     "2020Q4",
     "2020Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "No 13F since 2022Q2; this filer appears to have stopped filing and is left out of Consensus.",
    "featured": true,
    "top": [
     {
@@ -2055,12 +2819,15 @@
    "values_in_thousands": false,
    "total_value": 1811322571.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -2178,6 +2945,7 @@
    "values_in_thousands": true,
    "total_value": 144091000.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -2188,6 +2956,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -2293,6 +3063,7 @@
    "values_in_thousands": false,
    "total_value": 10029168542.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -2303,6 +3074,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -2420,6 +3193,7 @@
    "values_in_thousands": false,
    "total_value": 225366645888.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -2430,6 +3204,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -2547,6 +3323,7 @@
    "values_in_thousands": false,
    "total_value": 110225053010.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -2557,6 +3334,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -2674,6 +3453,7 @@
    "values_in_thousands": false,
    "total_value": 500172000641.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -2684,6 +3464,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -2801,6 +3583,7 @@
    "values_in_thousands": true,
    "total_value": 5415853000.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -2811,6 +3594,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -2928,6 +3713,7 @@
    "values_in_thousands": false,
    "total_value": 299253556246.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -2938,6 +3724,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -3055,12 +3843,15 @@
    "values_in_thousands": false,
    "total_value": 6729538649155.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3182,6 +3973,7 @@
    ],
    "filing_key": "0001193125-26-352211|0001193125-26-419121",
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3192,6 +3984,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3309,6 +4103,7 @@
    "values_in_thousands": false,
    "total_value": 3685336341.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3319,6 +4114,906 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2023Q2",
+     "report_date": "2023-06-30",
+     "notice_accession": "0000872786-23-000013",
+     "notice_filing_date": "2023-08-09",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SNC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2023Q1",
+     "report_date": "2023-03-31",
+     "notice_accession": "0001197610-23-000004",
+     "notice_filing_date": "2023-05-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SNC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2022Q4",
+     "report_date": "2022-12-31",
+     "notice_accession": "0000872786-23-000003",
+     "notice_filing_date": "2023-02-10",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SNC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2022Q3",
+     "report_date": "2022-09-30",
+     "notice_accession": "0000872786-22-000008",
+     "notice_filing_date": "2022-11-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SNC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2022Q2",
+     "report_date": "2022-06-30",
+     "notice_accession": "0001197610-22-000002",
+     "notice_filing_date": "2022-08-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2022Q1",
+     "report_date": "2022-03-31",
+     "notice_accession": "0001166588-22-000009",
+     "notice_filing_date": "2022-05-17",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2021Q4",
+     "report_date": "2021-12-31",
+     "notice_accession": "0001166588-22-000006",
+     "notice_filing_date": "2022-02-09",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2021Q3",
+     "report_date": "2021-09-30",
+     "notice_accession": "0001166588-21-000008",
+     "notice_filing_date": "2021-11-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2021Q2",
+     "report_date": "2021-06-30",
+     "notice_accession": "0000872786-21-000004",
+     "notice_filing_date": "2021-08-10",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2021Q1",
+     "report_date": "2021-03-31",
+     "notice_accession": "0001166588-21-000003",
+     "notice_filing_date": "2021-05-07",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q4",
+     "report_date": "2020-12-31",
+     "notice_accession": "0001197610-21-000002",
+     "notice_filing_date": "2021-02-10",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q3",
+     "report_date": "2020-09-30",
+     "notice_accession": "0000872786-20-000008",
+     "notice_filing_date": "2020-10-30",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q2",
+     "report_date": "2020-06-30",
+     "notice_accession": "0000872786-20-000005",
+     "notice_filing_date": "2020-08-06",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q1",
+     "report_date": "2020-03-31",
+     "notice_accession": "0000872786-20-000004",
+     "notice_filing_date": "2020-05-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q4",
+     "report_date": "2019-12-31",
+     "notice_accession": "0000872786-20-000002",
+     "notice_filing_date": "2020-02-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q3",
+     "report_date": "2019-09-30",
+     "notice_accession": "0001166588-19-000009",
+     "notice_filing_date": "2019-11-07",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q2",
+     "report_date": "2019-06-30",
+     "notice_accession": "0000872786-19-000005",
+     "notice_filing_date": "2019-07-31",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q1",
+     "report_date": "2019-03-31",
+     "notice_accession": "0000872786-19-000003",
+     "notice_filing_date": "2019-04-25",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q4",
+     "report_date": "2018-12-31",
+     "notice_accession": "0001166588-19-000002",
+     "notice_filing_date": "2019-02-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q3",
+     "report_date": "2018-09-30",
+     "notice_accession": "0001166588-18-000009",
+     "notice_filing_date": "2018-11-07",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q2",
+     "report_date": "2018-06-30",
+     "notice_accession": "0001166588-18-000006",
+     "notice_filing_date": "2018-07-25",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q4",
+     "report_date": "2017-12-31",
+     "notice_accession": "0000872786-18-000001",
+     "notice_filing_date": "2018-02-01",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q3",
+     "report_date": "2017-09-30",
+     "notice_accession": "0001197610-17-000003",
+     "notice_filing_date": "2017-11-07",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q2",
+     "report_date": "2017-06-30",
+     "notice_accession": "0001166588-17-000009",
+     "notice_filing_date": "2017-08-03",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q1",
+     "report_date": "2017-03-31",
+     "notice_accession": "0000872786-17-000007",
+     "notice_filing_date": "2017-05-03",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q4",
+     "report_date": "2016-12-31",
+     "notice_accession": "0001166588-17-000003",
+     "notice_filing_date": "2017-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q3",
+     "report_date": "2016-09-30",
+     "notice_accession": "0000872786-16-000015",
+     "notice_filing_date": "2016-10-05",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q2",
+     "report_date": "2016-06-30",
+     "notice_accession": "0000872786-16-000013",
+     "notice_filing_date": "2016-07-06",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q1",
+     "report_date": "2016-03-31",
+     "notice_accession": "0000872786-16-000011",
+     "notice_filing_date": "2016-05-25",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q4",
+     "report_date": "2015-12-31",
+     "notice_accession": "0000872786-16-000012",
+     "notice_filing_date": "2016-05-25",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001166588",
+      "name": "BNP PARIBAS ARBITRAGE, SA"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q3",
+     "report_date": "2015-09-30",
+     "notice_accession": "0000872786-15-000007",
+     "notice_filing_date": "2015-11-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2015Q2",
+     "report_date": "2015-06-30",
+     "notice_accession": "0000872786-15-000004",
+     "notice_filing_date": "2015-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q1",
+     "report_date": "2015-03-31",
+     "notice_accession": "0000872786-15-000003",
+     "notice_filing_date": "2015-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q4",
+     "report_date": "2014-12-31",
+     "notice_accession": "0000872786-15-000001",
+     "notice_filing_date": "2015-02-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q3",
+     "report_date": "2014-09-30",
+     "notice_accession": "0000872786-14-000009",
+     "notice_filing_date": "2014-11-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q2",
+     "report_date": "2014-06-30",
+     "notice_accession": "0000872786-14-000008",
+     "notice_filing_date": "2014-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q1",
+     "report_date": "2014-03-31",
+     "notice_accession": "0001166588-14-000007",
+     "notice_filing_date": "2014-05-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q4",
+     "report_date": "2013-12-31",
+     "notice_accession": "0000872786-14-000003",
+     "notice_filing_date": "2014-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q3",
+     "report_date": "2013-09-30",
+     "notice_accession": "0000872786-13-000006",
+     "notice_filing_date": "2013-11-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q2",
+     "report_date": "2013-06-30",
+     "notice_accession": "0000872786-13-000005",
+     "notice_filing_date": "2013-08-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001520354",
+      "name": "BNP Paribas Investment Partners S.A."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q1",
+     "report_date": "2013-03-31",
+     "notice_accession": "0000872786-13-000004",
+     "notice_filing_date": "2013-04-26",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q4",
+     "report_date": "2012-12-31",
+     "notice_accession": "0000872786-13-000003",
+     "notice_filing_date": "2013-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q3",
+     "report_date": "2012-09-30",
+     "notice_accession": "0000872786-12-000006",
+     "notice_filing_date": "2012-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q2",
+     "report_date": "2012-06-30",
+     "notice_accession": "0000872786-12-000005",
+     "notice_filing_date": "2012-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q1",
+     "report_date": "2012-03-31",
+     "notice_accession": "0000872786-12-000003",
+     "notice_filing_date": "2012-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q4",
+     "report_date": "2011-12-31",
+     "notice_accession": "0000872786-12-000001",
+     "notice_filing_date": "2012-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q3",
+     "report_date": "2011-09-30",
+     "notice_accession": "0000872786-11-000004",
+     "notice_filing_date": "2011-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q2",
+     "report_date": "2011-06-30",
+     "notice_accession": "0000872786-11-000003",
+     "notice_filing_date": "2011-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q1",
+     "report_date": "2011-03-31",
+     "notice_accession": "0000872786-11-000002",
+     "notice_filing_date": "2011-05-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q4",
+     "report_date": "2010-12-31",
+     "notice_accession": "0000872786-11-000001",
+     "notice_filing_date": "2011-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q3",
+     "report_date": "2010-09-30",
+     "notice_accession": "0000872786-10-000004",
+     "notice_filing_date": "2010-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q2",
+     "report_date": "2010-06-30",
+     "notice_accession": "0000872786-10-000003",
+     "notice_filing_date": "2010-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q1",
+     "report_date": "2010-03-31",
+     "notice_accession": "0000872786-10-000002",
+     "notice_filing_date": "2010-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q4",
+     "report_date": "2009-12-31",
+     "notice_accession": "0000872786-10-000001",
+     "notice_filing_date": "2010-02-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q3",
+     "report_date": "2009-09-30",
+     "notice_accession": "0000872786-09-000004",
+     "notice_filing_date": "2009-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q2",
+     "report_date": "2009-06-30",
+     "notice_accession": "0000872786-09-000003",
+     "notice_filing_date": "2009-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q1",
+     "report_date": "2009-03-31",
+     "notice_accession": "0000872786-09-000002",
+     "notice_filing_date": "2009-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q4",
+     "report_date": "2008-12-31",
+     "notice_accession": "0000872786-09-000001",
+     "notice_filing_date": "2009-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q3",
+     "report_date": "2008-09-30",
+     "notice_accession": "0000872786-08-000005",
+     "notice_filing_date": "2008-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q2",
+     "report_date": "2008-06-30",
+     "notice_accession": "0000872786-08-000004",
+     "notice_filing_date": "2008-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q1",
+     "report_date": "2008-03-31",
+     "notice_accession": "0000872786-08-000003",
+     "notice_filing_date": "2008-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q4",
+     "report_date": "2007-12-31",
+     "notice_accession": "0000872786-08-000001",
+     "notice_filing_date": "2008-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q3",
+     "report_date": "2007-09-30",
+     "notice_accession": "0000872786-07-000001",
+     "notice_filing_date": "2007-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q2",
+     "report_date": "2003-06-30",
+     "notice_accession": "0000872786-03-000014",
+     "notice_filing_date": "2003-08-21",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q1",
+     "report_date": "2003-03-31",
+     "notice_accession": "0000872786-03-000013",
+     "notice_filing_date": "2003-06-19",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q4",
+     "report_date": "2002-12-31",
+     "notice_accession": "0000872786-03-000008",
+     "notice_filing_date": "2003-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q3",
+     "report_date": "2002-09-30",
+     "notice_accession": "0000872786-02-000007",
+     "notice_filing_date": "2002-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q2",
+     "report_date": "2002-06-30",
+     "notice_accession": "0000872786-02-000005",
+     "notice_filing_date": "2002-08-08",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q1",
+     "report_date": "2002-03-31",
+     "notice_accession": "0000872786-02-000003",
+     "notice_filing_date": "2002-05-08",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q4",
+     "report_date": "2001-12-31",
+     "notice_accession": "0000872786-02-000001",
+     "notice_filing_date": "2002-02-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q3",
+     "report_date": "2001-09-30",
+     "notice_accession": "0000872786-01-500018",
+     "notice_filing_date": "2001-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q1",
+     "report_date": "2001-03-31",
+     "notice_accession": "0000872786-01-500015",
+     "notice_filing_date": "2001-05-24",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q4",
+     "report_date": "2000-12-31",
+     "notice_accession": "0000872786-01-000001",
+     "notice_filing_date": "2001-02-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q3",
+     "report_date": "2000-09-30",
+     "notice_accession": "0000872786-00-000013",
+     "notice_filing_date": "2000-11-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q2",
+     "report_date": "2000-06-30",
+     "notice_accession": "0000872786-00-000011",
+     "notice_filing_date": "2000-09-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q1",
+     "report_date": "2000-03-31",
+     "notice_accession": "0000872786-00-000003",
+     "notice_filing_date": "2000-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "1999Q2",
+     "report_date": "1999-06-30",
+     "notice_accession": "0000872786-99-000002",
+     "notice_filing_date": "1999-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "1998Q4",
+     "report_date": "1998-12-31",
+     "notice_accession": "0000872786-99-000001",
+     "notice_filing_date": "1999-05-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3436,6 +5131,7 @@
    "values_in_thousands": false,
    "total_value": 99785787443.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3446,6 +5142,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3563,6 +5261,7 @@
    "values_in_thousands": false,
    "total_value": 288870396178.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3573,6 +5272,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3690,6 +5391,7 @@
    "values_in_thousands": false,
    "total_value": 533053290.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3700,6 +5402,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3817,6 +5521,7 @@
    "values_in_thousands": false,
    "total_value": 112566449804.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3827,6 +5532,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -3944,6 +5651,7 @@
    "values_in_thousands": false,
    "total_value": 13506242488.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -3954,6 +5662,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -4071,6 +5781,7 @@
    "values_in_thousands": false,
    "total_value": 1834183510.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4081,6 +5792,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -4198,6 +5911,7 @@
    "values_in_thousands": false,
    "total_value": 24376086530.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4208,6 +5922,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -4325,6 +6041,7 @@
    "values_in_thousands": false,
    "total_value": 76987645805.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4335,6 +6052,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -4452,6 +6171,7 @@
    "values_in_thousands": false,
    "total_value": 180776675190.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4462,6 +6182,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -4579,6 +6301,7 @@
    "values_in_thousands": false,
    "total_value": 665113090.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4589,6 +6312,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -4706,6 +6431,7 @@
    "values_in_thousands": false,
    "total_value": 716871733902.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4716,6 +6442,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -4833,6 +6561,7 @@
    "values_in_thousands": false,
    "total_value": 27981981492.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -4843,6 +6572,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -4960,6 +6691,7 @@
    "values_in_thousands": false,
    "total_value": 8361410022.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -4970,6 +6702,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5087,6 +6821,7 @@
    "values_in_thousands": false,
    "total_value": 5332225414.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5095,6 +6830,8 @@
     "2025Q2",
     "2025Q1"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5212,6 +6949,7 @@
    "values_in_thousands": false,
    "total_value": 1853427.0,
    "unit_fix": 0.001,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5222,6 +6960,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5339,6 +7079,7 @@
    "values_in_thousands": false,
    "total_value": 875011794337.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5349,6 +7090,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5466,6 +7209,7 @@
    "values_in_thousands": false,
    "total_value": 120861574559.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5476,6 +7220,89 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2007Q3",
+     "report_date": "2007-09-30",
+     "notice_accession": "0000357235-07-000396",
+     "notice_filing_date": "2007-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q2",
+     "report_date": "2007-06-30",
+     "notice_accession": "0000357235-07-000347",
+     "notice_filing_date": "2007-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q1",
+     "report_date": "2007-03-31",
+     "notice_accession": "0000357235-07-000281",
+     "notice_filing_date": "2007-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q4",
+     "report_date": "2006-12-31",
+     "notice_accession": "0000357235-07-000181",
+     "notice_filing_date": "2007-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q3",
+     "report_date": "2006-09-30",
+     "notice_accession": "0001348883-06-000140",
+     "notice_filing_date": "2006-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q2",
+     "report_date": "2006-06-30",
+     "notice_accession": "0001348883-06-000105",
+     "notice_filing_date": "2006-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q1",
+     "report_date": "2006-03-31",
+     "notice_accession": "0001348883-06-000046",
+     "notice_filing_date": "2006-05-18",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q4",
+     "report_date": "2005-12-31",
+     "notice_accession": "0000357235-06-000133",
+     "notice_filing_date": "2006-02-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5593,6 +7420,7 @@
    "values_in_thousands": false,
    "total_value": 48629053706.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5603,6 +7431,19 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2005Q2",
+     "report_date": "2005-06-30",
+     "notice_accession": "0000919574-05-002842",
+     "notice_filing_date": "2005-08-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -5720,6 +7561,7 @@
    "values_in_thousands": true,
    "total_value": 63234826000.0,
    "unit_fix": 1000.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5730,6 +7572,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5847,6 +7691,7 @@
    "values_in_thousands": false,
    "total_value": 3274441524.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5857,6 +7702,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -5974,6 +7821,7 @@
    "values_in_thousands": false,
    "total_value": 34783267943.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -5984,6 +7832,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -6101,6 +7951,7 @@
    "values_in_thousands": false,
    "total_value": 8416783091.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -6111,6 +7962,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -6228,6 +8081,7 @@
    "values_in_thousands": false,
    "total_value": 23289545492.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -6238,6 +8092,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -6355,6 +8211,7 @@
    "values_in_thousands": true,
    "total_value": 87825495000.0,
    "unit_fix": 1000.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -6365,6 +8222,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -6482,6 +8341,7 @@
    "values_in_thousands": false,
    "total_value": 362350478790.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -6492,6 +8352,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -6609,6 +8471,7 @@
    "values_in_thousands": false,
    "total_value": 550809593184.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -6619,6 +8482,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -6736,6 +8601,7 @@
    "values_in_thousands": false,
    "total_value": 2407934157.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -6746,6 +8612,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -6863,6 +8731,7 @@
    "values_in_thousands": false,
    "total_value": 3908853490.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -6873,6 +8742,529 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2020Q4",
+     "report_date": "2020-12-31",
+     "notice_accession": "0001172661-21-000767",
+     "notice_filing_date": "2021-02-16",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q3",
+     "report_date": "2020-09-30",
+     "notice_accession": "0001172661-20-002333",
+     "notice_filing_date": "2020-11-16",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q2",
+     "report_date": "2020-06-30",
+     "notice_accession": "0001172661-20-001847",
+     "notice_filing_date": "2020-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2020Q1",
+     "report_date": "2020-03-31",
+     "notice_accession": "0001172661-20-001396",
+     "notice_filing_date": "2020-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q4",
+     "report_date": "2019-12-31",
+     "notice_accession": "0001172661-20-000812",
+     "notice_filing_date": "2020-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q3",
+     "report_date": "2019-09-30",
+     "notice_accession": "0001172661-19-002349",
+     "notice_filing_date": "2019-11-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q2",
+     "report_date": "2019-06-30",
+     "notice_accession": "0001172661-19-001861",
+     "notice_filing_date": "2019-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2019Q1",
+     "report_date": "2019-03-31",
+     "notice_accession": "0001172661-19-001369",
+     "notice_filing_date": "2019-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q4",
+     "report_date": "2018-12-31",
+     "notice_accession": "0001172661-19-000852",
+     "notice_filing_date": "2019-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q3",
+     "report_date": "2018-09-30",
+     "notice_accession": "0001079114-18-000015",
+     "notice_filing_date": "2018-11-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q2",
+     "report_date": "2018-06-30",
+     "notice_accession": "0001079114-18-000011",
+     "notice_filing_date": "2018-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2018Q1",
+     "report_date": "2018-03-31",
+     "notice_accession": "0001079114-18-000006",
+     "notice_filing_date": "2018-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q4",
+     "report_date": "2017-12-31",
+     "notice_accession": "0001079114-18-000003",
+     "notice_filing_date": "2018-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q3",
+     "report_date": "2017-09-30",
+     "notice_accession": "0001079114-17-000015",
+     "notice_filing_date": "2017-11-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q2",
+     "report_date": "2017-06-30",
+     "notice_accession": "0001079114-17-000011",
+     "notice_filing_date": "2017-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2017Q1",
+     "report_date": "2017-03-31",
+     "notice_accession": "0001079114-17-000007",
+     "notice_filing_date": "2017-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q4",
+     "report_date": "2016-12-31",
+     "notice_accession": "0001079114-17-000003",
+     "notice_filing_date": "2017-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q3",
+     "report_date": "2016-09-30",
+     "notice_accession": "0001079114-16-000032",
+     "notice_filing_date": "2016-11-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q2",
+     "report_date": "2016-06-30",
+     "notice_accession": "0001079114-16-000027",
+     "notice_filing_date": "2016-08-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2016Q1",
+     "report_date": "2016-03-31",
+     "notice_accession": "0001079114-16-000022",
+     "notice_filing_date": "2016-05-16",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q4",
+     "report_date": "2015-12-31",
+     "notice_accession": "0001079114-16-000019",
+     "notice_filing_date": "2016-02-16",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q3",
+     "report_date": "2015-09-30",
+     "notice_accession": "0001079114-15-000014",
+     "notice_filing_date": "2015-11-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2015Q2",
+     "report_date": "2015-06-30",
+     "notice_accession": "0001079114-15-000010",
+     "notice_filing_date": "2015-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2015Q1",
+     "report_date": "2015-03-31",
+     "notice_accession": "0001079114-15-000005",
+     "notice_filing_date": "2015-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q4",
+     "report_date": "2014-12-31",
+     "notice_accession": "0001079114-15-000003",
+     "notice_filing_date": "2015-02-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q3",
+     "report_date": "2014-09-30",
+     "notice_accession": "0001079114-14-000010",
+     "notice_filing_date": "2014-11-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q2",
+     "report_date": "2014-06-30",
+     "notice_accession": "0001079114-14-000005",
+     "notice_filing_date": "2014-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2014Q1",
+     "report_date": "2014-03-31",
+     "notice_accession": "0001140361-14-021632",
+     "notice_filing_date": "2014-05-15",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q4",
+     "report_date": "2013-12-31",
+     "notice_accession": "0001140361-14-007908",
+     "notice_filing_date": "2014-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q3",
+     "report_date": "2013-09-30",
+     "notice_accession": "0001140361-13-042780",
+     "notice_filing_date": "2013-11-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q2",
+     "report_date": "2013-06-30",
+     "notice_accession": "0001140361-13-032774",
+     "notice_filing_date": "2013-08-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001079114",
+      "name": "GREENLIGHT CAPITAL INC"
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q1",
+     "report_date": "2013-03-31",
+     "notice_accession": "0001140361-13-021008",
+     "notice_filing_date": "2013-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q4",
+     "report_date": "2012-12-31",
+     "notice_accession": "0001140361-13-007324",
+     "notice_filing_date": "2013-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q3",
+     "report_date": "2012-09-30",
+     "notice_accession": "0001140361-12-047251",
+     "notice_filing_date": "2012-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q2",
+     "report_date": "2012-06-30",
+     "notice_accession": "0001140361-12-037031",
+     "notice_filing_date": "2012-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2012Q1",
+     "report_date": "2012-03-31",
+     "notice_accession": "0000929638-12-000487",
+     "notice_filing_date": "2012-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q4",
+     "report_date": "2011-12-31",
+     "notice_accession": "0001140361-12-008127",
+     "notice_filing_date": "2012-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q3",
+     "report_date": "2011-09-30",
+     "notice_accession": "0001140361-11-053335",
+     "notice_filing_date": "2011-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q2",
+     "report_date": "2011-06-30",
+     "notice_accession": "0001140361-11-042031",
+     "notice_filing_date": "2011-08-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2011Q1",
+     "report_date": "2011-03-31",
+     "notice_accession": "0001140361-11-027774",
+     "notice_filing_date": "2011-05-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q4",
+     "report_date": "2010-12-31",
+     "notice_accession": "0001140361-11-009221",
+     "notice_filing_date": "2011-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q3",
+     "report_date": "2010-09-30",
+     "notice_accession": "0001140361-10-045703",
+     "notice_filing_date": "2010-11-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2010Q2",
+     "report_date": "2010-06-30",
+     "notice_accession": "0001140361-10-033736",
+     "notice_filing_date": "2010-08-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -6990,6 +9382,7 @@
    "values_in_thousands": false,
    "total_value": 191008088994.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -7000,6 +9393,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -7117,6 +9512,7 @@
    "values_in_thousands": true,
    "total_value": 5210856000.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -7127,6 +9523,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -7244,6 +9642,7 @@
    "values_in_thousands": false,
    "total_value": 130375293771.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -7254,6 +9653,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -7371,6 +9772,7 @@
    "values_in_thousands": false,
    "total_value": 9819775522.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -7381,6 +9783,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -7498,6 +9902,7 @@
    "values_in_thousands": false,
    "total_value": 22669814953.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -7508,6 +9913,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -7625,6 +10032,7 @@
    "values_in_thousands": false,
    "total_value": 139751745.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -7635,6 +10043,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -7752,6 +10162,7 @@
    "values_in_thousands": false,
    "total_value": 21675731270.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -7762,6 +10173,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -7879,6 +10292,7 @@
    "values_in_thousands": false,
    "total_value": 296602351.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -7889,6 +10303,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -8006,6 +10422,7 @@
    "values_in_thousands": false,
    "total_value": 2638278872.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -8016,6 +10433,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -8137,6 +10556,7 @@
    ],
    "filing_key": "0001325447-26-000020|0001325447-26-000033",
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -8147,6 +10567,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -8264,6 +10686,7 @@
    "values_in_thousands": false,
    "total_value": 8089173876.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -8274,6 +10697,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -8391,6 +10816,7 @@
    "values_in_thousands": false,
    "total_value": 977642255.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -8401,6 +10827,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -8518,6 +10946,7 @@
    "values_in_thousands": false,
    "total_value": 348264167857.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -8528,6 +10957,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -8645,6 +11076,7 @@
    "values_in_thousands": false,
    "total_value": 2303878429723.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -8655,6 +11087,8 @@
     "2024Q3",
     "2024Q2"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -8772,6 +11206,7 @@
    "values_in_thousands": false,
    "total_value": 461883707115.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -8782,6 +11217,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -8899,6 +11336,7 @@
    "values_in_thousands": false,
    "total_value": 1816672931.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -8909,6 +11347,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9026,6 +11466,7 @@
    "values_in_thousands": false,
    "total_value": 447544519.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -9036,6 +11477,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9153,6 +11596,7 @@
    "values_in_thousands": false,
    "total_value": 4518917743.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9163,6 +11607,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9280,6 +11726,7 @@
    "values_in_thousands": false,
    "total_value": 13648923682.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9290,6 +11737,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -9407,6 +11856,7 @@
    "values_in_thousands": false,
    "total_value": 348750636.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9417,6 +11867,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9534,6 +11986,7 @@
    "values_in_thousands": false,
    "total_value": 687601913.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9544,6 +11997,269 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2009Q4",
+     "report_date": "2009-12-31",
+     "notice_accession": "0000807249-10-000039",
+     "notice_filing_date": "2010-02-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q3",
+     "report_date": "2009-09-30",
+     "notice_accession": "0000807249-09-000659",
+     "notice_filing_date": "2009-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q2",
+     "report_date": "2009-06-30",
+     "notice_accession": "0000807249-09-000566",
+     "notice_filing_date": "2009-08-17",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q1",
+     "report_date": "2009-03-31",
+     "notice_accession": "0000807249-09-000369",
+     "notice_filing_date": "2009-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q4",
+     "report_date": "2008-12-31",
+     "notice_accession": "0000807249-09-000082",
+     "notice_filing_date": "2009-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q3",
+     "report_date": "2008-09-30",
+     "notice_accession": "0000807249-08-000509",
+     "notice_filing_date": "2008-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q2",
+     "report_date": "2008-06-30",
+     "notice_accession": "0000807249-08-000281",
+     "notice_filing_date": "2008-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q1",
+     "report_date": "2008-03-31",
+     "notice_accession": "0000807249-08-000149",
+     "notice_filing_date": "2008-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q4",
+     "report_date": "2007-12-31",
+     "notice_accession": "0000807249-08-000078",
+     "notice_filing_date": "2008-03-04",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q3",
+     "report_date": "2007-09-30",
+     "notice_accession": "0000807249-07-000377",
+     "notice_filing_date": "2007-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q2",
+     "report_date": "2007-06-30",
+     "notice_accession": "0000807249-07-000262",
+     "notice_filing_date": "2007-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q1",
+     "report_date": "2007-03-31",
+     "notice_accession": "0000807249-07-000145",
+     "notice_filing_date": "2007-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q4",
+     "report_date": "2006-12-31",
+     "notice_accession": "0000807249-07-000087",
+     "notice_filing_date": "2007-03-22",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q3",
+     "report_date": "2006-09-30",
+     "notice_accession": "0000807249-06-000291",
+     "notice_filing_date": "2006-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q2",
+     "report_date": "2006-06-30",
+     "notice_accession": "0000807249-06-000220",
+     "notice_filing_date": "2006-08-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q1",
+     "report_date": "2006-03-31",
+     "notice_accession": "0000807249-06-000148",
+     "notice_filing_date": "2006-05-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q4",
+     "report_date": "2005-12-31",
+     "notice_accession": "0000807249-06-000050",
+     "notice_filing_date": "2006-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q3",
+     "report_date": "2005-09-30",
+     "notice_accession": "0000807249-05-000381",
+     "notice_filing_date": "2005-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q2",
+     "report_date": "2005-06-30",
+     "notice_accession": "0000807249-05-000270",
+     "notice_filing_date": "2005-08-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q1",
+     "report_date": "2005-03-31",
+     "notice_accession": "0000807249-05-000152",
+     "notice_filing_date": "2005-05-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q4",
+     "report_date": "2004-12-31",
+     "notice_accession": "0000807249-05-000037",
+     "notice_filing_date": "2005-02-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q3",
+     "report_date": "2004-09-30",
+     "notice_accession": "0000807249-04-000418",
+     "notice_filing_date": "2004-11-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q2",
+     "report_date": "2004-06-30",
+     "notice_accession": "0000807249-04-000297",
+     "notice_filing_date": "2004-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q1",
+     "report_date": "2004-03-31",
+     "notice_accession": "0000807249-04-000167",
+     "notice_filing_date": "2004-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q4",
+     "report_date": "2003-12-31",
+     "notice_accession": "0000807249-04-000053",
+     "notice_filing_date": "2004-02-17",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q3",
+     "report_date": "2003-09-30",
+     "notice_accession": "0000807249-03-000328",
+     "notice_filing_date": "2003-11-18",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9661,6 +12377,7 @@
    "values_in_thousands": false,
    "total_value": 15654171972.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9671,6 +12388,79 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2009Q4",
+     "report_date": "2009-12-31",
+     "notice_accession": "0000807249-10-000038",
+     "notice_filing_date": "2010-02-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q3",
+     "report_date": "2009-09-30",
+     "notice_accession": "0000807249-09-000658",
+     "notice_filing_date": "2009-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q2",
+     "report_date": "2009-06-30",
+     "notice_accession": "0000807249-09-000565",
+     "notice_filing_date": "2009-08-17",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q1",
+     "report_date": "2009-03-31",
+     "notice_accession": "0000807249-09-000368",
+     "notice_filing_date": "2009-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q4",
+     "report_date": "2008-12-31",
+     "notice_accession": "0000807249-09-000081",
+     "notice_filing_date": "2009-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q3",
+     "report_date": "2008-09-30",
+     "notice_accession": "0000807249-08-000508",
+     "notice_filing_date": "2008-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q1",
+     "report_date": "2004-03-31",
+     "notice_accession": "0000807249-04-000168",
+     "notice_filing_date": "2004-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9788,6 +12578,7 @@
    "values_in_thousands": false,
    "total_value": 11145091361.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9798,6 +12589,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -9915,6 +12708,7 @@
    "values_in_thousands": false,
    "total_value": 34424791932.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -9925,6 +12719,39 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2002Q2",
+     "report_date": "2002-06-30",
+     "notice_accession": "0000912057-02-032070",
+     "notice_filing_date": "2002-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q1",
+     "report_date": "2002-03-31",
+     "notice_accession": "0000912057-02-020638",
+     "notice_filing_date": "2002-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q4",
+     "report_date": "2001-12-31",
+     "notice_accession": "0000912057-02-006150",
+     "notice_filing_date": "2002-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -10042,6 +12869,7 @@
    "values_in_thousands": false,
    "total_value": 1924364235538.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -10052,6 +12880,39 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2003Q2",
+     "report_date": "2003-06-30",
+     "notice_accession": "0000315066-03-003074",
+     "notice_filing_date": "2003-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q1",
+     "report_date": "2003-03-31",
+     "notice_accession": "0000315066-03-002609",
+     "notice_filing_date": "2003-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q4",
+     "report_date": "2002-12-31",
+     "notice_accession": "0000315066-03-002312",
+     "notice_filing_date": "2003-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -10169,6 +13030,7 @@
    "values_in_thousands": false,
    "total_value": 2974321189.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -10179,6 +13041,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -10296,12 +13160,15 @@
    "values_in_thousands": false,
    "total_value": 1151631766592.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -10419,6 +13286,7 @@
    "values_in_thousands": false,
    "total_value": 53757403317.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -10429,6 +13297,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -10546,6 +13416,7 @@
    "values_in_thousands": false,
    "total_value": 364211495.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -10556,6 +13427,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -10673,6 +13546,7 @@
    "values_in_thousands": false,
    "total_value": 9758289705.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -10683,6 +13557,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -10800,6 +13676,7 @@
    "values_in_thousands": false,
    "total_value": 75422839842.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -10810,6 +13687,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -10927,6 +13806,7 @@
    "values_in_thousands": false,
    "total_value": 4263102872.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -10937,6 +13817,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -11054,6 +13936,7 @@
    "values_in_thousands": false,
    "total_value": 3702921099.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -11064,6 +13947,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -11181,6 +14066,7 @@
    "values_in_thousands": false,
    "total_value": 34313644596.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -11191,6 +14077,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -11308,6 +14196,7 @@
    "values_in_thousands": false,
    "total_value": 239485973785.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -11318,6 +14207,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -11435,6 +14326,7 @@
    "values_in_thousands": false,
    "total_value": 8264090525.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -11445,6 +14337,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -11562,6 +14456,7 @@
    "values_in_thousands": false,
    "total_value": 964809476.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -11572,6 +14467,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -11689,6 +14586,7 @@
    "values_in_thousands": false,
    "total_value": 1264255606212.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -11699,6 +14597,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -11816,6 +14716,7 @@
    "values_in_thousands": false,
    "total_value": 1902301416.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -11826,6 +14727,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -11943,12 +14846,15 @@
    "values_in_thousands": false,
    "total_value": 1807041234839.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -12066,6 +14972,7 @@
    "values_in_thousands": false,
    "total_value": 632672050.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -12076,6 +14983,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -12193,6 +15102,7 @@
    "values_in_thousands": false,
    "total_value": 189671275.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -12203,6 +15113,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -12296,6 +15208,7 @@
    "values_in_thousands": false,
    "total_value": 2430717155.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -12306,6 +15219,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -12423,6 +15338,7 @@
    "values_in_thousands": false,
    "total_value": 479545526763.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -12433,6 +15349,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -12550,6 +15468,7 @@
    "values_in_thousands": false,
    "total_value": 902839902.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -12560,6 +15479,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -12677,6 +15598,7 @@
    "values_in_thousands": false,
    "total_value": 2356455296.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -12687,6 +15609,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -12804,6 +15728,7 @@
    "values_in_thousands": false,
    "total_value": 16357760275.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -12814,6 +15739,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -12931,6 +15858,7 @@
    "values_in_thousands": false,
    "total_value": 127897188.0,
    "unit_fix": 1.0,
+   "status": "empty_latest",
    "history_quarters": [
     "2025Q4",
     "2025Q3",
@@ -12940,6 +15868,16 @@
     "2024Q3",
     "2024Q2"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2026Q1",
+     "report_date": "2026-03-31",
+     "accession": "0001540866-26-000002",
+     "reason": "empty",
+     "filing_date": "2026-05-15"
+    }
+   ],
+   "status_note": "The 2026Q1 13F filed on 2026-05-15 lists no holdings (a blank or placeholder information table); showing 2025Q4.",
    "featured": true,
    "top": [
     {
@@ -13057,6 +15995,7 @@
    "values_in_thousands": false,
    "total_value": 62701561678.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13067,6 +16006,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13184,6 +16125,7 @@
    "values_in_thousands": false,
    "total_value": 126697578778.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13194,6 +16136,35 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2013Q4",
+     "report_date": "2013-12-31",
+     "notice_accession": "0001318757-14-000003",
+     "notice_filing_date": "2014-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001325091",
+      "name": "Marshall Wace North America, L.P."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2013Q3",
+     "report_date": "2013-09-30",
+     "notice_accession": "0001318757-13-000004",
+     "notice_filing_date": "2013-11-13",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001325091",
+      "name": "Marshall Wace North America, L.P."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13311,6 +16282,7 @@
    "values_in_thousands": true,
    "total_value": 46314000.0,
    "unit_fix": 1.0,
+   "status": "empty_latest",
    "history_quarters": [
     "2026Q1",
     "2025Q4",
@@ -13320,6 +16292,16 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2026Q2",
+     "report_date": "2026-06-30",
+     "accession": "0001172661-26-003407",
+     "reason": "empty",
+     "filing_date": "2026-08-13"
+    }
+   ],
+   "status_note": "The 2026Q2 13F filed on 2026-08-13 lists no holdings (a blank or placeholder information table); showing 2026Q1.",
    "featured": false,
    "top": [
     {
@@ -13353,6 +16335,7 @@
    "values_in_thousands": false,
    "total_value": 11320923736.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13363,6 +16346,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13480,6 +16465,7 @@
    "values_in_thousands": false,
    "total_value": 13089220.0,
    "unit_fix": 0.001,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13490,6 +16476,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13583,6 +16571,7 @@
    "values_in_thousands": false,
    "total_value": 22071370941.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13593,6 +16582,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13710,12 +16701,15 @@
    "values_in_thousands": false,
    "total_value": 118092577.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
     "2026Q1",
     "2025Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13833,6 +16827,7 @@
    "values_in_thousands": false,
    "total_value": 276475183688.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13843,6 +16838,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -13960,6 +16957,7 @@
    "values_in_thousands": false,
    "total_value": 423070057.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -13970,6 +16968,289 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2007Q3",
+     "report_date": "2007-09-30",
+     "notice_accession": "0000357235-07-000402",
+     "notice_filing_date": "2007-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q2",
+     "report_date": "2007-06-30",
+     "notice_accession": "0000357235-07-000351",
+     "notice_filing_date": "2007-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q1",
+     "report_date": "2007-03-31",
+     "notice_accession": "0000357235-07-000278",
+     "notice_filing_date": "2007-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q4",
+     "report_date": "2006-12-31",
+     "notice_accession": "0000357235-07-000189",
+     "notice_filing_date": "2007-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q3",
+     "report_date": "2006-09-30",
+     "notice_accession": "0001348883-06-000149",
+     "notice_filing_date": "2006-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q2",
+     "report_date": "2006-06-30",
+     "notice_accession": "0001348883-06-000112",
+     "notice_filing_date": "2006-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q1",
+     "report_date": "2006-03-31",
+     "notice_accession": "0001348883-06-000054",
+     "notice_filing_date": "2006-05-18",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q4",
+     "report_date": "2005-12-31",
+     "notice_accession": "0000357235-06-000151",
+     "notice_filing_date": "2006-02-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q3",
+     "report_date": "2005-09-30",
+     "notice_accession": "0000357235-05-000421",
+     "notice_filing_date": "2005-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q2",
+     "report_date": "2005-06-30",
+     "notice_accession": "0000357235-05-000359",
+     "notice_filing_date": "2005-08-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2005Q1",
+     "report_date": "2005-03-31",
+     "notice_accession": "0000357235-05-000225",
+     "notice_filing_date": "2005-05-04",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q4",
+     "report_date": "2004-12-31",
+     "notice_accession": "0000357235-05-000031",
+     "notice_filing_date": "2005-02-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q3",
+     "report_date": "2004-09-30",
+     "notice_accession": "0000704051-04-000333",
+     "notice_filing_date": "2004-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q2",
+     "report_date": "2004-06-30",
+     "notice_accession": "0000704051-04-000217",
+     "notice_filing_date": "2004-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2004Q1",
+     "report_date": "2004-03-31",
+     "notice_accession": "0000704051-04-000094",
+     "notice_filing_date": "2004-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q4",
+     "report_date": "2003-12-31",
+     "notice_accession": "0000895662-04-000058",
+     "notice_filing_date": "2004-02-17",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q3",
+     "report_date": "2003-09-30",
+     "notice_accession": "0000704051-03-000259",
+     "notice_filing_date": "2003-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q2",
+     "report_date": "2003-06-30",
+     "notice_accession": "0000936886-03-000042",
+     "notice_filing_date": "2003-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2003Q1",
+     "report_date": "2003-03-31",
+     "notice_accession": "0001067484-03-000202",
+     "notice_filing_date": "2003-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q4",
+     "report_date": "2002-12-31",
+     "notice_accession": "0001067484-03-000038",
+     "notice_filing_date": "2003-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q3",
+     "report_date": "2002-09-30",
+     "notice_accession": "0000276300-02-000139",
+     "notice_filing_date": "2002-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q2",
+     "report_date": "2002-06-30",
+     "notice_accession": "0000276300-02-000049",
+     "notice_filing_date": "2002-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2002Q1",
+     "report_date": "2002-03-31",
+     "notice_accession": "0000869906-02-000226",
+     "notice_filing_date": "2002-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q4",
+     "report_date": "2001-12-31",
+     "notice_accession": "0000869906-02-000089",
+     "notice_filing_date": "2002-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q3",
+     "report_date": "2001-09-30",
+     "notice_accession": "0001096338-01-500206",
+     "notice_filing_date": "2001-11-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q2",
+     "report_date": "2001-06-30",
+     "notice_accession": "0001096338-01-500139",
+     "notice_filing_date": "2001-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2001Q1",
+     "report_date": "2001-03-31",
+     "notice_accession": "0001096338-01-500075",
+     "notice_filing_date": "2001-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q4",
+     "report_date": "2000-12-31",
+     "notice_accession": "0000810868-01-000110",
+     "notice_filing_date": "2001-03-07",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -14087,6 +17368,7 @@
    "values_in_thousands": false,
    "total_value": 38691681.0,
    "unit_fix": 0.001,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -14097,6 +17379,8 @@
     "2023Q4",
     "2023Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14214,11 +17498,14 @@
    "values_in_thousands": false,
    "total_value": 4145785139.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14252,6 +17539,7 @@
    "values_in_thousands": false,
    "total_value": 467371740.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -14262,6 +17550,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14355,16 +17645,296 @@
    "values_in_thousands": false,
    "total_value": 11775638.0,
    "unit_fix": 0.001,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
+    "2026Q1",
+    "2025Q4",
     "2018Q4",
     "2018Q3",
     "2018Q2",
     "2018Q1",
-    "2017Q4",
-    "2017Q3",
-    "2017Q2"
+    "2017Q4"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2025Q3",
+     "report_date": "2025-09-30",
+     "notice_accession": "0001193125-25-278747",
+     "notice_filing_date": "2025-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2025Q2",
+     "report_date": "2025-06-30",
+     "notice_accession": "0000950123-25-007714",
+     "notice_filing_date": "2025-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2025Q1",
+     "report_date": "2025-03-31",
+     "notice_accession": "0000950123-25-005043",
+     "notice_filing_date": "2025-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2024Q4",
+     "report_date": "2024-12-31",
+     "notice_accession": "0000950123-25-001884",
+     "notice_filing_date": "2025-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2024Q3",
+     "report_date": "2024-09-30",
+     "notice_accession": "0000950123-24-011061",
+     "notice_filing_date": "2024-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2024Q2",
+     "report_date": "2024-06-30",
+     "notice_accession": "0000950123-24-007970",
+     "notice_filing_date": "2024-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2024Q1",
+     "report_date": "2024-03-31",
+     "notice_accession": "0000950123-24-004827",
+     "notice_filing_date": "2024-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2023Q4",
+     "report_date": "2023-12-31",
+     "notice_accession": "0000950123-24-001625",
+     "notice_filing_date": "2024-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2023Q3",
+     "report_date": "2023-09-30",
+     "notice_accession": "0000950123-23-009935",
+     "notice_filing_date": "2023-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2023Q2",
+     "report_date": "2023-06-30",
+     "notice_accession": "0000950123-23-007139",
+     "notice_filing_date": "2023-08-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2023Q1",
+     "report_date": "2023-03-31",
+     "notice_accession": "0000950123-23-004556",
+     "notice_filing_date": "2023-05-12",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001512734",
+      "name": "Mizuho Bank, Ltd."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2022Q4",
+     "report_date": "2022-12-31",
+     "notice_accession": "0000950123-23-002231",
+     "notice_filing_date": "2023-02-14",
+     "notice_note": "",
+     "reported_by": {
+      "cik": "0001512734",
+      "name": "Mizuho Bank, Ltd."
+     },
+     "reason": "notice",
+     "detail": "reporting manager has no holdings for this quarter yet"
+    },
+    {
+     "quarter": "2022Q3",
+     "report_date": "2022-09-30",
+     "notice_accession": "0000950123-22-011333",
+     "notice_filing_date": "2022-11-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2022Q2",
+     "report_date": "2022-06-30",
+     "notice_accession": "0000950123-22-008554",
+     "notice_filing_date": "2022-08-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2022Q1",
+     "report_date": "2022-03-31",
+     "notice_accession": "0000950123-22-005584",
+     "notice_filing_date": "2022-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2021Q4",
+     "report_date": "2021-12-31",
+     "notice_accession": "0000950123-22-001549",
+     "notice_filing_date": "2022-02-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2021Q3",
+     "report_date": "2021-09-30",
+     "notice_accession": "0000950123-21-014435",
+     "notice_filing_date": "2021-11-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2021Q2",
+     "report_date": "2021-06-30",
+     "notice_accession": "0000950123-21-010667",
+     "notice_filing_date": "2021-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2021Q1",
+     "report_date": "2021-03-31",
+     "notice_accession": "0000950123-21-006170",
+     "notice_filing_date": "2021-05-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q4",
+     "report_date": "2020-12-31",
+     "notice_accession": "0000950123-21-001394",
+     "notice_filing_date": "2021-02-10",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q3",
+     "report_date": "2020-09-30",
+     "notice_accession": "0000950123-20-011289",
+     "notice_filing_date": "2020-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q2",
+     "report_date": "2020-06-30",
+     "notice_accession": "0000950123-20-008451",
+     "notice_filing_date": "2020-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2020Q1",
+     "report_date": "2020-03-31",
+     "notice_accession": "0000950123-20-004736",
+     "notice_filing_date": "2020-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q4",
+     "report_date": "2019-12-31",
+     "notice_accession": "0000950123-20-001688",
+     "notice_filing_date": "2020-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q3",
+     "report_date": "2019-09-30",
+     "notice_accession": "0000950123-19-010684",
+     "notice_filing_date": "2019-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q2",
+     "report_date": "2019-06-30",
+     "notice_accession": "0000950123-19-007626",
+     "notice_filing_date": "2019-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2019Q1",
+     "report_date": "2019-03-31",
+     "notice_accession": "0000950123-19-004672",
+     "notice_filing_date": "2019-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14482,6 +18052,7 @@
    "values_in_thousands": false,
    "total_value": 6373136736.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -14492,6 +18063,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14609,6 +18182,7 @@
    "values_in_thousands": false,
    "total_value": 2665107501.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -14619,6 +18193,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14736,16 +18312,19 @@
    "values_in_thousands": false,
    "total_value": 3979204.0,
    "unit_fix": 0.001,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
+    "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3",
     "2025Q2",
     "2025Q1",
-    "2024Q4",
-    "2024Q3"
+    "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14867,6 +18446,7 @@
    ],
    "filing_key": "0001062993-26-003820|0001062993-26-003864",
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -14874,6 +18454,8 @@
     "2025Q3",
     "2025Q2"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -14991,6 +18573,7 @@
    "values_in_thousands": false,
    "total_value": 6743431248.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -15001,6 +18584,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15118,12 +18703,15 @@
    "values_in_thousands": false,
    "total_value": 1890805575974.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15241,6 +18829,7 @@
    "values_in_thousands": false,
    "total_value": 1070599282.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -15251,6 +18840,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15332,6 +18923,7 @@
    "values_in_thousands": false,
    "total_value": 150418538382.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -15342,6 +18934,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15459,6 +19053,7 @@
    "values_in_thousands": false,
    "total_value": 79301033019.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -15469,6 +19064,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15586,6 +19183,7 @@
    "values_in_thousands": false,
    "total_value": 46723763092.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -15596,6 +19194,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15713,11 +19313,39 @@
    "values_in_thousands": false,
    "total_value": 66602458000.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2001Q1",
+     "report_date": "2001-03-31",
+     "accession": "0000921739-01-500003",
+     "reason": "unreadable"
+    },
+    {
+     "quarter": "1999Q3",
+     "report_date": "1999-09-30",
+     "accession": "0000921739-99-000065",
+     "reason": "unreadable"
+    },
+    {
+     "quarter": "1999Q2",
+     "report_date": "1999-06-30",
+     "accession": "0000921739-99-000060",
+     "reason": "unreadable"
+    },
+    {
+     "quarter": "1999Q1",
+     "report_date": "1999-03-31",
+     "accession": "0000921739-99-000063",
+     "reason": "unreadable"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15835,12 +19463,15 @@
    "values_in_thousands": false,
    "total_value": 85358323156.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -15958,12 +19589,44 @@
    "values_in_thousands": false,
    "total_value": 1003234964718.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2025Q4",
     "2025Q2",
     "2024Q4"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2026Q1",
+     "report_date": "2026-03-31",
+     "accession": "0001374170-26-000023",
+     "reason": "empty",
+     "filing_date": "2026-05-11"
+    },
+    {
+     "quarter": "2025Q3",
+     "report_date": "2025-09-30",
+     "accession": "0001374170-25-000104",
+     "reason": "empty",
+     "filing_date": "2025-11-13"
+    },
+    {
+     "quarter": "2025Q1",
+     "report_date": "2025-03-31",
+     "accession": "0001374170-26-000021",
+     "reason": "empty",
+     "filing_date": "2026-05-11"
+    },
+    {
+     "quarter": "2024Q3",
+     "report_date": "2024-09-30",
+     "accession": "0001374170-25-000102",
+     "reason": "empty",
+     "filing_date": "2025-11-12"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -16081,6 +19744,7 @@
    "values_in_thousands": false,
    "total_value": 859788523480.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -16091,6 +19755,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -16208,6 +19874,7 @@
    "values_in_thousands": false,
    "total_value": 7206070520.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -16218,6 +19885,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -16335,6 +20004,7 @@
    "values_in_thousands": false,
    "total_value": 57805473.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -16345,6 +20015,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -16468,6 +20140,7 @@
    ],
    "filing_key": "0001132716-26-000004|0001132716-26-000009|0001132716-26-000011|0001132716-26-000017",
    "unit_fix": 1.0,
+   "status": "stale",
    "history_quarters": [
     "2025Q4",
     "2025Q3",
@@ -16478,6 +20151,8 @@
     "2024Q2",
     "2024Q1"
    ],
+   "skipped_quarters": [],
+   "status_note": "No 13F for 2026Q2 yet; showing 2025Q4.",
    "featured": false,
    "top": [
     {
@@ -16489,8 +20164,7 @@
      "shares": 1040571,
      "put_call": null,
      "weight": 0.123564,
-     "sector": "Unclassified",
-     "display_name": "Cyberark S"
+     "sector": "Unclassified"
     },
     {
      "issuer": "CHART INDS",
@@ -16513,8 +20187,7 @@
      "shares": 3311960,
      "put_call": null,
      "weight": 0.076645,
-     "sector": "Unclassified",
-     "display_name": "Comerica I"
+     "sector": "Unclassified"
     },
     {
      "issuer": "DAYFORCE I",
@@ -16525,7 +20198,7 @@
      "shares": 4096708,
      "put_call": null,
      "weight": 0.075425,
-     "display_name": "Dayforce I",
+     "display_name": "Dayforce",
      "sector": "Unclassified"
     },
     {
@@ -16537,8 +20210,7 @@
      "shares": 3716597,
      "put_call": null,
      "weight": 0.071366,
-     "sector": "Unclassified",
-     "display_name": "Avidity Bi"
+     "sector": "Unclassified"
     },
     {
      "issuer": "FRONTIER C",
@@ -16549,8 +20221,7 @@
      "shares": 6901367,
      "put_call": null,
      "weight": 0.069943,
-     "sector": "Unclassified",
-     "display_name": "Frontier C"
+     "sector": "Unclassified"
     },
     {
      "issuer": "AIR LEASE",
@@ -16595,6 +20266,7 @@
    "values_in_thousands": true,
    "total_value": 458067000.0,
    "unit_fix": 1.0,
+   "status": "empty_latest",
    "history_quarters": [
     "2026Q1",
     "2025Q4",
@@ -16604,6 +20276,16 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2026Q2",
+     "report_date": "2026-06-30",
+     "accession": "0000894189-26-021028",
+     "reason": "empty",
+     "filing_date": "2026-07-07"
+    }
+   ],
+   "status_note": "The 2026Q2 13F filed on 2026-07-07 lists no holdings (a blank or placeholder information table); showing 2026Q1.",
    "featured": true,
    "top": [
     {
@@ -16721,6 +20403,7 @@
    "values_in_thousands": false,
    "total_value": 15773025295.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -16731,6 +20414,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -16848,6 +20533,7 @@
    "values_in_thousands": false,
    "total_value": 1208987586.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -16858,6 +20544,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -16975,11 +20663,14 @@
    "values_in_thousands": false,
    "total_value": 354956664.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
     "2026Q1"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17097,6 +20788,7 @@
    "values_in_thousands": false,
    "total_value": 2575691752.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -17107,6 +20799,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17224,6 +20918,7 @@
    "values_in_thousands": false,
    "total_value": 481004678.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -17234,6 +20929,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17351,6 +21048,7 @@
    "values_in_thousands": false,
    "total_value": 1903736538.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -17361,6 +21059,19 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2012Q4",
+     "report_date": "2012-12-31",
+     "notice_accession": "0000895421-13-000280",
+     "notice_filing_date": "2013-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17468,85 +21179,108 @@
    "slug": "bill-ackman",
    "ok": true,
    "form": "13F-HR",
-   "accession": "0001172661-26-002336",
-   "filing_date": "2026-05-15",
-   "report_date": "2026-03-31",
-   "quarter": "2026Q1",
-   "sec_url": "https://www.sec.gov/Archives/edgar/data/1336528/000117266126002336/0001172661-26-002336-index.html",
-   "line_count": 11,
-   "position_count": 11,
+   "accession": "0001172661-26-003790",
+   "filing_date": "2026-08-14",
+   "report_date": "2026-06-30",
+   "quarter": "2026Q2",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/2026053/000117266126003790/0001172661-26-003790-index.html",
+   "line_count": 15,
+   "position_count": 14,
    "values_in_thousands": false,
-   "total_value": 13714299861.0,
+   "total_value": 19465692772.0,
    "unit_fix": 1.0,
+   "status": "reported_by_other",
+   "notice_accession": "0001172661-26-003777",
+   "notice_filing_date": "2026-08-14",
+   "notice_note": "Holdings of this reporting manager are now included in the report of its public parent company.",
+   "reported_by": {
+    "cik": "0002026053",
+    "name": "PERSHING SQUARE INC.",
+    "slug": "pershing-square-inc"
+   },
    "history_quarters": [
+    "2026Q2",
     "2026Q1",
     "2025Q4",
     "2025Q3",
     "2025Q2",
     "2025Q1",
     "2024Q4",
-    "2024Q3",
-    "2024Q2"
+    "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "Holdings for 2026Q2 are reported by Pershing Square Inc. (this filer filed a 13F notice).",
    "featured": true,
    "top": [
-    {
-     "issuer": "BROOKFIELD CORP",
-     "title": "CL A LTD VT SH",
-     "cusip": "11271J107",
-     "ticker": "BN",
-     "value": 2415946008.0,
-     "shares": 59697208,
-     "put_call": null,
-     "weight": 0.176163,
-     "display_name": "Brookfield",
-     "sector": "Real Estate"
-    },
-    {
-     "issuer": "AMAZON COM INC",
-     "title": "COM",
-     "cusip": "023135106",
-     "ticker": "AMZN",
-     "value": 2385104083.0,
-     "shares": 11451981,
-     "put_call": null,
-     "weight": 0.173914,
-     "display_name": "Amazon",
-     "sector": "Consumer Discretionary"
-    },
     {
      "issuer": "UBER TECHNOLOGIES INC",
      "title": "COM",
      "cusip": "90353T100",
      "ticker": "UBER",
-     "value": 2154934398.0,
-     "shares": 29958771,
+     "value": 2476978592.0,
+     "shares": 34326200,
      "put_call": null,
-     "weight": 0.15713,
+     "weight": 0.127248,
      "display_name": "Uber",
      "sector": "Industrials"
+    },
+    {
+     "issuer": "BROOKFIELD CORP",
+     "title": "CL A LTD VT SH",
+     "cusip": "11271J107",
+     "ticker": "BN",
+     "value": 2448117792.0,
+     "shares": 57481047,
+     "put_call": null,
+     "weight": 0.125766,
+     "display_name": "Brookfield",
+     "sector": "Real Estate"
     },
     {
      "issuer": "MICROSOFT CORP",
      "title": "COM",
      "cusip": "594918104",
      "ticker": "MSFT",
-     "value": 2092970053.0,
-     "shares": 5654078,
+     "value": 2315234425.0,
+     "shares": 6206730,
      "put_call": null,
-     "weight": 0.152612,
+     "weight": 0.118939,
      "display_name": "Microsoft",
      "sector": "Information Technology"
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "title": "COM",
+     "cusip": "023135106",
+     "ticker": "AMZN",
+     "value": 2041109677.0,
+     "shares": 8563857,
+     "put_call": null,
+     "weight": 0.104857,
+     "display_name": "Amazon",
+     "sector": "Consumer Discretionary"
+    },
+    {
+     "issuer": "HOWARD HUGHES HOLDINGS INC",
+     "title": "COM",
+     "cusip": "44267T102",
+     "ticker": "HHH",
+     "value": 1991144055.0,
+     "shares": 27852064,
+     "put_call": null,
+     "weight": 0.10229,
+     "display_name": "Howard Hughes Holdings",
+     "sector": "Real Estate"
     },
     {
      "issuer": "RESTAURANT BRANDS INTL INC",
      "title": "COM",
      "cusip": "76131D103",
      "ticker": "QSR",
-     "value": 1673501194.0,
-     "shares": 22645483,
+     "value": 1872301303.0,
+     "shares": 25821284,
      "put_call": null,
-     "weight": 0.122026,
+     "weight": 0.096185,
      "display_name": "Restaurant Brands International",
      "sector": "Consumer Discretionary"
     },
@@ -17555,36 +21289,24 @@
      "title": "CL A",
      "cusip": "30303M102",
      "ticker": "META",
-     "value": 1522358404.0,
-     "shares": 2660861,
+     "value": 1800309764.0,
+     "shares": 3196062,
      "put_call": null,
-     "weight": 0.111005,
+     "weight": 0.092486,
      "display_name": "Meta Platforms",
      "sector": "Communication Services"
     },
     {
-     "issuer": "HOWARD HUGHES HOLDINGS INC",
-     "title": "COM",
-     "cusip": "44267T102",
-     "ticker": "HHH",
-     "value": 1192581569.0,
-     "shares": 18852064,
+     "issuer": "VISA INC",
+     "title": "COM CL A",
+     "cusip": "92826C839",
+     "ticker": "V",
+     "value": 1122065552.0,
+     "shares": 3270470,
      "put_call": null,
-     "weight": 0.086959,
-     "display_name": "Howard Hughes Holdings",
-     "sector": "Real Estate"
-    },
-    {
-     "issuer": "SEAPORT ENTMT GROUP INC",
-     "title": "COMMON STOCK",
-     "cusip": "812215200",
-     "ticker": "SEG",
-     "value": 107910794.0,
-     "shares": 5023780,
-     "put_call": null,
-     "weight": 0.007868,
-     "display_name": "Seaport Entertainment Group",
-     "sector": "Consumer Discretionary"
+     "weight": 0.057643,
+     "display_name": "Visa",
+     "sector": "Financials"
     }
    ]
   },
@@ -17605,6 +21327,7 @@
    "values_in_thousands": false,
    "total_value": 19465692772.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -17612,6 +21335,8 @@
     "2025Q3",
     "2025Q2"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17729,6 +21454,7 @@
    "values_in_thousands": false,
    "total_value": 90675333456.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -17739,6 +21465,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17856,12 +21584,44 @@
    "values_in_thousands": true,
    "total_value": 368114.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
     "2025Q4",
     "2023Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2024Q3",
+     "report_date": "2024-09-30",
+     "accession": "0000902664-24-006629",
+     "reason": "empty",
+     "filing_date": "2024-11-14"
+    },
+    {
+     "quarter": "2024Q2",
+     "report_date": "2024-06-30",
+     "accession": "0000902664-24-005157",
+     "reason": "empty",
+     "filing_date": "2024-08-14"
+    },
+    {
+     "quarter": "2024Q1",
+     "report_date": "2024-03-31",
+     "accession": "0000902664-24-003627",
+     "reason": "empty",
+     "filing_date": "2024-05-15"
+    },
+    {
+     "quarter": "2023Q4",
+     "report_date": "2023-12-31",
+     "accession": "0000902664-24-001728",
+     "reason": "empty",
+     "filing_date": "2024-02-14"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -17895,6 +21655,7 @@
    "values_in_thousands": false,
    "total_value": 179947588.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -17905,6 +21666,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18022,6 +21785,7 @@
    "values_in_thousands": false,
    "total_value": 373289293.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -18032,6 +21796,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18149,6 +21915,7 @@
    "values_in_thousands": true,
    "total_value": 999124702000.0,
    "unit_fix": 1000.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -18159,6 +21926,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18276,6 +22045,7 @@
    "values_in_thousands": false,
    "total_value": 169112441771.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -18286,6 +22056,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18403,6 +22175,7 @@
    "values_in_thousands": false,
    "total_value": 466635420.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -18413,6 +22186,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18530,6 +22305,7 @@
    "values_in_thousands": false,
    "total_value": 692471573.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -18540,6 +22316,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18657,6 +22435,7 @@
    "values_in_thousands": false,
    "total_value": 91808139264.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -18667,6 +22446,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18784,6 +22565,7 @@
    "values_in_thousands": false,
    "total_value": 18363432030.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -18794,6 +22576,89 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2000Q4",
+     "report_date": "2000-12-31",
+     "notice_accession": "0000898417-01-000015",
+     "notice_filing_date": "2001-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q3",
+     "report_date": "2000-09-30",
+     "notice_accession": "0000898417-00-000054",
+     "notice_filing_date": "2000-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q2",
+     "report_date": "2000-06-30",
+     "notice_accession": "0000898417-00-000038",
+     "notice_filing_date": "2000-08-11",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2000Q1",
+     "report_date": "2000-03-31",
+     "notice_accession": "0000898417-00-000027",
+     "notice_filing_date": "2000-05-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "1999Q4",
+     "report_date": "1999-12-31",
+     "notice_accession": "0000898417-00-000014",
+     "notice_filing_date": "2000-02-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "1999Q3",
+     "report_date": "1999-09-30",
+     "notice_accession": "0000898418-99-000008",
+     "notice_filing_date": "1999-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "1999Q2",
+     "report_date": "1999-06-30",
+     "notice_accession": "0000898419-99-000005",
+     "notice_filing_date": "1999-08-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "1999Q1",
+     "report_date": "1999-03-31",
+     "notice_accession": "0000898419-99-000004",
+     "notice_filing_date": "1999-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -18911,6 +22776,7 @@
    "values_in_thousands": false,
    "total_value": 34097875562.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -18921,6 +22787,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -19038,6 +22906,7 @@
    "values_in_thousands": false,
    "total_value": 6639573155.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -19048,6 +22917,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -19165,6 +23036,7 @@
    "values_in_thousands": false,
    "total_value": 72617871974.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -19175,6 +23047,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -19292,6 +23166,7 @@
    "values_in_thousands": false,
    "total_value": 6427481573.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -19302,6 +23177,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -19419,6 +23296,7 @@
    "values_in_thousands": false,
    "total_value": 4819684910.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -19429,6 +23307,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -19546,6 +23426,7 @@
    "values_in_thousands": false,
    "total_value": 271593225.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -19556,6 +23437,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -19673,6 +23556,7 @@
    "values_in_thousands": false,
    "total_value": 4579551414.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -19683,6 +23567,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -19800,6 +23686,7 @@
    "values_in_thousands": false,
    "total_value": 284446906.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -19810,6 +23697,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -19927,6 +23816,7 @@
    "values_in_thousands": false,
    "total_value": 8143628824.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -19937,6 +23827,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20054,6 +23946,7 @@
    "values_in_thousands": false,
    "total_value": 1917151885.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -20064,6 +23957,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -20181,6 +24076,7 @@
    "values_in_thousands": false,
    "total_value": 915110721.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -20191,6 +24087,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20308,6 +24206,7 @@
    "values_in_thousands": false,
    "total_value": 4523797468.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -20318,6 +24217,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20435,6 +24336,7 @@
    "values_in_thousands": false,
    "total_value": 49553548104.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -20445,6 +24347,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20562,6 +24466,7 @@
    "values_in_thousands": false,
    "total_value": 3383260349220.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -20571,6 +24476,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20688,6 +24595,7 @@
    "values_in_thousands": false,
    "total_value": 6117841302.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -20698,6 +24606,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20815,6 +24725,7 @@
    "values_in_thousands": false,
    "total_value": 14783129979.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -20825,6 +24736,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -20942,6 +24855,7 @@
    "values_in_thousands": false,
    "total_value": 5271324116.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -20952,6 +24866,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -21069,6 +24985,7 @@
    "values_in_thousands": false,
    "total_value": 174374003787.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -21079,6 +24996,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -21196,6 +25115,7 @@
    "values_in_thousands": false,
    "total_value": 403105457.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -21206,6 +25126,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -21323,6 +25245,7 @@
    "values_in_thousands": true,
    "total_value": 152565085000.0,
    "unit_fix": 1000.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -21333,6 +25256,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -21450,6 +25375,7 @@
    "values_in_thousands": false,
    "total_value": 52769884406.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -21460,6 +25386,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -21577,6 +25505,7 @@
    "values_in_thousands": false,
    "total_value": 36700848637.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -21587,6 +25516,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -21704,6 +25635,7 @@
    "values_in_thousands": false,
    "total_value": 625342170.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -21714,6 +25646,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -21831,6 +25765,7 @@
    "values_in_thousands": false,
    "total_value": 4679571988.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -21841,6 +25776,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -21958,6 +25895,7 @@
    "values_in_thousands": false,
    "total_value": 10021048682.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -21968,6 +25906,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -22025,6 +25965,7 @@
    "values_in_thousands": false,
    "total_value": 23981506027.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -22035,6 +25976,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -22152,6 +26095,7 @@
    "values_in_thousands": false,
    "total_value": 54452223.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -22162,6 +26106,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -22279,6 +26225,7 @@
    "values_in_thousands": false,
    "total_value": 4230905202.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -22289,6 +26236,149 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2010Q4",
+     "report_date": "2010-12-31",
+     "notice_accession": "0001345471-11-000058",
+     "notice_filing_date": "2011-05-16",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q3",
+     "report_date": "2009-09-30",
+     "notice_accession": "0001345471-09-000375",
+     "notice_filing_date": "2009-11-12",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q2",
+     "report_date": "2009-06-30",
+     "notice_accession": "0001345471-09-000353",
+     "notice_filing_date": "2009-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2009Q1",
+     "report_date": "2009-03-31",
+     "notice_accession": "0001345471-09-000325",
+     "notice_filing_date": "2009-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q4",
+     "report_date": "2008-12-31",
+     "notice_accession": "0001345471-09-000152",
+     "notice_filing_date": "2009-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q3",
+     "report_date": "2008-09-30",
+     "notice_accession": "0001345471-08-000131",
+     "notice_filing_date": "2008-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q2",
+     "report_date": "2008-06-30",
+     "notice_accession": "0001345471-08-000084",
+     "notice_filing_date": "2008-08-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2008Q1",
+     "report_date": "2008-03-31",
+     "notice_accession": "0001415581-08-000080",
+     "notice_filing_date": "2008-05-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q4",
+     "report_date": "2007-12-31",
+     "notice_accession": "0001415581-08-000038",
+     "notice_filing_date": "2008-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q3",
+     "report_date": "2007-09-30",
+     "notice_accession": "0000030697-07-000341",
+     "notice_filing_date": "2007-11-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q2",
+     "report_date": "2007-06-30",
+     "notice_accession": "0000030697-07-000250",
+     "notice_filing_date": "2007-08-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2007Q1",
+     "report_date": "2007-03-31",
+     "notice_accession": "0000030697-07-000124",
+     "notice_filing_date": "2007-05-14",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q4",
+     "report_date": "2006-12-31",
+     "notice_accession": "0000030697-07-000042",
+     "notice_filing_date": "2007-02-13",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    },
+    {
+     "quarter": "2006Q3",
+     "report_date": "2006-09-30",
+     "notice_accession": "0000030697-06-000206",
+     "notice_filing_date": "2006-11-15",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -22406,6 +26496,7 @@
    "values_in_thousands": true,
    "total_value": 1120470000.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -22416,6 +26507,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -22533,6 +26626,7 @@
    "values_in_thousands": false,
    "total_value": 71912518398.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -22543,6 +26637,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -22660,6 +26756,7 @@
    "values_in_thousands": false,
    "total_value": 1228442170.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -22670,6 +26767,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -22787,6 +26886,7 @@
    "values_in_thousands": false,
    "total_value": 51433080635.0,
    "unit_fix": 1.0,
+   "status": "empty_latest",
    "history_quarters": [
     "2025Q4",
     "2025Q3",
@@ -22795,6 +26895,23 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2026Q2",
+     "report_date": "2026-06-30",
+     "accession": "0000899140-26-000848",
+     "reason": "empty",
+     "filing_date": "2026-08-14"
+    },
+    {
+     "quarter": "2026Q1",
+     "report_date": "2026-03-31",
+     "accession": "0000899140-26-000549",
+     "reason": "empty",
+     "filing_date": "2026-05-15"
+    }
+   ],
+   "status_note": "The 2026Q2 13F filed on 2026-08-14 lists no holdings (a blank or placeholder information table); showing 2025Q4.",
    "featured": false,
    "top": [
     {
@@ -22912,6 +27029,7 @@
    "values_in_thousands": false,
    "total_value": 138117670065.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -22922,6 +27040,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -23039,6 +27159,7 @@
    "values_in_thousands": false,
    "total_value": 1159454589.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -23049,6 +27170,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -23166,6 +27289,7 @@
    "values_in_thousands": false,
    "total_value": 550090665605.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -23176,6 +27300,19 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [
+    {
+     "quarter": "2010Q1",
+     "report_date": "2010-03-31",
+     "notice_accession": "0000861177-10-000046",
+     "notice_filing_date": "2010-05-19",
+     "notice_note": "",
+     "reported_by": null,
+     "reason": "notice",
+     "detail": "13F-NT names no other manager"
+    }
+   ],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -23293,6 +27430,7 @@
    "values_in_thousands": false,
    "total_value": 798082781.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -23303,6 +27441,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -23420,6 +27560,7 @@
    "values_in_thousands": false,
    "total_value": 3116388059.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -23430,6 +27571,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -23535,6 +27678,7 @@
    "values_in_thousands": false,
    "total_value": 404938048.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -23545,6 +27689,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -23662,6 +27808,7 @@
    "values_in_thousands": false,
    "total_value": 5634931372.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -23672,6 +27819,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -23789,6 +27938,7 @@
    "values_in_thousands": false,
    "total_value": 164097610141.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -23799,6 +27949,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -23916,6 +28068,7 @@
    "values_in_thousands": false,
    "total_value": 35079228595.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -23926,6 +28079,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": true,
    "top": [
     {
@@ -24043,6 +28198,7 @@
    "values_in_thousands": true,
    "total_value": 23247502.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -24053,6 +28209,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -24086,6 +28244,7 @@
    "values_in_thousands": false,
    "total_value": 434252354.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -24096,6 +28255,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -24213,6 +28374,7 @@
    "values_in_thousands": false,
    "total_value": 9011871154.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -24223,6 +28385,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -24340,6 +28504,7 @@
    "values_in_thousands": false,
    "total_value": 580172687615.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -24350,6 +28515,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -24467,6 +28634,7 @@
    "values_in_thousands": false,
    "total_value": 3087485439.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q2",
     "2026Q1",
@@ -24477,6 +28645,8 @@
     "2024Q4",
     "2024Q3"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -24594,6 +28764,7 @@
    "values_in_thousands": false,
    "total_value": 8376649376.0,
    "unit_fix": 1.0,
+   "status": "current",
    "history_quarters": [
     "2026Q3",
     "2026Q2",
@@ -24604,6 +28775,8 @@
     "2025Q1",
     "2024Q4"
    ],
+   "skipped_quarters": [],
+   "status_note": "",
    "featured": false,
    "top": [
     {
@@ -24961,8 +29134,8 @@
     "GABELLI & Co INVESTMENT ADVISERS, INC.",
     "Alaska Permanent Capital Management, LLC"
    ],
-   "weight": 0.05186923347799907,
-   "conviction": 6.276177250837888,
+   "weight": 0.051889577890732626,
+   "conviction": 6.278638924778647,
    "held_by_featured": 6,
    "display_name": "NVIDIA",
    "sector": "Information Technology"
@@ -25196,8 +29369,8 @@
     "SUMITOMO MITSUI FINANCIAL GROUP, INC.",
     "Mizuho Securities Co. Ltd."
    ],
-   "weight": 0.04201305742368524,
-   "conviction": 4.537410201758006,
+   "weight": 0.04202953599726564,
+   "conviction": 4.539189887704689,
    "held_by_featured": 8,
    "display_name": "Apple",
    "sector": "Information Technology"
@@ -25208,11 +29381,10 @@
    "cusip": "594918104",
    "ticker": "MSFT",
    "put_call": null,
-   "total_value": 1082218530655.0,
-   "total_shares": 2759904285,
-   "num_investors": 133,
+   "total_value": 1080125560602.0,
+   "total_shares": 2754250207,
+   "num_investors": 132,
    "held_by": [
-    "bill-ackman",
     "matthew-mclennan",
     "philippe-laffont",
     "chase-coleman",
@@ -25347,7 +29519,6 @@
     "summit-investment-advisory-services-llc"
    ],
    "held_by_names": [
-    "Bill Ackman",
     "Matthew McLennan",
     "Philippe Laffont",
     "Chase Coleman",
@@ -25481,9 +29652,9 @@
     "PDT Partners, LLC",
     "Summit Investment Advisory Services, LLC"
    ],
-   "weight": 0.030559682550877546,
-   "conviction": 4.064437779266713,
-   "held_by_featured": 16,
+   "weight": 0.030512544362908352,
+   "conviction": 4.027655855903903,
+   "held_by_featured": 15,
    "display_name": "Microsoft",
    "sector": "Information Technology"
   },
@@ -25493,12 +29664,11 @@
    "cusip": "023135106",
    "ticker": "AMZN",
    "put_call": null,
-   "total_value": 897167556305.0,
-   "total_shares": 3742965636,
-   "num_investors": 135,
+   "total_value": 894782452222.0,
+   "total_shares": 3731513655,
+   "num_investors": 134,
    "held_by": [
     "philippe-laffont",
-    "bill-ackman",
     "chase-coleman",
     "david-tepper",
     "bill-nygren",
@@ -25635,7 +29805,6 @@
    ],
    "held_by_names": [
     "Philippe Laffont",
-    "Bill Ackman",
     "Chase Coleman",
     "David Tepper",
     "Bill Nygren",
@@ -25770,9 +29939,9 @@
     "Mizuho Securities Co. Ltd.",
     "MIZUHO FINANCIAL GROUP INC"
    ],
-   "weight": 0.025334213875485432,
-   "conviction": 3.420118873190533,
-   "held_by_featured": 17,
+   "weight": 0.02527677361265211,
+   "conviction": 3.3870876640953824,
+   "held_by_featured": 16,
    "display_name": "Amazon",
    "sector": "Consumer Discretionary"
   },
@@ -25782,9 +29951,9 @@
    "cusip": "02079K305",
    "ticker": "GOOGL",
    "put_call": null,
-   "total_value": 859875546246.0,
-   "total_shares": 2419995016,
-   "num_investors": 138,
+   "total_value": 859864493203.0,
+   "total_shares": 2419961840,
+   "num_investors": 136,
    "held_by": [
     "warren-buffett",
     "bill-nygren",
@@ -25807,8 +29976,6 @@
     "tweedy-browne",
     "josh-tarasoff",
     "richard-pzena",
-    "bill-ackman",
-    "guy-spier",
     "blackrock-inc",
     "fmr-llc",
     "state-street-corp",
@@ -25947,8 +30114,6 @@
     "Tweedy Browne",
     "Josh Tarasoff",
     "Richard Pzena",
-    "Bill Ackman",
-    "Guy Spier",
     "BlackRock, Inc.",
     "FMR LLC",
     "STATE STREET CORP",
@@ -26065,9 +30230,9 @@
     "Apollo Management Holdings, L.P.",
     "SUMITOMO MITSUI FINANCIAL GROUP, INC."
    ],
-   "weight": 0.024281162244224393,
-   "conviction": 3.3508003897029663,
-   "held_by_featured": 23,
+   "weight": 0.02429037368611427,
+   "conviction": 3.3034908213115406,
+   "held_by_featured": 21,
    "display_name": "Alphabet Class A",
    "sector": "Communication Services"
   },
@@ -26300,8 +30465,8 @@
     "First Pacific Financial",
     "Fairman Group, LLC"
    ],
-   "weight": 0.01966435848044995,
-   "conviction": 2.123750715888595,
+   "weight": 0.01967207133445302,
+   "conviction": 2.1245837041209263,
    "held_by_featured": 7,
    "display_name": "Broadcom",
    "sector": "Information Technology"
@@ -26312,9 +30477,9 @@
    "cusip": "02079K107",
    "ticker": "GOOG",
    "put_call": null,
-   "total_value": 608455901943.0,
-   "total_shares": 1730780127,
-   "num_investors": 113,
+   "total_value": 608366480223.0,
+   "total_shares": 1730468401,
+   "num_investors": 112,
    "held_by": [
     "warren-buffett",
     "matthew-mclennan",
@@ -26328,7 +30493,6 @@
     "philippe-laffont",
     "francois-rochon",
     "stuart-mclaughlin",
-    "bill-ackman",
     "irving-kahn",
     "dan-sundheim",
     "ray-dalio",
@@ -26443,7 +30607,6 @@
     "Philippe Laffont",
     "Francois Rochon",
     "Stuart McLaughlin",
-    "Bill Ackman",
     "Irving Kahn",
     "Dan Sundheim",
     "Ray Dalio",
@@ -26545,9 +30708,9 @@
     "Fairman Group, LLC",
     "Apollo Management Holdings, L.P."
    ],
-   "weight": 0.017181575331492453,
-   "conviction": 1.941518012458647,
-   "held_by_featured": 17,
+   "weight": 0.017185788295172692,
+   "conviction": 1.9248082890593414,
+   "held_by_featured": 16,
    "display_name": "Alphabet Class C",
    "sector": "Communication Services"
   },
@@ -26557,14 +30720,13 @@
    "cusip": "595112103",
    "ticker": "MU",
    "put_call": null,
-   "total_value": 547565819656.0,
-   "total_shares": 481133273,
-   "num_investors": 97,
+   "total_value": 547554763656.0,
+   "total_shares": 480933273,
+   "num_investors": 96,
    "held_by": [
     "philippe-laffont",
     "david-tepper",
     "ray-dalio",
-    "guy-spier",
     "ruane-cunniff",
     "bill-nygren",
     "blackrock-inc",
@@ -26663,7 +30825,6 @@
     "Philippe Laffont",
     "David Tepper",
     "Ray Dalio",
-    "Guy Spier",
     "Ruane Cunniff",
     "Bill Nygren",
     "BlackRock, Inc.",
@@ -26758,9 +30919,9 @@
     "BAILLIE GIFFORD & CO",
     "Princeton Global Asset Management LLC"
    ],
-   "weight": 0.015462161430807055,
-   "conviction": 1.4998296587882844,
-   "held_by_featured": 6,
+   "weight": 0.015467913756122774,
+   "conviction": 1.4849197205877862,
+   "held_by_featured": 5,
    "display_name": "Micron",
    "sector": "Information Technology"
   },
@@ -26770,13 +30931,12 @@
    "cusip": "30303M102",
    "ticker": "META",
    "put_call": null,
-   "total_value": 513275187958.0,
-   "total_shares": 880742944,
-   "num_investors": 127,
+   "total_value": 511752829554.0,
+   "total_shares": 878082083,
+   "num_investors": 126,
    "held_by": [
     "matthew-mclennan",
     "chase-coleman",
-    "bill-ackman",
     "philippe-laffont",
     "andreas-halvorsen",
     "terry-smith",
@@ -26905,7 +31065,6 @@
    "held_by_names": [
     "Matthew McLennan",
     "Chase Coleman",
-    "Bill Ackman",
     "Philippe Laffont",
     "Andreas Halvorsen",
     "Terry Smith",
@@ -27031,9 +31190,9 @@
     "Potrero Capital Research LLC",
     "Mizuho Securities Co. Ltd."
    ],
-   "weight": 0.014493862709729249,
-   "conviction": 1.8407205641356146,
-   "held_by_featured": 18,
+   "weight": 0.014456542354119889,
+   "conviction": 1.821524336619106,
+   "held_by_featured": 17,
    "display_name": "Meta Platforms",
    "sector": "Communication Services"
   },
@@ -27240,8 +31399,8 @@
     "MIZUHO FINANCIAL GROUP INC",
     "SUMITOMO MITSUI FINANCIAL GROUP, INC."
    ],
-   "weight": 0.010987399129996304,
-   "conviction": 1.0438029173496488,
+   "weight": 0.010991708663177736,
+   "conviction": 1.044212323001885,
    "held_by_featured": 3,
    "display_name": "Eli Lilly",
    "sector": "Health Care"
@@ -27439,8 +31598,8 @@
     "BNP PARIBAS",
     "SUMITOMO MITSUI FINANCIAL GROUP, INC."
    ],
-   "weight": 0.010890905151923359,
-   "conviction": 0.9801814636731023,
+   "weight": 0.010895176837749345,
+   "conviction": 0.9805659153974411,
    "held_by_featured": 4,
    "display_name": "Tesla",
    "sector": "Consumer Discretionary"
@@ -27658,8 +31817,8 @@
     "Capula Management Ltd",
     "MIZUHO FINANCIAL GROUP INC"
    ],
-   "weight": 0.01073528677158472,
-   "conviction": 1.073528677158472,
+   "weight": 0.010739497419983578,
+   "conviction": 1.073949741998358,
    "held_by_featured": 6,
    "display_name": "AMD",
    "sector": "Information Technology"
@@ -27883,8 +32042,8 @@
     "Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",
     "Fairman Group, LLC"
    ],
-   "weight": 0.00811789557632597,
-   "conviction": 0.8361432443615748,
+   "weight": 0.008121079618330421,
+   "conviction": 0.8364712006880334,
    "held_by_featured": 6,
    "display_name": "JPMorgan Chase",
    "sector": "Financials"
@@ -28084,8 +32243,8 @@
     "First Pacific Financial",
     "SUMITOMO MITSUI FINANCIAL GROUP, INC."
    ],
-   "weight": 0.00722103377377551,
-   "conviction": 0.6571140734135714,
+   "weight": 0.007223866044113935,
+   "conviction": 0.6573718100143682,
    "held_by_featured": 5,
    "display_name": "Intel",
    "sector": "Information Technology"
@@ -28285,8 +32444,8 @@
     "Capula Management Ltd",
     "BAILLIE GIFFORD & CO"
    ],
-   "weight": 0.007050704843639771,
-   "conviction": 0.6416141407712191,
+   "weight": 0.00705347030670493,
+   "conviction": 0.6418657979101486,
    "held_by_featured": 5,
    "display_name": "Lam Research",
    "sector": "Information Technology"
@@ -28492,8 +32651,8 @@
     "BAILLIE GIFFORD & CO",
     "Fairman Group, LLC"
    ],
-   "weight": 0.007022192783815698,
-   "conviction": 0.6600861216786756,
+   "weight": 0.007024947063736745,
+   "conviction": 0.660345023991254,
    "held_by_featured": 6,
    "display_name": "Applied Materials",
    "sector": "Information Technology"
@@ -28743,8 +32902,8 @@
     "Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",
     "Fairman Group, LLC"
    ],
-   "weight": 0.006725519433830945,
-   "conviction": 0.7801602543243896,
+   "weight": 0.0067281573510322365,
+   "conviction": 0.7804662527197395,
    "held_by_featured": 14,
    "display_name": "Visa",
    "sector": "Financials"
@@ -28950,8 +33109,8 @@
     "Mitsubishi UFJ Morgan Stanley Securities Co., Ltd.",
     "Fairman Group, LLC"
    ],
-   "weight": 0.00633339201374522,
-   "conviction": 0.5953388492920507,
+   "weight": 0.006335876128749265,
+   "conviction": 0.595572356102431,
    "held_by_featured": 4,
    "display_name": "Johnson & Johnson",
    "sector": "Health Care"
@@ -28962,9 +33121,9 @@
    "cusip": "084670702",
    "ticker": "BRK.B",
    "put_call": null,
-   "total_value": 216096073360.0,
-   "total_shares": 432432367,
-   "num_investors": 99,
+   "total_value": 216057686360.0,
+   "total_shares": 432291767,
+   "num_investors": 98,
    "held_by": [
     "bill-gates",
     "li-lu",
@@ -28972,7 +33131,6 @@
     "francois-rochon",
     "matthew-mclennan",
     "tweedy-browne",
-    "guy-spier",
     "bill-nygren",
     "robert-olstein",
     "blackrock-inc",
@@ -29073,7 +33231,6 @@
     "Francois Rochon",
     "Matthew McLennan",
     "Tweedy Browne",
-    "Guy Spier",
     "Bill Nygren",
     "Robert Olstein",
     "BlackRock, Inc.",
@@ -29167,9 +33324,9 @@
     "Summit Investment Advisory Services, LLC",
     "Mitsubishi UFJ Morgan Stanley Securities Co., Ltd."
    ],
-   "weight": 0.006102120057374972,
-   "conviction": 0.6041098856801222,
-   "held_by_featured": 9,
+   "weight": 0.0061034290646103904,
+   "conviction": 0.5981360483318182,
+   "held_by_featured": 8,
    "display_name": "Berkshire Hathaway Class B",
    "sector": "Financials"
   },
@@ -29308,8 +33465,8 @@
     "Sumitomo Mitsui DS Asset Management Company, Ltd",
     "FIDELITY D & D BANCORP INC"
    ],
-   "weight": 0.006034519792500263,
-   "conviction": 0.368105707342516,
+   "weight": 0.00603688668233216,
+   "conviction": 0.3682500876222618,
    "held_by_featured": 1,
    "display_name": "iShares Core S&P 500 ETF",
    "sector": "Funds & ETFs"

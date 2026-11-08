@@ -1,0 +1,77 @@
+{
+ "generated_at": "2026-11-08T17:42:50Z",
+ "expected_quarter": "2026Q2",
+ "counts": {
+  "current": 192,
+  "inactive": 1,
+  "empty_latest": 4,
+  "stale": 1,
+  "reported_by_other": 1
+ },
+ "flagged": [
+  {
+   "slug": "guy-spier",
+   "manager": "Guy Spier",
+   "cik": "0001404599",
+   "quarter": "2022Q2",
+   "report_date": "2022-06-30",
+   "status": "inactive",
+   "status_note": "No 13F since 2022Q2; this filer appears to have stopped filing and is left out of Consensus."
+  },
+  {
+   "slug": "thomas-bancroft",
+   "manager": "Thomas Bancroft",
+   "cik": "0001540866",
+   "quarter": "2025Q4",
+   "report_date": "2025-12-31",
+   "status": "empty_latest",
+   "status_note": "The 2026Q1 13F filed on 2026-05-15 lists no holdings (a blank or placeholder information table); showing 2025Q4."
+  },
+  {
+   "slug": "oconnor-a-distinct-business-unit-of-ubs-asset-management",
+   "manager": "OCONNOR, A Distinct Business Unit of UBS ASSET MANAGEMENT",
+   "cik": "0001132716",
+   "quarter": "2025Q4",
+   "report_date": "2025-12-31",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q2 yet; showing 2025Q4."
+  },
+  {
+   "slug": "two-sigma-advisers-lp",
+   "manager": "TWO SIGMA ADVISERS, LP",
+   "cik": "0001478735",
+   "quarter": "2025Q4",
+   "report_date": "2025-12-31",
+   "status": "empty_latest",
+   "status_note": "The 2026Q2 13F filed on 2026-08-14 lists no holdings (a blank or placeholder information table); showing 2025Q4."
+  },
+  {
+   "slug": "matrix-capital-management-company-lp",
+   "manager": "Matrix Capital Management Company, LP",
+   "cik": "0001410830",
+   "quarter": "2026Q1",
+   "report_date": "2026-03-31",
+   "status": "empty_latest",
+   "status_note": "The 2026Q2 13F filed on 2026-08-13 lists no holdings (a blank or placeholder information table); showing 2026Q1."
+  },
+  {
+   "slug": "robert-olstein",
+   "manager": "Robert Olstein",
+   "cik": "0000947996",
+   "quarter": "2026Q1",
+   "report_date": "2026-03-31",
+   "status": "empty_latest",
+   "status_note": "The 2026Q2 13F filed on 2026-07-07 lists no holdings (a blank or placeholder information table); showing 2026Q1."
+  },
+  {
+   "slug": "bill-ackman",
+   "manager": "Bill Ackman",
+   "cik": "0001336528",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "reported_by_other",
+   "status_note": "Holdings for 2026Q2 are reported by Pershing Square Inc. (this filer filed a 13F notice)."
+  }
+ ],
+ "failed": []
+}

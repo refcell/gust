@@ -1,0 +1,2980 @@
+{
+ "0000030697-06-000206": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000030697-07-000042": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000030697-07-000124": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000030697-07-000250": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000030697-07-000341": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000276300-02-000049": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000276300-02-000139": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000315066-03-002312": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000315066-03-002609": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000315066-03-003074": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-05-000031": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-05-000225": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-05-000359": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-05-000421": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-06-000133": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-06-000151": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000181": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000189": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000278": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000281": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000347": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000351": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000396": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000357235-07-000402": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000704051-03-000259": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000704051-04-000094": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000704051-04-000217": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000704051-04-000333": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-03-000328": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-04-000053": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-04-000167": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-04-000168": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-04-000297": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-04-000418": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-05-000037": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-05-000152": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-05-000270": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-05-000381": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-06-000050": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-06-000148": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-06-000220": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-06-000291": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-07-000087": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-07-000145": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-07-000262": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-07-000377": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-08-000078": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-08-000149": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-08-000281": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-08-000508": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-08-000509": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000081": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000082": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000368": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000369": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000565": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000566": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000658": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-09-000659": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-10-000038": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000807249-10-000039": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000810868-01-000110": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000861177-10-000046": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000869906-02-000089": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000869906-02-000226": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-00-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-00-000011": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-00-000013": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-01-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-01-500015": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-01-500018": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-02-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-02-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-02-000005": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-02-000007": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-03-000008": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-03-000013": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-03-000014": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-07-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-08-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-08-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-08-000004": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-08-000005": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-09-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-09-000002": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-09-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-09-000004": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-10-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-10-000002": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-10-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-10-000004": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-11-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-11-000002": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-11-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-11-000004": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-12-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-12-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-12-000005": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-12-000006": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-13-000003": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-13-000004": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-13-000005": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   },
+   {
+    "cik": "0000067698",
+    "name": "MONTAG &amp; CALDWELL, LLC"
+   },
+   {
+    "cik": "0001428948",
+    "name": "Impax Asset Management LTD"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-13-000006": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": null,
+    "name": "Bank of the West"
+   },
+   {
+    "cik": null,
+    "name": "First Hawaiian Bank"
+   },
+   {
+    "cik": null,
+    "name": "Montag &amp; Caldwell, LLC"
+   },
+   {
+    "cik": null,
+    "name": "Impax Asset Management Ltd"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-14-000003": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   },
+   {
+    "cik": "0000067698",
+    "name": "MONTAG &amp; CALDWELL, LLC"
+   },
+   {
+    "cik": "0001428948",
+    "name": "Impax Asset Management LTD"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-14-000008": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   },
+   {
+    "cik": "0001428948",
+    "name": "Impax Asset Management LTD"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-14-000009": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-15-000001": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-15-000003": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   },
+   {
+    "cik": "0001623883",
+    "name": "EXANE DERIVATIVES"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-15-000004": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": null,
+    "name": "Bank of the West"
+   },
+   {
+    "cik": null,
+    "name": "First Hawaiian Bank"
+   },
+   {
+    "cik": "0001623883",
+    "name": "EXANE DERIVATIVES"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-15-000007": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "BNP Paribas Investment Partners SA"
+   },
+   {
+    "cik": null,
+    "name": "BNP Paribas Arbitrage SNC"
+   },
+   {
+    "cik": null,
+    "name": "Bank of the West"
+   },
+   {
+    "cik": null,
+    "name": "First Hawaiian Bank"
+   },
+   {
+    "cik": null,
+    "name": "Exane Derivatives"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-16-000011": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-16-000012": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-16-000013": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-16-000015": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-17-000007": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-18-000001": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-19-000003": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-19-000005": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-20-000002": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-20-000004": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-20-000005": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-20-000008": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-21-000004": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-22-000008": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SNC"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-23-000003": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SNC"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-23-000013": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SNC"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-23-000015": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SNC"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-24-000002": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS FINANCIAL MARKETS"
+   }
+  ],
+  "note": ""
+ },
+ "0000872786-99-000001": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000872786-99-000002": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000895421-13-000280": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000895662-04-000058": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898417-00-000014": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898417-00-000027": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898417-00-000038": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898417-00-000054": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898417-01-000015": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898418-99-000008": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898419-99-000004": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000898419-99-000005": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-05-000473": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-05-000578": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-05-000909": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-06-000133": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-06-000509": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-06-000879": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-06-001174": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-07-000159": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-07-000481": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-07-000775": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-07-001097": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-08-000150": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-08-000430": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-08-000679": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-08-000929": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-09-000107": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-09-000516": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-09-000813": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-10-000058": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-10-000311": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-10-000468": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-10-000645": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-11-000069": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-11-000264": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-11-000393": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-11-000540": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-12-000082": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-12-000268": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-12-000404": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-12-000545": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-13-000080": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-13-000315": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000903423-13-000621": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-14-000062": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-14-000301": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-14-000463": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-14-000597": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-15-000079": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-15-000315": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-15-000494": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-15-000650": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-16-000816": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-16-001025": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-16-001203": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-16-001355": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-17-000069": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-17-000325": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-17-000503": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000903423-17-000669": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0000912057-02-006150": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000912057-02-020638": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000912057-02-032070": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000918830-09-000020": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000919574-05-002842": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000929638-12-000487": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000936886-03-000042": {
+  "reporters": [],
+  "note": ""
+ },
+ "0000950123-18-002157": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-18-004882": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-18-008253": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-18-011412": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-001828": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-004606": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-004672": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-007626": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-008162": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-010684": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-19-011129": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-001688": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-002087": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-004736": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-005280": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-008451": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-008939": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-011289": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-20-012111": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-21-001394": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-21-002570": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "AMUNDI PIONEER ASSET MANAGEMENT INC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-21-006170": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-21-006980": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Amundi Asset Management US, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-21-010667": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Trust &amp; Banking Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-21-014435": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-22-001549": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-22-005584": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-22-008554": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-22-011333": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-23-002231": {
+  "reporters": [
+   {
+    "cik": "0001512734",
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": "0001520309",
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": "0001068855",
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": "0001513006",
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": "0001803149",
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": "0001825516",
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": "0001908623",
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": "0001964389",
+    "name": "PPSC Investment Service Corp"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-23-004556": {
+  "reporters": [
+   {
+    "cik": "0001512734",
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": "0001520309",
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": "0001068855",
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": "0001513006",
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": "0001803149",
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": "0001825516",
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": "0001908623",
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": "0001964389",
+    "name": "PPSC Investment Service Corp"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-23-007139": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-23-009935": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-24-001625": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-24-004827": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-24-007970": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-24-011061": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-25-001884": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-25-005043": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0000950123-25-007714": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0001067484-03-000038": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001067484-03-000202": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001079114-14-000005": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-14-000010": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-15-000003": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-15-000005": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-15-000010": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-15-000014": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Greenlight Capital, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-16-000019": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-16-000022": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-16-000027": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-16-000032": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-17-000003": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-17-000007": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-17-000011": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-17-000015": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-18-000003": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-18-000006": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-18-000011": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001079114-18-000015": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001096338-01-500075": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001096338-01-500139": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001096338-01-500206": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001104659-26-013743": {
+  "reporters": [
+   {
+    "cik": "0001512734",
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": "0001520309",
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": "0001068855",
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": "0000812291",
+    "name": "MIZUHO SECURITIES USA LLC"
+   },
+   {
+    "cik": "0001803149",
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": "0001825516",
+    "name": "MIZUHO MARKETS AMERICAS LLC"
+   },
+   {
+    "cik": "0001908623",
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": "0001964389",
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": "0002009539",
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0001104659-26-060671": {
+  "reporters": [
+   {
+    "cik": "0001512734",
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": "0001520309",
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": "0001068855",
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": "0000812291",
+    "name": "MIZUHO SECURITIES USA LLC"
+   },
+   {
+    "cik": "0001803149",
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": "0001825516",
+    "name": "MIZUHO MARKETS AMERICAS LLC"
+   },
+   {
+    "cik": "0001908623",
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": "0001964389",
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": "0002009539",
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0001140361-09-025968": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-10-033736": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-10-045703": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-11-009221": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-11-027774": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-11-042031": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-11-053335": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-12-008127": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-12-037031": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-12-047251": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-13-007324": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-13-021008": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001140361-13-032273": {
+  "reporters": [
+   {
+    "cik": "0001191672",
+    "name": "CREDIT AGRICOLE S A"
+   }
+  ],
+  "note": ""
+ },
+ "0001140361-13-032774": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001140361-13-042780": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001140361-14-007908": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001140361-14-021632": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-14-000007": {
+  "reporters": [
+   {
+    "cik": "0001520354",
+    "name": "BNP Paribas Investment Partners S.A."
+   },
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   },
+   {
+    "cik": "0000059951",
+    "name": "BANK OF THE WEST"
+   },
+   {
+    "cik": "0000764106",
+    "name": "FIRST HAWAIIAN BANK"
+   },
+   {
+    "cik": "0000067698",
+    "name": "MONTAG &amp; CALDWELL, LLC"
+   },
+   {
+    "cik": "0001428948",
+    "name": "Impax Asset Management LTD"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-17-000003": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-17-000009": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-18-000006": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-18-000009": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-19-000002": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-19-000009": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-21-000003": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-21-000008": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-22-000006": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001166588-22-000009": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-19-000852": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-19-001369": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-19-001861": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-19-002349": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-20-000812": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-20-001396": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-20-001847": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-20-002333": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-21-000767": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-21-001334": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-21-001877": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-21-002372": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-22-000887": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-22-001476": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-22-002021": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-22-002566": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-23-001334": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-23-002281": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-23-003175": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-23-004009": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-24-001504": {
+  "reporters": [
+   {
+    "cik": "0001079114",
+    "name": "GREENLIGHT CAPITAL INC"
+   }
+  ],
+  "note": ""
+ },
+ "0001172661-26-003777": {
+  "reporters": [
+   {
+    "cik": "0002026053",
+    "name": "PERSHING SQUARE INC."
+   }
+  ],
+  "note": "Holdings of this reporting manager are now included in the report of its public parent company."
+ },
+ "0001193125-25-278747": {
+  "reporters": [
+   {
+    "cik": null,
+    "name": "Mizuho Bank, Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities Co. Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Asset Management One Co., Ltd."
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Securities USA LLC"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Cayman LP"
+   },
+   {
+    "cik": null,
+    "name": "Mizuho Markets Americas LLC"
+   },
+   {
+    "cik": null,
+    "name": "PayPay Securities Corp"
+   },
+   {
+    "cik": null,
+    "name": "PPSC Investment Service Corp"
+   },
+   {
+    "cik": null,
+    "name": "Rakuten Securities, Inc."
+   }
+  ],
+  "note": ""
+ },
+ "0001197610-17-000003": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001197610-21-000002": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001197610-22-000002": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SA"
+   }
+  ],
+  "note": ""
+ },
+ "0001197610-23-000004": {
+  "reporters": [
+   {
+    "cik": "0001166588",
+    "name": "BNP PARIBAS ARBITRAGE, SNC"
+   }
+  ],
+  "note": ""
+ },
+ "0001318757-13-000004": {
+  "reporters": [
+   {
+    "cik": "0001325091",
+    "name": "Marshall Wace North America, L.P."
+   }
+  ],
+  "note": ""
+ },
+ "0001318757-14-000003": {
+  "reporters": [
+   {
+    "cik": "0001325091",
+    "name": "Marshall Wace North America, L.P."
+   }
+  ],
+  "note": ""
+ },
+ "0001345471-08-000084": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001345471-08-000131": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001345471-09-000152": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001345471-09-000325": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001345471-09-000353": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001345471-09-000375": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001345471-11-000058": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001348883-06-000046": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001348883-06-000054": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001348883-06-000105": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001348883-06-000112": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001348883-06-000140": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001348883-06-000149": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001415581-08-000038": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001415581-08-000080": {
+  "reporters": [],
+  "note": ""
+ },
+ "0001520309-26-000005": {
+  "reporters": [
+   {
+    "cik": "0001335730",
+    "name": "MIZUHO FINANCIAL GROUP INC"
+   }
+  ],
+  "note": ""
+ }
+}
