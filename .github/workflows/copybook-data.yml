@@ -121,6 +121,10 @@ jobs:
           python $I/events.py || echo "::warning::optional: Form 4 / 13D/G events failed"
           if [ "$SCOPE" = full ]; then
             python $I/stocks.py
+            # optional: every filer's moves vs its previous quarter (shard summary public, full rows to R2)
+            if [ -f $I/moves.py ]; then python $I/moves.py || echo "::warning::optional: filer moves failed"; fi
+            # optional: bulk/{quarter}.csv.gz exports for the Copy API (R2 only)
+            if [ -f $I/export.py ]; then python $I/export.py || echo "::warning::optional: bulk export failed"; fi
           fi
       # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
       - name: Refuse to publish a build that lost tickers
