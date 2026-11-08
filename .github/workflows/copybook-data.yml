@@ -117,6 +117,11 @@ jobs:
           if [ "$SCOPE" = full ]; then
             python $I/stocks.py || echo "::warning::stock holder index failed"
           fi
+      # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
+      - name: Refuse to publish a build that lost tickers
+        run: |
+          G=_ingest/copybook/ingest/gate.py
+          if [ -f $G ]; then python $G public/copybook/data; fi
       - name: Upload paid history to R2
         id: upload
         continue-on-error: true
