@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-11-09T01:01:46Z",
+ "generated_at": "2026-11-09T00:50:07Z",
  "expected_quarter": "2026Q2",
  "counts": {
-  "current": 192,
+  "current": 348,
   "inactive": 1,
   "empty_latest": 4,
   "stale": 1,

@@ -106,10 +106,13 @@ jobs:
           # Required steps fail the run, so nothing is uploaded or published and the live data stays.
           # Optional steps (external lookups that resume next run) only warn and keep their previous output.
           I=_ingest/copybook/ingest
+          if [ "$SCOPE" = full ]; then
+            # optional: SEC 13F data sets (seeds the fb/ full books once per period; stocks.py falls back to f/).
+            # Before build.py, whose split detection reads every filer's full books.
+            if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::optional: SEC 13F data sets failed"; fi
+          fi
           python $I/build.py
           if [ "$SCOPE" = full ]; then
-            # optional: SEC 13F data sets (seeds the fb/ full books once per period; stocks.py falls back to f/)
-            if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::optional: SEC 13F data sets failed"; fi
             # optional: all-filer shards (time-budgeted; picks up where it stopped next run)
             python $I/bulk.py || echo "::warning::optional: bulk ingest failed"
             # optional: OpenFIGI lookups for new CUSIPs (the cached map covers the rest)
@@ -120,6 +123,8 @@ jobs:
           # optional: Form 4 / 13D/G events (the previous events files stay)
           python $I/events.py || echo "::warning::optional: Form 4 / 13D/G events failed"
           if [ "$SCOPE" = full ]; then
+            # optional: filer type per CIK (hedge_fund, active, index, bank, ...), read by stocks.py and moves.py
+            if [ -f $I/filer_types.py ]; then python $I/filer_types.py || echo "::warning::optional: filer types failed"; fi
             python $I/stocks.py
             # optional: every filer's moves vs its previous quarter (shard summary public, full rows to R2)
             if [ -f $I/moves.py ]; then python $I/moves.py || echo "::warning::optional: filer moves failed"; fi
