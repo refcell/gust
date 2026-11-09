@@ -135,6 +135,9 @@ jobs:
           if [ -f $G ]; then python $G public/copybook/data; fi
       - name: Upload paid history to R2
         id: upload
+        # Paused: one Worker request per file used up the Workers free plan's 100k requests/day
+        # (2026-11-09). Turns back on with batched uploads once the API is back.
+        if: false
         continue-on-error: true
         env:
           PYTHONPATH: _ingest/copybook
