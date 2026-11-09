@@ -123,6 +123,11 @@ jobs:
           if [ "$SCOPE" = full ]; then
             # optional: filer type per CIK (hedge_fund, active, index, bank, ...), read by stocks.py and moves.py
             if [ -f $I/filer_types.py ]; then python $I/filer_types.py || echo "::warning::optional: filer types failed"; fi
+          else
+            # reviewed type cases on top of the last full run's types (the gate checks them every run)
+            python $I/filer_types.py --overrides
+          fi
+          if [ "$SCOPE" = full ]; then
             python $I/stocks.py
             # optional: EDGAR acceptance time for every shard's filing (hl/ rows, changes, fq/ books)
             if [ -f $I/accepted.py ]; then python $I/accepted.py || echo "::warning::optional: acceptance times failed"; fi
