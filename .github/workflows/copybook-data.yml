@@ -135,6 +135,8 @@ jobs:
           if [ -f $G ]; then python $G public/copybook/data; fi
       - name: Upload paid history to R2
         id: upload
+        # Paused again 2026-11-09 ~05:10 UTC at the API's request (gene hung); re-enable when it says go.
+        if: false
         continue-on-error: true
         env:
           PYTHONPATH: _ingest/copybook
