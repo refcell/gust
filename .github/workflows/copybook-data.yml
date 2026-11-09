@@ -63,7 +63,7 @@ jobs:
     needs: gate
     if: needs.gate.outputs.skip != '1'
     runs-on: ubuntu-latest
-    timeout-minutes: 170
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -99,6 +99,7 @@ jobs:
           COPYBOOK_FIGI_BUDGET_S: "900"
           COPYBOOK_SEC_BUDGET_S: "900"
           COPYBOOK_EVENTS_BUDGET_S: "900"
+          COPYBOOK_ACCEPTED_BUDGET_S: "2100"
         run: |
           # Required steps fail the run, so nothing is uploaded or published and the live data stays.
           # Optional steps (external lookups that resume next run) only warn and keep their previous output.
@@ -123,6 +124,8 @@ jobs:
             # optional: filer type per CIK (hedge_fund, active, index, bank, ...), read by stocks.py and moves.py
             if [ -f $I/filer_types.py ]; then python $I/filer_types.py || echo "::warning::optional: filer types failed"; fi
             python $I/stocks.py
+            # optional: EDGAR acceptance time for every shard's filing (hl/ rows, changes, fq/ books)
+            if [ -f $I/accepted.py ]; then python $I/accepted.py || echo "::warning::optional: acceptance times failed"; fi
             # optional: every filer's moves vs its previous quarter (shard summary public, full rows to R2)
             if [ -f $I/moves.py ]; then python $I/moves.py || echo "::warning::optional: filer moves failed"; fi
             # optional: bulk/{quarter}.csv.gz exports for the Copy API (R2 only)
@@ -135,14 +138,13 @@ jobs:
           if [ -f $G ]; then python $G public/copybook/data; fi
       - name: Upload paid history to R2
         id: upload
-        # Paused again 2026-11-09 ~05:10 UTC at the API's request (gene hung); re-enable when it says go.
-        if: false
+        # Resumed 2026-11-09 at the API's go: one bundle at a time, at most 100 files / 20 MB each.
         continue-on-error: true
         env:
           PYTHONPATH: _ingest/copybook
           COPYBOOK_WEB_DIR: public/copybook
-          # The self-hosted Copy API (2026-11-09); uploads go as tar bundles, never one request per file.
-          COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
+          # The self-hosted Copy API: upload_history.py reads its base from api.json each run (the tunnel can change).
+          COPYBOOK_UPLOAD_BUDGET_S: "3000"
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - uses: actions/cache/save@v4
