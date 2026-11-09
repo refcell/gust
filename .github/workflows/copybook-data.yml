@@ -160,6 +160,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           UPLOADED: ${{ steps.upload.outcome }}
+          # Fine-grained token with actions:write on factordynamics/site: rebuilds the site right after new data.
+          SITE_DISPATCH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -173,6 +175,12 @@ jobs:
           for i in 1 2 3 4 5; do
             if git pull -q --rebase -X theirs && git push -q; then
               gh workflow run ci.yml --ref main
+              if [ -n "$SITE_DISPATCH_TOKEN" ]; then
+                GH_TOKEN="$SITE_DISPATCH_TOKEN" gh workflow run copybook-pages.yml -R factordynamics/site --ref main \
+                  || echo "::warning::site build dispatch failed"
+              else
+                echo "::notice::SITE_DISPATCH_TOKEN not set; the site rebuilds on its own schedule"
+              fi
               exit 0
             fi
             sleep 15
