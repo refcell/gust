@@ -30,8 +30,8 @@ on:
 
 run-name: "Copybook data (${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}) ${{ inputs.reason }}"
 
-# One full and one curated run can be in flight; a curated run steps aside while a full
-# run is going (the full run refreshes the curated funds too), so neither cancels the other.
+# One full and one curated run can be in flight at once; neither cancels or waits for the other.
+# A snapshot never replaces a newer one at head (see the push step).
 concurrency:
   group: copybook-data-${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}
   cancel-in-progress: false
@@ -56,11 +56,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "scope=$SCOPE accession=${{ inputs.accession }}"
-          if [ "$SCOPE" = curated ]; then
-            busy=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow copybook-data.yml --status in_progress \
-              --json databaseId,displayTitle -q "[.[] | select(.databaseId != ${{ github.run_id }}) | select(.displayTitle | contains(\"(full)\"))] | length")
-            if [ "${busy:-0}" != 0 ]; then echo "A full run is in progress; it refreshes the curated funds too."; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
-          fi
+          # Curated refreshes always run, also while a long full run is going: the season data must
+          # never wait for a full rebuild. The push step keeps whichever snapshot is newer.
 
   refresh:
     needs: gate
@@ -168,6 +165,22 @@ jobs:
           # h/ leaves Pages only once every file is in R2; otherwise the Pages copy stays as the fallback.
           if [ "$UPLOADED" = success ]; then
             git rm -r -q --cached --ignore-unmatch public/copybook/data/h
+          fi
+          # Never publish a snapshot older than head. A curated run that lost the race publishes nothing;
+          # a full run keeps its all-filer outputs and takes the newer curated snapshot from head.
+          D=public/copybook/data
+          gen() { python3 -c 'import json,sys; print(json.load(sys.stdin).get("generated_at") or "")' 2>/dev/null; }
+          git fetch -q origin main
+          HEAD_GEN=$(git show origin/main:$D/index.json 2>/dev/null | gen)
+          OUR_GEN=$(gen < $D/index.json)
+          if [ -n "$HEAD_GEN" ] && [[ "$HEAD_GEN" > "$OUR_GEN" ]]; then
+            if [ "$SCOPE" = curated ]; then echo "Head has a newer snapshot ($HEAD_GEN > $OUR_GEN); nothing to publish"; exit 0; fi
+            echo "Head has a newer curated snapshot ($HEAD_GEN > $OUR_GEN); publishing only the all-filer outputs on top of it"
+            KEEP="f hl filers.json filer_types.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+            T=$(mktemp -d)
+            for k in $KEEP; do if [ -e $D/$k ]; then cp -r $D/$k $T/; fi; done
+            git checkout origin/main -- $D
+            for k in $KEEP; do if [ -e $T/$k ]; then rm -rf $D/$k; cp -r $T/$k $D/; fi; done
           fi
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
