@@ -1,8 +1,54 @@
 {
- "generated_at": "2026-11-10T15:20:43Z",
+ "generated_at": "2026-11-10T15:41:11Z",
  "rule": "New = original 13F-HR for a report period later than any recorded for the fund, filed within 7 days. Amendments, restatements, 13F-NT notices and accession changes on old periods never alert.",
- "new_filings": [],
+ "new_filings": [
+  {
+   "slug": "aquamarine-zurich-ag",
+   "manager": "Aquamarine Zurich AG",
+   "name": "Aquamarine Zurich AG",
+   "quarter": "2026Q3",
+   "filing_date": "2026-11-10",
+   "report_date": "2026-09-30",
+   "previous_report_date": "2026-06-30",
+   "form": "13F-HR",
+   "accession": "0001953324-26-000004",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1953324/000195332426000004/0001953324-26-000004-index.html",
+   "reported_by": null,
+   "moves": {
+    "suspect_units": 0,
+    "bought_usd": 0,
+    "sold_usd": 0,
+    "new": [],
+    "exited": [],
+    "added": [],
+    "trimmed": []
+   }
+  }
+ ],
  "recent": [
+  {
+   "slug": "aquamarine-zurich-ag",
+   "manager": "Aquamarine Zurich AG",
+   "name": "Aquamarine Zurich AG",
+   "quarter": "2026Q3",
+   "filing_date": "2026-11-10",
+   "report_date": "2026-09-30",
+   "previous_report_date": "2026-06-30",
+   "form": "13F-HR",
+   "accession": "0001953324-26-000004",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1953324/000195332426000004/0001953324-26-000004-index.html",
+   "reported_by": null,
+   "moves": {
+    "suspect_units": 0,
+    "bought_usd": 0,
+    "sold_usd": 0,
+    "new": [],
+    "exited": [],
+    "added": [],
+    "trimmed": []
+   },
+   "detected_at": "2026-11-10T15:41:11Z"
+  },
   {
    "slug": "fmr-llc",
    "manager": "FMR LLC",
@@ -4379,7 +4425,7 @@
   "apollo-management-holdings-l-p": "2026-06-30",
   "aqr-capital-management-llc": "2026-06-30",
   "aquamarine-financial-cayman-ltd": "2026-06-30",
-  "aquamarine-zurich-ag": "2026-06-30",
+  "aquamarine-zurich-ag": "2026-09-30",
   "armstrong-henry-h-associates-inc-6827": "2026-09-30",
   "arrowstreet-capital-limited-partnership": "2026-06-30",
   "atalan-capital-partners-lp-2906": "2026-06-30",
@@ -4717,5 +4763,5 @@
   "yacktman-asset-management-lp": "2026-09-30",
   "ycg-llc-4801": "2026-06-30"
  },
- "email_status": null
+ "email_status": "skipped: COPYBOOK_ALERT_TO unset"
 }
