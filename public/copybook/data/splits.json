@@ -743,6 +743,6 @@
   "09661T305:2026Q3": "accepted",
   "00162Q726:2026Q3": "accepted"
  },
- "generated_at": "2026-11-10T16:01:34+00:00",
+ "generated_at": "2026-11-10T16:21:39+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math."
 }
