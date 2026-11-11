@@ -779,6 +779,24 @@
    "sector": "Funds & ETFs"
   },
   {
+   "cusip": "861896108",
+   "ticker": "SNEX",
+   "issuer": "StoneX Group",
+   "from_quarter": "2025Q4",
+   "to_quarter": "2026Q1",
+   "effective_after": "2025-12-31",
+   "effective_by": "2026-03-31",
+   "ratio": 1.5,
+   "holders": 54,
+   "exact_holders": 5,
+   "unchanged_holders": 1,
+   "price_ratio": 0.8478,
+   "xbrl_shares_ratio": 1.517,
+   "confirmed_by": "holders and SEC XBRL shares outstanding",
+   "display_name": "StoneX Group",
+   "sector": "Financials"
+  },
+  {
    "cusip": "860630102",
    "ticker": "SF",
    "issuer": "Stifel Financial",
@@ -787,9 +805,9 @@
    "effective_after": "2025-12-31",
    "effective_by": "2026-03-31",
    "ratio": 1.5,
-   "holders": 67,
-   "exact_holders": 5,
-   "unchanged_holders": 1,
+   "holders": 87,
+   "exact_holders": 7,
+   "unchanged_holders": 2,
    "price_ratio": 0.5903,
    "xbrl_shares_ratio": null,
    "confirmed_by": "holders",
@@ -1043,9 +1061,10 @@
   "36254L407:2026Q3": "accepted",
   "02462A203:2026Q3": "accepted",
   "05601U204:2026Q3": "accepted",
-  "860630102:2026Q1": "accepted"
+  "860630102:2026Q1": "accepted",
+  "861896108:2026Q1": "accepted"
  },
- "generated_at": "2026-11-11T14:11:27+00:00",
+ "generated_at": "2026-11-11T14:24:34+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
