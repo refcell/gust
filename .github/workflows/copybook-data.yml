@@ -109,6 +109,9 @@ jobs:
           COPYBOOK_BULK_REVERSE: "1"
           COPYBOOK_FIGI_BUDGET_S: "900"
           COPYBOOK_SEC_BUDGET_S: "900"
+          # SEC fair access: one full and one curated run can fetch at once, so together they stay under 10 req/s
+          # (full 3.3 + curated 6.25 = 9.6). Every SEC request goes through edgar.get, one process per run.
+          COPYBOOK_SEC_INTERVAL: ${{ env.SCOPE == 'full' && '0.3' || '0.16' }}
           COPYBOOK_EVENTS_BUDGET_S: "900"
           COPYBOOK_ACCEPTED_BUDGET_S: "2100"
         run: |
