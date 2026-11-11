@@ -180,7 +180,6 @@ jobs:
           # Curated runs upload for at most 3 minutes so publishing a new filing never waits; the rest goes next run.
           COPYBOOK_UPLOAD_BUDGET_S: ${{ env.SCOPE == 'full' && '3000' || '180' }}
           # Path A test on gene (runner), Nov 11: no uploads 15:55-16:35 UTC; a full run holds until 16:35. Remove after.
-          COPYBOOK_UPLOAD_QUIET: "2026-11-11T15:55:00Z/2026-11-11T16:35:00Z"
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - uses: actions/cache/save@v4
