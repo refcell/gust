@@ -647,12 +647,12 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 0.333333,
+   "confirmed_by": "issuer filing",
+   "evidence": "8-K 0001666700-26-000046: 1-for-3 reverse stock split",
    "holders": 1033,
    "exact_holders": 143,
    "unchanged_holders": 5,
    "price_ratio": 2.9616,
-   "xbrl_shares_ratio": 0.3302,
-   "confirmed_by": "holders and SEC XBRL shares outstanding",
    "display_name": "DuPont de Nemours",
    "sector": "Materials"
   },
@@ -1045,7 +1045,7 @@
   "05601U204:2026Q3": "accepted",
   "860630102:2026Q1": "accepted"
  },
- "generated_at": "2026-11-11T13:24:09+00:00",
+ "generated_at": "2026-11-11T13:44:59+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1148,7 +1148,7 @@
    "split_ratio": 0.333333,
    "units_ok": true,
    "reason": null,
-   "evidence": "holders and SEC XBRL shares outstanding",
+   "evidence": "8-K 0001666700-26-000046: 1-for-3 reverse stock split",
    "to_quarter": "2026Q2",
    "pairs": 8640
   },
@@ -1200,6 +1200,8 @@
    "split_ratio": 0.333333,
    "units_ok": true,
    "reason": null,
+   "cash_per_old_share": 15.0,
+   "note": "Each old Enviri share became 1/3 New Enviri share plus $15.00 cash; the cash leg is not a sale",
    "evidence": "8-K 0001193125-26-251752 (June 1, 2026): each Enviri share became one CLEH share, then one New Enviri share per three CLEH shares; CLEH shares then became $15.00 cash each (Veolia). A separation, not a split: 1/3 share plus cash per old share",
    "to_quarter": "2026Q2",
    "pairs": 8640
@@ -1210,10 +1212,10 @@
    "exact_at_1": 8,
    "exact_at_ratio": 8,
    "median_ratio": 1.0,
-   "split_ratio": null,
+   "split_ratio": 1.0,
    "units_ok": true,
    "reason": null,
-   "evidence": "holders at exactly 1:1",
+   "evidence": "8-K 0001493152-26-032342: re-domicile from the Cayman Islands to Florida, July 7, 2026; each ordinary share became one share of common stock (new CUSIP 87877F 103)",
    "to_quarter": "2026Q3",
    "pairs": 5246
   },
@@ -1276,8 +1278,8 @@
    "exact_at_ratio": 2,
    "median_ratio": 1.0,
    "split_ratio": null,
-   "units_ok": true,
-   "reason": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 1.000 over 16 holders, 2 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
    "pairs": 5246
