@@ -1,0 +1,20 @@
+{
+ "checked_at": "2026-11-11T07:49:59Z",
+ "status": "kept",
+ "reason": "reclass off (COPYBOOK_TYPES_RECLASS unset)",
+ "limit_pct": 10,
+ "limit_min_filers": 10,
+ "published_counts": {
+  "index": 101,
+  "wealth": 5098,
+  "hedge_fund": 1243,
+  "other": 403,
+  "long_only": 1554,
+  "bank": 372,
+  "insurance": 103,
+  "sovereign": 19,
+  "pension": 190
+ },
+ "candidate_counts": null,
+ "moved": []
+}
