@@ -226,8 +226,16 @@ jobs:
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
           git commit -q -m "Refresh Copybook 13F data ($SCOPE)"
+          # A file one run deleted and the other changed (hl/G2949D.json, Nov 11 10:05) stops -X theirs: this run's
+          # side wins there too, as for every other path.
+          take_ours() {
+            for p in $(git diff --name-only --diff-filter=U); do
+              if git cat-file -e "REBASE_HEAD:$p" 2>/dev/null; then git checkout REBASE_HEAD -- "$p" && git add "$p"; else git rm -q "$p"; fi
+            done
+            GIT_EDITOR=true git rebase --continue
+          }
           for i in 1 2 3 4 5; do
-            if git pull -q --rebase -X theirs && git push -q; then
+            if { git pull -q --rebase -X theirs || take_ours || { git rebase --abort; false; }; } && git push -q; then
               gh workflow run ci.yml --ref main
               if [ -n "$SITE_DISPATCH_TOKEN" ]; then
                 GH_TOKEN="$SITE_DISPATCH_TOKEN" gh workflow run copybook-pages.yml -R factordynamics/site --ref main \
