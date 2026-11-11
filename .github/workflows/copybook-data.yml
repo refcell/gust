@@ -133,6 +133,19 @@ jobs:
             python $I/securities.py public/copybook/data
           fi
           python $I/enrich.py
+          # moves.py is required (lead, Nov 11: it feeds paid /v1 and alerts). If it fails, the previous good hl/, hlr/,
+          # changes/ and fq/ stay (Pages from git, R2 untouched: the uploader never deletes), the rest publishes, and
+          # the run ends failed ("Fail if moves failed"), so a crash shows red.
+          moves() {
+            if ! python $I/moves.py; then
+              echo "::error::moves.py failed: the previous hl/, hlr/, changes/ and fq/ stay; the rest publishes; this run fails"
+              D=public/copybook/data
+              git checkout HEAD -- $D/hl $D/hlr 2>/dev/null || true
+              git clean -fdq -- $D/hl $D/hlr || true
+              rm -rf $D/changes $D/fq
+              echo "MOVES_FAILED=1" >> "$GITHUB_ENV"
+            fi
+          }
           # optional: Form 4 / 13D/G events (the previous events files stay)
           python $I/events.py || echo "::warning::optional: Form 4 / 13D/G events failed"
           if [ "$SCOPE" = full ]; then
@@ -151,15 +164,15 @@ jobs:
             schema=$(python $I/moves.py --schema-stale || echo 0)
             if { [ "${new:-0}" != 0 ] || [ "${stale:-0}" = 1 ] || [ "${schema:-0}" = 1 ] || [ ! -f public/copybook/data/quality.json ]; } && [ -d public/copybook/data/fb ]; then
               echo "rebuilding hl/: new=${new:-0} lenses_stale=${stale:-0}"
-              python $I/moves.py || echo "::warning::optional: filer moves failed"
+              moves
             fi
           fi
           if [ "$SCOPE" = full ]; then
             python $I/stocks.py
             # optional: EDGAR acceptance time for every shard's filing (hl/ rows, changes, fq/ books)
             if [ -f $I/accepted.py ]; then python $I/accepted.py || echo "::warning::optional: acceptance times failed"; fi
-            # optional: every filer's moves vs its previous quarter (shard summary public, full rows to R2)
-            if [ -f $I/moves.py ]; then python $I/moves.py || echo "::warning::optional: filer moves failed"; fi
+            # required: every filer's moves vs its previous quarter (shard summary public, full rows to R2)
+            moves
             # optional: bulk/{quarter}.csv.gz exports for the Copy API (R2 only)
             if [ -f $I/export.py ]; then python $I/export.py || echo "::warning::optional: bulk export failed"; fi
           fi
@@ -254,6 +267,11 @@ jobs:
             fi
             sleep 15
           done
+          exit 1
+      - name: Fail if moves failed
+        if: env.MOVES_FAILED == '1'
+        run: |
+          echo "::error::moves.py failed: hl/, hlr/, changes/ and fq/ kept their previous build; everything else published."
           exit 1
       - name: Fail if the R2 upload failed
         if: steps.upload.outcome == 'failure'
