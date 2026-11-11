@@ -217,7 +217,7 @@ jobs:
           if [ -n "$HEAD_GEN" ] && [[ "$HEAD_GEN" > "$OUR_GEN" ]]; then
             if [ "$SCOPE" = curated ]; then echo "Head has a newer snapshot ($HEAD_GEN > $OUR_GEN); nothing to publish"; exit 0; fi
             echo "Head has a newer curated snapshot ($HEAD_GEN > $OUR_GEN); publishing only the all-filer outputs on top of it"
-            KEEP="f fall hl hlr hedge_flow.json quality.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+            KEEP="f fall hl hlr hedge_flow.json quality.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
             T=$(mktemp -d)
             for k in $KEEP; do if [ -e $D/$k ]; then cp -r $D/$k $T/; fi; done
             git checkout origin/main -- $D
