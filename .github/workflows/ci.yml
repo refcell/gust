@@ -33,8 +33,17 @@ jobs:
         env:
           VITE_PUSH_API: ${{ vars.VITE_PUSH_API }}
           VITE_VAPID_PUBLIC_KEY: ${{ vars.VITE_VAPID_PUBLIC_KEY }}
-      - run: pnpm exec playwright install --with-deps chromium webkit
+      # The browser install pulls apt packages; since Nov 11 13:53 UTC it has hung past 10 min on some runners, and
+      # every data commit then cancelled the run before Pages deployed (public data stuck at 13:23). Bounded: if it
+      # can't install in 6 min, e2e is skipped for this run and the build still deploys.
+      - id: pw
+        run: pnpm exec playwright install --with-deps chromium webkit
+        timeout-minutes: 6
+        continue-on-error: true
       - run: pnpm e2e
+        if: steps.pw.outcome == 'success'
+      - if: steps.pw.outcome != 'success'
+        run: echo "::warning::playwright install failed or timed out; e2e skipped this run"
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
