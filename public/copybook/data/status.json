@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-11T08:10:15Z",
+ "generated_at": "2026-11-11T08:31:17Z",
  "expected_quarter": "2026Q2",
  "counts": {
   "current": 348,
-  "inactive": 1,
-  "empty_latest": 4,
+  "inactive": 2,
+  "empty_latest": 3,
   "stale": 1,
   "reported_by_other": 1
  },
@@ -60,8 +60,8 @@
    "cik": "0000947996",
    "quarter": "2026Q1",
    "report_date": "2026-03-31",
-   "status": "empty_latest",
-   "status_note": "The 2026Q2 13F filed on 2026-07-07 lists no holdings (a blank or placeholder information table); showing 2026Q1."
+   "status": "inactive",
+   "status_note": "Olstein Capital Management's SEC registration has been terminated since Jul 10, 2026, and its 2026Q2 13F lists one $0 line; it has stopped filing and is left out of Consensus and alerts."
   },
   {
    "slug": "bill-ackman",
