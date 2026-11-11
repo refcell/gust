@@ -89,6 +89,7 @@ jobs:
         with:
           path: |
             public/copybook/data/h
+            public/copybook/data/hlf
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}
           restore-keys: copybook-h-
@@ -179,8 +180,9 @@ jobs:
           # The self-hosted Copy API through Tailscale Funnel: no 100 s cap (the trycloudflare tunnel in api.json
           # returned HTTP 524 on a 19 MB bundle) and no Cloudflare bulk traffic. Bundles stay at 5 MB.
           COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
-          # Curated runs upload for at most 3 minutes so publishing a new filing never waits; the rest goes next run.
-          COPYBOOK_UPLOAD_BUDGET_S: ${{ env.SCOPE == 'full' && '3000' || '180' }}
+          # Curated runs upload for at most 10 minutes (3 before Nov 11 18:00): hlf/ is cached with h/, so every curated run
+          # continues the holder-index upload a rebuild started; publishing waits at most that long.
+          COPYBOOK_UPLOAD_BUDGET_S: ${{ env.SCOPE == 'full' && '3000' || '600' }}
           # Path A test on gene (runner), Nov 11: no uploads 15:55-16:35 UTC; a full run holds until 16:35. Remove after.
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
@@ -189,6 +191,7 @@ jobs:
         with:
           path: |
             public/copybook/data/h
+            public/copybook/data/hlf
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}
       - uses: actions/cache/save@v4
