@@ -531,7 +531,7 @@
    "effective_after": "2025-09-30",
    "effective_by": "2025-12-31",
    "ratio": 5,
-   "holders": 88,
+   "holders": 87,
    "exact_holders": 6,
    "unchanged_holders": 1,
    "price_ratio": 0.1665,
@@ -549,7 +549,7 @@
    "effective_after": "2025-09-30",
    "effective_by": "2025-12-31",
    "ratio": 2,
-   "holders": 25,
+   "holders": 24,
    "exact_holders": 5,
    "unchanged_holders": 0,
    "price_ratio": 0.4983,
@@ -567,7 +567,7 @@
    "effective_after": "2025-09-30",
    "effective_by": "2025-12-31",
    "ratio": 10,
-   "holders": 110,
+   "holders": 109,
    "exact_holders": 11,
    "unchanged_holders": 0,
    "price_ratio": 0.0782,
@@ -585,7 +585,7 @@
    "effective_after": "2025-09-30",
    "effective_by": "2025-12-31",
    "ratio": 1.5,
-   "holders": 56,
+   "holders": 55,
    "exact_holders": 14,
    "unchanged_holders": 1,
    "price_ratio": 0.6691,
@@ -762,6 +762,6 @@
   "00162Q726:2026Q3": "accepted",
   "09661T206:2026Q3": "accepted"
  },
- "generated_at": "2026-11-11T04:29:27+00:00",
+ "generated_at": "2026-11-11T04:44:59+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math."
 }
