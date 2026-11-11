@@ -27,6 +27,10 @@ on:
       accession:
         description: "Filing that triggered it (logged only)"
         required: false
+      accept_types:
+        description: "Publish an accepted filer-type reclass (Form ADV) even if a type's count moves over 10%; this run only"
+        type: boolean
+        default: false
 
 run-name: "Copybook data (${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}) ${{ inputs.reason }}"
 
@@ -38,6 +42,10 @@ concurrency:
 
 env:
   SCOPE: ${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}
+  # Filer types (copybook/ingest/filer_types.py, gate.py): the classifier runs when COPYBOOK_TYPES_RECLASS is 1 (repo
+  # variable, or this dispatch's accept_types); a type count moving over 10% publishes only with accept_types.
+  COPYBOOK_TYPES_RECLASS: ${{ (inputs.accept_types && '1') || vars.COPYBOOK_TYPES_RECLASS || '' }}
+  COPYBOOK_TYPES_ACCEPTED: ${{ (inputs.accept_types && '1') || '' }}
 
 permissions:
   contents: write
@@ -200,7 +208,7 @@ jobs:
           if [ -n "$HEAD_GEN" ] && [[ "$HEAD_GEN" > "$OUR_GEN" ]]; then
             if [ "$SCOPE" = curated ]; then echo "Head has a newer snapshot ($HEAD_GEN > $OUR_GEN); nothing to publish"; exit 0; fi
             echo "Head has a newer curated snapshot ($HEAD_GEN > $OUR_GEN); publishing only the all-filer outputs on top of it"
-            KEEP="f fall hl filers.json filer_types.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+            KEEP="f fall hl filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
             T=$(mktemp -d)
             for k in $KEEP; do if [ -e $D/$k ]; then cp -r $D/$k $T/; fi; done
             git checkout origin/main -- $D
