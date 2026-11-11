@@ -139,7 +139,11 @@ jobs:
             python $I/filer_types.py --overrides
             # A tracked fund filed a new 13F-HR: rebuild hl/ now (about 5 minutes), not at the next full run.
             new=$(python3 -c 'import json; print(len(json.load(open("public/copybook/data/alerts.json")).get("new_filings") or []))' || echo 0)
-            if [ "${new:-0}" != 0 ] && [ -d public/copybook/data/fb ]; then
+            # Or the type set changed (hand overrides above): hl/, hedge_flow.json and fall/ follow it now, so every
+            # lens matches filer_types.json and index.json types_as_of.
+            stale=$(python $I/filer_types.py --lenses-stale || echo 0)
+            if { [ "${new:-0}" != 0 ] || [ "${stale:-0}" = 1 ]; } && [ -d public/copybook/data/fb ]; then
+              echo "rebuilding hl/: new=${new:-0} lenses_stale=${stale:-0}"
               python $I/moves.py || echo "::warning::optional: filer moves failed"
             fi
           fi
@@ -210,11 +214,13 @@ jobs:
           if [ -n "$HEAD_GEN" ] && [[ "$HEAD_GEN" > "$OUR_GEN" ]]; then
             if [ "$SCOPE" = curated ]; then echo "Head has a newer snapshot ($HEAD_GEN > $OUR_GEN); nothing to publish"; exit 0; fi
             echo "Head has a newer curated snapshot ($HEAD_GEN > $OUR_GEN); publishing only the all-filer outputs on top of it"
-            KEEP="f fall hl filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+            KEEP="f fall hl hedge_flow.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
             T=$(mktemp -d)
             for k in $KEEP; do if [ -e $D/$k ]; then cp -r $D/$k $T/; fi; done
             git checkout origin/main -- $D
             for k in $KEEP; do if [ -e $T/$k ]; then rm -rf $D/$k; cp -r $T/$k $D/; fi; done
+            # head's index.json, with this run's type set date (the lenses above use this run's types)
+            python3 -c 'import json,sys; d=sys.argv[1]; i=json.load(open(d+"/index.json")); i["types_as_of"]=json.load(open(d+"/filer_types.json")).get("as_of") or i.get("types_as_of"); open(d+"/index.json","w").write(json.dumps(i,separators=(",",":"))+"\n")' $D
           fi
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
