@@ -178,8 +178,6 @@ jobs:
           COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
           # Curated runs upload for at most 3 minutes so publishing a new filing never waits; the rest goes next run.
           COPYBOOK_UPLOAD_BUDGET_S: ${{ env.SCOPE == 'full' && '3000' || '180' }}
-          # No uploads in these windows (runner's clean Funnel timing, Nov 11; EDGAR is closed then). Remove after.
-          COPYBOOK_UPLOAD_QUIET: "2026-11-11T09:15:00Z/2026-11-11T10:00:00Z"
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - uses: actions/cache/save@v4
@@ -217,7 +215,7 @@ jobs:
           if [ -n "$HEAD_GEN" ] && [[ "$HEAD_GEN" > "$OUR_GEN" ]]; then
             if [ "$SCOPE" = curated ]; then echo "Head has a newer snapshot ($HEAD_GEN > $OUR_GEN); nothing to publish"; exit 0; fi
             echo "Head has a newer curated snapshot ($HEAD_GEN > $OUR_GEN); publishing only the all-filer outputs on top of it"
-            KEEP="f fall hl hedge_flow.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+            KEEP="f fall hl hlr hedge_flow.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
             T=$(mktemp -d)
             for k in $KEEP; do if [ -e $D/$k ]; then cp -r $D/$k $T/; fi; done
             git checkout origin/main -- $D
