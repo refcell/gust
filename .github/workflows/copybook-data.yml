@@ -145,7 +145,8 @@ jobs:
             # Or the type set changed (hand overrides above): hl/, hedge_flow.json and fall/ follow it now, so every
             # lens matches filer_types.json and index.json types_as_of.
             stale=$(python $I/filer_types.py --lenses-stale || echo 0)
-            if { [ "${new:-0}" != 0 ] || [ "${stale:-0}" = 1 ]; } && [ -d public/copybook/data/fb ]; then
+            # Or quality.json (held lines, /status/) isn't published yet: moves.py writes it.
+            if { [ "${new:-0}" != 0 ] || [ "${stale:-0}" = 1 ] || [ ! -f public/copybook/data/quality.json ]; } && [ -d public/copybook/data/fb ]; then
               echo "rebuilding hl/: new=${new:-0} lenses_stale=${stale:-0}"
               python $I/moves.py || echo "::warning::optional: filer moves failed"
             fi
