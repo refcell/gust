@@ -148,7 +148,9 @@ jobs:
         env:
           PYTHONPATH: _ingest/copybook
           COPYBOOK_WEB_DIR: public/copybook
-          # The self-hosted Copy API: upload_history.py reads its base from api.json each run (the tunnel can change).
+          # The self-hosted Copy API through Tailscale Funnel: no 100 s cap (the trycloudflare tunnel in api.json
+          # returned HTTP 524 on a 19 MB bundle) and no Cloudflare bulk traffic. Bundles stay at 5 MB.
+          COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
           COPYBOOK_UPLOAD_BUDGET_S: "3000"
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
