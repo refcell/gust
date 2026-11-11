@@ -70,7 +70,10 @@ jobs:
         with:
           repository: factordynamics/site
           path: _ingest
-          sparse-checkout: copybook
+          # holdterm/src: roster.json names the funds whose books go into data/books.json (books.py)
+          sparse-checkout: |
+            copybook
+            holdterm/src
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -141,6 +144,8 @@ jobs:
             # optional: bulk/{quarter}.csv.gz exports for the Copy API (R2 only)
             if [ -f $I/export.py ]; then python $I/export.py || echo "::warning::optional: bulk export failed"; fi
           fi
+          # optional, last: Holdterm's funds' books in one file, after every step that writes {slug}.json
+          if [ -f $I/books.py ]; then python $I/books.py || echo "::warning::optional: books.json failed"; fi
       # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
       - name: Refuse to publish a build that lost tickers
         run: |
