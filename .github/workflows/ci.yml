@@ -11,9 +11,12 @@ permissions:
   pages: write
   id-token: write
 
+# On main a run is never cancelled: data commits land every few minutes, and cancelling the running deploy for each
+# one left Pages serving the 13:23 data from 13:53 to 16:10 UTC on Nov 11. Newer pushes queue (GitHub keeps the newest
+# pending run), so the deployed data is at most one run behind. Pull requests still cancel superseded runs.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   check:
@@ -35,10 +38,10 @@ jobs:
           VITE_VAPID_PUBLIC_KEY: ${{ vars.VITE_VAPID_PUBLIC_KEY }}
       # The browser install pulls apt packages; since Nov 11 13:53 UTC it has hung past 10 min on some runners, and
       # every data commit then cancelled the run before Pages deployed (public data stuck at 13:23). Bounded: if it
-      # can't install in 6 min, e2e is skipped for this run and the build still deploys.
+      # can't install in 4 min, e2e is skipped for this run and the build still deploys.
       - id: pw
         run: pnpm exec playwright install --with-deps chromium webkit
-        timeout-minutes: 6
+        timeout-minutes: 4
         continue-on-error: true
       - run: pnpm e2e
         if: steps.pw.outcome == 'success'
