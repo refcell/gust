@@ -178,6 +178,9 @@ jobs:
           COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
           # Curated runs upload for at most 3 minutes so publishing a new filing never waits; the rest goes next run.
           COPYBOOK_UPLOAD_BUDGET_S: ${{ env.SCOPE == 'full' && '3000' || '180' }}
+          # Post A (14:00 UTC, first real traffic): no uploads 13:55-14:20 so gene's uplink serves sign-ins. A full run
+          # holds its upload until 14:20; a curated run leaves the rest for the next run. Remove after 14:20.
+          COPYBOOK_UPLOAD_QUIET: "2026-11-11T13:55:00Z/2026-11-11T14:20:00Z"
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - uses: actions/cache/save@v4
