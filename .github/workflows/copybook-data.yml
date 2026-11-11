@@ -142,7 +142,7 @@ jobs:
               D=public/copybook/data
               git checkout HEAD -- $D/hl $D/hlr 2>/dev/null || true
               git clean -fdq -- $D/hl $D/hlr || true
-              rm -rf $D/changes $D/fq
+              rm -rf $D/changes $D/fq $D/hlf  # hlf/ is what the uploader sends as R2 hl/: never a half-new build
               echo "MOVES_FAILED=1" >> "$GITHUB_ENV"
             fi
           }
