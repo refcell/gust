@@ -181,7 +181,7 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 4,
-   "holders": 1532,
+   "holders": 1533,
    "exact_holders": 255,
    "unchanged_holders": 13,
    "price_ratio": 0.3469,
@@ -371,7 +371,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 6,
-   "holders": 2623,
+   "holders": 2625,
    "exact_holders": 637,
    "unchanged_holders": 24,
    "price_ratio": 0.1972,
@@ -389,8 +389,8 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 4,
-   "holders": 2298,
-   "exact_holders": 582,
+   "holders": 2300,
+   "exact_holders": 583,
    "unchanged_holders": 14,
    "price_ratio": 0.2806,
    "xbrl_shares_ratio": null,
@@ -407,7 +407,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 8,
-   "holders": 1889,
+   "holders": 1890,
    "exact_holders": 604,
    "unchanged_holders": 16,
    "price_ratio": 0.1713,
@@ -479,7 +479,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 2,
-   "holders": 770,
+   "holders": 771,
    "exact_holders": 235,
    "unchanged_holders": 5,
    "price_ratio": 0.5298,
@@ -583,7 +583,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 4,
-   "holders": 2341,
+   "holders": 2343,
    "exact_holders": 857,
    "unchanged_holders": 23,
    "price_ratio": 0.2912,
@@ -779,6 +779,24 @@
    "sector": "Funds & ETFs"
   },
   {
+   "cusip": "G0593M107",
+   "ticker": "AZN",
+   "issuer": "Astrazeneca",
+   "from_quarter": "2025Q4",
+   "to_quarter": "2026Q1",
+   "effective_after": "2025-12-31",
+   "effective_by": "2026-03-31",
+   "ratio": 0.5,
+   "holders": 20,
+   "exact_holders": 5,
+   "unchanged_holders": 0,
+   "price_ratio": 2.1453,
+   "xbrl_shares_ratio": null,
+   "confirmed_by": "holders",
+   "display_name": "Astrazeneca",
+   "sector": "Health Care"
+  },
+  {
    "cusip": "946760105",
    "ticker": "CLMB",
    "issuer": "Climb Global Solutions",
@@ -787,7 +805,7 @@
    "effective_after": "2025-12-31",
    "effective_by": "2026-03-31",
    "ratio": 4,
-   "holders": 57,
+   "holders": 58,
    "exact_holders": 10,
    "unchanged_holders": 0,
    "price_ratio": 0.1928,
@@ -823,8 +841,8 @@
    "effective_after": "2025-12-31",
    "effective_by": "2026-03-31",
    "ratio": 1.5,
-   "holders": 163,
-   "exact_holders": 21,
+   "holders": 171,
+   "exact_holders": 23,
    "unchanged_holders": 3,
    "price_ratio": 0.8478,
    "xbrl_shares_ratio": 1.517,
@@ -841,8 +859,8 @@
    "effective_after": "2025-12-31",
    "effective_by": "2026-03-31",
    "ratio": 1.5,
-   "holders": 268,
-   "exact_holders": 36,
+   "holders": 278,
+   "exact_holders": 39,
    "unchanged_holders": 4,
    "price_ratio": 0.5903,
    "xbrl_shares_ratio": null,
@@ -1138,9 +1156,10 @@
   "946760105:2026Q1": "accepted",
   "046353108:2026Q1": "accepted",
   "10501L106:2026Q1": "accepted",
-  "55374X208:2026Q1": "rejected"
+  "55374X208:2026Q1": "rejected",
+  "G0593M107:2026Q1": "accepted"
  },
- "generated_at": "2026-11-12T21:11:56+00:00",
+ "generated_at": "2026-11-12T21:33:58+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1154,7 +1173,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "143658300": {
    "new": "G2004J103",
@@ -1167,7 +1186,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "682310875": {
    "new": "68237V103",
@@ -1180,7 +1199,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "68622E104": {
    "new": "68622E203",
@@ -1193,7 +1212,7 @@
    "reason": null,
    "evidence": "8-K 0001628280-26-023158: 1-for-20 reverse stock split, effective Apr 1, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "09077B104": {
    "new": "09077B203",
@@ -1206,24 +1225,24 @@
    "reason": null,
    "evidence": "8-K 0001193125-26-140053: every 50 shares converted into 1 in a subsidiary merger (share consolidation), effective Apr 6, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "30231G102": {
    "new": "30233Q108",
-   "holders": 2351,
-   "exact_at_1": 517,
-   "exact_at_ratio": 517,
+   "holders": 2356,
+   "exact_at_1": 518,
+   "exact_at_ratio": 518,
    "median_ratio": 1.0,
    "split_ratio": null,
    "units_ok": true,
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "438516106": {
    "new": "438516205",
-   "holders": 1903,
+   "holders": 1905,
    "exact_at_1": 6,
    "exact_at_ratio": 319,
    "median_ratio": 0.5,
@@ -1232,7 +1251,7 @@
    "reason": null,
    "evidence": "8-K 0000773840-26-000084 Ex. 99.1: 1-for-2 reverse stock split, effective with the Honeywell Aerospace (HONA) spin-off; new CUSIP 438516205",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "26614N102": {
    "new": "26614N201",
@@ -1245,7 +1264,7 @@
    "reason": null,
    "evidence": "8-K 0001666700-26-000046: 1-for-3 reverse stock split",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "811916105": {
    "new": "811927102",
@@ -1258,7 +1277,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "G5S37H101": {
    "new": "G5T40M104",
@@ -1271,11 +1290,11 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "Y95308105": {
    "new": "94352A104",
-   "holders": 81,
+   "holders": 82,
    "exact_at_1": 11,
    "exact_at_ratio": 11,
    "median_ratio": 1.0,
@@ -1284,7 +1303,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "415864107": {
    "new": "29390K102",
@@ -1299,7 +1318,7 @@
    "note": "Each old Enviri share became 1/3 New Enviri share plus $15.00 cash; the cash leg is not a sale",
    "evidence": "8-K 0001193125-26-251752 (June 1, 2026): each Enviri share became one CLEH share, then one New Enviri share per three CLEH shares; CLEH shares then became $15.00 cash each (Veolia). A separation, not a split: 1/3 share plus cash per old share",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "G87264100": {
    "new": "87877F103",
@@ -1312,7 +1331,7 @@
    "reason": null,
    "evidence": "8-K 0001493152-26-032342: re-domicile from the Cayman Islands to Florida, July 7, 2026; each ordinary share became one share of common stock (new CUSIP 87877F 103)",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "G39108108": {
    "new": "G39104107",
@@ -1325,7 +1344,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "02462A104": {
    "new": "02462A203",
@@ -1338,7 +1357,7 @@
    "reason": null,
    "evidence": "8-K 0001193125-26-296396: 1-for-15 reverse stock split, effective July 2, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "91544A109": {
    "new": "91544A208",
@@ -1351,7 +1370,7 @@
    "reason": null,
    "evidence": "8-K 0001505155-26-000039: 1-for-10 reverse stock split, effective June 17, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "14161W105": {
    "new": "14161W303",
@@ -1364,7 +1383,7 @@
    "reason": null,
    "evidence": "8-K 0001628280-26-040351: 1-for-10 reverse stock split, effective June 5, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "36322Q206": {
    "new": "G2646Y104",
@@ -1377,7 +1396,7 @@
    "reason": "units unconfirmed: median share ratio 1.000 over 20 holders, 2 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "67623L307": {
    "new": "67623L505",
@@ -1390,7 +1409,7 @@
    "reason": null,
    "evidence": "8-K 0001193125-26-263723: 1-for-10 reverse stock split of Class A, effective June 8, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8661
+   "pairs": 8664
   },
   "91702V101": {
    "new": "91703D100",
@@ -1403,7 +1422,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "N3144W105": {
    "new": "G3314M109",
@@ -1416,7 +1435,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "226718104": {
    "new": "L20675101",
@@ -1429,7 +1448,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "682680103": {
    "new": "30609A109",
@@ -1442,7 +1461,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "881624209": {
    "new": "M8769Q102",
@@ -1455,7 +1474,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "08862E109": {
    "new": "08862E307",
@@ -1468,7 +1487,7 @@
    "reason": null,
    "evidence": "8-K 0001655210-26-000059: 1-for-30 reverse stock split, effective Aug 13, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "197641103": {
    "new": "197914104",
@@ -1481,7 +1500,7 @@
    "reason": null,
    "evidence": "8-K12B 0001193125-26-309602: second-step conversion, each share exchanged for 2.2000 new shares, July 20, 2026 (offering purchases and Northfield merger shares read as adds)",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "05601U105": {
    "new": "05601U204",
@@ -1494,7 +1513,7 @@
    "reason": null,
    "evidence": "8-K 0001891101-26-000043: 1-for-10 reverse stock split of Class A, effective Aug 21, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "89788C104": {
    "new": "89790E106",
@@ -1507,7 +1526,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "38341P102": {
    "new": "38341P201",
@@ -1520,7 +1539,7 @@
    "reason": null,
    "evidence": "8-K 0001728117-26-000094: 1-for-80 reverse stock split, effective Sep 10, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "762093102": {
    "new": "762093201",
@@ -1533,7 +1552,7 @@
    "reason": null,
    "evidence": "8-K 0001751783-26-000032 Ex. 99.1: second-step conversion, each public share exchanged for 1.3978 new shares, July 21, 2026 (offering purchases read as adds)",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   },
   "36254L308": {
    "new": "36254L407",
@@ -1546,7 +1565,7 @@
    "reason": null,
    "evidence": "8-K 0001493152-26-041333: 1-for-25 reverse stock split, effective Sep 8, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 5293
+   "pairs": 5298
   }
  }
 }
