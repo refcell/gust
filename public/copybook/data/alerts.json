@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T11:54:20Z",
+ "generated_at": "2026-11-13T12:19:57Z",
  "rule": "New = original 13F-HR for a report period later than any recorded for the fund, filed within 7 days. Amendments, restatements, 13F-NT notices and accession changes on old periods never alert.",
  "new_filings": [
   {
@@ -47,7 +47,7 @@
     "added": [],
     "trimmed": []
    },
-   "detected_at": "2026-11-13T11:54:20Z"
+   "detected_at": "2026-11-13T12:19:57Z"
   },
   {
    "slug": "bnp-paribas-asset-management-holding-s-a",
