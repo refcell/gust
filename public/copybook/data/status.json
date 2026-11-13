@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-13T13:54:55Z",
+ "generated_at": "2026-11-13T14:21:23Z",
  "expected_quarter": "2026Q2",
  "counts": {
-  "current": 348,
+  "current": 347,
   "inactive": 2,
-  "empty_latest": 3,
+  "empty_latest": 4,
   "stale": 1,
   "reported_by_other": 1
  },
@@ -62,6 +62,15 @@
    "report_date": "2026-03-31",
    "status": "inactive",
    "status_note": "Olstein Capital Management's SEC registration has been terminated since Jul 10, 2026, and its 2026Q2 13F lists one $0 line; it has stopped filing and is left out of Consensus and alerts."
+  },
+  {
+   "slug": "norges-bank",
+   "manager": "NORGES BANK",
+   "cik": "0001374170",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "empty_latest",
+   "status_note": "The 2026Q3 13F filed on 2026-11-13 lists no holdings (a blank or placeholder information table); showing 2026Q2."
   },
   {
    "slug": "bill-ackman",
