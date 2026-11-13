@@ -1178,7 +1178,7 @@
   "G0593M107:2026Q1": "accepted",
   "781846308:2026Q3": "accepted"
  },
- "generated_at": "2026-11-13T07:20:04+00:00",
+ "generated_at": "2026-11-13T07:37:51+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1583,6 +1583,71 @@
    "units_ok": true,
    "reason": null,
    "evidence": "8-K 0001493152-26-041333: 1-for-25 reverse stock split, effective Sep 8, 2026",
+   "to_quarter": "2026Q3",
+   "pairs": 6008
+  },
+  "74640Y106": {
+   "new": "74640Y304",
+   "holders": 11,
+   "exact_at_1": 0,
+   "exact_at_ratio": 0,
+   "median_ratio": 0.0375,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.038 over 11 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 6008
+  },
+  "33733U108": {
+   "new": "33740U257",
+   "holders": 37,
+   "exact_at_1": 16,
+   "exact_at_ratio": 16,
+   "median_ratio": 1.0,
+   "split_ratio": null,
+   "units_ok": true,
+   "reason": null,
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 6008
+  },
+  "36468G103": {
+   "new": "36468G202",
+   "holders": 14,
+   "exact_at_1": 1,
+   "exact_at_ratio": 1,
+   "median_ratio": 0.1242,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.124 over 14 holders, 1 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 6008
+  },
+  "23283X206": {
+   "new": "23283X305",
+   "holders": 11,
+   "exact_at_1": 0,
+   "exact_at_ratio": 0,
+   "median_ratio": 0.05,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.050 over 11 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 6008
+  },
+  "68828E809": {
+   "new": "68827X105",
+   "holders": 39,
+   "exact_at_1": 14,
+   "exact_at_ratio": 14,
+   "median_ratio": 1.0,
+   "split_ratio": null,
+   "units_ok": true,
+   "reason": null,
+   "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
    "pairs": 6008
   }
