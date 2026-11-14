@@ -1,12 +1,11 @@
 {
- "generated_at": "2026-11-13T23:59:09Z",
- "expected_quarter": "2026Q2",
+ "generated_at": "2026-11-14T00:15:33Z",
+ "expected_quarter": "2026Q3",
  "counts": {
-  "current": 347,
+  "current": 197,
+  "stale": 152,
   "inactive": 2,
-  "empty_latest": 4,
-  "stale": 1,
-  "reported_by_other": 1
+  "empty_latest": 4
  },
  "flagged": [
   {
@@ -34,7 +33,7 @@
    "quarter": "2025Q4",
    "report_date": "2025-12-31",
    "status": "stale",
-   "status_note": "No 13F for 2026Q2 yet; showing 2025Q4."
+   "status_note": "No 13F for 2026Q3 yet; showing 2025Q4."
   },
   {
    "slug": "two-sigma-advisers-lp",
@@ -64,6 +63,483 @@
    "status_note": "Olstein Capital Management's SEC registration has been terminated since Jul 10, 2026, and its 2026Q2 13F lists one $0 line; it has stopped filing and is left out of Consensus and alerts."
   },
   {
+   "slug": "adage-capital-partners-gp-l-l-c",
+   "manager": "ADAGE CAPITAL PARTNERS GP, L.L.C.",
+   "cik": "0001165408",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "alden-global-capital-llc",
+   "manager": "Alden Global Capital LLC",
+   "cik": "0001616882",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "allianz-asset-management-gmbh",
+   "manager": "Allianz Asset Management GmbH",
+   "cik": "0001535323",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "apollo-management-holdings-l-p",
+   "manager": "Apollo Management Holdings, L.P.",
+   "cik": "0001449434",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "david-tepper",
+   "manager": "David Tepper",
+   "cik": "0001656456",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "aqr-capital-management-llc",
+   "manager": "AQR CAPITAL MANAGEMENT LLC",
+   "cik": "0001167557",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "warren-buffett",
+   "manager": "Warren Buffett",
+   "cik": "0001067983",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "blackstone-inc",
+   "manager": "Blackstone Inc.",
+   "cik": "0001393818",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "board-of-trustees-of-the-leland-stanford-junior-universit",
+   "manager": "Board of Trustees of The Leland Stanford Junior Universit",
+   "cik": "0001315828",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "brevan-howard-capital-management-lp",
+   "manager": "Brevan Howard Capital Management LP",
+   "cik": "0001512857",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "bridgewater-advisors-inc",
+   "manager": "Bridgewater Advisors Inc.",
+   "cik": "0001600319",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "ray-dalio",
+   "manager": "Ray Dalio",
+   "cik": "0001350694",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "brookfield-corp-on",
+   "manager": "BROOKFIELD Corp /ON/",
+   "cik": "0001001085",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "canada-pension-plan-investment-board",
+   "manager": "CANADA PENSION PLAN INVESTMENT BOARD",
+   "cik": "0001283718",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "william-von-mueffling",
+   "manager": "William von Mueffling",
+   "cik": "0001279936",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "capula-management-ltd",
+   "manager": "Capula Management Ltd",
+   "cik": "0001557017",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "caxton-corp",
+   "manager": "CAXTON CORP",
+   "cik": "0001388551",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "citadel-advisors-llc",
+   "manager": "CITADEL ADVISORS LLC",
+   "cik": "0001423053",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "philippe-laffont",
+   "manager": "Philippe Laffont",
+   "cik": "0001135730",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "cohen-steers-inc",
+   "manager": "COHEN & STEERS, INC.",
+   "cik": "0001284812",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "corvex-management-lp",
+   "manager": "Corvex Management LP",
+   "cik": "0001535472",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dan-sundheim",
+   "manager": "Dan Sundheim",
+   "cik": "0001747057",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "davidson-kempner-capital-management-lp",
+   "manager": "DAVIDSON KEMPNER CAPITAL MANAGEMENT LP",
+   "cik": "0001595082",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "discovery-capital-management-llc-ct",
+   "manager": "DISCOVERY CAPITAL MANAGEMENT, LLC / CT",
+   "cik": "0001389507",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "david-einhorn",
+   "manager": "David Einhorn",
+   "cik": "0001489933",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "stanley-druckenmiller",
+   "manager": "Stanley Druckenmiller",
+   "cik": "0001536411",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dz-bank-ag-deutsche-zentral-genossenschafts-bank-frankfu",
+   "manager": "DZ BANK AG Deutsche Zentral Genossenschafts Bank, Frankfu",
+   "cik": "0001694217",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "elliott-investment-management-l-p",
+   "manager": "Elliott Investment Management L.P.",
+   "cik": "0001791786",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "farallon-capital-management-l-l-c",
+   "manager": "FARALLON CAPITAL MANAGEMENT, L.L.C.",
+   "cik": "0000909661",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "fundsmith-investment-services-ltd",
+   "manager": "FUNDSMITH INVESTMENT SERVICES LTD.",
+   "cik": "0001868537",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "terry-smith",
+   "manager": "Terry Smith",
+   "cik": "0001569205",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "bill-gates",
+   "manager": "Bill Gates",
+   "cik": "0001166559",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "goldman-sachs-group-inc",
+   "manager": "GOLDMAN SACHS GROUP INC",
+   "cik": "0000886982",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "josh-tarasoff",
+   "manager": "Josh Tarasoff",
+   "cik": "0001766504",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "bill-nygren",
+   "manager": "Bill Nygren",
+   "cik": "0000813917",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "li-lu",
+   "manager": "Li Lu",
+   "cik": "0001709323",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "hotchkis-wiley-capital-management-llc",
+   "manager": "HOTCHKIS & WILEY CAPITAL MANAGEMENT LLC",
+   "cik": "0001164833",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "hsbc-holdings-plc",
+   "manager": "HSBC HOLDINGS PLC",
+   "cik": "0000873630",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "irving-kahn",
+   "manager": "Irving Kahn",
+   "cik": "0001039565",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "king-street-capital-management-l-p",
+   "manager": "KING STREET CAPITAL MANAGEMENT, L.P.",
+   "cik": "0001218199",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "legal-general-group-plc",
+   "manager": "Legal & General Group Plc",
+   "cik": "0000764068",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "light-street-capital-management-llc",
+   "manager": "LIGHT STREET CAPITAL MANAGEMENT, LLC",
+   "cik": "0001569049",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "stephen-mandel",
+   "manager": "Stephen Mandel",
+   "cik": "0001061165",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "man-group-plc",
+   "manager": "Man Group plc",
+   "cik": "0001637460",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "maverick-capital-ltd",
+   "manager": "MAVERICK CAPITAL LTD",
+   "cik": "0000934639",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "metlife-inc",
+   "manager": "METLIFE INC",
+   "cik": "0001099219",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "metlife-investment-management-llc",
+   "manager": "MetLife Investment Management, LLC",
+   "cik": "0001529735",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "millennium-management-llc",
+   "manager": "MILLENNIUM MANAGEMENT LLC",
+   "cik": "0001273087",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "bill-miller",
+   "manager": "Bill Miller",
+   "cik": "0001135778",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "moore-capital-management-lp",
+   "manager": "MOORE CAPITAL MANAGEMENT, LP",
+   "cik": "0001448574",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "new-york-state-common-retirement-fund",
+   "manager": "NEW YORK STATE COMMON RETIREMENT FUND",
+   "cik": "0000810265",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "nomura-asset-management-international-inc",
+   "manager": "NOMURA ASSET MANAGEMENT INTERNATIONAL INC.",
+   "cik": "0000921739",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "nomura-holdings-inc",
+   "manager": "NOMURA HOLDINGS INC",
+   "cik": "0001163653",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
    "slug": "norges-bank",
    "manager": "NORGES BANK",
    "cik": "0001374170",
@@ -73,13 +549,886 @@
    "status_note": "The 2026Q3 13F filed on 2026-11-13 lists no holdings (a blank or placeholder information table); showing 2026Q2."
   },
   {
+   "slug": "northern-trust-corp",
+   "manager": "NORTHERN TRUST CORP",
+   "cik": "0000073124",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "howard-marks",
+   "manager": "Howard Marks",
+   "cik": "0000949509",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "oaktree-fund-advisors-llc",
+   "manager": "Oaktree Fund Advisors, LLC",
+   "cik": "0001822973",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "owl-creek-asset-management-l-p",
+   "manager": "Owl Creek Asset Management, L.P.",
+   "cik": "0001313756",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "paulson-co-inc",
+   "manager": "PAULSON & CO. INC.",
+   "cik": "0001035674",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "pdt-partners-llc",
+   "manager": "PDT Partners, LLC",
+   "cik": "0001564702",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
    "slug": "bill-ackman",
    "manager": "Bill Ackman",
    "cik": "0001336528",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
-   "status": "reported_by_other",
-   "status_note": "Holdings for 2026Q2 are reported by Pershing Square Inc. (this filer filed a 13F notice)."
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "pershing-square-inc",
+   "manager": "PERSHING SQUARE INC.",
+   "cik": "0002026053",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "point72-asset-management-l-p",
+   "manager": "Point72 Asset Management, L.P.",
+   "cik": "0001603466",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "point72-private-investments-llc",
+   "manager": "Point72 Private Investments, LLC",
+   "cik": "0001954961",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "price-t-rowe-associates-inc-md",
+   "manager": "PRICE T ROWE ASSOCIATES INC /MD/",
+   "cik": "0000080255",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "prudential-financial-inc",
+   "manager": "PRUDENTIAL FINANCIAL INC",
+   "cik": "0001137774",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "ruane-cunniff",
+   "manager": "Ruane Cunniff",
+   "cik": "0001720792",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "silver-lake-group-l-l-c",
+   "manager": "Silver Lake Group, L.L.C.",
+   "cik": "0001418226",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "mason-hawkins",
+   "manager": "Mason Hawkins",
+   "cik": "0000807985",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "starboard-value-lp",
+   "manager": "Starboard Value LP",
+   "cik": "0001517137",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "state-of-wisconsin-investment-board",
+   "manager": "STATE OF WISCONSIN INVESTMENT BOARD",
+   "cik": "0000854157",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "t-rowe-price-investment-management-inc",
+   "manager": "T. Rowe Price Investment Management, Inc.",
+   "cik": "0001897612",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "chris-hohn",
+   "manager": "Chris Hohn",
+   "cik": "0001647251",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dan-loeb",
+   "manager": "Dan Loeb",
+   "cik": "0001040273",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "chase-coleman",
+   "manager": "Chase Coleman",
+   "cik": "0001167483",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "nelson-peltz",
+   "manager": "Nelson Peltz",
+   "cik": "0001345471",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "stuart-mclaughlin",
+   "manager": "Stuart McLaughlin",
+   "cik": "0001454502",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "tudor-investment-corp-et-al",
+   "manager": "TUDOR INVESTMENT CORP ET AL",
+   "cik": "0000923093",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "two-sigma-investments-lp",
+   "manager": "TWO SIGMA INVESTMENTS, LP",
+   "cik": "0001179392",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "two-sigma-securities-llc",
+   "manager": "TWO SIGMA SECURITIES, LLC",
+   "cik": "0001450144",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "ubs-am-a-distinct-business-unit-of-ubs-asset-management",
+   "manager": "UBS AM, a distinct business unit of UBS ASSET MANAGEMENT",
+   "cik": "0000861177",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dev-kantesaria",
+   "manager": "Dev Kantesaria",
+   "cik": "0001697868",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "mason-morfit",
+   "manager": "Mason Morfit",
+   "cik": "0001418814",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "andreas-halvorsen",
+   "manager": "Andreas Halvorsen",
+   "cik": "0001103804",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "vista-equity-partners-management-llc",
+   "manager": "VISTA EQUITY PARTNERS MANAGEMENT, LLC",
+   "cik": "0001569532",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "wellington-management-group-llp",
+   "manager": "WELLINGTON MANAGEMENT GROUP LLP",
+   "cik": "0000902219",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "eagle-capital-management-llc-5631",
+   "manager": "EAGLE CAPITAL MANAGEMENT LLC",
+   "cik": "0000945631",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "h-h-international-investment-llc-9760",
+   "manager": "H&H International Investment, LLC",
+   "cik": "0001759760",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "newlands-management-operations-llc-8450",
+   "manager": "Newlands Management Operations LLC",
+   "cik": "0001908450",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "soroban-capital-partners-lp-7857",
+   "manager": "Soroban Capital Partners LP",
+   "cik": "0001517857",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "edgepoint-investment-group-inc-1669",
+   "manager": "EdgePoint Investment Group Inc.",
+   "cik": "0001481669",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "srs-investment-management-llc-3174",
+   "manager": "SRS Investment Management, LLC",
+   "cik": "0001503174",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "harding-loevner-lp-8196",
+   "manager": "HARDING LOEVNER LP",
+   "cik": "0000928196",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "generation-investment-management-llp-5534",
+   "manager": "GENERATION INVESTMENT MANAGEMENT LLP",
+   "cik": "0001375534",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "durable-capital-partners-lp-8849",
+   "manager": "Durable Capital Partners LP",
+   "cik": "0001798849",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "windacre-partnership-llc-9383",
+   "manager": "WINDACRE PARTNERSHIP LLC",
+   "cik": "0001599383",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "altimeter-capital-management-lp-1617",
+   "manager": "Altimeter Capital Management, LP",
+   "cik": "0001541617",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "peconic-partners-llc-0464",
+   "manager": "PECONIC PARTNERS LLC",
+   "cik": "0001050464",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dsm-capital-partners-llc-4639",
+   "manager": "DSM CAPITAL PARTNERS LLC",
+   "cik": "0001214639",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "kensico-capital-management-corp-3000",
+   "manager": "KENSICO CAPITAL MANAGEMENT CORP",
+   "cik": "0001113000",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "sessa-capital-im-l-p-5849",
+   "manager": "Sessa Capital IM, L.P.",
+   "cik": "0001595849",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "linonia-partnership-lp-5479",
+   "manager": "Linonia Partnership LP",
+   "cik": "0001985479",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "skye-global-management-lp-5884",
+   "manager": "Skye Global Management LP",
+   "cik": "0001675884",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "brave-warrior-advisors-llc-3733",
+   "manager": "Brave Warrior Advisors, LLC",
+   "cik": "0001553733",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "marshfield-associates-4976",
+   "manager": "MARSHFIELD ASSOCIATES",
+   "cik": "0000914976",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "par-capital-management-inc-1359",
+   "manager": "PAR CAPITAL MANAGEMENT INC",
+   "cik": "0001051359",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "foxhaven-asset-management-lp-0531",
+   "manager": "Foxhaven Asset Management, LP",
+   "cik": "0001590531",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "voyager-global-management-lp-9753",
+   "manager": "Voyager Global Management LP",
+   "cik": "0001849753",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "cooperman-leon-g-8382",
+   "manager": "COOPERMAN LEON G",
+   "cik": "0000898382",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "spruce-house-investment-management-llc-3170",
+   "manager": "SPRUCE HOUSE INVESTMENT MANAGEMENT LLC",
+   "cik": "0001543170",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "caledonia-private-investments-pty-ltd-2924",
+   "manager": "Caledonia (Private) Investments Pty Ltd",
+   "cik": "0001352924",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "hardman-johnston-global-advisors-llc-6364",
+   "manager": "Hardman Johnston Global Advisors LLC",
+   "cik": "0001006364",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dorsal-capital-management-lp-7007",
+   "manager": "Dorsal Capital Management, LP",
+   "cik": "0001547007",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "consulta-ltd-0677",
+   "manager": "Consulta Ltd",
+   "cik": "0001510677",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "altrinsic-global-advisors-llc-7388",
+   "manager": "ALTRINSIC GLOBAL ADVISORS LLC",
+   "cik": "0001167388",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "first-beijing-investment-ltd-1717",
+   "manager": "First Beijing Investment Ltd",
+   "cik": "0001701717",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "route-one-investment-company-l-p-2171",
+   "manager": "Route One Investment Company, L.P.",
+   "cik": "0001512171",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "intermede-investment-partners-ltd-4713",
+   "manager": "Intermede Investment Partners Ltd",
+   "cik": "0001664713",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "darlington-partners-capital-management-lp-4440",
+   "manager": "DARLINGTON PARTNERS CAPITAL MANAGEMENT, LP",
+   "cik": "0001854440",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "voss-capital-lp-0145",
+   "manager": "Voss Capital, LP",
+   "cik": "0001730145",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "gobi-capital-llc-8060",
+   "manager": "GOBI CAPITAL LLC",
+   "cik": "0001698060",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "prescott-general-partners-llc-8653",
+   "manager": "Prescott General Partners LLC",
+   "cik": "0001538653",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "progeny-3-inc-6006",
+   "manager": "Progeny 3, Inc.",
+   "cik": "0001536006",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "sourcerock-group-llc-2531",
+   "manager": "Sourcerock Group LLC",
+   "cik": "0001822531",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "mhr-fund-management-llc-7742",
+   "manager": "MHR FUND MANAGEMENT LLC",
+   "cik": "0001277742",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "gmt-capital-corp-6191",
+   "manager": "GMT CAPITAL CORP",
+   "cik": "0001106191",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "broadwood-capital-inc-8387",
+   "manager": "BROADWOOD CAPITAL INC",
+   "cik": "0001278387",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "park-presidio-capital-llc-6510",
+   "manager": "PARK PRESIDIO CAPITAL LLC",
+   "cik": "0001596510",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dendur-capital-lp-2124",
+   "manager": "DENDUR CAPITAL LP",
+   "cik": "0001782124",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "l1-capital-international-pty-ltd-9023",
+   "manager": "L1 Capital International Pty Ltd",
+   "cik": "0002009023",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "browning-west-lp-5564",
+   "manager": "BROWNING WEST LP",
+   "cik": "0001825564",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "no-street-gp-lp-5774",
+   "manager": "No Street GP LP",
+   "cik": "0001765774",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "atalan-capital-partners-lp-2906",
+   "manager": "Atalan Capital Partners, LP",
+   "cik": "0001662906",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "dorsey-asset-management-llc-1657",
+   "manager": "Dorsey Asset Management, LLC",
+   "cik": "0001671657",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "qvt-financial-lp-0162",
+   "manager": "QVT Financial LP",
+   "cik": "0001290162",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "stony-point-capital-llc-6023",
+   "manager": "Stony Point Capital LLC",
+   "cik": "0001776023",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "kontiki-capital-management-hk-ltd-3390",
+   "manager": "Kontiki Capital Management (HK) Ltd.",
+   "cik": "0001713390",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "styrax-capital-lp-4897",
+   "manager": "Styrax Capital, LP",
+   "cik": "0001904897",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "impactive-capital-lp-6767",
+   "manager": "Impactive Capital LP",
+   "cik": "0001786767",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "irenic-capital-management-lp-9389",
+   "manager": "Irenic Capital Management LP",
+   "cik": "0001929389",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "teewinot-capital-advisers-l-l-c-4886",
+   "manager": "Teewinot Capital Advisers, L.L.C.",
+   "cik": "0001574886",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "crosslink-capital-inc-4329",
+   "manager": "CROSSLINK CAPITAL INC",
+   "cik": "0001104329",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "rwwm-inc-7683",
+   "manager": "RWWM, Inc.",
+   "cik": "0001507683",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "optimus-prime-fund-management-co-ltd-2539",
+   "manager": "Optimus Prime Fund Management Co., Ltd.",
+   "cik": "0001732539",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "biglari-capital-corp-4429",
+   "manager": "BIGLARI CAPITAL CORP.",
+   "cik": "0001334429",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "khrom-capital-management-llc-7963",
+   "manager": "Khrom Capital Management LLC",
+   "cik": "0001877963",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "coliseum-capital-management-llc-9751",
+   "manager": "Coliseum Capital Management, LLC",
+   "cik": "0001409751",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "vr-advisory-services-ltd-8145",
+   "manager": "VR Advisory Services Ltd",
+   "cik": "0001348145",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "hudson-way-capital-management-llc-7597",
+   "manager": "Hudson Way Capital Management LLC",
+   "cik": "0001697597",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "ironvine-capital-partners-llc-0478",
+   "manager": "Ironvine Capital Partners, LLC",
+   "cik": "0001730478",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "j-stern-co-llp-1335",
+   "manager": "J. Stern & Co. LLP",
+   "cik": "0002011335",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "engine-capital-management-lp-5590",
+   "manager": "Engine Capital Management, LP",
+   "cik": "0001665590",
+   "quarter": "2026Q2",
+   "report_date": "2026-06-30",
+   "status": "stale",
+   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   }
  ],
  "failed": []
