@@ -1254,7 +1254,7 @@
   "09661T503:2026Q3": "accepted",
   "724078100:2026Q1": "accepted"
  },
- "generated_at": "2026-11-14T03:04:32+00:00",
+ "generated_at": "2026-11-14T03:18:52+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1723,6 +1723,19 @@
    "split_ratio": null,
    "units_ok": true,
    "reason": null,
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 6069
+  },
+  "652941105": {
+   "new": "652941204",
+   "holders": 13,
+   "exact_at_1": 0,
+   "exact_at_ratio": 0,
+   "median_ratio": 0.0998,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.100 over 13 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
    "pairs": 6069
