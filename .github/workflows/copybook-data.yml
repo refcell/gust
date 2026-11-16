@@ -104,11 +104,11 @@ jobs:
           path: public/copybook/data/fb
           key: copybook-fb-${{ github.run_id }}
           restore-keys: copybook-fb-
-      # Full runs died Nov 14-16 with "The runner has received a shutdown signal" late in moves.py, at a different
-      # line each time. Extra swap keeps the runner alive through moves' memory peak; the Ingest step logs a "res"
-      # line every minute (memory, swap, disk, largest process) so the next failure shows its cause.
-      - name: Add swap (full runs)
-        if: env.SCOPE == 'full'
+      # Full runs died Nov 14-16 with "The runner has received a shutdown signal" late in moves.py: out of memory.
+      # Probe 43805804040 (Nov 16): full-scope moves.py peaks at 15.4 GB resident plus 9.7 GB swapped on a 16 GB
+      # runner with 3 GB of swap. A curated run died the same way on Nov 13 (43480790102), so every run adds 16 GB of
+      # swap; full runs' Ingest step logs a "res" line every minute (memory, swap, disk, largest process).
+      - name: Add swap
         run: |
           free -m; swapon --show; df -h / /mnt 2>/dev/null || true
           d=/; for m in /mnt; do
