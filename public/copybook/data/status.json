@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T19:53:33Z",
+ "generated_at": "2026-11-16T20:17:55Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 267,
-  "stale": 82,
+  "current": 270,
+  "stale": 79,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -405,15 +405,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "price-t-rowe-associates-inc-md",
-   "manager": "PRICE T ROWE ASSOCIATES INC /MD/",
-   "cik": "0000080255",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "mason-hawkins",
    "manager": "Mason Hawkins",
    "cik": "0000807985",
@@ -426,15 +417,6 @@
    "slug": "starboard-value-lp",
    "manager": "Starboard Value LP",
    "cik": "0001517137",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "t-rowe-price-investment-management-inc",
-   "manager": "T. Rowe Price Investment Management, Inc.",
-   "cik": "0001897612",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -759,15 +741,6 @@
    "slug": "biglari-capital-corp-4429",
    "manager": "BIGLARI CAPITAL CORP.",
    "cik": "0001334429",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "khrom-capital-management-llc-7963",
-   "manager": "Khrom Capital Management LLC",
-   "cik": "0001877963",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
