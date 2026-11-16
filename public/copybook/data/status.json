@@ -1,11 +1,12 @@
 {
- "generated_at": "2026-11-16T21:47:24Z",
+ "generated_at": "2026-11-16T22:19:44Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 333,
+  "current": 339,
   "inactive": 2,
-  "stale": 16,
-  "empty_latest": 4
+  "stale": 9,
+  "empty_latest": 4,
+  "reported_by_other": 1
  },
  "flagged": [
   {
@@ -81,15 +82,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "goldman-sachs-group-inc",
-   "manager": "GOLDMAN SACHS GROUP INC",
-   "cik": "0000886982",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "new-york-state-common-retirement-fund",
    "manager": "NEW YORK STATE COMMON RETIREMENT FUND",
    "cik": "0000810265",
@@ -126,51 +118,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "pdt-partners-llc",
-   "manager": "PDT Partners, LLC",
-   "cik": "0001564702",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "bill-ackman",
-   "manager": "Bill Ackman",
-   "cik": "0001336528",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "pershing-square-inc",
-   "manager": "PERSHING SQUARE INC.",
-   "cik": "0002026053",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "mason-hawkins",
-   "manager": "Mason Hawkins",
-   "cik": "0000807985",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "vista-equity-partners-management-llc",
-   "manager": "VISTA EQUITY PARTNERS MANAGEMENT, LLC",
-   "cik": "0001569532",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "edgepoint-investment-group-inc-1669",
    "manager": "EdgePoint Investment Group Inc.",
    "cik": "0001481669",
@@ -189,15 +136,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "voss-capital-lp-0145",
-   "manager": "Voss Capital, LP",
-   "cik": "0001730145",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "biglari-capital-corp-4429",
    "manager": "BIGLARI CAPITAL CORP.",
    "cik": "0001334429",
@@ -205,6 +143,15 @@
    "report_date": "2026-06-30",
    "status": "stale",
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+  },
+  {
+   "slug": "bill-ackman",
+   "manager": "Bill Ackman",
+   "cik": "0001336528",
+   "quarter": "2026Q3",
+   "report_date": "2026-09-30",
+   "status": "reported_by_other",
+   "status_note": "Holdings for 2026Q3 are reported by Pershing Square Inc. (this filer filed a 13F notice)."
   }
  ],
  "failed": []
