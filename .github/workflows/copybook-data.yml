@@ -31,6 +31,10 @@ on:
         description: "Publish an accepted filer-type reclass (Form ADV) even if a type's count moves over 10%; this run only"
         type: boolean
         default: false
+      restamp_hl:
+        description: "Re-send every hl/ object so meta/builds.json's hl built_at is this build (outside EDGAR hours; up to 50 min of upload)"
+        type: boolean
+        default: false
 
 run-name: "Copybook data (${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}) ${{ inputs.reason }}"
 
@@ -214,7 +218,8 @@ jobs:
           COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
           # Curated runs upload for at most 10 minutes (3 before Nov 11 18:00): hlf/ is cached with h/, so every curated run
           # continues the holder-index upload a rebuild started; publishing waits at most that long.
-          COPYBOOK_UPLOAD_BUDGET_S: ${{ env.SCOPE == 'full' && '3000' || '600' }}
+          COPYBOOK_UPLOAD_BUDGET_S: ${{ (env.SCOPE == 'full' || inputs.restamp_hl) && '3000' || '600' }}
+          COPYBOOK_RESTAMP_HL: ${{ inputs.restamp_hl && '1' || '' }}
           # Path A test on gene (runner), Nov 11: no uploads 15:55-16:35 UTC; a full run holds until 16:35. Remove after.
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
