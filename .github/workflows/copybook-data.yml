@@ -89,13 +89,24 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # The newest h/ cache saved by a full run or by a curated run no full run superseded (.github/copybook-cache.sh,
+      # Nov 16): a curated run that restored before a full run saved must never become the cache later runs restore.
+      - name: Pick the h/ cache
+        id: hcache
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "H_RESTORED_AT=$(date -u +%FT%TZ)" >> "$GITHUB_ENV"
+          key=$(bash .github/copybook-cache.sh pick || true)
+          echo "h/ cache: ${key:-none picked, newest copybook-h-}"
+          echo "key=$key" >> "$GITHUB_OUTPUT"
       - uses: actions/cache/restore@v4
         with:
           path: |
             public/copybook/data/h
             public/copybook/data/hlf
             public/copybook/data/.h-manifest.json
-          key: copybook-h-${{ github.run_id }}
+          key: ${{ steps.hcache.outputs.key || format('copybook-h-{0}', github.run_id) }}
           restore-keys: copybook-h-
       # Full 13F books for every filer (paid; never committed): only full runs need them.
       # Curated runs restore it too (read-only, never saved) to rebuild hl/ when a tracked fund files.
@@ -206,8 +217,20 @@ jobs:
         run: |
           G=_ingest/copybook/ingest/gate.py
           if [ -f $G ]; then python $G public/copybook/data; fi
+      # A full run saved its h/ cache after this curated run restored its own: this run's hlf/ and manifest are older
+      # than the full run's hl/, so it sends nothing to the API (no older hl/ objects or meta/builds.json over the full
+      # run's), keeps its cache unsaved, and publishes head's all-filer outputs (Commit and deploy).
+      - name: Check whether a full run superseded this run's cache
+        if: env.SCOPE != 'full'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          s=$(bash .github/copybook-cache.sh superseded "$H_RESTORED_AT" || echo 0)
+          echo "superseded=$s (cache restored at $H_RESTORED_AT)"
+          if [ "$s" = 1 ]; then echo "SUPERSEDED=1" >> "$GITHUB_ENV"; fi
       - name: Upload paid history to R2
         id: upload
+        if: env.SUPERSEDED != '1'
         # Resumed 2026-11-09 at the API's go: one bundle at a time, at most 100 files / 20 MB each.
         continue-on-error: true
         env:
@@ -223,14 +246,24 @@ jobs:
           # Path A test on gene (runner), Nov 11: no uploads 15:55-16:35 UTC; a full run holds until 16:35. Remove after.
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
+      - name: Check again before saving the h/ cache
+        if: always() && env.SCOPE != 'full' && env.SUPERSEDED != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(bash .github/copybook-cache.sh superseded "$H_RESTORED_AT" || echo 0)" = 1 ]; then
+            echo "A full run saved its cache during this run: not saving this one"; echo "SUPERSEDED=1" >> "$GITHUB_ENV"
+          fi
+      # Curated runs save as copybook-h-{run}-v2 (pick takes those and full runs' copybook-h-{run}, never the older
+      # curated keys a superseded run left).
       - uses: actions/cache/save@v4
-        if: always()
+        if: always() && env.SUPERSEDED != '1'
         with:
           path: |
             public/copybook/data/h
             public/copybook/data/hlf
             public/copybook/data/.h-manifest.json
-          key: copybook-h-${{ github.run_id }}
+          key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
       - uses: actions/cache/save@v4
         if: always() && env.SCOPE == 'full'
         with:
@@ -256,10 +289,22 @@ jobs:
           git fetch -q origin main
           HEAD_GEN=$(git show origin/main:$D/index.json 2>/dev/null | gen)
           OUR_GEN=$(gen < $D/index.json)
+          KEEP="f fall hl hlr hedge_flow.json quality.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+          # A curated run a full run superseded (see the check above) publishes its own snapshot but head's all-filer
+          # outputs and meta/builds.json: never an older holder index over the full run's.
+          if [ "$SCOPE" = curated ] && { [ "${SUPERSEDED:-}" = 1 ] \
+              || [ "$(bash .github/copybook-cache.sh superseded "$H_RESTORED_AT" || echo 0)" = 1 ]; }; then
+            echo "Superseded by a full run: taking head's all-filer outputs and meta/builds.json"
+            for k in $KEEP meta/builds.json; do
+              rm -rf "$D/$k"
+              if git cat-file -e "origin/main:$D/$k" 2>/dev/null; then git checkout origin/main -- "$D/$k"; fi
+            done
+          fi
+          # A full run's own meta/builds.json (written once the API took it) goes with its all-filer outputs.
+          if [ "$SCOPE" = full ] && ! git diff --quiet HEAD -- $D/meta/builds.json; then KEEP="$KEEP meta"; fi
           if [ -n "$HEAD_GEN" ] && [[ "$HEAD_GEN" > "$OUR_GEN" ]]; then
             if [ "$SCOPE" = curated ]; then echo "Head has a newer snapshot ($HEAD_GEN > $OUR_GEN); nothing to publish"; exit 0; fi
             echo "Head has a newer curated snapshot ($HEAD_GEN > $OUR_GEN); publishing only the all-filer outputs on top of it"
-            KEEP="f fall hl hlr hedge_flow.json quality.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
             T=$(mktemp -d)
             for k in $KEEP; do if [ -e $D/$k ]; then cp -r $D/$k $T/; fi; done
             git checkout origin/main -- $D
