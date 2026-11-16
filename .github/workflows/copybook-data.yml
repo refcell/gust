@@ -100,6 +100,22 @@ jobs:
           path: public/copybook/data/fb
           key: copybook-fb-${{ github.run_id }}
           restore-keys: copybook-fb-
+      # Full runs died Nov 14-16 with "The runner has received a shutdown signal" late in moves.py, at a different
+      # line each time. Extra swap keeps the runner alive through moves' memory peak; the Ingest step logs a "res"
+      # line every minute (memory, swap, disk, largest process) so the next failure shows its cause.
+      - name: Add swap (full runs)
+        if: env.SCOPE == 'full'
+        run: |
+          free -m; swapon --show; df -h / /mnt 2>/dev/null || true
+          d=/; for m in /mnt; do
+            if [ -d $m ] && [ "$(df -m --output=avail $m | tail -1)" -gt "$(df -m --output=avail / | tail -1)" ]; then d=$m; fi
+          done
+          if [ "$(df -m --output=avail $d | tail -1)" -lt 40000 ]; then
+            sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          fi
+          sudo fallocate -l 16G $d/copybook.swap && sudo chmod 600 $d/copybook.swap && sudo mkswap -q $d/copybook.swap \
+            && sudo swapon $d/copybook.swap || echo "::warning::could not add swap"
+          free -m; df -h / /mnt 2>/dev/null || true
       - name: Ingest 13F filings
         env:
           PYTHONPATH: _ingest/copybook
@@ -120,6 +136,9 @@ jobs:
           # Optional steps (external lookups that resume next run) only warn and keep their previous output.
           I=_ingest/copybook/ingest
           if [ "$SCOPE" = full ]; then
+            ( while sleep 60; do
+                echo "res $(date -u +%T) $(free -m | awk '/^Mem/{printf "mem_used=%sM avail=%sM ",$3,$7} /^Swap/{printf "swap=%s/%sM ",$3,$2}')disk_avail=$(df -m --output=avail . | tail -1 | tr -d ' ')M top=$(ps -eo rss=,args= --sort=-rss | head -1 | awk '{printf "%dM %s %s", $1/1024, $2, $3}')"
+              done ) &
             # optional: SEC 13F data sets (seeds the fb/ full books once per period; stocks.py falls back to f/).
             # Before build.py, whose split detection reads every filer's full books.
             if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::optional: SEC 13F data sets failed"; fi

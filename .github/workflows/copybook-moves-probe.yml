@@ -1,0 +1,68 @@
+name: Copybook moves probe
+
+# Temporary (Nov 16): measures moves.py's peak memory in a full-scope rebuild on the cached data, without the
+# ~1h45m of fetching before it in a full run. Publishes nothing: no commit, no upload, no cache save.
+on:
+  workflow_dispatch:
+    inputs:
+      swap:
+        description: "Add 16 GB of swap first"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: factordynamics/site
+          path: _ingest
+          sparse-checkout: |
+            copybook
+            holdterm/src
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            public/copybook/data/h
+            public/copybook/data/hlf
+            public/copybook/data/.h-manifest.json
+          key: copybook-h-probe
+          restore-keys: copybook-h-
+      - uses: actions/cache/restore@v4
+        with:
+          path: public/copybook/data/fb
+          key: copybook-fb-probe
+          restore-keys: copybook-fb-
+      - name: Runner
+        run: |
+          nproc; free -m; swapon --show; df -h / /mnt 2>/dev/null || true
+          du -sh public/copybook/data public/copybook/data/fb public/copybook/data/f 2>/dev/null || true
+      - name: Add swap
+        if: inputs.swap
+        run: |
+          d=/; [ -d /mnt ] && [ "$(df -m --output=avail /mnt | tail -1)" -gt "$(df -m --output=avail / | tail -1)" ] && d=/mnt
+          sudo fallocate -l 16G $d/copybook.swap && sudo chmod 600 $d/copybook.swap && sudo mkswap -q $d/copybook.swap && sudo swapon $d/copybook.swap
+          free -m
+      - name: moves.py (full scope)
+        env:
+          PYTHONPATH: _ingest/copybook
+          COPYBOOK_WEB_DIR: public/copybook
+          COPYBOOK_CUSIP_MAP: public/copybook/data/cusip_map.json
+          COPYBOOK_HISTORY_QUARTERS: "8"
+          SCOPE: full
+        run: |
+          ( while sleep 30; do
+              echo "res $(date -u +%T) $(free -m | awk '/^Mem/{printf "mem_used=%sM avail=%sM ",$3,$7} /^Swap/{printf "swap=%s/%sM ",$3,$2}')disk_avail=$(df -m --output=avail . | tail -1 | tr -d ' ')M top=$(ps -eo rss=,args= --sort=-rss | head -1 | awk '{printf "%dM %s %s", $1/1024, $2, $3}')"
+            done ) &
+          [ -x /usr/bin/time ] || sudo apt-get install -y -qq time >/dev/null
+          /usr/bin/time -v python _ingest/copybook/ingest/moves.py || true
+          sudo dmesg | grep -iE "oom|killed process" | tail -20 || true
