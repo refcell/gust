@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T14:55:13Z",
+ "generated_at": "2026-11-16T15:29:17Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 222,
-  "stale": 125,
+  "current": 230,
+  "stale": 119,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -192,15 +192,6 @@
    "slug": "william-von-mueffling",
    "manager": "William von Mueffling",
    "cik": "0001279936",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "capula-management-ltd",
-   "manager": "Capula Management Ltd",
-   "cik": "0001557017",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -468,15 +459,6 @@
    "status_note": "The 2026Q3 13F filed on 2026-11-13 lists no holdings (a blank or placeholder information table); showing 2026Q2."
   },
   {
-   "slug": "northern-trust-corp",
-   "manager": "NORTHERN TRUST CORP",
-   "cik": "0000073124",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "howard-marks",
    "manager": "Howard Marks",
    "cik": "0000949509",
@@ -594,15 +576,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "state-of-wisconsin-investment-board",
-   "manager": "STATE OF WISCONSIN INVESTMENT BOARD",
-   "cik": "0000854157",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "t-rowe-price-investment-management-inc",
    "manager": "T. Rowe Price Investment Management, Inc.",
    "cik": "0001897612",
@@ -675,15 +648,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "ubs-am-a-distinct-business-unit-of-ubs-asset-management",
-   "manager": "UBS AM, a distinct business unit of UBS ASSET MANAGEMENT",
-   "cik": "0000861177",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "dev-kantesaria",
    "manager": "Dev Kantesaria",
    "cik": "0001697868",
@@ -723,15 +687,6 @@
    "slug": "eagle-capital-management-llc-5631",
    "manager": "EAGLE CAPITAL MANAGEMENT LLC",
    "cik": "0000945631",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "h-h-international-investment-llc-9760",
-   "manager": "H&H International Investment, LLC",
-   "cik": "0001759760",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -1008,15 +963,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "dendur-capital-lp-2124",
-   "manager": "DENDUR CAPITAL LP",
-   "cik": "0001782124",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "browning-west-lp-5564",
    "manager": "BROWNING WEST LP",
    "cik": "0001825564",
@@ -1047,15 +993,6 @@
    "slug": "qvt-financial-lp-0162",
    "manager": "QVT Financial LP",
    "cik": "0001290162",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "stony-point-capital-llc-6023",
-   "manager": "Stony Point Capital LLC",
-   "cik": "0001776023",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
