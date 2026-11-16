@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T16:01:53Z",
+ "generated_at": "2026-11-16T16:30:01Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 240,
-  "stale": 109,
+  "current": 243,
+  "stale": 106,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -666,15 +666,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "srs-investment-management-llc-3174",
-   "manager": "SRS Investment Management, LLC",
-   "cik": "0001503174",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "durable-capital-partners-lp-8849",
    "manager": "Durable Capital Partners LP",
    "cik": "0001798849",
@@ -801,15 +792,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "hardman-johnston-global-advisors-llc-6364",
-   "manager": "Hardman Johnston Global Advisors LLC",
-   "cik": "0001006364",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "route-one-investment-company-l-p-2171",
    "manager": "Route One Investment Company, L.P.",
    "cik": "0001512171",
@@ -867,15 +849,6 @@
    "slug": "progeny-3-inc-6006",
    "manager": "Progeny 3, Inc.",
    "cik": "0001536006",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "sourcerock-group-llc-2531",
-   "manager": "Sourcerock Group LLC",
-   "cik": "0001822531",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
