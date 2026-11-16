@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T10:52:18Z",
+ "generated_at": "2026-11-16T11:30:07Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 199,
-  "stale": 150,
+  "current": 208,
+  "stale": 141,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -207,36 +207,9 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "caxton-corp",
-   "manager": "CAXTON CORP",
-   "cik": "0001388551",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "citadel-advisors-llc",
    "manager": "CITADEL ADVISORS LLC",
    "cik": "0001423053",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "philippe-laffont",
-   "manager": "Philippe Laffont",
-   "cik": "0001135730",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "cohen-steers-inc",
-   "manager": "COHEN & STEERS, INC.",
-   "cik": "0001284812",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -468,24 +441,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "metlife-inc",
-   "manager": "METLIFE INC",
-   "cik": "0001099219",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "metlife-investment-management-llc",
-   "manager": "MetLife Investment Management, LLC",
-   "cik": "0001529735",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "millennium-management-llc",
    "manager": "MILLENNIUM MANAGEMENT LLC",
    "cik": "0001273087",
@@ -651,15 +606,6 @@
    "slug": "prudential-financial-inc",
    "manager": "PRUDENTIAL FINANCIAL INC",
    "cik": "0001137774",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "ruane-cunniff",
-   "manager": "Ruane Cunniff",
-   "cik": "0001720792",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -1089,15 +1035,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "first-beijing-investment-ltd-1717",
-   "manager": "First Beijing Investment Ltd",
-   "cik": "0001701717",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "route-one-investment-company-l-p-2171",
    "manager": "Route One Investment Company, L.P.",
    "cik": "0001512171",
@@ -1179,15 +1116,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "gmt-capital-corp-6191",
-   "manager": "GMT CAPITAL CORP",
-   "cik": "0001106191",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "park-presidio-capital-llc-6510",
    "manager": "PARK PRESIDIO CAPITAL LLC",
    "cik": "0001596510",
@@ -1200,15 +1128,6 @@
    "slug": "dendur-capital-lp-2124",
    "manager": "DENDUR CAPITAL LP",
    "cik": "0001782124",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "l1-capital-international-pty-ltd-9023",
-   "manager": "L1 Capital International Pty Ltd",
-   "cik": "0002009023",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
