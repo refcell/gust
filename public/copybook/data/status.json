@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T13:09:17Z",
+ "generated_at": "2026-11-16T13:37:01Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 209,
-  "stale": 140,
+  "current": 215,
+  "stale": 134,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -291,24 +291,6 @@
    "slug": "farallon-capital-management-l-l-c",
    "manager": "FARALLON CAPITAL MANAGEMENT, L.L.C.",
    "cik": "0000909661",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "fundsmith-investment-services-ltd",
-   "manager": "FUNDSMITH INVESTMENT SERVICES LTD.",
-   "cik": "0001868537",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "terry-smith",
-   "manager": "Terry Smith",
-   "cik": "0001569205",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -612,15 +594,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "silver-lake-group-l-l-c",
-   "manager": "Silver Lake Group, L.L.C.",
-   "cik": "0001418226",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "mason-hawkins",
    "manager": "Mason Hawkins",
    "cik": "0000807985",
@@ -801,15 +774,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "newlands-management-operations-llc-8450",
-   "manager": "Newlands Management Operations LLC",
-   "cik": "0001908450",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "soroban-capital-partners-lp-7857",
    "manager": "Soroban Capital Partners LP",
    "cik": "0001517857",
@@ -927,15 +891,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "skye-global-management-lp-5884",
-   "manager": "Skye Global Management LP",
-   "cik": "0001675884",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "brave-warrior-advisors-llc-3733",
    "manager": "Brave Warrior Advisors, LLC",
    "cik": "0001553733",
@@ -1011,15 +966,6 @@
    "slug": "hardman-johnston-global-advisors-llc-6364",
    "manager": "Hardman Johnston Global Advisors LLC",
    "cik": "0001006364",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "dorsal-capital-management-lp-7007",
-   "manager": "Dorsal Capital Management, LP",
-   "cik": "0001547007",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
