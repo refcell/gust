@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T10:52:18Z",
+ "generated_at": "2026-11-16T11:05:12Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 197,
-  "stale": 152,
+  "current": 199,
+  "stale": 150,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -1089,15 +1089,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "altrinsic-global-advisors-llc-7388",
-   "manager": "ALTRINSIC GLOBAL ADVISORS LLC",
-   "cik": "0001167388",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "first-beijing-investment-ltd-1717",
    "manager": "First Beijing Investment Ltd",
    "cik": "0001701717",
@@ -1191,15 +1182,6 @@
    "slug": "gmt-capital-corp-6191",
    "manager": "GMT CAPITAL CORP",
    "cik": "0001106191",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "broadwood-capital-inc-8387",
-   "manager": "BROADWOOD CAPITAL INC",
-   "cik": "0001278387",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
