@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T11:54:01Z",
+ "generated_at": "2026-11-16T12:21:38Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 208,
-  "stale": 141,
+  "current": 209,
+  "stale": 140,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -1245,15 +1245,6 @@
    "slug": "rwwm-inc-7683",
    "manager": "RWWM, Inc.",
    "cik": "0001507683",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "optimus-prime-fund-management-co-ltd-2539",
-   "manager": "Optimus Prime Fund Management Co., Ltd.",
-   "cik": "0001732539",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
