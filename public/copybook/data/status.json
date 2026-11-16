@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T17:50:05Z",
+ "generated_at": "2026-11-16T18:39:12Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 252,
-  "stale": 97,
+  "current": 258,
+  "stale": 91,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -288,15 +288,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "hsbc-holdings-plc",
-   "manager": "HSBC HOLDINGS PLC",
-   "cik": "0000873630",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "legal-general-group-plc",
    "manager": "Legal & General Group Plc",
    "cik": "0000764068",
@@ -462,15 +453,6 @@
    "slug": "price-t-rowe-associates-inc-md",
    "manager": "PRICE T ROWE ASSOCIATES INC /MD/",
    "cik": "0000080255",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "prudential-financial-inc",
-   "manager": "PRUDENTIAL FINANCIAL INC",
-   "cik": "0001137774",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -675,15 +657,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "brave-warrior-advisors-llc-3733",
-   "manager": "Brave Warrior Advisors, LLC",
-   "cik": "0001553733",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "marshfield-associates-4976",
    "manager": "MARSHFIELD ASSOCIATES",
    "cik": "0000914976",
@@ -846,15 +819,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "teewinot-capital-advisers-l-l-c-4886",
-   "manager": "Teewinot Capital Advisers, L.L.C.",
-   "cik": "0001574886",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "crosslink-capital-inc-4329",
    "manager": "CROSSLINK CAPITAL INC",
    "cik": "0001104329",
@@ -903,24 +867,6 @@
    "slug": "vr-advisory-services-ltd-8145",
    "manager": "VR Advisory Services Ltd",
    "cik": "0001348145",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "ironvine-capital-partners-llc-0478",
-   "manager": "Ironvine Capital Partners, LLC",
-   "cik": "0001730478",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "j-stern-co-llp-1335",
-   "manager": "J. Stern & Co. LLP",
-   "cik": "0002011335",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
