@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T17:21:15Z",
+ "generated_at": "2026-11-16T17:50:05Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 249,
-  "stale": 100,
+  "current": 252,
+  "stale": 97,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -291,15 +291,6 @@
    "slug": "hsbc-holdings-plc",
    "manager": "HSBC HOLDINGS PLC",
    "cik": "0000873630",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "irving-kahn",
-   "manager": "Irving Kahn",
-   "cik": "0001039565",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -720,15 +711,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "voyager-global-management-lp-9753",
-   "manager": "Voyager Global Management LP",
-   "cik": "0001849753",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "spruce-house-investment-management-llc-3170",
    "manager": "SPRUCE HOUSE INVESTMENT MANAGEMENT LLC",
    "cik": "0001543170",
@@ -831,15 +813,6 @@
    "slug": "no-street-gp-lp-5774",
    "manager": "No Street GP LP",
    "cik": "0001765774",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "atalan-capital-partners-lp-2906",
-   "manager": "Atalan Capital Partners, LP",
-   "cik": "0001662906",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
