@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T19:30:24Z",
+ "generated_at": "2026-11-16T19:53:33Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 264,
-  "stale": 85,
+  "current": 267,
+  "stale": 82,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -216,15 +216,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "dz-bank-ag-deutsche-zentral-genossenschafts-bank-frankfu",
-   "manager": "DZ BANK AG Deutsche Zentral Genossenschafts Bank, Frankfu",
-   "cik": "0001694217",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "elliott-investment-management-l-p",
    "manager": "Elliott Investment Management L.P.",
    "cik": "0001791786",
@@ -327,24 +318,6 @@
    "slug": "new-york-state-common-retirement-fund",
    "manager": "NEW YORK STATE COMMON RETIREMENT FUND",
    "cik": "0000810265",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "nomura-asset-management-international-inc",
-   "manager": "NOMURA ASSET MANAGEMENT INTERNATIONAL INC.",
-   "cik": "0000921739",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "nomura-holdings-inc",
-   "manager": "NOMURA HOLDINGS INC",
-   "cik": "0001163653",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
