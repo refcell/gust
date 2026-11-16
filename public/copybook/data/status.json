@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T16:55:22Z",
+ "generated_at": "2026-11-16T17:21:15Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 247,
-  "stale": 102,
+  "current": 249,
+  "stale": 100,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -42,7 +42,7 @@
    "quarter": "2025Q4",
    "report_date": "2025-12-31",
    "status": "empty_latest",
-   "status_note": "The 2026Q2 13F filed on 2026-08-14 lists no holdings (a blank or placeholder information table); showing 2025Q4."
+   "status_note": "The 2026Q3 13F filed on 2026-11-16 lists no holdings (a blank or placeholder information table); showing 2025Q4."
   },
   {
    "slug": "matrix-capital-management-company-lp",
@@ -360,15 +360,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "moore-capital-management-lp",
-   "manager": "MOORE CAPITAL MANAGEMENT, LP",
-   "cik": "0001448574",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "new-york-state-common-retirement-fund",
    "manager": "NEW YORK STATE COMMON RETIREMENT FUND",
    "cik": "0000810265",
@@ -561,15 +552,6 @@
    "slug": "tudor-investment-corp-et-al",
    "manager": "TUDOR INVESTMENT CORP ET AL",
    "cik": "0000923093",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "two-sigma-investments-lp",
-   "manager": "TWO SIGMA INVESTMENTS, LP",
-   "cik": "0001179392",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
