@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-16T18:39:12Z",
+ "generated_at": "2026-11-16T19:07:26Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 258,
-  "stale": 91,
+  "current": 264,
+  "stale": 85,
   "inactive": 2,
   "empty_latest": 4
  },
@@ -198,15 +198,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "discovery-capital-management-llc-ct",
-   "manager": "DISCOVERY CAPITAL MANAGEMENT, LLC / CT",
-   "cik": "0001389507",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "david-einhorn",
    "manager": "David Einhorn",
    "cik": "0001489933",
@@ -282,15 +273,6 @@
    "slug": "hotchkis-wiley-capital-management-llc",
    "manager": "HOTCHKIS & WILEY CAPITAL MANAGEMENT LLC",
    "cik": "0001164833",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "legal-general-group-plc",
-   "manager": "Legal & General Group Plc",
-   "cik": "0000764068",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -495,27 +477,9 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "chase-coleman",
-   "manager": "Chase Coleman",
-   "cik": "0001167483",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "nelson-peltz",
    "manager": "Nelson Peltz",
    "cik": "0001345471",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "stuart-mclaughlin",
-   "manager": "Stuart McLaughlin",
-   "cik": "0001454502",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
@@ -738,15 +702,6 @@
    "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
   },
   {
-   "slug": "gobi-capital-llc-8060",
-   "manager": "GOBI CAPITAL LLC",
-   "cik": "0001698060",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "prescott-general-partners-llc-8653",
    "manager": "Prescott General Partners LLC",
    "cik": "0001538653",
@@ -795,15 +750,6 @@
    "slug": "qvt-financial-lp-0162",
    "manager": "QVT Financial LP",
    "cik": "0001290162",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "styrax-capital-lp-4897",
-   "manager": "Styrax Capital, LP",
-   "cik": "0001904897",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
