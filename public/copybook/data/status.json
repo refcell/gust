@@ -1,11 +1,12 @@
 {
- "generated_at": "2026-11-17T11:03:52Z",
+ "generated_at": "2026-11-17T11:30:06Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 341,
+  "current": 342,
   "inactive": 2,
-  "stale": 7,
+  "stale": 4,
   "empty_latest": 4,
+  "notice_pending": 2,
   "reported_by_other": 1
  },
  "flagged": [
@@ -64,15 +65,6 @@
    "status_note": "Olstein Capital Management's SEC registration has been terminated since Jul 10, 2026, and its 2026Q2 13F lists one $0 line; it has stopped filing and is left out of Consensus and alerts."
   },
   {
-   "slug": "brookfield-corp-on",
-   "manager": "BROOKFIELD Corp /ON/",
-   "cik": "0001001085",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
    "slug": "william-von-mueffling",
    "manager": "William von Mueffling",
    "cik": "0001279936",
@@ -105,8 +97,8 @@
    "cik": "0000949509",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+   "status": "notice_pending",
+   "status_note": "Filed a 13F notice for 2026Q3 (13F-NT names no other manager); showing 2026Q2."
   },
   {
    "slug": "oaktree-fund-advisors-llc",
@@ -114,8 +106,8 @@
    "cik": "0001822973",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
+   "status": "notice_pending",
+   "status_note": "Filed a 13F notice for 2026Q3 (13F-NT names no other manager); showing 2026Q2."
   },
   {
    "slug": "intermede-investment-partners-ltd-4713",
