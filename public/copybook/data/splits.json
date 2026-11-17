@@ -55,6 +55,24 @@
    "sector": "Financials"
   },
   {
+   "cusip": "81761L201",
+   "ticker": "SVC",
+   "issuer": "Service Properties Trust",
+   "from_quarter": "2026Q2",
+   "to_quarter": "2026Q3",
+   "effective_after": "2026-06-30",
+   "effective_by": "2026-09-30",
+   "ratio": 0.2,
+   "holders": 133,
+   "exact_holders": 27,
+   "unchanged_holders": 2,
+   "price_ratio": 3.8107,
+   "xbrl_shares_ratio": 0.2006,
+   "confirmed_by": "holders and SEC XBRL shares outstanding",
+   "display_name": "Service Properties Trust",
+   "sector": "Real Estate"
+  },
+  {
    "cusip": "781846308",
    "ticker": "RUSHB",
    "issuer": "Rush Enterprises Cl B",
@@ -1290,9 +1308,10 @@
   "09661T503:2026Q3": "accepted",
   "724078100:2026Q1": "accepted",
   "36468G202:2026Q3": "accepted",
-  "23283X305:2026Q3": "accepted"
+  "23283X305:2026Q3": "accepted",
+  "81761L201:2026Q3": "accepted"
  },
- "generated_at": "2026-11-17T00:50:00+00:00",
+ "generated_at": "2026-11-17T01:07:29+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1878,6 +1897,45 @@
    "split_ratio": null,
    "units_ok": false,
    "reason": "units unconfirmed: median share ratio 0.066 over 10 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 7126
+  },
+  "81761L102": {
+   "new": "81761L201",
+   "holders": 122,
+   "exact_at_1": 1,
+   "exact_at_ratio": 25,
+   "median_ratio": 0.2014,
+   "split_ratio": 0.2,
+   "units_ok": true,
+   "reason": null,
+   "evidence": "holders and SEC XBRL shares outstanding",
+   "to_quarter": "2026Q3",
+   "pairs": 7126
+  },
+  "64081V109": {
+   "new": "64081V208",
+   "holders": 37,
+   "exact_at_1": 0,
+   "exact_at_ratio": 0,
+   "median_ratio": 0.0536,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.054 over 37 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 7126
+  },
+  "G1820C102": {
+   "new": "G1820C110",
+   "holders": 13,
+   "exact_at_1": 0,
+   "exact_at_ratio": 0,
+   "median_ratio": 0.11,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.110 over 13 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
    "pairs": 7126
