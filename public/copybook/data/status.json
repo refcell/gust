@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-17T20:40:22Z",
+ "generated_at": "2026-11-17T20:58:39Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 342,
+  "current": 343,
   "inactive": 2,
-  "stale": 4,
+  "stale": 3,
   "empty_latest": 4,
   "notice_pending": 2,
   "reported_by_other": 1
@@ -68,15 +68,6 @@
    "slug": "william-von-mueffling",
    "manager": "William von Mueffling",
    "cik": "0001279936",
-   "quarter": "2026Q2",
-   "report_date": "2026-06-30",
-   "status": "stale",
-   "status_note": "No 13F for 2026Q3 yet; showing 2026Q2."
-  },
-  {
-   "slug": "new-york-state-common-retirement-fund",
-   "manager": "NEW YORK STATE COMMON RETIREMENT FUND",
-   "cik": "0000810265",
    "quarter": "2026Q2",
    "report_date": "2026-06-30",
    "status": "stale",
