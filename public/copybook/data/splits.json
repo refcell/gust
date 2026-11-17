@@ -1311,7 +1311,7 @@
   "23283X305:2026Q3": "accepted",
   "81761L201:2026Q3": "accepted"
  },
- "generated_at": "2026-11-17T06:34:07+00:00",
+ "generated_at": "2026-11-17T06:56:13+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1936,6 +1936,32 @@
    "split_ratio": null,
    "units_ok": false,
    "reason": "units unconfirmed: median share ratio 0.100 over 18 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 8523
+  },
+  "G4405D107": {
+   "new": "68253E100",
+   "holders": 17,
+   "exact_at_1": 1,
+   "exact_at_ratio": 1,
+   "median_ratio": 0.0833,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 0.083 over 17 holders, 1 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
+   "evidence": "holders at exactly 1:1",
+   "to_quarter": "2026Q3",
+   "pairs": 8523
+  },
+  "G70077105": {
+   "new": "35661P100",
+   "holders": 15,
+   "exact_at_1": 4,
+   "exact_at_ratio": 4,
+   "median_ratio": 1.433,
+   "split_ratio": null,
+   "units_ok": false,
+   "reason": "units unconfirmed: median share ratio 1.433 over 15 holders, 4 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
    "pairs": 8523
