@@ -467,7 +467,7 @@
    "price_ratio": 0.2806,
    "xbrl_shares_ratio": null,
    "confirmed_by": "holders",
-   "display_name": "Vanguard Index Mid Cap ETF",
+   "display_name": "Vanguard Index Mrngstr Mid Cap",
    "sector": "Funds & ETFs"
   },
   {
@@ -1292,7 +1292,7 @@
   "36468G202:2026Q3": "accepted",
   "23283X305:2026Q3": "accepted"
  },
- "generated_at": "2026-11-17T00:16:24+00:00",
+ "generated_at": "2026-11-16T23:13:17+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
