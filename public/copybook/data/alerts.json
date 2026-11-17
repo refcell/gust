@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-17T20:58:39Z",
+ "generated_at": "2026-11-17T21:19:28Z",
  "rule": "New = original 13F-HR for a report period later than any recorded for the fund, filed within 7 days. Amendments, restatements, 13F-NT notices and accession changes on old periods never alert.",
  "new_filings": [
   {
@@ -795,7 +795,7 @@
      }
     ]
    },
-   "detected_at": "2026-11-17T20:58:39Z"
+   "detected_at": "2026-11-17T21:19:28Z"
   },
   {
    "slug": "brookfield-corp-on",
