@@ -1,8 +1,173 @@
 {
- "generated_at": "2026-11-17T10:50:43Z",
+ "generated_at": "2026-11-17T11:03:52Z",
  "rule": "New = original 13F-HR for a report period later than any recorded for the fund, filed within 7 days. Amendments, restatements, 13F-NT notices and accession changes on old periods never alert.",
- "new_filings": [],
- "recent": [],
+ "new_filings": [
+  {
+   "slug": "biglari-capital-corp-4429",
+   "manager": "BIGLARI CAPITAL CORP.",
+   "name": "BIGLARI CAPITAL CORP.",
+   "quarter": "2026Q3",
+   "filing_date": "2026-11-17",
+   "report_date": "2026-09-30",
+   "previous_report_date": "2026-06-30",
+   "form": "13F-HR",
+   "accession": "0000921895-26-003197",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1334429/000092189526003197/0000921895-26-003197-index.html",
+   "reported_by": null,
+   "moves": {
+    "suspect_units": 0,
+    "bought_usd": 26517375,
+    "sold_usd": 3528200,
+    "new": [],
+    "exited": [
+     {
+      "ticker": "CBRL",
+      "display_name": "Cracker Barrel Old Country Store",
+      "issuer": "CRACKER BARREL OLD CTRY STOR",
+      "cusip": "22410J106",
+      "title": "COM",
+      "put_call": null,
+      "shares_type": "SH",
+      "sector": "Consumer Discretionary",
+      "shares": 0,
+      "prev_shares": 2000.0,
+      "share_change": -2000.0,
+      "value": 0,
+      "prev_value": 106600.0,
+      "value_delta": -106600,
+      "delta_pct_of_book": -0.000103,
+      "pct_of_book": 0.0,
+      "weight": 0.0,
+      "prev_weight": 8.9e-05
+     }
+    ],
+    "added": [
+     {
+      "ticker": "RACE",
+      "issuer": "FERRARI N V",
+      "cusip": "N3167Y103",
+      "title": "COM",
+      "put_call": null,
+      "shares_type": "SH",
+      "shares": 414481.0,
+      "prev_shares": 346981.0,
+      "share_change": 67500.0,
+      "value": 162828861.0,
+      "prev_value": 129177556.0,
+      "value_delta": 26517375,
+      "delta_pct_of_book": 0.025735,
+      "pct_of_book": 0.158024,
+      "weight": 0.158024,
+      "prev_weight": 0.108129
+     }
+    ],
+    "trimmed": [
+     {
+      "ticker": "LOCO",
+      "issuer": "EL POLLO LOCO HLDGS INC",
+      "cusip": "268603107",
+      "title": "COM",
+      "put_call": null,
+      "shares_type": "SH",
+      "shares": 3538961.0,
+      "prev_shares": 3777400.0,
+      "share_change": -238439.0,
+      "value": 50784090.0,
+      "prev_value": 64064704.0,
+      "value_delta": -3421600,
+      "delta_pct_of_book": -0.003321,
+      "pct_of_book": 0.049286,
+      "weight": 0.049286,
+      "prev_weight": 0.053626
+     }
+    ]
+   }
+  }
+ ],
+ "recent": [
+  {
+   "slug": "biglari-capital-corp-4429",
+   "manager": "BIGLARI CAPITAL CORP.",
+   "name": "BIGLARI CAPITAL CORP.",
+   "quarter": "2026Q3",
+   "filing_date": "2026-11-17",
+   "report_date": "2026-09-30",
+   "previous_report_date": "2026-06-30",
+   "form": "13F-HR",
+   "accession": "0000921895-26-003197",
+   "sec_url": "https://www.sec.gov/Archives/edgar/data/1334429/000092189526003197/0000921895-26-003197-index.html",
+   "reported_by": null,
+   "moves": {
+    "suspect_units": 0,
+    "bought_usd": 26517375,
+    "sold_usd": 3528200,
+    "new": [],
+    "exited": [
+     {
+      "ticker": "CBRL",
+      "display_name": "Cracker Barrel Old Country Store",
+      "issuer": "CRACKER BARREL OLD CTRY STOR",
+      "cusip": "22410J106",
+      "title": "COM",
+      "put_call": null,
+      "shares_type": "SH",
+      "sector": "Consumer Discretionary",
+      "shares": 0,
+      "prev_shares": 2000.0,
+      "share_change": -2000.0,
+      "value": 0,
+      "prev_value": 106600.0,
+      "value_delta": -106600,
+      "delta_pct_of_book": -0.000103,
+      "pct_of_book": 0.0,
+      "weight": 0.0,
+      "prev_weight": 8.9e-05
+     }
+    ],
+    "added": [
+     {
+      "ticker": "RACE",
+      "issuer": "FERRARI N V",
+      "cusip": "N3167Y103",
+      "title": "COM",
+      "put_call": null,
+      "shares_type": "SH",
+      "shares": 414481.0,
+      "prev_shares": 346981.0,
+      "share_change": 67500.0,
+      "value": 162828861.0,
+      "prev_value": 129177556.0,
+      "value_delta": 26517375,
+      "delta_pct_of_book": 0.025735,
+      "pct_of_book": 0.158024,
+      "weight": 0.158024,
+      "prev_weight": 0.108129
+     }
+    ],
+    "trimmed": [
+     {
+      "ticker": "LOCO",
+      "issuer": "EL POLLO LOCO HLDGS INC",
+      "cusip": "268603107",
+      "title": "COM",
+      "put_call": null,
+      "shares_type": "SH",
+      "shares": 3538961.0,
+      "prev_shares": 3777400.0,
+      "share_change": -238439.0,
+      "value": 50784090.0,
+      "prev_value": 64064704.0,
+      "value_delta": -3421600,
+      "delta_pct_of_book": -0.003321,
+      "pct_of_book": 0.049286,
+      "weight": 0.049286,
+      "prev_weight": 0.053626
+     }
+    ]
+   },
+   "detected_at": "2026-11-17T11:03:52Z"
+  }
+ ],
  "periods": {
   "acadian-asset-management-llc": "2026-09-30",
   "acr-alpine-capital-research-llc": "2026-09-30",
@@ -32,7 +197,7 @@
   "atlas-frm-llc-9898": "2026-09-30",
   "baillie-gifford-co": "2026-09-30",
   "barclays-plc": "2026-09-30",
-  "biglari-capital-corp-4429": "2026-06-30",
+  "biglari-capital-corp-4429": "2026-09-30",
   "bill-ackman": "2026-09-30",
   "bill-gates": "2026-09-30",
   "bill-miller": "2026-09-30",
@@ -363,5 +528,5 @@
   "yacktman-asset-management-lp": "2026-09-30",
   "ycg-llc-4801": "2026-09-30"
  },
- "email_status": null
+ "email_status": "skipped: COPYBOOK_ALERT_TO unset"
 }
