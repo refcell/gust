@@ -144,10 +144,6 @@ jobs:
           sudo fallocate -l 16G $d/copybook.swap && sudo chmod 600 $d/copybook.swap && sudo mkswap -q $d/copybook.swap \
             && sudo swapon $d/copybook.swap || echo "::warning::could not add swap"
           free -m; df -h / /mnt 2>/dev/null || true
-      - name: Probe the h/ cache (before ingest)
-        if: startsWith(inputs.reason, 'probe')
-        continue-on-error: true
-        run: python3 .github/copybook-probe.py public/copybook/data mizuho-securities-usa-llc 68389X,86800U,842587,00971T,92939U,682189
       - name: Ingest 13F filings
         env:
           PYTHONPATH: _ingest/copybook
@@ -231,10 +227,6 @@ jobs:
           fi
           # optional, last: Holdterm's funds' books in one file, after every step that writes {slug}.json
           if [ -f $I/books.py ]; then python $I/books.py || echo "::warning::optional: books.json failed"; fi
-      - name: Probe the h/ cache (after ingest)
-        if: startsWith(inputs.reason, 'probe')
-        continue-on-error: true
-        run: python3 .github/copybook-probe.py public/copybook/data mizuho-securities-usa-llc 68389X,86800U,842587,00971T,92939U,682189
       # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
       - name: Refuse to publish a build that lost tickers
         run: |
