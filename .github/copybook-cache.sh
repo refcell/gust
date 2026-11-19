@@ -7,6 +7,9 @@
 #   pick           newest cache saved by a full run, or by a curated run that no full run superseded (-v2 keys)
 #   superseded T0  1 when a full run saved its cache after T0, the time this run restored its own: this run's hlf/
 #                  is older than the full run's, so it neither uploads, saves its cache, nor publishes its hl/
+#   filing-active  number of other curated filing runs (reason "filing ...") queued or running; 1 if GitHub can't say,
+#                  so a keepalive yields when unsure
+#   keepalive-uploading  1 while another curated keepalive is in its upload step
 set -uo pipefail
 R=${GITHUB_REPOSITORY:-refcell/gust}
 full() { gh api "repos/$R/actions/runs/$1" --jq '.display_title' 2>/dev/null | grep -q '(full)'; }
@@ -26,6 +29,21 @@ case "${1:-}" in
       saved=$(gh api "repos/$R/actions/runs/$id/jobs" --jq '[.jobs[] | select(.name == "refresh") | .steps[]
         | select(.name == "Run actions/cache/save@v4") | select(.conclusion == "success")][0].completed_at // ""')
       if [ -n "$saved" ] && [[ "$saved" > "$t0" ]]; then echo 1; exit 0; fi
+    done
+    echo 0
+    ;;
+  filing-active)
+    gh api "repos/$R/actions/workflows/copybook-data.yml/runs?per_page=40" --jq "[.workflow_runs[]
+      | select(.status != \"completed\") | select(.id != ${GITHUB_RUN_ID:-0})
+      | select(.display_title | contains(\"(curated) filing\"))] | length" 2>/dev/null || echo 1
+    ;;
+  keepalive-uploading)
+    for id in $(gh api "repos/$R/actions/workflows/copybook-data.yml/runs?status=in_progress&per_page=20" --jq \
+        ".workflow_runs[] | select(.id != ${GITHUB_RUN_ID:-0}) | select(.display_title | contains(\"(curated)\"))
+        | select(.display_title | contains(\"(curated) filing\") | not) | .id"); do
+      n=$(gh api "repos/$R/actions/runs/$id/jobs" --jq '[.jobs[] | select(.name == "refresh") | .steps[]
+        | select(.name == "Upload paid history to R2" and .status == "in_progress")] | length')
+      if [ "${n:-0}" != 0 ]; then echo 1; exit 0; fi
     done
     echo 0
     ;;

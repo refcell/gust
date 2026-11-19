@@ -26,12 +26,29 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
     steps:
-      - name: Dispatch Copybook refreshes every 20 minutes
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+      # Every minute: a curated fund's new 13F on EDGAR's current feed (copybook-filings.py) starts a curated filing
+      # run at once, in its own lane (copybook-data.yml concurrency), so it never queues behind a keepalive
+      # (cycle plan, Nov 19). Every 5 minutes, as before: a keepalive, and a full run when the last is 3 hours old.
+      - name: Dispatch Copybook refreshes
         run: |
           runs() { gh run list --workflow copybook-data.yml -L 60 --json status,displayTitle,createdAt "$@"; }
           age() { echo $(( $(date -u +%s) - $(date -u -d "$1" +%s) )); }
           start=$SECONDS
+          tick=0
+          dispatched=" "
           while [ $((SECONDS - start)) -lt 18000 ]; do
+            titles=$(runs -q '.[].displayTitle')
+            for acc in $(python3 .github/copybook-filings.py); do
+              if [[ "$dispatched" == *" $acc "* ]] || grep -q "filing $acc" <<< "$titles"; then continue; fi
+              echo "$(date -u +%T) dispatch filing $acc"
+              gh workflow run copybook-data.yml --ref main -f scope=curated -f reason="filing $acc" -f accession="$acc" \
+                && dispatched="$dispatched$acc " || echo "::warning::dispatch failed"
+            done
+            tick=$((tick + 1))
+            if [ $((tick % 5)) != 1 ]; then sleep 60; continue; fi
             since=$(date -u -d '-4 hours' +%FT%TZ)
             worker=$(runs -q "[.[] | select(.createdAt > \"$since\") | select(.displayTitle | contains(\"copybook-api\") or contains(\"filing by \"))] | length")
             if [ "${worker:-0}" != 0 ]; then echo "The Copy API Worker is dispatching refreshes; ending the chain."; exit 0; fi
@@ -51,6 +68,6 @@ jobs:
               echo "$(date -u +%T) dispatch full"
               gh workflow run copybook-data.yml --ref main -f scope=full -f reason=keepalive || echo "::warning::dispatch failed"
             fi
-            sleep 300
+            sleep 60
           done
           gh workflow run copybook-keepalive.yml --ref main

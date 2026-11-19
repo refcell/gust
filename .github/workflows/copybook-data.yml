@@ -38,14 +38,20 @@ on:
 
 run-name: "Copybook data (${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}) ${{ inputs.reason }}"
 
-# One full and one curated run can be in flight at once; neither cancels or waits for the other.
-# A snapshot never replaces a newer one at head (see the push step).
+# Three lanes, none cancelling or waiting for another (cycle plan, Nov 19): full; curated filing runs (reason
+# "filing <accession>", dispatched by copybook-keepalive.yml when EDGAR shows a curated fund's 13F), one at a time; and
+# curated keepalives (no reason or "keepalive", and the cron), one at a time. A filing run never queues behind a
+# keepalive: a keepalive skips while a filing run is active and yields before its upload, cache save and commit
+# (copybook-cache.sh filing-active), and a filing run waits for a keepalive's upload in flight. A snapshot never
+# replaces a newer one at head (see the push step).
 concurrency:
-  group: copybook-data-${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}
+  group: copybook-data-${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}${{ (inputs.scope == 'curated' || (github.event_name == 'schedule' && github.event.schedule != '23 */3 * * *')) && !startsWith(inputs.reason, 'filing') && '-keepalive' || '' }}
   cancel-in-progress: false
 
 env:
   SCOPE: ${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}
+  # 1 for a curated keepalive (see concurrency): it gives way to filing runs.
+  KEEPALIVE: ${{ (inputs.scope == 'curated' || (github.event_name == 'schedule' && github.event.schedule != '23 */3 * * *')) && !startsWith(inputs.reason, 'filing') && '1' || '' }}
   # Filer types (copybook/ingest/filer_types.py, gate.py): the classifier runs when COPYBOOK_TYPES_RECLASS is 1 (repo
   # variable, or this dispatch's accept_types); a type count moving over 10% publishes only with accept_types.
   COPYBOOK_TYPES_RECLASS: ${{ (inputs.accept_types && '1') || vars.COPYBOOK_TYPES_RECLASS || '' }}
@@ -62,14 +68,21 @@ jobs:
     outputs:
       skip: ${{ steps.gate.outputs.skip }}
     steps:
-      - name: Skip a curated run while a full run is going
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+      - name: Skip a keepalive while a filing run is going
         id: gate
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "scope=$SCOPE accession=${{ inputs.accession }}"
+          echo "scope=$SCOPE keepalive=${KEEPALIVE:-0} accession=${{ inputs.accession }}"
           # Curated refreshes always run, also while a long full run is going: the season data must
           # never wait for a full rebuild. The push step keeps whichever snapshot is newer.
+          # A keepalive while a filing run is queued or running would only fetch the same filings and then yield.
+          if [ "$KEEPALIVE" = 1 ] && [ "$(bash .github/copybook-cache.sh filing-active)" != 0 ]; then
+            echo "A filing run is active: this keepalive skips"; echo "skip=1" >> "$GITHUB_OUTPUT"
+          fi
 
   refresh:
     needs: gate
@@ -141,9 +154,10 @@ jobs:
           COPYBOOK_BULK_REVERSE: "1"
           COPYBOOK_FIGI_BUDGET_S: "900"
           COPYBOOK_SEC_BUDGET_S: "900"
-          # SEC fair access: one full and one curated run can fetch at once, so together they stay under 10 req/s
-          # (full 3.3 + curated 6.25 = 9.6). Every SEC request goes through edgar.get, one process per run.
-          COPYBOOK_SEC_INTERVAL: ${{ env.SCOPE == 'full' && '0.3' || '0.16' }}
+          # SEC fair access: a full, a filing and a keepalive run can fetch at once, so together they stay under
+          # 10 req/s (full 3.3 + filing 4.5 + keepalive 1.7 = 9.5). Every SEC request goes through edgar.get, one
+          # process per run.
+          COPYBOOK_SEC_INTERVAL: ${{ (env.SCOPE == 'full' && '0.3') || (env.KEEPALIVE == '1' && '0.6') || '0.22' }}
           COPYBOOK_EVENTS_BUDGET_S: "900"
           COPYBOOK_ACCEPTED_BUDGET_S: "2100"
         run: |
@@ -228,9 +242,25 @@ jobs:
           s=$(bash .github/copybook-cache.sh superseded "$H_RESTORED_AT" || echo 0)
           echo "superseded=$s (cache restored at $H_RESTORED_AT)"
           if [ "$s" = 1 ]; then echo "SUPERSEDED=1" >> "$GITHUB_ENV"; fi
+      # Lanes: a keepalive yields to a filing run (no upload, cache save or commit; the filing run fetches the same
+      # filings); a filing run waits for a keepalive's upload in flight (at most its 10-minute budget), so only one
+      # curated run talks to the API at a time.
+      - name: Give way between curated lanes
+        if: env.SCOPE != 'full'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          C=.github/copybook-cache.sh
+          if [ "$KEEPALIVE" = 1 ]; then
+            if [ "$(bash $C filing-active)" != 0 ]; then echo "A filing run is active: yielding"; echo "YIELD=1" >> "$GITHUB_ENV"; fi
+          else
+            t=$SECONDS
+            while [ "$(bash $C keepalive-uploading)" != 0 ] && [ $((SECONDS - t)) -lt 660 ]; do sleep 10; done
+            echo "waited $((SECONDS - t))s for a keepalive upload"
+          fi
       - name: Upload paid history to R2
         id: upload
-        if: env.SUPERSEDED != '1'
+        if: env.SUPERSEDED != '1' && env.YIELD != '1'
         # Resumed 2026-11-09 at the API's go: one bundle at a time, at most 100 files / 20 MB each.
         continue-on-error: true
         env:
@@ -247,17 +277,20 @@ jobs:
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - name: Check again before saving the h/ cache
-        if: always() && env.SCOPE != 'full' && env.SUPERSEDED != '1'
+        if: always() && env.SCOPE != 'full' && env.SUPERSEDED != '1' && env.YIELD != '1'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ "$(bash .github/copybook-cache.sh superseded "$H_RESTORED_AT" || echo 0)" = 1 ]; then
             echo "A full run saved its cache during this run: not saving this one"; echo "SUPERSEDED=1" >> "$GITHUB_ENV"
           fi
+          if [ "$KEEPALIVE" = 1 ] && [ "$(bash .github/copybook-cache.sh filing-active)" != 0 ]; then
+            echo "A filing run is active: yielding"; echo "YIELD=1" >> "$GITHUB_ENV"
+          fi
       # Curated runs save as copybook-h-{run}-v2 (pick takes those and full runs' copybook-h-{run}, never the older
       # curated keys a superseded run left).
       - uses: actions/cache/save@v4
-        if: always() && env.SUPERSEDED != '1'
+        if: always() && env.SUPERSEDED != '1' && env.YIELD != '1'
         with:
           path: |
             public/copybook/data/h
@@ -270,6 +303,7 @@ jobs:
           path: public/copybook/data/fb
           key: copybook-fb-${{ github.run_id }}
       - name: Commit and deploy
+        if: env.YIELD != '1'
         env:
           GH_TOKEN: ${{ github.token }}
           UPLOADED: ${{ steps.upload.outcome }}
@@ -314,6 +348,10 @@ jobs:
           fi
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
+          # Last look before the push: a keepalive never pushes while a filing run is active.
+          if [ "$KEEPALIVE" = 1 ] && [ "$(bash .github/copybook-cache.sh filing-active)" != 0 ]; then
+            echo "A filing run is active: yielding"; exit 0
+          fi
           git commit -q -m "Refresh Copybook 13F data ($SCOPE)"
           # A file one run deleted and the other changed (hl/G2949D.json, Nov 11 10:05) stops -X theirs: this run's
           # side wins there too, as for every other path.
