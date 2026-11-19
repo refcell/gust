@@ -229,6 +229,9 @@ jobs:
           if [ -f $I/books.py ]; then python $I/books.py || echo "::warning::optional: books.json failed"; fi
       # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
       - name: Refuse to publish a build that lost tickers
+        env:
+          # gate.py refetch_diff: publish refetched books whose totals or trades moved, after review (reason refetch-accepted)
+          COPYBOOK_REFETCH_ACCEPTED: ${{ inputs.reason == 'refetch-accepted' && '1' || '' }}
         run: |
           G=_ingest/copybook/ingest/gate.py
           if [ -f $G ]; then python $G public/copybook/data; fi
