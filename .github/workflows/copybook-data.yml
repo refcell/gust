@@ -274,14 +274,12 @@ jobs:
         env:
           PYTHONPATH: _ingest/copybook
           COPYBOOK_WEB_DIR: public/copybook
-          # The self-hosted Copy API through Tailscale Funnel: no 100 s cap (the trycloudflare tunnel in api.json
-          # returned HTTP 524 on a 19 MB bundle) and no Cloudflare bulk traffic. Bundles stay at 5 MB.
-          COPYBOOK_API: https://gene.tail70ba3.ts.net/copybook
+          # The upload endpoint lives in a repo secret; hosts aren't named in this public repo. Bundles stay at 5 MB.
+          COPYBOOK_API: ${{ secrets.COPYBOOK_API }}
           # Curated runs upload for at most 10 minutes (3 before Nov 11 18:00): hlf/ is cached with h/, so every curated run
           # continues the holder-index upload a rebuild started; publishing waits at most that long.
           COPYBOOK_UPLOAD_BUDGET_S: ${{ (env.SCOPE == 'full' || inputs.restamp_hl) && '3000' || '600' }}
           COPYBOOK_RESTAMP_HL: ${{ inputs.restamp_hl && '1' || '' }}
-          # Path A test on gene (runner), Nov 11: no uploads 15:55-16:35 UTC; a full run holds until 16:35. Remove after.
         # Any non-200 fails this step; h/ then stays on Pages (see commit step) and the job fails at the end.
         run: python _ingest/copybook/ingest/upload_history.py
       - name: Check again before saving the h/ cache
