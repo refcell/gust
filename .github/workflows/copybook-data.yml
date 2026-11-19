@@ -161,6 +161,10 @@ jobs:
           COPYBOOK_SEC_INTERVAL: ${{ (env.SCOPE == 'full' && '0.5') || (env.KEEPALIVE == '1' && '0.55') || '0.25' }}
           COPYBOOK_EVENTS_BUDGET_S: "900"
           COPYBOOK_ACCEPTED_BUDGET_S: "2100"
+          # Curated runs refetch no stale-format quarters (build.py UPGRADE): the format-6 refetch (Nov 19) made a keepalive's
+          # ingest 782 s with nine tracked funds' 2026Q2 unreadable (44516926456), held by gate.py refetch_diff. Only full
+          # runs refetch, behind that gate; curated runs keep reading the cached books (MIN_CACHE_FORMAT 3).
+          COPYBOOK_UPGRADE_PER_RUN: ${{ env.SCOPE == 'full' && '120' || '0' }}
         run: |
           # Required steps fail the run, so nothing is uploaded or published and the live data stays.
           # Optional steps (external lookups that resume next run) only warn and keep their previous output.
