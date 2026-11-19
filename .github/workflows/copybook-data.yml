@@ -154,10 +154,11 @@ jobs:
           COPYBOOK_BULK_REVERSE: "1"
           COPYBOOK_FIGI_BUDGET_S: "900"
           COPYBOOK_SEC_BUDGET_S: "900"
-          # SEC fair access: a full, a filing and a keepalive run can fetch at once, so together they stay under
-          # 10 req/s (full 3.3 + filing 4 + keepalive 2.5 = 9.8). Every SEC request goes through edgar.get, one
-          # process per run. Keepalives at 0.6 s (Nov 19 01:15-05:00Z) took ~25 min a job, ingest and versions SEC-bound.
-          COPYBOOK_SEC_INTERVAL: ${{ (env.SCOPE == 'full' && '0.3') || (env.KEEPALIVE == '1' && '0.4') || '0.25' }}
+          # SEC fair access: a full, a filing and a keepalive run can fetch at once, so together they stay at or under
+          # 8 req/s, with headroom below SEC's 10 (lead, Nov 19): full 2 + filing 4 + keepalive 1.8 = 7.8. Filing runs
+          # keep the fastest rate. Every SEC request goes through edgar.get, one process per run; a 403 or 429 there
+          # pauses and halves the run's rate (site edgar.py).
+          COPYBOOK_SEC_INTERVAL: ${{ (env.SCOPE == 'full' && '0.5') || (env.KEEPALIVE == '1' && '0.55') || '0.25' }}
           COPYBOOK_EVENTS_BUDGET_S: "900"
           COPYBOOK_ACCEPTED_BUDGET_S: "2100"
         run: |
