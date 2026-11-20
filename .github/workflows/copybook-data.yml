@@ -233,6 +233,7 @@ jobs:
           if [ -f $I/books.py ]; then python $I/books.py || echo "::warning::optional: books.json failed"; fi
       # A failed gate stops the run here: nothing goes to R2 or Pages, so the live data stays.
       - name: Refuse to publish a build that lost tickers
+        id: publish_gate
         env:
           # gate.py refetch_diff: publish refetched books whose totals or trades moved, after review (reason refetch-accepted)
           COPYBOOK_REFETCH_ACCEPTED: ${{ inputs.reason == 'refetch-accepted' && '1' || '' }}
@@ -295,8 +296,10 @@ jobs:
           fi
       # Curated runs save as copybook-h-{run}-v2 (pick takes those and full runs' copybook-h-{run}, never the older
       # curated keys a superseded run left).
+      # A full run its gate held saves neither cache: its books (a refetch at a new format, say) must not become the
+      # base later runs build and diff from (Nov 20: held refetch 44633835541 blocked every curated run after it).
       - uses: actions/cache/save@v4
-        if: always() && env.SUPERSEDED != '1' && env.YIELD != '1'
+        if: always() && env.SUPERSEDED != '1' && env.YIELD != '1' && (env.SCOPE != 'full' || steps.publish_gate.outcome == 'success')
         with:
           path: |
             public/copybook/data/h
@@ -304,7 +307,7 @@ jobs:
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
       - uses: actions/cache/save@v4
-        if: always() && env.SCOPE == 'full'
+        if: always() && env.SCOPE == 'full' && steps.publish_gate.outcome == 'success'
         with:
           path: public/copybook/data/fb
           key: copybook-fb-${{ github.run_id }}
