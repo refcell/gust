@@ -99,7 +99,7 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 1.5,
-   "holders": 316,
+   "holders": 317,
    "exact_holders": 52,
    "unchanged_holders": 3,
    "price_ratio": 0.6277,
@@ -131,9 +131,9 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 2,
-   "holders": 640,
+   "holders": 642,
    "exact_holders": 113,
-   "unchanged_holders": 7,
+   "unchanged_holders": 8,
    "price_ratio": 0.493,
    "xbrl_shares_ratio": 1.9714,
    "confirmed_by": "holders and SEC XBRL shares outstanding",
@@ -149,9 +149,9 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 2,
-   "holders": 1199,
+   "holders": 1203,
    "exact_holders": 198,
-   "unchanged_holders": 3,
+   "unchanged_holders": 4,
    "price_ratio": 0.433,
    "xbrl_shares_ratio": 2.0015,
    "confirmed_by": "holders and SEC XBRL shares outstanding",
@@ -167,9 +167,9 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 2,
-   "holders": 347,
+   "holders": 348,
    "exact_holders": 54,
-   "unchanged_holders": 2,
+   "unchanged_holders": 3,
    "price_ratio": 0.437,
    "xbrl_shares_ratio": null,
    "confirmed_by": "holders",
@@ -253,7 +253,7 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 4,
-   "holders": 2298,
+   "holders": 2303,
    "exact_holders": 370,
    "unchanged_holders": 18,
    "price_ratio": 0.3469,
@@ -357,9 +357,9 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 3,
-   "holders": 142,
+   "holders": 143,
    "exact_holders": 43,
-   "unchanged_holders": 0,
+   "unchanged_holders": 1,
    "price_ratio": 0.3407,
    "xbrl_shares_ratio": null,
    "confirmed_by": "holders",
@@ -407,9 +407,9 @@
    "effective_after": "2026-06-30",
    "effective_by": "2026-09-30",
    "ratio": 2,
-   "holders": 2169,
+   "holders": 2174,
    "exact_holders": 350,
-   "unchanged_holders": 3,
+   "unchanged_holders": 4,
    "price_ratio": 0.4781,
    "xbrl_shares_ratio": 2.0071,
    "confirmed_by": "holders and SEC XBRL shares outstanding",
@@ -427,9 +427,9 @@
    "ratio": 0.066667,
    "confirmed_by": "issuer filing",
    "evidence": "8-K 0001193125-26-296396: 1-for-15 reverse stock split, effective July 2, 2026",
-   "holders": 64,
+   "holders": 65,
    "exact_holders": 17,
-   "unchanged_holders": 0,
+   "unchanged_holders": 1,
    "price_ratio": 12.4505,
    "display_name": "American Bitcoin",
    "sector": "Financials"
@@ -479,8 +479,8 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 4,
-   "holders": 2312,
-   "exact_holders": 587,
+   "holders": 2314,
+   "exact_holders": 588,
    "unchanged_holders": 14,
    "price_ratio": 0.2806,
    "xbrl_shares_ratio": null,
@@ -497,8 +497,8 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 8,
-   "holders": 1901,
-   "exact_holders": 609,
+   "holders": 1902,
+   "exact_holders": 610,
    "unchanged_holders": 16,
    "price_ratio": 0.1713,
    "xbrl_shares_ratio": null,
@@ -533,8 +533,8 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 5,
-   "holders": 913,
-   "exact_holders": 281,
+   "holders": 914,
+   "exact_holders": 282,
    "unchanged_holders": 15,
    "price_ratio": 0.2392,
    "xbrl_shares_ratio": null,
@@ -569,7 +569,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 2,
-   "holders": 775,
+   "holders": 776,
    "exact_holders": 235,
    "unchanged_holders": 5,
    "price_ratio": 0.5298,
@@ -637,7 +637,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 10,
-   "holders": 1979,
+   "holders": 1980,
    "exact_holders": 304,
    "unchanged_holders": 9,
    "price_ratio": 0.2049,
@@ -673,8 +673,8 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 4,
-   "holders": 2355,
-   "exact_holders": 863,
+   "holders": 2358,
+   "exact_holders": 866,
    "unchanged_holders": 23,
    "price_ratio": 0.2912,
    "xbrl_shares_ratio": null,
@@ -739,7 +739,7 @@
    "ratio": 0.333333,
    "confirmed_by": "issuer filing",
    "evidence": "8-K 0001666700-26-000046: 1-for-3 reverse stock split",
-   "holders": 1049,
+   "holders": 1050,
    "exact_holders": 145,
    "unchanged_holders": 5,
    "price_ratio": 2.9616,
@@ -755,7 +755,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 5,
-   "holders": 216,
+   "holders": 217,
    "exact_holders": 31,
    "unchanged_holders": 2,
    "price_ratio": 0.1894,
@@ -805,7 +805,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 25,
-   "holders": 1755,
+   "holders": 1756,
    "exact_holders": 253,
    "unchanged_holders": 9,
    "price_ratio": 0.0423,
@@ -841,7 +841,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 5,
-   "holders": 99,
+   "holders": 100,
    "exact_holders": 33,
    "unchanged_holders": 0,
    "price_ratio": 0.1639,
@@ -859,7 +859,7 @@
    "effective_after": "2026-03-31",
    "effective_by": "2026-06-30",
    "ratio": 10,
-   "holders": 195,
+   "holders": 196,
    "exact_holders": 70,
    "unchanged_holders": 2,
    "price_ratio": 0.0793,
@@ -1330,7 +1330,7 @@
   "81761L201:2026Q3": "accepted",
   "25157Y202:2026Q1": "accepted"
  },
- "generated_at": "2026-11-20T03:42:53+00:00",
+ "generated_at": "2026-11-20T05:56:53+00:00",
  "rule": "A k-for-1 split is detected when filers holding the stock in both quarters cluster at an exact share ratio of k (and the price moves by about 1/k), and SEC XBRL shares outstanding does not contradict it. Earlier quarters' share counts are multiplied by k in all change math.",
  "links": {
   "04351P101": {
@@ -1344,7 +1344,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "143658300": {
    "new": "G2004J103",
@@ -1357,7 +1357,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "682310875": {
    "new": "68237V103",
@@ -1370,7 +1370,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "68622E104": {
    "new": "68622E203",
@@ -1383,7 +1383,7 @@
    "reason": null,
    "evidence": "8-K 0001628280-26-023158: 1-for-20 reverse stock split, effective Apr 1, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "09077B104": {
    "new": "09077B203",
@@ -1396,11 +1396,11 @@
    "reason": null,
    "evidence": "8-K 0001193125-26-140053: every 50 shares converted into 1 in a subsidiary merger (share consolidation), effective Apr 6, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "30231G102": {
    "new": "30233Q108",
-   "holders": 3294,
+   "holders": 3297,
    "exact_at_1": 683,
    "exact_at_ratio": 683,
    "median_ratio": 1.0,
@@ -1409,11 +1409,11 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "438516106": {
    "new": "438516205",
-   "holders": 1916,
+   "holders": 1917,
    "exact_at_1": 6,
    "exact_at_ratio": 321,
    "median_ratio": 0.5,
@@ -1422,11 +1422,11 @@
    "reason": null,
    "evidence": "8-K 0000773840-26-000084 Ex. 99.1: 1-for-2 reverse stock split, effective with the Honeywell Aerospace (HONA) spin-off; new CUSIP 438516205",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "26614N102": {
    "new": "26614N201",
-   "holders": 1001,
+   "holders": 1002,
    "exact_at_1": 0,
    "exact_at_ratio": 134,
    "median_ratio": 0.3323,
@@ -1435,7 +1435,7 @@
    "reason": null,
    "evidence": "8-K 0001666700-26-000046: 1-for-3 reverse stock split",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "811916105": {
    "new": "811927102",
@@ -1448,7 +1448,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "G5S37H101": {
    "new": "G5T40M104",
@@ -1461,7 +1461,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "Y95308105": {
    "new": "94352A104",
@@ -1474,7 +1474,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "415864107": {
    "new": "29390K102",
@@ -1489,11 +1489,11 @@
    "note": "Each old Enviri share became 1/3 New Enviri share plus $15.00 cash; the cash leg is not a sale",
    "evidence": "8-K 0001193125-26-251752 (June 1, 2026): each Enviri share became one CLEH share, then one New Enviri share per three CLEH shares; CLEH shares then became $15.00 cash each (Veolia). A separation, not a split: 1/3 share plus cash per old share",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "G87264100": {
    "new": "87877F103",
-   "holders": 101,
+   "holders": 102,
    "exact_at_1": 14,
    "exact_at_ratio": 14,
    "median_ratio": 1.0,
@@ -1502,7 +1502,7 @@
    "reason": null,
    "evidence": "8-K 0001493152-26-032342: re-domicile from the Cayman Islands to Florida, July 7, 2026; each ordinary share became one share of common stock (new CUSIP 87877F 103)",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "G39108108": {
    "new": "G39104107",
@@ -1515,7 +1515,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "02462A104": {
    "new": "02462A203",
@@ -1528,7 +1528,7 @@
    "reason": null,
    "evidence": "8-K 0001193125-26-296396: 1-for-15 reverse stock split, effective July 2, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "91544A109": {
    "new": "91544A208",
@@ -1541,7 +1541,7 @@
    "reason": null,
    "evidence": "8-K 0001505155-26-000039: 1-for-10 reverse stock split, effective June 17, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "14161W105": {
    "new": "14161W303",
@@ -1554,7 +1554,7 @@
    "reason": null,
    "evidence": "8-K 0001628280-26-040351: 1-for-10 reverse stock split, effective June 5, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "36322Q206": {
    "new": "G2646Y104",
@@ -1567,7 +1567,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "67623L307": {
    "new": "67623L505",
@@ -1580,7 +1580,7 @@
    "reason": null,
    "evidence": "8-K 0001193125-26-263723: 1-for-10 reverse stock split of Class A, effective June 8, 2026",
    "to_quarter": "2026Q2",
-   "pairs": 8711
+   "pairs": 8717
   },
   "91702V101": {
    "new": "91703D100",
@@ -1593,7 +1593,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "N3144W105": {
    "new": "G3314M109",
@@ -1606,7 +1606,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "226718104": {
    "new": "L20675101",
@@ -1619,11 +1619,11 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "682680103": {
    "new": "30609A109",
-   "holders": 1383,
+   "holders": 1386,
    "exact_at_1": 339,
    "exact_at_ratio": 339,
    "median_ratio": 1.0,
@@ -1632,7 +1632,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "881624209": {
    "new": "M8769Q102",
@@ -1645,7 +1645,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "08862E109": {
    "new": "08862E307",
@@ -1658,7 +1658,7 @@
    "reason": null,
    "evidence": "8-K 0001655210-26-000059: 1-for-30 reverse stock split, effective Aug 13, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "197641103": {
    "new": "197914104",
@@ -1671,7 +1671,7 @@
    "reason": null,
    "evidence": "8-K12B 0001193125-26-309602: second-step conversion, each share exchanged for 2.2000 new shares, July 20, 2026 (offering purchases and Northfield merger shares read as adds)",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "05601U105": {
    "new": "05601U204",
@@ -1684,7 +1684,7 @@
    "reason": null,
    "evidence": "8-K 0001891101-26-000043: 1-for-10 reverse stock split of Class A, effective Aug 21, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "89788C104": {
    "new": "89790E106",
@@ -1697,7 +1697,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "38341P102": {
    "new": "38341P201",
@@ -1710,7 +1710,7 @@
    "reason": null,
    "evidence": "8-K 0001728117-26-000094: 1-for-80 reverse stock split, effective Sep 10, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "762093102": {
    "new": "762093201",
@@ -1723,7 +1723,7 @@
    "reason": null,
    "evidence": "8-K 0001751783-26-000032 Ex. 99.1: second-step conversion, each public share exchanged for 1.3978 new shares, July 21, 2026 (offering purchases read as adds)",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "36254L308": {
    "new": "36254L407",
@@ -1736,7 +1736,7 @@
    "reason": null,
    "evidence": "8-K 0001493152-26-041333: 1-for-25 reverse stock split, effective Sep 8, 2026",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "74640Y106": {
    "new": "74640Y304",
@@ -1749,7 +1749,7 @@
    "reason": "units unconfirmed: median share ratio 0.040 over 26 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "33733U108": {
    "new": "33740U257",
@@ -1762,7 +1762,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "36468G103": {
    "new": "36468G202",
@@ -1775,7 +1775,7 @@
    "reason": null,
    "evidence": "holders and SEC XBRL shares outstanding",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "23283X206": {
    "new": "23283X305",
@@ -1788,7 +1788,7 @@
    "reason": null,
    "evidence": "holders and SEC XBRL shares outstanding",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "68828E809": {
    "new": "68827X105",
@@ -1801,7 +1801,7 @@
    "reason": null,
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "652941105": {
    "new": "652941204",
@@ -1814,7 +1814,7 @@
    "reason": "units unconfirmed: median share ratio 0.100 over 23 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "08862L202": {
    "new": "08862L301",
@@ -1827,7 +1827,7 @@
    "reason": "units unconfirmed: median share ratio 0.050 over 19 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "231269309": {
    "new": "231269408",
@@ -1840,7 +1840,7 @@
    "reason": "units unconfirmed: median share ratio 0.050 over 19 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "372446302": {
    "new": "372446401",
@@ -1853,7 +1853,7 @@
    "reason": "units unconfirmed: median share ratio 0.100 over 15 holders, 4 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "08771Y402": {
    "new": "08771Y501",
@@ -1866,7 +1866,7 @@
    "reason": "units unconfirmed: median share ratio 0.033 over 14 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "45259L205": {
    "new": "45259L304",
@@ -1879,7 +1879,7 @@
    "reason": "units unconfirmed: median share ratio 0.079 over 16 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "83086J200": {
    "new": "83086J309",
@@ -1892,7 +1892,7 @@
    "reason": "units unconfirmed: median share ratio 0.118 over 18 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "25401N507": {
    "new": "25401N606",
@@ -1905,7 +1905,7 @@
    "reason": "units unconfirmed: median share ratio 0.025 over 11 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "576810303": {
    "new": "576810402",
@@ -1918,7 +1918,7 @@
    "reason": "units unconfirmed: median share ratio 0.065 over 11 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "81761L102": {
    "new": "81761L201",
@@ -1931,7 +1931,7 @@
    "reason": null,
    "evidence": "holders and SEC XBRL shares outstanding",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "64081V109": {
    "new": "64081V208",
@@ -1944,7 +1944,7 @@
    "reason": "units unconfirmed: median share ratio 0.055 over 42 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "G1820C102": {
    "new": "G1820C110",
@@ -1957,7 +1957,7 @@
    "reason": "units unconfirmed: median share ratio 0.100 over 18 holders, 0 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "G4405D107": {
    "new": "68253E100",
@@ -1970,7 +1970,7 @@
    "reason": "units unconfirmed: median share ratio 0.083 over 17 holders, 1 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   },
   "G70077105": {
    "new": "35661P100",
@@ -1983,7 +1983,7 @@
    "reason": "units unconfirmed: median share ratio 1.433 over 15 holders, 4 at exactly 1:1 (needs 5 and 10%, median within 1% of 1), no split or filing found",
    "evidence": "holders at exactly 1:1",
    "to_quarter": "2026Q3",
-   "pairs": 8620
+   "pairs": 8634
   }
  }
 }
