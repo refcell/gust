@@ -159,6 +159,8 @@ jobs:
           # keep the fastest rate. Every SEC request goes through edgar.get, one process per run; a 403 or 429 there
           # pauses and halves the run's rate (site edgar.py).
           COPYBOOK_SEC_INTERVAL: ${{ (env.SCOPE == 'full' && '0.5') || (env.KEEPALIVE == '1' && '0.55') || '0.25' }}
+          # 23:00-10:45Z (lead, Nov 20): full 0.4 s, keepalive 1.0 s, filing runs unchanged: 7.5 req/s with all lanes.
+          COPYBOOK_SEC_INTERVAL_NIGHT: ${{ (env.SCOPE == 'full' && '0.4') || (env.KEEPALIVE == '1' && '1.0') || '' }}
           COPYBOOK_EVENTS_BUDGET_S: "900"
           COPYBOOK_ACCEPTED_BUDGET_S: "2100"
           # Curated runs refetch no stale-format quarters (build.py UPGRADE): the format-6 refetch (Nov 19) made a keepalive's
