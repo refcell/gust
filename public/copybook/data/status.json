@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-11-19T23:22:12Z",
+ "generated_at": "2026-11-19T23:58:10Z",
  "expected_quarter": "2026Q3",
  "counts": {
-  "current": 343,
+  "current": 342,
   "inactive": 2,
   "stale": 3,
   "empty_latest": 4,
@@ -119,5 +119,11 @@
    "status_note": "Holdings for 2026Q3 are reported by Pershing Square Inc. (this filer filed a 13F notice)."
   }
  ],
- "failed": []
+ "failed": [
+  {
+   "slug": "morgan-stanley",
+   "manager": "MORGAN STANLEY",
+   "error": "IncompleteRead(3757711 bytes read)"
+  }
+ ]
 }
