@@ -334,7 +334,7 @@ jobs:
           git fetch -q origin main
           HEAD_GEN=$(git show origin/main:$D/index.json 2>/dev/null | gen)
           OUR_GEN=$(gen < $D/index.json)
-          KEEP="f fall hl hlr hedge_flow.json quality.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+          KEEP="f fall hl hlr hedge_flow.json quality.json page_holds.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
           # A curated run a full run superseded (see the check above) publishes its own snapshot but head's all-filer
           # outputs and meta/builds.json: never an older holder index over the full run's.
           if [ "$SCOPE" = curated ] && { [ "${SUPERSEDED:-}" = 1 ] \
