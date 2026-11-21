@@ -118,6 +118,7 @@ jobs:
           path: |
             public/copybook/data/h
             public/copybook/data/hlf
+            public/copybook/data/hlcf
             public/copybook/data/.h-manifest.json
           key: ${{ steps.hcache.outputs.key || format('copybook-h-{0}', github.run_id) }}
           restore-keys: copybook-h-
@@ -195,9 +196,9 @@ jobs:
             if ! python $I/moves.py; then
               echo "::error::moves.py failed: the previous hl/, hlr/, changes/ and fq/ stay; the rest publishes; this run fails"
               D=public/copybook/data
-              git checkout HEAD -- $D/hl $D/hlr 2>/dev/null || true
-              git clean -fdq -- $D/hl $D/hlr || true
-              rm -rf $D/changes $D/fq $D/hlf  # hlf/ is what the uploader sends as R2 hl/: never a half-new build
+              git checkout HEAD -- $D/hl $D/hlr $D/hlc 2>/dev/null || true
+              git clean -fdq -- $D/hl $D/hlr $D/hlc || true
+              rm -rf $D/changes $D/fq $D/hlf $D/hlcf  # hlf/ is what the uploader sends as R2 hl/: never a half-new build
               echo "MOVES_FAILED=1" >> "$GITHUB_ENV"
             fi
           }
@@ -306,6 +307,7 @@ jobs:
           path: |
             public/copybook/data/h
             public/copybook/data/hlf
+            public/copybook/data/hlcf
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
       - uses: actions/cache/save@v4
@@ -334,7 +336,7 @@ jobs:
           git fetch -q origin main
           HEAD_GEN=$(git show origin/main:$D/index.json 2>/dev/null | gen)
           OUR_GEN=$(gen < $D/index.json)
-          KEEP="f fall hl hlr hedge_flow.json quality.json page_holds.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
+          KEEP="f fall hl hlc hlr hedge_flow.json quality.json page_holds.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
           # A curated run a full run superseded (see the check above) publishes its own snapshot but head's all-filer
           # outputs and meta/builds.json: never an older holder index over the full run's.
           if [ "$SCOPE" = curated ] && { [ "${SUPERSEDED:-}" = 1 ] \
