@@ -1,0 +1,30 @@
+name: Copybook stale-publish check
+
+# Fails while the API's status probe reports curated publishing stale (freshness.curated_stale_since: no curated
+# build on Pages within 90 min in season, 6 h out of it). Its own short run every 15 minutes, so a stall shows as a
+# red run even when the data runs themselves hang (Nov 21: flagged 08:25Z, unnoticed for two hours).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read curated_stale_since
+        env:
+          STATUS_URL: ${{ vars.COPYBOOK_STATUS_URL }}
+        run: |
+          if [ -z "$STATUS_URL" ]; then echo "::error::repo variable COPYBOOK_STATUS_URL is not set"; exit 1; fi
+          body=$(curl -fsS --retry 2 --max-time 20 "$STATUS_URL") || { echo "::warning::status.json unreadable"; exit 0; }
+          since=$(printf '%s' "$body" | python3 -c 'import json,sys; print((json.load(sys.stdin).get("freshness") or {}).get("curated_stale_since") or "")')
+          if [ -n "$since" ]; then
+            echo "::error::Curated publishing stale since $since (status.json freshness.curated_stale_since)"
+            printf '### Curated publishing stale since %s\n' "$since" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "Curated publishing is fresh" >> "$GITHUB_STEP_SUMMARY"

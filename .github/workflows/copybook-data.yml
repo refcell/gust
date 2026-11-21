@@ -300,8 +300,10 @@ jobs:
       # curated keys a superseded run left).
       # A full run its gate held saves neither cache: its books (a refetch at a new format, say) must not become the
       # base later runs build and diff from (Nov 20: held refetch 44633835541 blocked every curated run after it).
+      # Nor does a cancelled or failed run (Nov 21: three runs cancelled after refetching every book without a cache
+      # saved copybook-h- and copybook-fb- on their way out, and the next run's fb/ fallback took one).
       - uses: actions/cache/save@v4
-        if: always() && env.SUPERSEDED != '1' && env.YIELD != '1' && (env.SCOPE != 'full' || steps.publish_gate.outcome == 'success')
+        if: "!cancelled() && !failure() && env.SUPERSEDED != '1' && env.YIELD != '1' && (env.SCOPE != 'full' || steps.publish_gate.outcome == 'success')"
         with:
           path: |
             public/copybook/data/h
@@ -309,7 +311,7 @@ jobs:
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
       - uses: actions/cache/save@v4
-        if: always() && env.SCOPE == 'full' && steps.publish_gate.outcome == 'success'
+        if: "!cancelled() && !failure() && env.SCOPE == 'full' && steps.publish_gate.outcome == 'success'"
         with:
           path: public/copybook/data/fb
           key: copybook-fb-${{ github.run_id }}
@@ -386,6 +388,21 @@ jobs:
             sleep 15
           done
           exit 1
+      # The API's per-minute probe sets freshness.curated_stale_since once no curated build reached Pages within 90 min
+      # (in season; 6 h out of it). Shown on every curated run's summary; copybook-stale.yml fails on it every 15 min.
+      - name: Stale-publish alert
+        if: always() && env.SCOPE != 'full' && vars.COPYBOOK_STATUS_URL != ''
+        env:
+          STATUS_URL: ${{ vars.COPYBOOK_STATUS_URL }}
+        run: |
+          since=$(curl -fsS --max-time 20 "$STATUS_URL" | python3 -c 'import json,sys; print((json.load(sys.stdin).get("freshness") or {}).get("curated_stale_since") or "")' || echo "?")
+          if [ "$since" = "?" ]; then echo "::warning::status.json unreadable: curated freshness unknown"
+          elif [ -n "$since" ]; then
+            echo "::warning::Curated publishing is stale since $since (status.json freshness.curated_stale_since)"
+            printf '### Curated publishing stale since %s\n\nNo curated build reached Pages within the limit. copybook-stale.yml fails while this is set.\n' "$since" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Curated publishing is fresh" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Fail if moves failed
         if: env.MOVES_FAILED == '1'
         run: |
