@@ -336,6 +336,7 @@ jobs:
           git fetch -q origin main
           HEAD_GEN=$(git show origin/main:$D/index.json 2>/dev/null | gen)
           OUR_GEN=$(gen < $D/index.json)
+          ACC_OURS=$(mktemp); cp $D/accepted.json "$ACC_OURS" 2>/dev/null || rm -f "$ACC_OURS"
           KEEP="f fall hl hlc hlr hedge_flow.json quality.json page_holds.json cusip_links.json consensus.json recent_filings.json filers.json filer_types.json types_guard.json stock_holders.json securities.json issuers.json cusip_map.json splits.json"
           # A curated run a full run superseded (see the check above) publishes its own snapshot but head's all-filer
           # outputs and meta/builds.json: never an older holder index over the full run's.
@@ -358,6 +359,22 @@ jobs:
             for k in $KEEP; do if [ -e $T/$k ]; then rm -rf $D/$k; cp -r $T/$k $D/; fi; done
             # head's index.json, with this run's type set date (the lenses above use this run's types)
             python3 -c 'import json,sys; d=sys.argv[1]; i=json.load(open(d+"/index.json")); i["types_as_of"]=json.load(open(d+"/filer_types.json")).get("as_of") or i.get("types_as_of"); open(d+"/index.json","w").write(json.dumps(i,separators=(",",":"))+"\n")' $D
+          fi
+          # accepted.json (accepted.py, full runs only) is the union of head's and this run's, head's time kept on a
+          # mismatch: it was never in KEEP, so from Nov 18 every full run that published over a newer curated snapshot
+          # dropped its acceptance lookups and the next run redid the same ~8,260 filers.
+          if [ "$SCOPE" = full ] && [ -f "$ACC_OURS" ]; then
+            python3 - "$D/accepted.json" "$ACC_OURS" <<'PY'
+          import json, subprocess, sys
+          dst, ours = sys.argv[1], sys.argv[2]
+          head = json.loads(subprocess.run(["git", "show", "origin/main:" + dst], capture_output=True, text=True).stdout or "{}")
+          mine = json.load(open(ours))
+          diff = sorted(a for a in head if a in mine and mine[a] != head[a])
+          out = mine | head
+          print(f"accepted.json: head {len(head)}, this run {len(mine)}, merged {len(out)}; "
+                f"{len(diff)} acceptance times differ (head's kept): " + ", ".join(f"{a} head {head[a]} run {mine[a]}" for a in diff[:10]))
+          open(dst, "w").write(json.dumps(out, separators=(",", ":"), sort_keys=True))
+          PY
           fi
           git add public/copybook/data
           if git diff --staged --quiet; then echo "No new filings"; exit 0; fi
