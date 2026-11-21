@@ -118,7 +118,6 @@ jobs:
           path: |
             public/copybook/data/h
             public/copybook/data/hlf
-            public/copybook/data/hlcf
             public/copybook/data/.h-manifest.json
           key: ${{ steps.hcache.outputs.key || format('copybook-h-{0}', github.run_id) }}
           restore-keys: copybook-h-
@@ -307,7 +306,6 @@ jobs:
           path: |
             public/copybook/data/h
             public/copybook/data/hlf
-            public/copybook/data/hlcf
             public/copybook/data/.h-manifest.json
           key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
       - uses: actions/cache/save@v4
