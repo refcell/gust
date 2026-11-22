@@ -9,6 +9,10 @@ on:
         description: "factordynamics/site branch or commit to run"
         required: true
         default: hlq
+      reseed:
+        description: "Also re-seed this quarter (datasets.py --reseed) first and report its diff; empty for none"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -55,6 +59,9 @@ jobs:
               echo "res $(date -u +%T) $(free -m | awk '/^Mem/{printf "mem_used=%sM ",$3} /^Swap/{printf "swap=%s/%sM ",$3,$2}')top=$(ps -eo rss=,args= --sort=-rss | head -1 | awk '{printf "%dM", $1/1024}')"
             done ) &
           ls public/copybook/data/fb
+          if [ -n "${{ inputs.reseed }}" ]; then
+            python _ingest/copybook/ingest/datasets.py --reseed "${{ inputs.reseed }}" || echo "::warning::re-seed held (see the diff above)"
+          fi
           /usr/bin/time -v python _ingest/copybook/ingest/moves.py 2>&1 | grep -vE "^\s+(Minor|Major|Volun|Invol|Swaps|File sys|Socket|Signals|Page size|Exit|Average|Percent)"
       - name: hq/ sizes
         if: always()
