@@ -48,6 +48,11 @@ jobs:
                 && dispatched="$dispatched$acc " || echo "::warning::dispatch failed"
             done
             tick=$((tick + 1))
+            # Every 15 minutes: the stale-publish check (copybook-stale.yml). Its own */15 cron is best-effort: GitHub
+            # ran it 3 times in its first 17 hours (Nov 21 20:32Z, Nov 22 00:41Z and 07:29Z), so it stays only as a backup.
+            if [ $((tick % 15)) = 1 ]; then
+              gh workflow run copybook-stale.yml --ref main || echo "::warning::stale-check dispatch failed"
+            fi
             if [ $((tick % 5)) != 1 ]; then sleep 60; continue; fi
             since=$(date -u -d '-4 hours' +%FT%TZ)
             worker=$(runs -q "[.[] | select(.createdAt > \"$since\") | select(.displayTitle | contains(\"copybook-api\") or contains(\"filing by \"))] | length")
