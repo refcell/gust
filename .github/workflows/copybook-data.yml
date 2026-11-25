@@ -35,6 +35,9 @@ on:
         description: "Re-send every hl/ object so meta/builds.json's hl built_at is this build (outside EDGAR hours; up to 50 min of upload)"
         type: boolean
         default: false
+      reseed:
+        description: "Full runs only: re-seed this past quarter (YYYYQn) from SEC's data set with its late-filing window (datasets.py --reseed); the run fails and publishes nothing if any existing fb/ book would change"
+        required: false
 
 run-name: "Copybook data (${{ inputs.scope || (github.event.schedule == '23 */3 * * *' && 'full') || (github.event_name == 'schedule' && 'curated') || 'full' }}) ${{ inputs.reason }}"
 
@@ -175,6 +178,11 @@ jobs:
             ( while sleep 60; do
                 echo "res $(date -u +%T) $(free -m | awk '/^Mem/{printf "mem_used=%sM avail=%sM ",$3,$7} /^Swap/{printf "swap=%s/%sM ",$3,$2}')disk_avail=$(df -m --output=avail . | tail -1 | tr -d ' ')M top=$(ps -eo rss=,args= --sort=-rss | head -1 | awk '{printf "%dM %s %s", $1/1024, $2, $3}')"
               done ) &
+            # required, when dispatched with reseed: one past quarter's late filings, gated (no existing book may change)
+            if [ -n "${{ inputs.reseed }}" ]; then
+              [[ "${{ inputs.reseed }}" =~ ^20[0-9]{2}Q[1-4]$ ]] || { echo "::error::reseed must look like 2025Q4"; exit 1; }
+              python $I/datasets.py --reseed "${{ inputs.reseed }}"
+            fi
             # optional: SEC 13F data sets (seeds the fb/ full books once per period; stocks.py falls back to f/).
             # Before build.py, whose split detection reads every filer's full books.
             if [ -f $I/datasets.py ]; then python $I/datasets.py || echo "::warning::optional: SEC 13F data sets failed"; fi
