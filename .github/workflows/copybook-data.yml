@@ -304,25 +304,6 @@ jobs:
           if [ "$KEEPALIVE" = 1 ] && [ "$(bash .github/copybook-cache.sh filing-active)" != 0 ]; then
             echo "A filing run is active: yielding"; echo "YIELD=1" >> "$GITHUB_ENV"
           fi
-      # Curated runs save as copybook-h-{run}-v2 (pick takes those and full runs' copybook-h-{run}, never the older
-      # curated keys a superseded run left).
-      # A full run its gate held saves neither cache: its books (a refetch at a new format, say) must not become the
-      # base later runs build and diff from (Nov 20: held refetch 44633835541 blocked every curated run after it).
-      # Nor does a cancelled or failed run (Nov 21: three runs cancelled after refetching every book without a cache
-      # saved copybook-h- and copybook-fb- on their way out, and the next run's fb/ fallback took one).
-      - uses: actions/cache/save@v4
-        if: "!cancelled() && !failure() && env.SUPERSEDED != '1' && env.YIELD != '1' && (env.SCOPE != 'full' || steps.publish_gate.outcome == 'success')"
-        with:
-          path: |
-            public/copybook/data/h
-            public/copybook/data/hlf
-            public/copybook/data/.h-manifest.json
-          key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
-      - uses: actions/cache/save@v4
-        if: "!cancelled() && !failure() && env.SCOPE == 'full' && steps.publish_gate.outcome == 'success'"
-        with:
-          path: public/copybook/data/fb
-          key: copybook-fb-${{ github.run_id }}
       - name: Commit and deploy
         if: env.YIELD != '1'
         env:
@@ -401,6 +382,8 @@ jobs:
           }
           for i in 1 2 3 4 5; do
             if { git pull -q --rebase -X theirs || take_ours || { git rebase --abort; false; }; } && git push -q; then
+              # Pushed: the caches saved after this step now match what was published (dispatch failures below keep them).
+              echo "PUSHED=1" >> "$GITHUB_ENV"
               gh workflow run ci.yml --ref main
               if [ -n "$SITE_DISPATCH_TOKEN" ]; then
                 GH_TOKEN="$SITE_DISPATCH_TOKEN" gh workflow run copybook-pages.yml -R factordynamics/site --ref main \
@@ -413,6 +396,28 @@ jobs:
             sleep 15
           done
           exit 1
+      # Curated runs save as copybook-h-{run}-v2 (pick takes those and full runs' copybook-h-{run}, never the older
+      # curated keys a superseded run left).
+      # A full run its gate held saves neither cache: its books (a refetch at a new format, say) must not become the
+      # base later runs build and diff from (Nov 20: held refetch 44633835541 blocked every curated run after it).
+      # Nor does a cancelled or failed run (Nov 21: three runs cancelled after refetching every book without a cache
+      # saved copybook-h- and copybook-fb- on their way out, and the next run's fb/ fallback took one).
+      # A run's cache must match what it published: both saves run only once its data commit is pushed (PUSHED, set in
+      # Commit and deploy), so a rejected push or a curated run that publishes nothing saves none, while a run that fails
+      # only after its push (Nov 25: Pages dispatch HTTP 500) keeps its caches.
+      - uses: actions/cache/save@v4
+        if: "!cancelled() && env.PUSHED == '1' && env.SUPERSEDED != '1' && env.YIELD != '1' && (env.SCOPE != 'full' || steps.publish_gate.outcome == 'success')"
+        with:
+          path: |
+            public/copybook/data/h
+            public/copybook/data/hlf
+            public/copybook/data/.h-manifest.json
+          key: copybook-h-${{ github.run_id }}${{ env.SCOPE != 'full' && '-v2' || '' }}
+      - uses: actions/cache/save@v4
+        if: "!cancelled() && env.PUSHED == '1' && env.SCOPE == 'full' && steps.publish_gate.outcome == 'success'"
+        with:
+          path: public/copybook/data/fb
+          key: copybook-fb-${{ github.run_id }}
       # The API's per-minute probe sets freshness.curated_stale_since once no curated build reached Pages within 90 min
       # (in season; 6 h out of it). Shown on every curated run's summary; copybook-stale.yml fails on it every 15 min.
       - name: Stale-publish alert
