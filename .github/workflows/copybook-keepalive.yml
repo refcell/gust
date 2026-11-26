@@ -34,7 +34,9 @@ jobs:
       # (cycle plan, Nov 19). Every 5 minutes, as before: a keepalive, and a full run when the last is 3 hours old.
       - name: Dispatch Copybook refreshes
         run: |
-          runs() { gh run list --workflow copybook-data.yml -L 60 --json status,displayTitle,createdAt "$@"; }
+          # ghr (copybook-gh.sh): gh, retried through GitHub's 5xx and network errors for up to 30 min a call.
+          . .github/copybook-gh.sh
+          runs() { ghr run list --workflow copybook-data.yml -L 60 --json status,displayTitle,createdAt "$@"; }
           age() { echo $(( $(date -u +%s) - $(date -u -d "$1" +%s) )); }
           start=$SECONDS
           tick=0
@@ -44,14 +46,14 @@ jobs:
             for acc in $(python3 .github/copybook-filings.py); do
               if [[ "$dispatched" == *" $acc "* ]] || grep -q "filing $acc" <<< "$titles"; then continue; fi
               echo "$(date -u +%T) dispatch filing $acc"
-              gh workflow run copybook-data.yml --ref main -f scope=curated -f reason="filing $acc" -f accession="$acc" \
+              ghr workflow run copybook-data.yml --ref main -f scope=curated -f reason="filing $acc" -f accession="$acc" \
                 && dispatched="$dispatched$acc " || echo "::warning::dispatch failed"
             done
             tick=$((tick + 1))
             # Every 15 minutes: the stale-publish check (copybook-stale.yml). Its own */15 cron is best-effort: GitHub
             # ran it 3 times in its first 17 hours (Nov 21 20:32Z, Nov 22 00:41Z and 07:29Z), so it stays only as a backup.
             if [ $((tick % 15)) = 1 ]; then
-              gh workflow run copybook-stale.yml --ref main || echo "::warning::stale-check dispatch failed"
+              ghr workflow run copybook-stale.yml --ref main || echo "::warning::stale-check dispatch failed"
             fi
             if [ $((tick % 5)) != 1 ]; then sleep 60; continue; fi
             since=$(date -u -d '-4 hours' +%FT%TZ)
@@ -64,15 +66,15 @@ jobs:
             waiting() { runs -q "[.[] | select(.status == \"queued\" or .status == \"pending\" or .status == \"waiting\" or .status == \"requested\") | select(.displayTitle | contains(\"($1)\"))] | length"; }
             if [ "$(waiting curated)" = 0 ]; then
               echo "$(date -u +%T) dispatch curated"
-              gh workflow run copybook-data.yml --ref main -f scope=curated -f reason=keepalive || echo "::warning::dispatch failed"
+              ghr workflow run copybook-data.yml --ref main -f scope=curated -f reason=keepalive || echo "::warning::dispatch failed"
             else
               echo "$(date -u +%T) a curated run is already queued; skip"
             fi
             last_full=$(runs -q '[.[] | select(.displayTitle | contains("(full)"))][0].createdAt // "1970-01-01T00:00:00Z"')
             if [ "$(busy full)" = 0 ] && [ "$(age "$last_full")" -ge 10800 ]; then
               echo "$(date -u +%T) dispatch full"
-              gh workflow run copybook-data.yml --ref main -f scope=full -f reason=keepalive || echo "::warning::dispatch failed"
+              ghr workflow run copybook-data.yml --ref main -f scope=full -f reason=keepalive || echo "::warning::dispatch failed"
             fi
             sleep 60
           done
-          gh workflow run copybook-keepalive.yml --ref main
+          ghr workflow run copybook-keepalive.yml --ref main
