@@ -1,16 +1,17 @@
 name: Copybook hq/ dry run
 
-# Builds moves.py from a site branch on the last full run's books, to measure a change before it lands (hq/, Nov 22).
-# Read-only: restores the fb/ cache and never saves one, uploads nothing to R2 and commits nothing.
+# Branch x1000-check only (never merged): classifies every cached h/ book's options with site main and with a site
+# branch, and lists every option line whose classification differs. Read-only: restores the h/ cache and never saves
+# one, makes no SEC request, uploads nothing to R2 and commits nothing.
 on:
   workflow_dispatch:
     inputs:
       site_ref:
-        description: "factordynamics/site branch or commit to run"
+        description: "factordynamics/site branch or commit to compare with site main"
         required: true
-        default: hlq
+        default: x1000
       reseed:
-        description: "Also re-seed this quarter (datasets.py --reseed) first and report its diff; empty for none"
+        description: "unused on this branch"
         required: false
         default: ""
 
@@ -22,54 +23,71 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  dryrun:
+  classify:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           repository: factordynamics/site
+          ref: main
+          path: _old
+          sparse-checkout: copybook
+      - uses: actions/checkout@v4
+        with:
+          repository: factordynamics/site
           ref: ${{ inputs.site_ref }}
-          path: _ingest
-          sparse-checkout: |
-            copybook
-            holdterm/src
+          path: _new
+          sparse-checkout: copybook
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - uses: actions/cache/restore@v4
         with:
-          path: public/copybook/data/fb
-          key: copybook-fb-dryrun-${{ github.run_id }}
-          restore-keys: copybook-fb-
-      - name: Add swap
-        run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
-          sudo fallocate -l 16G /mnt/copybook.swap && sudo chmod 600 /mnt/copybook.swap && sudo mkswap -q /mnt/copybook.swap \
-            && sudo swapon /mnt/copybook.swap || echo "::warning::could not add swap"
-      - name: moves.py (full scope)
+          path: |
+            public/copybook/data/h
+            public/copybook/data/hlf
+            public/copybook/data/.h-manifest.json
+          key: copybook-h-x1000-check-${{ github.run_id }}
+          restore-keys: copybook-h-
+      - name: Classify every cached book's options, main vs branch
         env:
-          PYTHONPATH: _ingest/copybook
           COPYBOOK_WEB_DIR: public/copybook
           COPYBOOK_CUSIP_MAP: public/copybook/data/cusip_map.json
-          SCOPE: full
         run: |
-          ( while sleep 60; do
-              echo "res $(date -u +%T) $(free -m | awk '/^Mem/{printf "mem_used=%sM ",$3} /^Swap/{printf "swap=%s/%sM ",$3,$2}')top=$(ps -eo rss=,args= --sort=-rss | head -1 | awk '{printf "%dM", $1/1024}')"
-            done ) &
-          ls public/copybook/data/fb
-          if [ -n "${{ inputs.reseed }}" ]; then
-            python _ingest/copybook/ingest/datasets.py --reseed "${{ inputs.reseed }}" || echo "::warning::re-seed held (see the diff above)"
-          fi
-          /usr/bin/time -v python _ingest/copybook/ingest/moves.py 2>&1 | grep -vE "^\s+(Minor|Major|Volun|Invol|Swaps|File sys|Socket|Signals|Page size|Exit|Average|Percent)"
-      - name: hq/ sizes
-        if: always()
-        run: |
-          D=public/copybook/data
-          for q in $D/hq/*Q?; do
-            [ -d "$q" ] || continue
-            echo "$(basename $q): $(ls $q | wc -l) objects, $(du -sb $q | cut -f1) bytes, index $(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print({k: d[k] for k in ('complete', 'issuers', 'sig')}, len(d['tickers']), 'tickers')" $q/index.json)"
-          done | tee -a "$GITHUB_STEP_SUMMARY"
-          echo "hlf (hl/'s every-holder files): $(ls $D/hlf | wc -l) objects, $(du -sb $D/hlf | cut -f1) bytes" | tee -a "$GITHUB_STEP_SUMMARY"
-          ls -la $D/fb/*/.complete 2>/dev/null || true
+          cat > /tmp/classify.py <<'EOF'
+          import json, sys
+          from pathlib import Path
+          from ingest import build
+          out, books, lines = {}, 0, 0
+          for p in sorted(Path("public/copybook/data/h").glob("*/*.json")):
+              if p.name.endswith(".v1.json"):
+                  continue
+              q = json.loads(p.read_text())
+              if not q.get("holdings"):
+                  continue
+              books += 1
+              # as cached_quarters() reads a cached quarter back
+              q["holdings"] = [{k: v for k, v in h.items() if k != "held_reason"} for h in q["holdings"]]
+              c = build.classify_options(q)
+              for h in c["holdings"]:
+                  if h.get("put_call") and h.get("shares_type") != "PRN":
+                      lines += 1
+                      out[f"{p.parent.name}/{p.stem} {h['cusip']} {h['put_call']}"] = [h.get("option_held"), h.get("option_ratio"),
+                                                                                    h.get("option_benchmark"), c.get("options_basis")]
+          json.dump(out, open(sys.argv[1], "w"))
+          print(f"{sys.argv[1]}: {books} cached books, {lines} option lines")
+          EOF
+          ls public/copybook/data/h | wc -l
+          git -C _old log --oneline -1; git -C _new log --oneline -1
+          PYTHONPATH=_old/copybook python /tmp/classify.py /tmp/old.json
+          PYTHONPATH=_new/copybook python /tmp/classify.py /tmp/new.json
+          python - <<'EOF' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json
+          old, new = json.load(open("/tmp/old.json")), json.load(open("/tmp/new.json"))
+          diff = sorted(k for k in set(old) | set(new) if old.get(k) != new.get(k))
+          print(f"option lines classified differently, main vs branch: {len(diff)} of {len(old)}")
+          for k in diff[:200]:
+              print(f"- {k}: {old.get(k)} -> {new.get(k)}")
+          EOF
